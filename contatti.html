@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contatti · Prosopon</title>
+  <meta name="description" content="Contatta l'Accademia di Teatro Classico Prosopon. Sede a Roma. Iscriviti alla newsletter." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ NAVIGAZIONE ============ -->
+  <nav class="nav">
+    <div class="nav__contenitore">
+      <a href="index.html" class="nav__logo">
+        Prosopon
+        <span>Accademia di Teatro Classico</span>
+      </a>
+      <ul class="nav__menu" id="navMenu">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
+        <li><a href="formazione.html" class="nav__link">Formazione</a></li>
+        <li><a href="docenti.html" class="nav__link">Docenti</a></li>
+        <li><a href="eventi.html" class="nav__link">Spettacoli & Eventi</a></li>
+        <li><a href="contatti.html" class="nav__link nav__link--attivo">Contatti</a></li>
+        <li><a href="iscrizioni.html" class="nav__cta">Iscrizioni</a></li>
+      </ul>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============ HERO PAGINA ============ -->
+  <section class="hero-pagina">
+    <div class="contenitore">
+      <span class="etichetta">Siamo a Roma</span>
+      <h1 style="margin:0.8rem 0 1rem;">Contatti</h1>
+      <p>Scrivici, vienici a trovare, resta in contatto.</p>
+    </div>
+  </section>
+
+  <!-- ============ CONTATTI + FORM ============ -->
+  <section class="sezione sezione--avorio">
+    <div class="contenitore">
+      <div class="griglia-2" style="gap:5rem; align-items:start;">
+
+        <!-- Informazioni -->
+        <div>
+          <span class="etichetta">Informazioni</span>
+          <h2 style="margin:0.8rem 0 2rem; font-size:1.8rem;">Come raggiungerci</h2>
+
+          <div style="margin-bottom:2rem;">
+            <p class="etichetta" style="color:var(--color-grigio);">Sede</p>
+            <p style="margin-top:0.4rem; font-size:1.05rem;">Roma, Italia<br>
+            <span style="font-style:italic; color:var(--color-grigio); font-size:0.95rem;">(indirizzo completo comunicato agli iscritti)</span></p>
+          </div>
+
+          <div style="margin-bottom:2rem;">
+            <p class="etichetta" style="color:var(--color-grigio);">Email</p>
+            <p style="margin-top:0.4rem; font-size:1.05rem;">
+              <a href="mailto:puglisiandreasaverio@gmail.com" style="color:var(--color-oro-scuro);">puglisiandreasaverio@gmail.com</a>
+            </p>
+          </div>
+
+          <div style="margin-bottom:2rem;">
+            <p class="etichetta" style="color:var(--color-grigio);">Telefono</p>
+            <p style="margin-top:0.4rem; font-size:1.05rem;">
+              <a href="tel:+393480624140" style="color:var(--color-oro-scuro);">+39 348 062 4140</a>
+            </p>
+          </div>
+
+          <div style="margin-bottom:2rem;">
+            <p class="etichetta" style="color:var(--color-grigio);">Web</p>
+            <p style="margin-top:0.4rem; font-size:1.05rem;">
+              <a href="https://www.andreapuglisi.com" target="_blank" style="color:var(--color-oro-scuro);">www.andreapuglisi.com</a>
+            </p>
+          </div>
+
+          <div style="margin-bottom:2.5rem;">
+            <p class="etichetta" style="color:var(--color-grigio);">Orari di segreteria</p>
+            <p style="margin-top:0.4rem; font-size:1.05rem;">Lunedì – Venerdì<br>10:00 – 13:00 · 15:00 – 18:00</p>
+          </div>
+
+          <div style="background:var(--color-avorio-scuro); padding:1.5rem 2rem; border-left:3px solid var(--color-oro);">
+            <p style="font-size:1rem; font-style:italic;">Per informazioni su audizioni e iscrizioni visita la sezione <a href="iscrizioni.html" style="color:var(--color-oro-scuro); text-decoration:underline;">Audizioni & Iscrizioni</a>.</p>
+          </div>
+        </div>
+
+        <!-- Form contatto -->
+        <div>
+          <span class="etichetta">Scrivici</span>
+          <h2 style="margin:0.8rem 0 2rem; font-size:1.8rem;">Modulo di contatto</h2>
+
+          <form onsubmit="inviaContatto(event)">
+            <div class="griglia-2" style="gap:2rem;">
+              <div class="form-gruppo">
+                <label for="nome-c">Nome *</label>
+                <input type="text" id="nome-c" name="nome" placeholder="Il tuo nome" required />
+              </div>
+              <div class="form-gruppo">
+                <label for="cognome-c">Cognome *</label>
+                <input type="text" id="cognome-c" name="cognome" placeholder="Il tuo cognome" required />
+              </div>
+            </div>
+            <div class="form-gruppo">
+              <label for="email-c">Email *</label>
+              <input type="email" id="email-c" name="email" placeholder="tua@email.com" required />
+            </div>
+            <div class="form-gruppo">
+              <label for="oggetto-c">Oggetto *</label>
+              <select id="oggetto-c" name="oggetto" required>
+                <option value="" disabled selected>Seleziona...</option>
+                <option value="info-triennale">Informazioni corso triennale</option>
+                <option value="info-serali">Informazioni corsi serali</option>
+                <option value="info-laboratori">Informazioni laboratori</option>
+                <option value="info-masterclass">Informazioni masterclass</option>
+                <option value="collaborazione">Proposta di collaborazione</option>
+                <option value="stampa">Stampa e media</option>
+                <option value="altro">Altro</option>
+              </select>
+            </div>
+            <div class="form-gruppo">
+              <label for="messaggio-c">Messaggio *</label>
+              <textarea id="messaggio-c" name="messaggio" rows="5" placeholder="Scrivi qui il tuo messaggio..." required></textarea>
+            </div>
+            <div style="margin-top:1.5rem;">
+              <button type="submit" class="btn btn--oro">Invia il messaggio</button>
+            </div>
+            <div id="conferma-contatto" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(184,150,90,0.1); border-left:3px solid var(--color-oro);">
+              <p>Messaggio inviato. Ti risponderemo entro 48 ore lavorative.</p>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NEWSLETTER ============ -->
+  <section class="sezione sezione--scura" id="newsletter">
+    <div class="contenitore" style="max-width:680px;">
+      <div class="titolo-sezione">
+        <span class="etichetta">Resta aggiornato</span>
+        <h2 style="color:var(--color-avorio);">Newsletter Prosopon</h2>
+        <p>Iscriviti per ricevere aggiornamenti su spettacoli, audizioni, open day, nuovi corsi e masterclass. Niente spam: solo ciò che conta.</p>
+      </div>
+
+      <form onsubmit="inviaNewsletter(event)" style="max-width:500px; margin:0 auto;" class="form--chiaro">
+        <div class="griglia-2" style="gap:1.5rem;">
+          <div class="form-gruppo">
+            <label for="nome-nl">Nome *</label>
+            <input type="text" id="nome-nl" name="nome" placeholder="Il tuo nome" required />
+          </div>
+          <div class="form-gruppo">
+            <label for="email-nl">Email *</label>
+            <input type="email" id="email-nl" name="email" placeholder="tua@email.com" required />
+          </div>
+        </div>
+        <div class="form-gruppo" style="margin-top:0.5rem;">
+          <label style="display:flex; align-items:flex-start; gap:0.8rem; cursor:pointer; font-family:var(--font-corpo); font-size:0.9rem; text-transform:none; letter-spacing:0; color:rgba(197,189,180,0.8);">
+            <input type="checkbox" required style="margin-top:3px; flex-shrink:0; accent-color:var(--color-oro);" />
+            Acconsento al trattamento dei dati personali per l'invio della newsletter.
+          </label>
+        </div>
+        <div style="margin-top:1.5rem;">
+          <button type="submit" class="btn btn--oro">Iscriviti alla newsletter</button>
+        </div>
+        <div id="conferma-newsletter" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(184,150,90,0.15); border-left:3px solid var(--color-oro);">
+          <p style="color:var(--color-avorio);">Iscrizione completata. Bentornato/a nel mondo di Prosopon.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="contenitore">
+      <div class="footer__griglia">
+        <div>
+          <div class="footer__logo">Prosopon<span>Accademia di Teatro Classico</span></div>
+          <p>Centro di Teatro Classico e Arti Performative.<br>Direttore artistico: Andrea Saverio Puglisi.<br>Roma, dal 2025.</p>
+        </div>
+        <div>
+          <p class="footer__titolo">Navigazione</p>
+          <ul class="footer__lista">
+            <li><a href="accademia.html">L'Accademia</a></li>
+            <li><a href="formazione.html">Formazione</a></li>
+            <li><a href="docenti.html">Docenti</a></li>
+            <li><a href="eventi.html">Spettacoli & Eventi</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__titolo">Formazione</p>
+          <ul class="footer__lista">
+            <li><a href="formazione.html#triennale">Corso Triennale</a></li>
+            <li><a href="formazione.html#serali">Corsi Serali</a></li>
+            <li><a href="formazione.html#laboratori">Laboratori</a></li>
+            <li><a href="formazione.html#masterclass">Masterclass</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__titolo">Contatti</p>
+          <ul class="footer__lista">
+            <li><a href="iscrizioni.html">Audizioni & Iscrizioni</a></li>
+            <li><a href="contatti.html">Contatti</a></li>
+            <li><a href="contatti.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2025 Accademia di Teatro Classico Prosopon. Tutti i diritti riservati.</p>
+        <p style="font-style:italic; font-size:0.8rem; color:var(--color-grigio);">Roma, Italia</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => navMenu.classList.toggle('aperto'));
+
+    function inviaContatto(e) {
+      e.preventDefault();
+      document.getElementById('conferma-contatto').style.display = 'block';
+      e.target.reset();
+      e.target.querySelector('button').disabled = true;
+    }
+
+    function inviaNewsletter(e) {
+      e.preventDefault();
+      document.getElementById('conferma-newsletter').style.display = 'block';
+      e.target.reset();
+      e.target.querySelector('button').disabled = true;
+    }
+  </script>
+</body>
+</html>

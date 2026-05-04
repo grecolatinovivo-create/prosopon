@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formazione · Prosopon</title>
+  <meta name="description" content="Corso triennale accademico, corsi serali per adulti, laboratori intensivi e masterclass all'Accademia Prosopon." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .tab-nav {
+      display: flex;
+      border-bottom: 1px solid rgba(184,150,90,0.3);
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      font-family: var(--font-titolo);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      color: var(--color-grigio);
+      transition: all var(--transizione);
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--color-nero); }
+    .tab-btn.attivo {
+      color: var(--color-oro-scuro);
+      border-bottom-color: var(--color-oro);
+    }
+    .tab-pannello { display: none; padding-top: var(--spazio-lg); }
+    .tab-pannello.attivo { display: block; }
+
+    .anno-card {
+      border-left: 3px solid var(--color-oro);
+      padding: 2rem 2rem 2rem 2.5rem;
+      background: var(--color-avorio);
+      margin-bottom: 1.5rem;
+      transition: box-shadow var(--transizione);
+    }
+    .anno-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+
+    .materia-lista { margin-top: 1rem; }
+    .materia-lista li {
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(197,189,180,0.4);
+      font-size: 1rem;
+      color: var(--color-grafite);
+      display: flex;
+      gap: 1rem;
+      align-items: baseline;
+    }
+    .materia-lista li::before {
+      content: '·';
+      color: var(--color-oro);
+      font-size: 1.4rem;
+      line-height: 0.8;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVIGAZIONE ============ -->
+  <nav class="nav">
+    <div class="nav__contenitore">
+      <a href="index.html" class="nav__logo">
+        Prosopon
+        <span>Accademia di Teatro Classico</span>
+      </a>
+      <ul class="nav__menu" id="navMenu">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
+        <li><a href="formazione.html" class="nav__link nav__link--attivo">Formazione</a></li>
+        <li><a href="docenti.html" class="nav__link">Docenti</a></li>
+        <li><a href="eventi.html" class="nav__link">Spettacoli & Eventi</a></li>
+        <li><a href="contatti.html" class="nav__link">Contatti</a></li>
+        <li><a href="iscrizioni.html" class="nav__cta">Iscrizioni</a></li>
+      </ul>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============ HERO PAGINA ============ -->
+  <section class="hero-pagina">
+    <div class="contenitore">
+      <span class="etichetta">Offerta formativa</span>
+      <h1 style="margin:0.8rem 0 1rem;">Formazione</h1>
+      <p>Dal corso triennale ai laboratori intensivi:<br>un percorso per ogni vocazione teatrale.</p>
+    </div>
+  </section>
+
+  <!-- ============ TAB DI NAVIGAZIONE FORMAZIONE ============ -->
+  <section class="sezione sezione--avorio" style="padding-top:3rem;">
+    <div class="contenitore">
+
+      <div class="tab-nav" role="tablist">
+        <button class="tab-btn attivo" onclick="apriTab(event, 'triennale')" role="tab">Corso Triennale</button>
+        <button class="tab-btn" onclick="apriTab(event, 'serali')" role="tab">Corsi Serali</button>
+        <button class="tab-btn" onclick="apriTab(event, 'laboratori')" role="tab">Laboratori Intensivi</button>
+        <button class="tab-btn" onclick="apriTab(event, 'masterclass')" role="tab">Masterclass</button>
+      </div>
+
+      <!-- ===== TRIENNALE ===== -->
+      <div class="tab-pannello attivo" id="triennale">
+        <div style="max-width:820px; margin-bottom:3rem;">
+          <span class="etichetta">Percorso accademico</span>
+          <h2 style="margin:0.8rem 0 1.5rem;">Corso Triennale Accademico</h2>
+          <p class="testo-grande">Tre anni di formazione integrale nell'arte del teatro classico. Un percorso che forma l'attore nel suo insieme: voce, corpo, intelligenza, sensibilità.</p>
+          <p style="margin-top:1rem;">L'accesso avviene tramite <strong>audizione e selezione</strong>. Il numero di posti è limitato per garantire un insegnamento personalizzato e il mantenimento di un gruppo di lavoro coeso. Le audizioni si tengono ogni anno prima dell'apertura dell'anno accademico.</p>
+          <div style="display:flex; gap:1.5rem; margin-top:2rem; flex-wrap:wrap;">
+            <a href="iscrizioni.html" class="btn btn--oro">Candidati all'audizione</a>
+            <a href="documenti/CURRICULUM scherma.docx" class="btn btn--contorno-scuro" download>Scarica il piano di studi</a>
+          </div>
+        </div>
+
+        <!-- Anno I -->
+        <div class="anno-card" id="anno1">
+          <span class="etichetta">Anno Accademico I</span>
+          <h3 style="margin:0.6rem 0 0.5rem;">Primo Anno — Le Fondamenta</h3>
+          <p style="font-size:1rem;">Il primo anno introduce lo studente alle tecniche fondamentali dell'attore: voce, respiro, corpo e il primo approccio al testo classico. Si lavora sulla presenza scenica e sulla consapevolezza fisica.</p>
+          <ul class="materia-lista">
+            <li>Recitazione classica — principi e tecniche di base</li>
+            <li>Dizione e prosodia — voce, emissione, articolazione</li>
+            <li>Movimento scenico — corpo, spazio, ritmo</li>
+            <li>Introduzione alla maschera — storia e pratica</li>
+            <li>Storia del teatro antico — Grecia e Roma</li>
+            <li>Scherma storica — livello base</li>
+            <li>Canto — fondamenti e applicazione al testo</li>
+            <li>Drammaturgia classica — lettura e analisi del testo</li>
+          </ul>
+        </div>
+
+        <!-- Anno II -->
+        <div class="anno-card" id="anno2">
+          <span class="etichetta">Anno Accademico II</span>
+          <h3 style="margin:0.6rem 0 0.5rem;">Secondo Anno — L'Approfondimento</h3>
+          <p style="font-size:1rem;">Il secondo anno approfondisce le tecniche acquisite e introduce il lavoro su testi completi, la composizione drammaturgica e la relazione con il pubblico.</p>
+          <ul class="materia-lista">
+            <li>Recitazione classica — lavoro sui personaggi</li>
+            <li>Voce e verso — metrica greca e latina in scena</li>
+            <li>Maschera — lavoro avanzato e costruzione</li>
+            <li>Teatro greco — messa in scena di testi integrali</li>
+            <li>Teatro latino — Plauto e Terenzio in pratica</li>
+            <li>Scherma storica — livello intermedio</li>
+            <li>Drammaturgia — riscrittura e adattamento</li>
+            <li>Storia delle arti performative — dal Rinascimento al Barocco</li>
+          </ul>
+        </div>
+
+        <!-- Anno III -->
+        <div class="anno-card" id="anno3">
+          <span class="etichetta">Anno Accademico III</span>
+          <h3 style="margin:0.6rem 0 0.5rem;">Terzo Anno — La Produzione</h3>
+          <p style="font-size:1rem;">L'anno della sintesi e della creazione. Gli studenti lavorano a uno spettacolo di produzione completo, affrontano la ricerca personale e si preparano all'ingresso nella professione.</p>
+          <ul class="materia-lista">
+            <li>Recitazione classica — autonomia e ricerca personale</li>
+            <li>Regia e composizione scenica</li>
+            <li>Produzione teatrale — dall'idea alla prima</li>
+            <li>Teatro contemporaneo e classico — dialogo tra tradizioni</li>
+            <li>Maschera e commedia dell'arte — approfondimento</li>
+            <li>Scrittura drammaturgica originale</li>
+            <li>Scherma storica — livello avanzato</li>
+            <li>Spettacolo finale di diploma</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--color-avorio-scuro); padding:2rem 2.5rem; margin-top:2rem; border-left:3px solid var(--color-oro);">
+          <h4 style="margin-bottom:0.8rem;">Informazioni pratiche</h4>
+          <div class="griglia-3" style="gap:2rem; margin-top:1rem;">
+            <div>
+              <p class="etichetta" style="color:var(--color-grigio);">Durata</p>
+              <p style="font-size:1rem; margin-top:0.3rem;">3 anni accademici</p>
+            </div>
+            <div>
+              <p class="etichetta" style="color:var(--color-grigio);">Accesso</p>
+              <p style="font-size:1rem; margin-top:0.3rem;">Audizione e selezione</p>
+            </div>
+            <div>
+              <p class="etichetta" style="color:var(--color-grigio);">Sede</p>
+              <p style="font-size:1rem; margin-top:0.3rem;">Roma</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CORSI SERALI ===== -->
+      <div class="tab-pannello" id="serali">
+        <div style="max-width:820px; margin-bottom:3rem;">
+          <span class="etichetta">Formazione continua</span>
+          <h2 style="margin:0.8rem 0 1.5rem;">Corsi Serali per Adulti</h2>
+          <p class="testo-grande">Per chi lavora e porta il teatro come vocazione parallela. Corsi modulari in orario serale, accessibili tramite iscrizione diretta online.</p>
+          <p style="margin-top:1rem;">I corsi serali sono pensati per adulti che desiderano avvicinarsi al teatro classico senza dover rinunciare ai propri impegni lavorativi. Ogni corso è autonomo e può essere seguito singolarmente o in combinazione con altri.</p>
+          <a href="iscrizioni.html#serali" class="btn btn--oro" style="margin-top:2rem; display:inline-block;">Iscriviti ora</a>
+        </div>
+
+        <div class="griglia-2" style="gap:2rem;">
+          <div class="card" style="padding:2.5rem;">
+            <span class="etichetta">Modulo A</span>
+            <h3 style="margin:0.8rem 0 1rem;">Recitazione Classica — Base</h3>
+            <p style="font-size:1rem;">Introduzione alle tecniche di recitazione classica. Lavoro sulla voce, sul corpo e sulla prima relazione con il testo antico. Aperto a tutti, senza esperienza prevista.</p>
+            <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--color-avorio-scuro);">
+              <span class="etichetta" style="color:var(--color-grigio);">Frequenza</span>
+              <p style="font-size:1rem; margin-top:0.3rem;">2 sere a settimana</p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:2.5rem;">
+            <span class="etichetta">Modulo B</span>
+            <h3 style="margin:0.8rem 0 1rem;">Voce e Dizione</h3>
+            <p style="font-size:1rem;">Tecnica vocale applicata al teatro. Respirazione, proiezione, articolazione, lavoro sul verso classico e sulla prosodia italiana e latina.</p>
+            <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--color-avorio-scuro);">
+              <span class="etichetta" style="color:var(--color-grigio);">Frequenza</span>
+              <p style="font-size:1rem; margin-top:0.3rem;">1 sera a settimana</p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:2.5rem;">
+            <span class="etichetta">Modulo C</span>
+            <h3 style="margin:0.8rem 0 1rem;">Introduzione alla Maschera</h3>
+            <p style="font-size:1rem;">Storia, significato e pratica della maschera nel teatro classico. Dal greco antico alla Commedia dell'Arte. Laboratorio pratico con maschere.</p>
+            <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--color-avorio-scuro);">
+              <span class="etichetta" style="color:var(--color-grigio);">Frequenza</span>
+              <p style="font-size:1rem; margin-top:0.3rem;">1 sera a settimana</p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:2.5rem;">
+            <span class="etichetta">Modulo D</span>
+            <h3 style="margin:0.8rem 0 1rem;">Testi Classici in Scena</h3>
+            <p style="font-size:1rem;">Lettura drammaturgica e messa in scena di brani dal teatro greco, latino e rinascimentale. Per chi ha già una base di formazione teatrale.</p>
+            <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--color-avorio-scuro);">
+              <span class="etichetta" style="color:var(--color-grigio);">Frequenza</span>
+              <p style="font-size:1rem; margin-top:0.3rem;">2 sere a settimana</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== LABORATORI ===== -->
+      <div class="tab-pannello" id="laboratori">
+        <div style="max-width:820px; margin-bottom:3rem;">
+          <span class="etichetta">Workshop intensivi</span>
+          <h2 style="margin:0.8rem 0 1.5rem;">Laboratori Intensivi</h2>
+          <p class="testo-grande">Periodi di lavoro concentrato, per studenti e professionisti che vogliono approfondire una tecnica o lavorare su un progetto specifico in poco tempo.</p>
+          <p style="margin-top:1rem;">I laboratori intensivi si svolgono prevalentemente in estate e durante i periodi festivi. Hanno una durata variabile (da 3 a 10 giorni) e sono tenuti dai docenti dell'Accademia o da maestri ospiti.</p>
+          <a href="eventi.html" class="btn btn--oro" style="margin-top:2rem; display:inline-block;">Prossimi laboratori</a>
+        </div>
+
+        <div class="griglia-3" style="gap:2rem;">
+          <div class="card" style="padding:2.5rem 2rem; text-align:center;">
+            <div style="font-family:var(--font-titolo); font-size:1.8rem; color:var(--color-oro); margin-bottom:1rem;">☀</div>
+            <h3 style="margin-bottom:1rem;">Summer Lab</h3>
+            <p style="font-size:1rem;">Laboratorio estivo residenziale di 10 giorni. Teatro greco, voce, maschera. Aperto a studenti del triennio e professionisti.</p>
+          </div>
+          <div class="card" style="padding:2.5rem 2rem; text-align:center;">
+            <div style="font-family:var(--font-titolo); font-size:1.8rem; color:var(--color-oro); margin-bottom:1rem;">♟</div>
+            <h3 style="margin-bottom:1rem;">Scherma Storica</h3>
+            <p style="font-size:1rem;">Workshop intensivo di 3 giorni dedicato alla scherma storica applicata al teatro. Livelli base e avanzato.</p>
+          </div>
+          <div class="card" style="padding:2.5rem 2rem; text-align:center;">
+            <div style="font-family:var(--font-titolo); font-size:1.8rem; color:var(--color-oro); margin-bottom:1rem;">♩</div>
+            <h3 style="margin-bottom:1rem;">Voce e Canto</h3>
+            <p style="font-size:1rem;">Immersione intensiva nelle tecniche vocali del teatro classico: dalla dizione greca al canto rinascimentale.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== MASTERCLASS ===== -->
+      <div class="tab-pannello" id="masterclass">
+        <div style="max-width:820px; margin-bottom:3rem;">
+          <span class="etichetta">Incontri con i maestri</span>
+          <h2 style="margin:0.8rem 0 1.5rem;">Masterclass</h2>
+          <p class="testo-grande">Incontri con artisti e studiosi di fama nazionale e internazionale. Un'occasione rara per confrontarsi con esperienze d'eccellenza.</p>
+          <p style="margin-top:1rem;">Le masterclass di Prosopon portano all'Accademia voci autorevoli del teatro contemporaneo e della ricerca sul teatro antico. Sono aperte agli studenti del triennio, ai partecipanti ai corsi serali e, dove indicato, al pubblico esterno.</p>
+          <a href="eventi.html" class="btn btn--oro" style="margin-top:2rem; display:inline-block;">Prossime masterclass</a>
+        </div>
+
+        <div style="background:var(--color-avorio-scuro); padding:2.5rem; border-left:3px solid var(--color-oro); max-width:720px;">
+          <h4 style="margin-bottom:1rem;">Prossime masterclass in programma</h4>
+          <p style="font-size:1rem; font-style:italic; color:var(--color-grigio);">
+            Il calendario delle masterclass per l'anno accademico 2025–2026 sarà comunicato a breve. Iscriviti alla newsletter per ricevere tutti gli aggiornamenti.
+          </p>
+          <a href="contatti.html#newsletter" class="btn btn--contorno-scuro" style="margin-top:1.5rem; display:inline-block;">Iscriviti alla newsletter</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="contenitore">
+      <div class="footer__griglia">
+        <div>
+          <div class="footer__logo">Prosopon<span>Accademia di Teatro Classico</span></div>
+          <p>Centro di Teatro Classico e Arti Performative.<br>Direttore artistico: Andrea Saverio Puglisi.<br>Roma, dal 2025.</p>
+        </div>
+        <div>
+          <p class="footer__titolo">Navigazione</p>
+          <ul class="footer__lista">
+            <li><a href="accademia.html">L'Accademia</a></li>
+            <li><a href="formazione.html">Formazione</a></li>
+            <li><a href="docenti.html">Docenti</a></li>
+            <li><a href="eventi.html">Spettacoli & Eventi</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__titolo">Formazione</p>
+          <ul class="footer__lista">
+            <li><a href="formazione.html#triennale">Corso Triennale</a></li>
+            <li><a href="formazione.html#serali">Corsi Serali</a></li>
+            <li><a href="formazione.html#laboratori">Laboratori</a></li>
+            <li><a href="formazione.html#masterclass">Masterclass</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__titolo">Contatti</p>
+          <ul class="footer__lista">
+            <li><a href="iscrizioni.html">Audizioni & Iscrizioni</a></li>
+            <li><a href="contatti.html">Contatti</a></li>
+            <li><a href="contatti.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2025 Accademia di Teatro Classico Prosopon. Tutti i diritti riservati.</p>
+        <p style="font-style:italic; font-size:0.8rem; color:var(--color-grigio);">Roma, Italia</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => navMenu.classList.toggle('aperto'));
+
+    function apriTab(evt, id) {
+      document.querySelectorAll('.tab-pannello').forEach(p => p.classList.remove('attivo'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('attivo'));
+      document.getElementById(id).classList.add('attivo');
+      evt.currentTarget.classList.add('attivo');
+    }
+
+    // Apertura diretta da anchor
+    const hash = window.location.hash.replace('#','');
+    if (hash && document.getElementById(hash)) {
+      document.querySelectorAll('.tab-pannello').forEach(p => p.classList.remove('attivo'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('attivo'));
+      document.getElementById(hash).classList.add('attivo');
+      const btn = document.querySelector(`.tab-btn[onclick*="${hash}"]`);
+      if (btn) btn.classList.add('attivo');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docenti · Prosopon</title>
+  <meta name="description" content="Il corpo docente dell'Accademia di Teatro Classico Prosopon: attori, registi e maestri della scena classica." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .griglia-docenti {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+    .card-docente {
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+    }
+    .card-docente:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
+    .card-docente__foto {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--color-avorio-scuro);
+      overflow: hidden;
+      position: relative;
+    }
+    .card-docente__foto img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+    .card-docente:hover .card-docente__foto img {
+      transform: scale(1.04);
+    }
+    /* Overlay scuro al hover con nome */
+    .card-docente__foto::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14,13,11,0.55) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .card-docente:hover .card-docente__foto::after {
+      opacity: 1;
+    }
+    .card-docente__foto .iniziali {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-titolo);
+      font-size: 2.5rem;
+      color: var(--color-oro);
+      letter-spacing: 0.1em;
+      background: var(--color-avorio-scuro);
+    }
+    .card-docente__info {
+      padding: 1.2rem 1.2rem 1.5rem;
+      background: var(--color-avorio);
+      border: 1px solid rgba(184,150,90,0.15);
+      border-top: none;
+    }
+    .card-docente__info h3 {
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+    .card-docente__ruolo {
+      font-family: var(--font-corpo);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--color-oro-scuro);
+    }
+    .card-docente__leggi {
+      font-family: var(--font-titolo);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-grigio);
+      margin-top: 0.8rem;
+      display: inline-block;
+      transition: color var(--transizione);
+    }
+    .card-docente:hover .card-docente__leggi {
+      color: var(--color-oro-scuro);
+    }
+
+    /* Modale docente */
+    .modale-docente {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(14,13,11,0.88);
+      backdrop-filter: blur(5px);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .modale-docente.aperta { display: flex; }
+    .modale-docente__pannello {
+      background: var(--color-avorio);
+      max-width: 780px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      position: relative;
+    }
+    .modale-docente__foto {
+      background: var(--color-avorio-scuro);
+      min-height: 380px;
+      overflow: hidden;
+      position: relative;
+    }
+    .modale-docente__foto img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      position: absolute; inset: 0;
+    }
+    .modale-docente__corpo {
+      padding: 3rem 2.5rem 2.5rem;
+      overflow-y: auto;
+    }
+    .modale-docente__chiudi {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: var(--color-nero);
+      color: var(--color-avorio);
+      border: none;
+      width: 36px; height: 36px;
+      cursor: pointer;
+      font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10;
+      transition: background var(--transizione);
+      font-family: var(--font-corpo);
+    }
+    .modale-docente__chiudi:hover { background: var(--color-oro-scuro); }
+
+    /* Sezioni interne della modale */
+    .modale-sezione {
+      margin-top: 1.8rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-avorio-scuro);
+    }
+    .modale-sezione__titolo {
+      font-family: var(--font-titolo);
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--color-oro);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .modale-sezione__titolo::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(184,150,90,0.25);
+    }
+    .modale-crediti {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .modale-crediti li {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 0.8rem;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(197,189,180,0.3);
+      font-size: 0.95rem;
+      line-height: 1.4;
+      align-items: baseline;
+    }
+    .modale-crediti li:last-child { border-bottom: none; }
+    .modale-crediti__anno {
+      font-family: var(--font-titolo);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--color-oro-scuro);
+    }
+    .modale-tag {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.2rem;
+    }
+    .modale-tag span {
+      font-family: var(--font-titolo);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid rgba(184,150,90,0.4);
+      color: var(--color-oro-scuro);
+    }
+    .modale-bio {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--color-grafite);
+    }
+
+    @media(max-width:768px) {
+      .griglia-docenti { grid-template-columns: 1fr 1fr; }
+      .modale-docente__pannello { grid-template-columns: 1fr; }
+      .modale-docente__foto { min-height: 240px; }
+    }
+    @media(max-width:480px) {
+      .griglia-docenti { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVIGAZIONE ============ -->
+  <nav class="nav">
+    <div class="nav__contenitore">
+      <a href="index.html" class="nav__logo">
+        Prosopon
+        <span>Accademia di Teatro Classico</span>
+      </a>
+      <ul class="nav__menu" id="navMenu">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
+        <li><a href="formazione.html" class="nav__link">Formazione</a></li>
+        <li><a href="docenti.html" class="nav__link nav__link--attivo">Docenti</a></li>
+        <li><a href="eventi.html" class="nav__link">Spettacoli & Eventi</a></li>
+        <li><a href="contatti.html" class="nav__link">Contatti</a></li>
+        <li><a href="iscrizioni.html" class="nav__cta">Iscrizioni</a></li>
+      </ul>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============ HERO PAGINA ============ -->
+  <section class="hero-pagina">
+    <div class="contenitore">
+      <span class="etichetta">Il corpo docente</span>
+      <h1 style="margin:0.8rem 0 1rem;">Docenti</h1>
+      <p>Attori, registi, maestri e studiosi uniti da una visione comune:<br>il teatro classico come pratica viva.</p>
+    </div>
+  </section>
+
+  <!-- ============ GRIGLIA DOCENTI ============ -->
+  <section class="sezione sezione--avorio">
+    <div class="contenitore">
+      <div class="griglia-docenti">
+
+        <!-- Andrea Saverio Puglisi -->
+        <div class="card-docente" onclick="apriDocente('puglisi')" role="button" tabindex="0">
+          <div class="card-docente__foto">
+            <img src="assets/docenti/andrea-puglisi.jpg" alt="Andrea Saverio Puglisi" style="object-position: center 15%;" />
+            <div class="iniziali">AP</div>
+          </div>
+          <div class="card-docente__info">
+            <h3>Andrea Saverio Puglisi</h3>
+            <p class="card-docente__ruolo">Direttore Artistico · Attore · Regista</p>
+            <span class="card-docente__leggi">Leggi la bio →</span>
+          </div>
+        </div>
+
+        <!-- Elena Rossetto -->
+        <div class="card-docente" onclick="apriDocente('rossetto')" role="button" tabindex="0">
+          <div class="card-docente__foto">
+            <img src="assets/docenti/elena-rossetto.jpg" alt="Elena Rossetto" style="object-position: center 10%;" />
+            <div class="iniziali">ER</div>
+          </div>
+          <div class="card-docente__info">
+            <h3>Elena Rossetto</h3>
+            <p class="card-docente__ruolo">Attrice · Doppiatrice · Speaker</p>
+            <span class="card-docente__leggi">Leggi la bio →</span>
+          </div>
+        </div>
+
+        <!-- Rachele Sarti -->
+        <div class="card-docente" onclick="apriDocente('sarti')" role="button" tabindex="0">
+          <div class="card-docente__foto">
+            <img src="assets/docenti/rachele-sarti.jpg" alt="Rachele Sarti" style="object-position: center 10%;" />
+            <div class="iniziali">RS</div>
+          </div>
+          <div class="card-docente__info">
+            <h3>Rachele Sarti</h3>
+            <p class="card-docente__ruolo">Attrice</p>
+            <span class="card-docente__leggi">Leggi la bio →</span>
+          </div>
+        </div>
+
+        <!-- Francesco Rizzo -->
+        <div class="card-docente" onclick="apriDocente('rizzo')" role="button" tabindex="0">
+          <div class="card-docente__foto">
+            <img src="assets/docenti/francesco-rizzo.jpg" alt="Francesco Rizzo" style="object-position: center 15%;" />
+            <div class="iniziali">FR</div>
+          </div>
+          <div class="card-docente__info">
+            <h3>Francesco Rizzo</h3>
+            <p class="card-docente__ruolo">Attore</p>
+            <span class="card-docente__leggi">Leggi la bio →</span>
+          </div>
+        </div>
+
+        <!-- Gaetano Marsico -->
+        <div class="card-docente" onclick="apriDocente('marsico')" role="button" tabindex="0">
+          <div class="card-docente__foto">
+            <img src="assets/docenti/gaetano-marsico.jpg" alt="Gaetano Marsico" style="object-position: center 20%;" />
+            <div class="iniziali">GM</div>
+          </div>
+          <div class="card-docente__info">
+            <h3>Gaetano Marsico</h3>
+            <p class="card-docente__ruolo">Attore · Scherma</p>
+            <span class="card-docente__leggi">Leggi la bio →</span>
+          </div>
+        </div>
+
+        <!-- Massimiliano Viola -->
+        <div class="card-docente" onclick="apriDocente('viola')" role="button" tabindex="0">
+          <div class="card-docente__foto">
+            <img src="assets/docenti/massimiliano-viola.jpg" alt="Massimiliano Viola" style="object-position: center 10%;" />
+            <div class="iniziali">MV</div>
+          </div>
+          <div class="card-docente__info">
+            <h3>Massimiliano Viola</h3>
+            <p class="card-docente__ruolo">Attore · Tecnico Teatrale</p>
+            <span class="card-docente__leggi">Leggi la bio →</span>
+          </div>
+        </div>
+
+        <!-- Matteo Mascetta -->
+        <div class="card-docente" onclick="apriDocente('mascetta')" role="button" tabindex="0">
+          <div class="card-docente__foto">
+            <img src="assets/docenti/matteo-mascetta.jpg" alt="Matteo Maria Mascetta" style="object-position: center 15%;" />
+            <div class="iniziali">MM</div>
+          </div>
+          <div class="card-docente__info">
+            <h3>Matteo Maria Mascetta</h3>
+            <p class="card-docente__ruolo">Attore · Mimo · Improvvisazione</p>
+            <span class="card-docente__leggi">Leggi la bio →</span>
+          </div>
+        </div>
+
+        <!-- Caterina Pentericci -->
+        <div class="card-docente" onclick="apriDocente('pentericci')" role="button" tabindex="0">
+          <div class="card-docente__foto">
+            <img src="assets/docenti/caterina-pentericci.jpg" alt="Caterina Pentericci" style="object-position: center 20%;" />
+            <div class="iniziali">CP</div>
+          </div>
+          <div class="card-docente__info">
+            <h3>Caterina Pentericci</h3>
+            <p class="card-docente__ruolo">Maestra di Scherma · Tecnico III Livello SNaQ</p>
+            <span class="card-docente__leggi">Leggi la bio →</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MODALI DOCENTI ============ -->
+
+  <!-- ——— ANDREA SAVERIO PUGLISI ——— -->
+  <div class="modale-docente" id="modale-puglisi">
+    <div class="modale-docente__pannello">
+      <button class="modale-docente__chiudi" onclick="chiudiModale('puglisi')">✕</button>
+      <div class="modale-docente__foto">
+        <img src="assets/docenti/andrea-puglisi.jpg" alt="Andrea Saverio Puglisi" style="object-position: center 15%;" />
+      </div>
+      <div class="modale-docente__corpo">
+        <span class="etichetta">Direttore Artistico</span>
+        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Andrea Saverio Puglisi</h2>
+        <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attore · Regista · Autore</p>
+        <div class="modale-tag">
+          <span>Italiano · Inglese · Francese</span>
+          <span>Siciliano · Romano · Catanese</span>
+          <span>Scherma · Canto · Pugilato</span>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Formazione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2025</span><span>Fondatore e Direttore Artistico — Accademia Prosopon, Roma</span></li>
+            <li><span class="modale-crediti__anno">Univ.</span><span>Laurea DAMS con lode — Roma Tre. Tesi: <em>Maschere fittili di Lipari e le riproduzioni di G. Santelli</em></span></li>
+            <li><span class="modale-crediti__anno">Scuola</span><span>Fondamenta — la scuola dell'Attore, Roma</span></li>
+            <li><span class="modale-crediti__anno">2024</span><span>Workshop «Recitare con la maschera» — Università Carlo Bo, Urbino</span></li>
+            <li><span class="modale-crediti__anno">2022</span><span>Docente di Maschera Menandrea — Accademia Artea, Cosenza</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Teatro — selezione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2026</span><span>Truffaldino e Pantalone — Commedia dell'Arte</span></li>
+            <li><span class="modale-crediti__anno">2022–26</span><span><em>PPP – Pasolini – Amore e lotta</em>, regia Matteo Tarasco — Tournée Nazionale</span></li>
+            <li><span class="modale-crediti__anno">2019</span><span><em>Elena</em> da Euripide, ruolo Teoclimeno — Teatro Antico di Segesta, Tournée Nazionale</span></li>
+            <li><span class="modale-crediti__anno">2018</span><span><em>Il Cartaginese</em> di Plauto, regia Giancarlo Sammartano — Teatro Imperiale/Arcobaleno</span></li>
+            <li><span class="modale-crediti__anno">2017</span><span><em>Delitto e Castigo</em>, ruolo Raskolnikov — Premio Rita Sala, miglior spettacolo</span></li>
+            <li><span class="modale-crediti__anno">2013</span><span><em>Esposti a tutto</em> — Teatro greco di Epidauro, Grecia</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Cinema & Televisione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2022</span><span><em>I Leoni di Sicilia</em> — Disney+, regia Paolo Genovese</span></li>
+            <li><span class="modale-crediti__anno">2022</span><span><em>Viola come il mare</em> — Canale 5, regia Francesco Vicario</span></li>
+            <li><span class="modale-crediti__anno">2021</span><span><em>Letizia Battaglia</em> — Rai Uno, regia Roberto Andò</span></li>
+            <li><span class="modale-crediti__anno">2021</span><span><em>Amore Criminale</em> — Rai Tre</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Pubblicazioni</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2025</span><span><em>Un'Alba nuova</em> — Castelvecchi Editore</span></li>
+            <li><span class="modale-crediti__anno">2020</span><span><em>La maschera della Meretrix</em> in AA.VV. — Carocci Editore</span></li>
+            <li><span class="modale-crediti__anno">2020</span><span><em>La guerra di Paulinuzzu Millarti</em> — Algra Editore</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Premi</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2022</span><span>Premio Nazionale Ercole Patti — 1° classificato</span></li>
+            <li><span class="modale-crediti__anno">2018</span><span>Miglior Attore al festival In-Corto</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ——— ELENA ROSSETTO ——— -->
+  <div class="modale-docente" id="modale-rossetto">
+    <div class="modale-docente__pannello">
+      <button class="modale-docente__chiudi" onclick="chiudiModale('rossetto')">✕</button>
+      <div class="modale-docente__foto">
+        <img src="assets/docenti/elena-rossetto.jpg" alt="Elena Rossetto" style="object-position: center 10%;" />
+      </div>
+      <div class="modale-docente__corpo">
+        <span class="etichetta">Docente</span>
+        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Elena Rossetto</h2>
+        <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attrice · Doppiatrice · Speaker · Presentatrice</p>
+        <div class="modale-tag">
+          <span>Italiano · Inglese · Francese · Spagnolo C1</span>
+          <span>Dialetto Veneto</span>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Formazione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">Scuola</span><span>Fondamenta — la scuola dell'Attore, Roma</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Cinema</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2025</span><span><em>Electromagnetic Bug</em>, ruolo Milena — regia Fabrizio Fazio</span></li>
+            <li><span class="modale-crediti__anno">2024</span><span><em>Storia di una Mistress</em>, ruolo Batula — regia Ciro Tomaiuoli</span></li>
+            <li><span class="modale-crediti__anno">2022</span><span><em>L'Amore Allegro</em>, ruolo Raffaella — regia Francesco Bonelli</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Televisione & Web</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2024</span><span>Giallappa's Show — Micidial Srl per TV8</span></li>
+            <li><span class="modale-crediti__anno">2022</span><span><em>Maccioverse - La Serie</em> con Maccio Capatonda</span></li>
+            <li><span class="modale-crediti__anno">2015</span><span><em>Dov'è Mario?</em> — Wildside per Sky</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Teatro — selezione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2024</span><span><em>Oscar, tre valigie per due figlie</em> — regia Fabrizio Nalli</span></li>
+            <li><span class="modale-crediti__anno">2021</span><span><em>Professione separata</em> — regia Salvatore Scirè</span></li>
+            <li><span class="modale-crediti__anno">2015</span><span><em>Un tram che si chiama Desiderio</em> — regia Nicola Donno</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Doppiaggio — selezione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">Netflix</span><span><em>Chiami il mio agente!</em>, <em>In Silenzio</em>, <em>Jeffrey Epstein</em></span></li>
+            <li><span class="modale-crediti__anno">Amazon</span><span><em>La Rosa Velenosa</em> (Famke Janssen), <em>The Bleeder</em> (Naomi Watts)</span></li>
+            <li><span class="modale-crediti__anno">Apple TV</span><span><em>Now & Then</em>, <em>Harriet the Spy</em></span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Premi</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2025</span><span>Miglior Attrice Non Protagonista — 4ª edizione LP Film Festival</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ——— RACHELE SARTI ——— -->
+  <div class="modale-docente" id="modale-sarti">
+    <div class="modale-docente__pannello">
+      <button class="modale-docente__chiudi" onclick="chiudiModale('sarti')">✕</button>
+      <div class="modale-docente__foto">
+        <img src="assets/docenti/rachele-sarti.jpg" alt="Rachele Sarti" style="object-position: center 10%;" />
+      </div>
+      <div class="modale-docente__corpo">
+        <span class="etichetta">Docente</span>
+        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Rachele Sarti</h2>
+        <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attrice</p>
+        <div class="modale-tag">
+          <span>Inglese (ottimo) · Tedesco (buono)</span>
+          <span>Friulano · Emiliano · Napoletano · Romano</span>
+          <span>Equitazione · Kick-boxing · Scherma</span>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Formazione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">Scuola</span><span>Fondamenta — la scuola dell'Attore, Roma</span></li>
+            <li><span class="modale-crediti__anno">Liceo</span><span>Liceo Classico Europeo — Collegio Uccellis, Udine</span></li>
+            <li><span class="modale-crediti__anno">2022–23</span><span>Master Scherma Scenica con Renzo Musumeci Greco, Roma</span></li>
+            <li><span class="modale-crediti__anno">2022</span><span>Master Maschera Menandrea Integrale con Andrea Puglisi, Roma</span></li>
+            <li><span class="modale-crediti__anno">2024</span><span>Master Biomeccanica con Francis Pardeilhan, Roma</span></li>
+            <li><span class="modale-crediti__anno">2024</span><span>Masterclass con il regista Filippo Orobello, Patti (ME)</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Teatro — selezione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2024</span><span><em>La Storia di Francesco</em> — regia Pino Quartullo</span></li>
+            <li><span class="modale-crediti__anno">2023</span><span><em>Gli ingannati</em> — regia Sergio Basile e Gianluigi Fogacci, Teatro di Villa Lazzaroni, Roma</span></li>
+            <li><span class="modale-crediti__anno">2023</span><span><em>Le donne di Shakespeare</em> — regia Paola Mattioli, Roma</span></li>
+            <li><span class="modale-crediti__anno">2022</span><span><em>Il Persiano</em> di Plauto — regia Giancarlo Sammartano</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Altro</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2023</span><span>Vocal Coach di lingua Friulana per <em>PPP – Amore e Lotta</em>, regia Matteo Tarasco — Teatro Cilea, RC</span></li>
+            <li><span class="modale-crediti__anno">2022</span><span><em>Di pietre e di Rose</em> — Voice Over, regia Paola Mattioli</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ——— FRANCESCO RIZZO ——— -->
+  <div class="modale-docente" id="modale-rizzo">
+    <div class="modale-docente__pannello">
+      <button class="modale-docente__chiudi" onclick="chiudiModale('rizzo')">✕</button>
+      <div class="modale-docente__foto">
+        <img src="assets/docenti/francesco-rizzo.jpg" alt="Francesco Rizzo" style="object-position: center 15%;" />
+      </div>
+      <div class="modale-docente__corpo">
+        <span class="etichetta">Docente</span>
+        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Francesco Rizzo</h2>
+        <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attore · Pedagogo</p>
+        <div class="modale-tag">
+          <span>Cosentino · Calabrese</span>
+          <span>Calcio · Kick Boxing · Thai Boxing</span>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Formazione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">Scuola</span><span>Fondamenta — la scuola dell'Attore, Roma (dizione con G. Trasselli, recitazione classica con M. Blanchi)</span></li>
+            <li><span class="modale-crediti__anno">AIAD</span><span>Accademia Internazionale d'Arte Drammatica — Teatro Quirino, dir. Alvaro Piccardi. Scherma con Renzo Musumeci Greco; con F. Pannofino, Lello Arena, Giorgio Rossi</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Teatro — selezione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2025</span><span><em>Giangurgolo principe di Danimarca</em>, regia Max Mazzotta — Libero Teatro</span></li>
+            <li><span class="modale-crediti__anno">2025</span><span><em>Romeo e Giulietta - esercizi di stile</em> — regia Ada Roncone, Teatrop</span></li>
+            <li><span class="modale-crediti__anno">2024</span><span><em>Smart Work</em> — vincitore Denver Fringe Festival, menzione speciale Prague Fringe Festival</span></li>
+            <li><span class="modale-crediti__anno">2020</span><span><em>Una femmina</em> — regia Francesco Costabile, Medusa Film</span></li>
+            <li><span class="modale-crediti__anno">2017</span><span><em>Giulio Cesare – pezzi staccati</em> — ideazione Romeo Castellucci</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Pedagogia</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2022–</span><span>Docente «Corpo e Spazio» — Accademia Artea, Cosenza</span></li>
+            <li><span class="modale-crediti__anno">2022–</span><span>Conduttore laboratorio «Athanor» — con USSM Catanzaro per giovani autori di reato</span></li>
+            <li><span class="modale-crediti__anno">–</span><span>Pedagogo — Compagnia Scena Verticale</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ——— GAETANO MARSICO ——— -->
+  <div class="modale-docente" id="modale-marsico">
+    <div class="modale-docente__pannello">
+      <button class="modale-docente__chiudi" onclick="chiudiModale('marsico')">✕</button>
+      <div class="modale-docente__foto">
+        <img src="assets/docenti/gaetano-marsico.jpg" alt="Gaetano Marsico" style="object-position: center 20%;" />
+      </div>
+      <div class="modale-docente__corpo">
+        <span class="etichetta">Docente</span>
+        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Gaetano Marsico</h2>
+        <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attore · Maestro di Scherma</p>
+        <div class="modale-tag">
+          <span>Italiano · Inglese · Spagnolo</span>
+          <span>Scherma: Fioretto · Spada · Sciabola</span>
+          <span>Chitarra · Flauto · Pianoforte · Canto Tenore</span>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Formazione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2017–19</span><span>Diploma — Centro Sperimentale di Cinematografia, Roma</span></li>
+            <li><span class="modale-crediti__anno">2024</span><span>Masterclass con Pino Pellegrino — HT Studio</span></li>
+            <li><span class="modale-crediti__anno">2023</span><span>Workshop con Stefano Reali — <em>L'arte di essere scelti</em></span></li>
+            <li><span class="modale-crediti__anno">2022</span><span>Workshop teatrale con Giancarlo Sepe · Masterclass con Roberto Capucci</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Teatro — selezione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2025</span><span>Fra Masseo in <em>Il Viaggio di Francesco</em> — regia Pino Quartullo</span></li>
+            <li><span class="modale-crediti__anno">2019</span><span>Jake in <em>Beirut Rocks</em> di Israel Horovitz — regia Vito Mancusi</span></li>
+            <li><span class="modale-crediti__anno">2018–19</span><span>Landry Coleman in <em>Il Sognatore</em> — opera pop di Michele Iorio</span></li>
+            <li><span class="modale-crediti__anno">2017</span><span>Mercuzio in <em>Shake Shake Shakespeare</em> — regia Roberto Antonelli</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Cinema & Televisione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2021</span><span><em>House of Gucci</em> — regia Ridley Scott</span></li>
+            <li><span class="modale-crediti__anno">2024</span><span><em>Le indagini di Lolita Lobosco</em> — ruolo Salvo</span></li>
+            <li><span class="modale-crediti__anno">2024</span><span><em>Tra passato e presente</em> — ruolo Abelardo, Rai 3</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ——— MASSIMILIANO VIOLA ——— -->
+  <div class="modale-docente" id="modale-viola">
+    <div class="modale-docente__pannello">
+      <button class="modale-docente__chiudi" onclick="chiudiModale('viola')">✕</button>
+      <div class="modale-docente__foto">
+        <img src="assets/docenti/massimiliano-viola.jpg" alt="Massimiliano Viola" style="object-position: center 10%;" />
+      </div>
+      <div class="modale-docente__corpo">
+        <span class="etichetta">Docente</span>
+        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Massimiliano Viola</h2>
+        <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attore · Tecnico Teatrale · Burattinaio</p>
+        <div class="modale-tag">
+          <span>Italiano · Inglese B1 · Francese A1</span>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Formazione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2017–21</span><span>Diploma Accademico di I Livello in Recitazione — Accademia Internazionale di Teatro, Roma</span></li>
+            <li><span class="modale-crediti__anno">2014–17</span><span>Laurea in Scienze e Tecniche Psicologiche — Università di Genova</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Teatro — selezione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2021</span><span>Attore e Tecnico Teatrale — Titanick Theatre, Münster (Germania)</span></li>
+            <li><span class="modale-crediti__anno">–</span><span><em>Il Viaggio di Francesco</em> — La Città degli Artisti, Teatro Quirino e Teatro Italia, Roma</span></li>
+            <li><span class="modale-crediti__anno">–</span><span><em>I Due della Città del Sole</em> — attore di prosa</span></li>
+            <li><span class="modale-crediti__anno">–</span><span>Attore e manipolatore di pupi — Illoco Teatro</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Altro</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2015–18</span><span>Speaker radiofonico — Radio PNR Tortona</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ——— MATTEO MARIA MASCETTA ——— -->
+  <div class="modale-docente" id="modale-mascetta">
+    <div class="modale-docente__pannello">
+      <button class="modale-docente__chiudi" onclick="chiudiModale('mascetta')">✕</button>
+      <div class="modale-docente__foto">
+        <img src="assets/docenti/matteo-mascetta.jpg" alt="Matteo Maria Mascetta" style="object-position: center 15%;" />
+      </div>
+      <div class="modale-docente__corpo">
+        <span class="etichetta">Docente</span>
+        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Matteo Maria Mascetta</h2>
+        <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attore · Mimo · Improvvisazione</p>
+        <div class="modale-tag">
+          <span>Italiano · Inglese B1 · Spagnolo B1</span>
+          <span>Abruzzese · Romano · Napoletano · Siciliano</span>
+          <span>Pugilato · Scherma · Equitazione · Calisthenics</span>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Formazione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2018–20</span><span>Fondamenta — la scuola dell'Attore, Roma</span></li>
+            <li><span class="modale-crediti__anno">2023–</span><span>Teatro Sette — Laboratorio teatrale, dir. Sergio Zecca, Roma</span></li>
+            <li><span class="modale-crediti__anno">2023–24</span><span>Arts Factory — Scuola di Doppiaggio, Roma</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Teatro — selezione</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2025</span><span><em>Come vi piace</em> (Shakespeare) — regia Gianfranco Teodoro</span></li>
+            <li><span class="modale-crediti__anno">2025</span><span><em>Dimostrazione Maschere Greche – Il Truculentus</em> — regia Andrea Puglisi, Urbino</span></li>
+            <li><span class="modale-crediti__anno">2024</span><span>Workshop Maschere Greche con Andrea Puglisi; Lvdi Plautini Sarsinates, Sarsina</span></li>
+            <li><span class="modale-crediti__anno">2024</span><span><em>La guerra di Paulinuzzu Millarti</em> — regia Benedetta Nicoletti, Roma</span></li>
+            <li><span class="modale-crediti__anno">2025</span><span><em>La Lista di Babbo Natale</em> — regia Tiko Rossi Vairo, Roma</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ——— CATERINA PENTERICCI ——— -->
+  <div class="modale-docente" id="modale-pentericci">
+    <div class="modale-docente__pannello">
+      <button class="modale-docente__chiudi" onclick="chiudiModale('pentericci')">✕</button>
+      <div class="modale-docente__foto">
+        <img src="assets/docenti/caterina-pentericci.jpg" alt="Caterina Pentericci" style="object-position: center 20%;" />
+      </div>
+      <div class="modale-docente__corpo">
+        <span class="etichetta">Docente</span>
+        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Caterina Pentericci</h2>
+        <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Maestra di Scherma Olimpica · Tecnico di III Livello SNaQ</p>
+        <div class="modale-tag">
+          <span>Fioretto · Spada · Sciabola</span>
+          <span>Scherma Artistica · Combattimento Scenico</span>
+          <span>Arbitro Nazionale FIS</span>
+        </div>
+
+        <p class="modale-bio" style="margin-top:1.2rem;">Professionista della scherma con oltre quindici anni di esperienza nell'insegnamento, nella formazione di tecnici federali e nella gestione di sale d'armi. Formatasi presso l'Accademia Nazionale di Scherma di Napoli, ha sviluppato un profilo che integra rigore tecnico olimpico, scherma artistica e combattimento scenico, e una consolidata esperienza nella didattica in contesti scolastici e performativi.</p>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Formazione Tecnica</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2013</span><span>Diploma di Maestro di Scherma (Tecnico III Livello) — Accademia Nazionale di Scherma, Napoli</span></li>
+            <li><span class="modale-crediti__anno">2011</span><span>Diploma di Istruttore Nazionale alle tre armi (Tecnico II Livello) — Accademia Nazionale di Scherma, Napoli</span></li>
+            <li><span class="modale-crediti__anno">2009</span><span>Diploma di Istruttore Regionale alle tre armi (Tecnico I Livello) — Accademia Nazionale di Scherma, Napoli</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Scherma Artistica & Teatro</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2024</span><span>Esperta esterna — Progetto PNRR "Orientarsi per non disperdersi", I.I.S. "L. Donati", Fossombrone. Spettacoli teatrali con combattimenti artistici, in collaborazione con il CTU Cesare Questa, Urbino</span></li>
+            <li><span class="modale-crediti__anno">2015</span><span>Coreografa e combattimento scenico — <em>La Resistenza della Poesia</em></span></li>
+            <li><span class="modale-crediti__anno">2009–16</span><span>Maestra di scherma artistica — "La Compagnia di Avalon", Jesi. Rievocazioni storiche: Palio di Jesi, Palio di Offagna, Palio di Roncitelli</span></li>
+            <li><span class="modale-crediti__anno">2009–15</span><span>Armigera e arciera-performer — "La Compagnia di Avalon", regia Matteo Mazzoni</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Esperienza in Sala d'Armi</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2015–</span><span>Responsabile di sala e Maestra di Scherma Olimpica — A.S.D. Aquila Gladiatrix, Urbino · Club Scherma Fabriano</span></li>
+            <li><span class="modale-crediti__anno">2011–20</span><span>Maestra di Scherma Olimpica — Club Scherma Jesi. Insegnamento alle tre armi in contesto agonistico internazionale, atleti dai 6 ai 25 anni</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Docenza & Formazione Federale</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2014–22</span><span>Docente Tutor — Corsi FIS I Livello, Comitato Regionale Marche. Formazione Aspiranti Istruttori Regionali (edizioni 2014, 2015, 2016, 2020, 2021, 2022)</span></li>
+            <li><span class="modale-crediti__anno">2014–19</span><span>Docente — Summer School Internazionale "Fencing Academy Marche", Club Scherma Jesi / Esitur</span></li>
+            <li><span class="modale-crediti__anno">2009–15</span><span>Arbitro Nazionale di Scherma Olimpica e Storica — Federazione Italiana Scherma, Roma</span></li>
+          </ul>
+        </div>
+
+        <div class="modale-sezione">
+          <p class="modale-sezione__titolo">Ricerca & Pubblicazioni</p>
+          <ul class="modale-crediti">
+            <li><span class="modale-crediti__anno">2020</span><span>Curatrice di <em>Personaggi in scena: la Meretrix</em> (con G. Bandini, intr. R. Danese) — Carocci Editore, Roma</span></li>
+            <li><span class="modale-crediti__anno">2019</span><span>Curatrice di <em>Personaggi in scena: il Parasitus</em> (con G. Bandini, intr. R. Danese) — Carocci Editore, Roma</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="contenitore">
+      <div class="footer__griglia">
+        <div>
+          <div class="footer__logo">Prosopon<span>Accademia di Teatro Classico</span></div>
+          <p>Centro di Teatro Classico e Arti Performative.<br>Direttore artistico: Andrea Saverio Puglisi.<br>Roma, dal 2025.</p>
+        </div>
+        <div>
+          <p class="footer__titolo">Navigazione</p>
+          <ul class="footer__lista">
+            <li><a href="accademia.html">L'Accademia</a></li>
+            <li><a href="formazione.html">Formazione</a></li>
+            <li><a href="docenti.html">Docenti</a></li>
+            <li><a href="eventi.html">Spettacoli & Eventi</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__titolo">Formazione</p>
+          <ul class="footer__lista">
+            <li><a href="formazione.html#triennale">Corso Triennale</a></li>
+            <li><a href="formazione.html#serali">Corsi Serali</a></li>
+            <li><a href="formazione.html#laboratori">Laboratori</a></li>
+            <li><a href="formazione.html#masterclass">Masterclass</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__titolo">Contatti</p>
+          <ul class="footer__lista">
+            <li><a href="iscrizioni.html">Audizioni & Iscrizioni</a></li>
+            <li><a href="contatti.html">Contatti</a></li>
+            <li><a href="contatti.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2025 Accademia di Teatro Classico Prosopon. Tutti i diritti riservati.</p>
+        <p style="font-style:italic; font-size:0.8rem; color:var(--color-grigio);">Roma, Italia</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => navMenu.classList.toggle('aperto'));
+
+    function apriDocente(id) {
+      document.getElementById('modale-' + id).classList.add('aperta');
+      document.body.style.overflow = 'hidden';
+    }
+    function chiudiModale(id) {
+      document.getElementById('modale-' + id).classList.remove('aperta');
+      document.body.style.overflow = '';
+    }
+    // Chiudi cliccando fuori
+    document.querySelectorAll('.modale-docente').forEach(m => {
+      m.addEventListener('click', e => {
+        if (e.target === m) {
+          m.classList.remove('aperta');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+    // Chiudi con Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modale-docente.aperta').forEach(m => {
+          m.classList.remove('aperta');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+    // Keyboard navigation per le card
+    document.querySelectorAll('.card-docente').forEach(c => {
+      c.addEventListener('keydown', e => { if (e.key === 'Enter') c.click(); });
+    });
+  </script>
+</body>
+</html>
