@@ -10,6 +10,24 @@
 
 ---
 
+## 🆕 ROUND 2 — Nuove richieste utente (2026-05-04)
+
+### Aggiornamento date anno accademico
+- [ ] Triennale: A.A. **2027/2028** (sostituire ovunque "2025/2026" o "2025-2026" relativo al triennio)
+- [ ] Serali / Laboratori / Masterclass: avvio **ottobre 2026** → A.A. **2026/2027**
+- [ ] Verificare: banda scarcity homepage e iscrizioni, copy iscrizioni, copy formazione, sitemap lastmod, JSON-LD
+
+### Nuova pagina "La Biblioteca"
+- [ ] Creare `biblioteca.html` con sezione principale "La Biblioteca" — angle: Accademia Prosopon è l'unico centro che offre uno spazio di studio e riflessione su teatro classico
+- [ ] Aggiungere sezione "Accesso alle aule" nella stessa pagina — angle: aule a disposizione degli studenti su prenotazione, per offrire un luogo "safe" dove provare
+- [ ] Aggiungere voce "Biblioteca" alla nav su tutte le pagine (10 pagine totali ora)
+- [ ] Aggiungere link nel footer di tutte le pagine
+- [ ] Aggiornare `sitemap.xml`, OpenGraph, canonical, meta description per la nuova pagina
+- [ ] Aggiungere CTA prenotazione aula (può puntare al form contatti con `?richiesta=prenotazione-aula#form-contatto`)
+- [ ] Aggiornare `README.md` e `TECH_NOTES.md` con la nuova pagina
+
+---
+
 ## 🔧 SENIOR CODER — Fix tecnici
 
 ### Form e backend
@@ -170,3 +188,123 @@
 | 2026-05-04 | Neuro  | Pass conversion + trust completa. **Trust:** `contatti.html` riscritto wording sede + mappa placeholder accessibile (in attesa di indirizzo reale → 2 punti `[~]`). Email istituzionale `info@accademiaprosopon.it` aggiunta nel footer di tutte e 7 le pagine per coerenza. Nuova sezione `#direzione-artistica` in homepage (foto + quote brand + bio + 2 CTA verso accademia/docenti, con ancora `#direttore-artistico` aggiunta in `accademia.html`). Sezione "Voci dell'Accademia" (`#voci`) in `accademia.html`: 3 quote, l'ultima placeholder onesto. **CTA & funnel:** audit completo, ogni pagina ha almeno 1 CTA conversion. CTA hero homepage cambiato in "Iscriviti alle audizioni / Scopri il triennio" (e replicato in CTA finale). Aggiunti CTA conversion finali su `docenti.html` (mancante) e `formazione.html`. `.banda-scarcity` (CSS globale) inserita su homepage e iscrizioni: wording "Audizioni in apertura · A.A. 2025–2026" senza scadenze inventate. **Microcopy:** verificati i 3 fix typo (già applicati da UX), riscritti tutti e 4 i success message in voce di brand (es. "Fatto. Il tuo nome è ora tra le voci di Prosopon — benvenuto/a."). Aggiunta classe `.form-reassurance` con micro-rassicurazioni accanto a tutti e 4 i pulsanti submit ("Risposta entro 48h", "Niente spam", "I tuoi dati restano tuoi", ecc.). **Eventi:** 4 card placeholder riscritte con "data in definizione" + link "Avvisami quando esce" → newsletter; strip newsletter di `eventi.html` rinforzata in voce funnel ("Vuoi essere il primo a saperlo?"). |
 | 2026-05-04 | UX     | Pass design completa. Contrasti: introdotte `--color-link` (#7a5f30) e `--color-grigio-chiaro` (#a09a92), entrambe AA-conformi (5.12:1 e 6.4:1). Link inline: underline globale per `main p/li a:not(.btn)` + variante `.sezione--scura` con oro chiaro. Componenti: classi utility `.card--centro`, `.card__icona/__titolo/__testo/__cta`, `.intro-large`, `.cta-band`, `.testo-centrato`, `.spazio-*`, `.docente-circle`, `.evento-card--prossimo`/`.evento-badge`, `.ancore-corsi`. Index: 3 card formazione + 4 card docente (ora link reali con `aria-label` + ancora a modale) + CTA finale rifattorizzati. Eventi: badge "Prossimo evento" più visibile, stato vuoto evocativo. Formazione: tab attivo rinforzato (border 3px + background + box-shadow), masterclass empty state riscritto, ancore mobile sticky. Mobile: hero h1 `clamp(2rem, 8vw, 3.2rem)` + letter-spacing 0.04em sotto 480px. Microcopy: messaggi errore form mappati per campo in voce di brand (`contatti.html` + `iscrizioni.html`), stati submit/error riscritti. Identità istituzionale: in `contatti.html` aggiunto canale "Segreteria: info@accademiaprosopon.it" (da configurare) accanto all'email del direttore; offuscamento email/telefono deliberatamente NON applicato (peggiora UX). |
 | 2026-05-04 | Auditor | **GDPR:** verificato che `privacy.html` (informativa completa, indice cliccabile, art. 6 GDPR, responsabili esterni, trasferimenti extra UE, art. 15-22, reclamo Garante) e `cookie.html` (no analytics, no profilazione, snippet banner pronto e commentato per attivazione futura) erano già presenti e ben fatti — confermati come `[x]`. Aggiunto link a `privacy.html` (target `_blank`) nelle 2 label di consenso GDPR di `iscrizioni.html` (audizione + iscrizione corso serale): prima erano testo piatto. Footer privacy/cookie verificato su tutte e 9 le pagine (incluse privacy/cookie). **Newsletter double-opt-in:** flag `[~]` — Formspree è singolo opt-in, raccomandato passaggio a provider DOI (Mailchimp/Brevo) prima del lancio attivo. **Cookie banner:** non obbligatorio ad oggi (no analytics/profilazione/social/embed); snippet pronto e commentato in `cookie.html` §6 per attivazione futura condizionale. **Consistency:** tutte le 8 foto docenti + 7 CV PDF + `home.webp` esistono e sono linkati. Conteggio "8 docenti" coerente tra index e docenti.html. Bug minore CORRETTO: `formazione.html:253` puntava a `iscrizioni.html#serali` (ancora inesistente) → cambiato in `iscrizioni.html#form-iscrizione`. ID hamburger/navMenu univoci per pagina, ID dei 4 form suffissati `-c/-nl/-aud/-isc` (no duplicati). **Documentazione:** creati `README.md` (struttura, run locale, pre-deploy checklist) e `TECH_NOTES.md` (stack, CSS architecture, flusso form, SEO, a11y, GDPR, debito tecnico). Aggiunto in fondo a `TODO.md` blocco "Placeholder da sostituire prima del push" + blocco "Check che richiedono browser/tool reali (utente)". Lighthouse / W3C / responsive / screen reader / submit form documentati come task da eseguire all'utente — non automatizzabili da CLI. |
+
+---
+
+## ⚠️ PLACEHOLDER DA SOSTITUIRE PRIMA DEL PUSH
+
+Lista esaustiva delle stringhe segnaposto presenti nel repo. **Tutte vanno sostituite prima del go-live**.
+
+### A. Backend form — Formspree
+4 occorrenze di `https://formspree.io/f/REPLACE_WITH_YOUR_ID` da sostituire con l'ID reale (può essere lo stesso endpoint per tutti e 4 i form, oppure uno per ciascuno):
+
+| File | Riga | Form |
+|------|------|------|
+| `iscrizioni.html` | 204 | Form audizione triennale |
+| `iscrizioni.html` | 280 | Form iscrizione corsi serali |
+| `contatti.html` | 146 | Form contatto generico |
+| `contatti.html` | 225 | Form newsletter |
+
+### B. Dominio / URL canonical
+Il dominio `accademiaprosopon.it` è usato come placeholder nei `canonical`, `og:url`, `og:image`, `twitter:image`, JSON-LD e nei file `sitemap.xml` / `robots.txt`. Va confermato (o sostituito con il dominio reale registrato) e propagato in:
+
+- 9× `<link rel="canonical">` (uno per pagina HTML)
+- 9× `<meta property="og:url">`
+- 9× `<meta property="og:image">`
+- 7× `<meta name="twitter:image">` (mancante su privacy/cookie come da convenzione `noindex`)
+- `index.html` JSON-LD: `url`, `logo`, `image` (3 occorrenze)
+- `sitemap.xml`: 7 `<loc>`
+- `robots.txt`: 1 `Sitemap:`
+
+### C. Email istituzionale
+`info@accademiaprosopon.it` è usata come **canale ufficiale** in:
+
+- footer di tutte e 9 le pagine HTML
+- `privacy.html` (titolare + esercizio diritti + chiusura)
+- `cookie.html` (chiusura)
+- `contatti.html` (Segreteria, accanto a "Direzione artistica")
+
+→ Va **configurata lato MX/DNS** (creare la mailbox `info@<dominio>`) **oppure** sostituita ovunque con un'email realmente attiva. Finché la mailbox non esiste il link `mailto:` rimanderà il messaggio in bounce.
+
+### D. Email personale direttore
+`puglisiandreasaverio@gmail.com` è presente solo in `contatti.html:102` come "Direzione artistica" — **NON è un placeholder**, è un dato reale fornito. Va eventualmente nascosta o spostata su un alias istituzionale a discrezione del direttore artistico.
+
+### E. Dati legali del titolare (`privacy.html` §1)
+Il blocco `.blocco-info` dichiara esplicitamente che mancano:
+
+- Forma giuridica (associazione culturale, SRL, SAS, ditta individuale…)
+- Partita IVA
+- Codice fiscale
+- Indirizzo della sede legale completo
+
+→ vanno integrati a **costituzione formale dell'ente perfezionata**. Fino ad allora il blocco resta come "in via di formalizzazione".
+
+### F. Indirizzo sede operativa (`contatti.html`)
+Oggi: *"Sede operativa a Roma. Indirizzo completo comunicato in fase di colloquio per audizioni e iscrizioni."* Marcato `[~]` da Neuro. Va sostituito con almeno **quartiere + via** non appena disponibile.
+
+### G. Mappa Maps (`contatti.html`)
+Oggi: blocco placeholder "Mappa in arrivo" con icona stilizzata, marcato `[~]` da Neuro. Da sostituire con `<iframe>` Google Maps o OpenStreetMap quando l'indirizzo è confermato.
+
+### H. CV mancante (`docenti.html`)
+La modale di **Caterina Pentericci** non ha link "Scarica CV (PDF)" perché il file non esiste in `documenti/cv/`. Se la docente fornisce il PDF, salvarlo come `documenti/cv/CV - Caterina Pentericci.pdf` e aggiungere il link nella modale (`docenti.html` ~ riga 850).
+
+### I. Asset bitmap del favicon
+Il favicon è solo `favicon.svg`. PNG 16/32 e `apple-touch-icon.png` 180×180 non sono stati generati (richiedono tool grafico). Generarli con uno strumento (es. https://realfavicongenerator.net) e linkarli in tutti i `<head>` se si vuole il pieno supporto cross-browser.
+
+### J. Foto docenti in WebP
+Le 8 foto docenti sono in JPG. Conversione in WebP (con `<picture>` fallback) raccomandata per migliorare il peso/LCP di `docenti.html`. Comando suggerito:
+```bash
+for f in assets/docenti/*.jpg; do
+  cwebp -q 80 -resize 800 0 "$f" -o "${f%.jpg}.webp"
+done
+```
+Poi sostituire `<img>` con `<picture><source srcset="…webp" type="image/webp"><img src="…jpg" …></picture>`.
+
+---
+
+## 🧪 CHECK CHE RICHIEDONO BROWSER / TOOL REALI (DA UTENTE)
+
+Questi check **non sono eseguibili da CLI** (no browser headless in questa sessione) e vanno eseguiti dall'utente prima del push:
+
+### Audit automatici
+- [ ] **Lighthouse** (Chrome DevTools → Lighthouse) su tutte e 9 le pagine. Target ≥ 90 per Performance / Accessibility / SEO / Best Practices. Eseguire sia su Mobile (default) sia su Desktop.
+- [ ] **Validatore W3C HTML** → https://validator.w3.org/nu/ — eseguire su tutte e 9 le pagine. Tollerare warning, zero errori critici.
+- [ ] **Validatore W3C CSS** → https://jigsaw.w3.org/css-validator/ — eseguire su `style.css` (e gli stili inline per-pagina di privacy/cookie). Tollerare warning sui custom properties moderni.
+- [ ] **Pa11y / axe DevTools** (estensione browser) per audit accessibility approfondito.
+
+### Test funzionali
+- [ ] **Submit dei 4 form** dopo aver configurato l'ID Formspree reale: contatto, newsletter, audizione, iscrizione corso serale. Verificare che: (a) la POST parta, (b) la mail arrivi alla casella configurata, (c) il messaggio di success sia mostrato, (d) gli errori validation client-side siano leggibili.
+- [ ] **Pre-compilazione oggetto contatti** via querystring: aprire `formazione.html`, cliccare "Richiedi il piano di studi", verificare che `contatti.html` apra il form contatto con campo `oggetto` pre-compilato.
+- [ ] **Apertura modali docenti via hash**: aprire `index.html`, cliccare la card di Puglisi → atterraggio su `docenti.html#puglisi` con modale Puglisi già aperta. Ripetere per Rossetto, Sarti, Pentericci.
+
+### Test responsive
+- [ ] **375 px** (iPhone SE) — controllare che hero h1, nav hamburger, card formazione, ancore mobile sticky `.ancore-corsi`, FAQ accordion, form e checkbox consenso siano tutti leggibili e cliccabili (touch target ≥ 44×44 px).
+- [ ] **768 px** (tablet portrait) — controllare il punto di break del menu (hamburger ↔ menu orizzontale) e il layout `.griglia-2`.
+- [ ] **1024 px** (laptop / iPad landscape) — controllare il layout 3 colonne delle card formazione e il footer 4 colonne.
+- [ ] **1440 px** (desktop) — controllare che `.contenitore` non si stiri eccessivamente e che la tipografia hero non superi `clamp` max.
+
+### Test interazione tastiera & screen reader
+- [ ] **Navigazione Tab** su tutta la home: skip-link → logo → 7 link nav → CTA → contenuti. Outline `:focus-visible` oro 2px sempre visibile.
+- [ ] **Focus trap modali docenti**: aprire una modale, premere Tab ripetutamente — il focus deve restare dentro la modale e ciclare. Shift+Tab ciclo inverso. Esc chiude. Click outside chiude. Al close, il focus torna sulla card che ha aperto la modale.
+- [ ] **Tab navigazione formazione**: frecce sinistra/destra spostano il tab attivo. Home/End vanno al primo/ultimo. Enter/Space attivano il tab.
+- [ ] **FAQ accordion in iscrizioni**: Enter/Space espande/contrae, `aria-expanded` cambia.
+- [ ] **Screen reader test**: almeno un giro con **VoiceOver (macOS)** o **NVDA (Windows)**. Verificare che skip-link sia il primo elemento annunciato, che gli stati `aria-live` dei form vengano letti, che le label dei docente-circle nella home (`aria-label="Vai alla scheda di [Nome]"`) siano corrette.
+
+### Browser cross-check
+- [ ] Chrome / Edge / Safari / Firefox più recenti (almeno desktop + iOS Safari + Android Chrome). Niente IE.
+
+---
+
+## 🐛 BUG / DUBBI RESIDUI (Auditor)
+
+Trovati durante la pass statica — **non bloccanti** per il push, ma da valutare con l'utente:
+
+1. **Newsletter singolo opt-in** (Formspree). Per la piena conformità GDPR su comunicazioni commerciali si raccomanda Mailchimp/Brevo con DOI. Soft warning, non blocca il push.
+2. **Email `info@accademiaprosopon.it` non configurata** lato MX/DNS. Finché la mailbox non esiste, qualunque `mailto:` cadrà in bounce. Va creata la casella **prima** del lancio (la maggior parte dei punti del sito la usa come canale principale).
+3. **Endpoint Formspree placeholder** in 4 punti. Il sito funziona graficamente ma i form non inviano nulla finché non viene sostituito.
+4. **CV Pentericci mancante** nella modale (sua o per scelta editoriale?). Verificare con la docente.
+5. **Indirizzo sede + dati legali in `privacy.html`** ancora generici. Vanno completati a costituzione perfezionata dell'ente.
+6. **Cartella `documenti/`** contiene file `.pages` (BIO DOCENTI, Piano di lavorazione) interni e `.docx` (CURRICULUM scherma — l'origine del bug Coder già risolto). Sono già `Disallow` in `robots.txt` e ignorati via `.gitignore`. Verificare che NON vengano committati per errore (controllo a `git status` prima del push).
+7. **Favicon solo SVG**: alcuni vecchi browser desktop e iOS pinned tab continuano a richiedere PNG/ICO. Non bloccante.
+8. **Foto docenti ancora in JPG** (~5-8 MB totali ipotetici). Conversione in WebP raccomandata per LCP `docenti.html`. Non bloccante.
+9. **Nessun test reale form** possibile in questa sessione. Va fatto dall'utente con browser dopo il fix Formspree.
