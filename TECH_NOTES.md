@@ -77,9 +77,22 @@ Ibrido BEM + utility class. Esempio:
 
 ---
 
-## 4. Flusso form (Formspree)
+## 4. Flusso form (FormSubmit)
 
-Tutti e 4 i form puntano a `https://formspree.io/f/REPLACE_WITH_YOUR_ID` e vanno aggiornati con l'ID reale prima del go-live (vedi `TODO.md` blocco placeholder).
+Tutti e 4 i form puntano direttamente a `https://formsubmit.co/centroprosopon@gmail.com` (Round 6, 2026-05-04 — sostituito il precedente Formspree). Zero account, zero ID da configurare; richiesta solo una conferma one-click via mail al primo invio.
+
+Campi nascosti standard FormSubmit usati su tutti e 4 i form:
+
+| Campo | Valore | Scopo |
+|-------|--------|-------|
+| `_subject` | (specifico per form) | Subject leggibile dell'email recapitata |
+| `_template` | `table` | Body email formattato in tabella, leggibile |
+| `_captcha` | `true` | Captcha automatico anti-spam (default-on, esplicitato) |
+| `_next` | `https://www.accademiaprosopon.it/grazie.html[?tipo=...]` | Pagina di redirect post-submit (fallback per utenti senza JS) |
+
+Per gli utenti con JS abilitato (default), il submit avviene via `fetch()` in background (no full-page reload) e il success message viene mostrato inline tramite `.form-stato`. Il `_next` resta utile come fallback no-JS o se la fetch fallisce in modo silenzioso.
+
+`grazie.html` ha `<meta name="robots" content="noindex">`, non è linkata da nav/footer ed è esclusa da `sitemap.xml`.
 
 Pattern condiviso:
 
@@ -89,6 +102,7 @@ Pattern condiviso:
 4. `<div class="form-stato" role="status" aria-live="polite">` riceve gli stati di submit (loading/success/error) annunciati a screen reader.
 5. Checkbox `name="consenso_privacy" required` con link a `privacy.html` (target `_blank`).
 6. `.form-reassurance` accanto al pulsante con micro-rassicurazioni ("Risposta entro 48h", "Niente spam"…).
+7. `<p class="form-fallback">` sotto le rassicurazioni con `mailto:centroprosopon@gmail.com?subject=...` come canale di backup.
 
 ### Pre-compilazione oggetto
 
@@ -138,7 +152,7 @@ Valori attualmente cablati nelle CTA del sito:
 - Hero `index.html`: immagine senza `loading="lazy"`, `width`/`height` esplicite.
 - Tutte le altre `<img>`: `loading="lazy"`.
 - Google Fonts caricati via `preconnect` + `<link rel="stylesheet">` con `display=swap` (no `@import` per evitare blocking-render).
-- Nessun JavaScript di terze parti caricato in fondo (solo Formspree, e solo al submit).
+- Nessun JavaScript di terze parti caricato in fondo (solo FormSubmit, e solo al submit).
 - Nessun analytics → niente cookie banner → niente blocking script.
 - (Da fare a deploy time): conversione foto docenti in WebP con `<picture>` fallback per ridurre del ~60% il peso di `docenti.html`.
 
@@ -146,10 +160,10 @@ Valori attualmente cablati nelle CTA del sito:
 
 ## 8. Privacy / GDPR
 
-- `privacy.html` copre titolare, dati raccolti, finalità + base giuridica (art. 6 GDPR), responsabili esterni (Formspree, Google Fonts), trasferimenti extra UE (SCC + DPF), tempi di conservazione, diritti artt. 15-22, modalità di esercizio, reclamo Garante.
+- `privacy.html` copre titolare, dati raccolti, finalità + base giuridica (art. 6 GDPR), responsabili esterni (FormSubmit, Google Fonts), trasferimenti extra UE (SCC + DPF), tempi di conservazione, diritti artt. 15-22, modalità di esercizio, reclamo Garante.
 - `cookie.html`: nessun cookie di analytics/profilazione attualmente. Snippet banner pronto e commentato in fondo, da attivare solo se in futuro vengono introdotti analytics o cookie di terze parti non tecnici.
 - Tutti e 4 i form hanno checkbox `consenso_privacy` obbligatorio con link a `privacy.html`.
-- Newsletter: implementata oggi come singolo opt-in (Formspree). **Per essere pienamente conforme si raccomanda di passare a un provider con double-opt-in (Mailchimp/Brevo/MailerLite/...) prima del lancio attivo della newsletter.** Fino ad allora il flag è da considerarsi soft.
+- Newsletter: implementata oggi come singolo opt-in (FormSubmit). **Per essere pienamente conforme si raccomanda di passare a un provider con double-opt-in (Mailchimp/Brevo/MailerLite/...) prima del lancio attivo della newsletter.** Fino ad allora il flag è da considerarsi soft.
 
 ---
 
@@ -158,7 +172,7 @@ Valori attualmente cablati nelle CTA del sito:
 | Servizio | Uso | Note |
 |----------|-----|------|
 | Google Fonts | Caricamento Cormorant Garamond, EB Garamond, Cinzel | Solo CSS, nessun cookie persistente. Citato in privacy/cookie. |
-| Formspree | Backend dei 4 form | Endpoint placeholder `REPLACE_WITH_YOUR_ID`. Citato in privacy/cookie. |
+| FormSubmit | Backend dei 4 form | Endpoint live `formsubmit.co/centroprosopon@gmail.com`. Citato in privacy/cookie. Richiede 1 click di conferma utente al primo invio. |
 
 Nessun analytics, nessun social plugin, nessun video embed, nessuna mappa interattiva, nessun CDN JS.
 
@@ -167,7 +181,7 @@ Nessun analytics, nessun social plugin, nessun video embed, nessuna mappa intera
 ## 10. Limiti noti / debito tecnico
 
 - Nav e footer sono **duplicati a mano** sulle 10 pagine. Modifica = 10 edit. Soluzione futura: SSI/include o piccolo build step (Eleventy, Astro). Per ora SCOPE OUT.
-- 4 endpoint Formspree placeholder.
+- ~~4 endpoint Formspree placeholder.~~ **CHIUSO Round 6:** sostituiti tutti con `formsubmit.co/centroprosopon@gmail.com` (Round 6, 2026-05-04). Richiesto 1 click di conferma utente al primo invio.
 - Foto docenti ancora in JPG (no WebP).
 - Favicon solo SVG; PNG 16/32 e apple-touch-icon non generabili senza tool grafico.
 - CV Pentericci mancante.
