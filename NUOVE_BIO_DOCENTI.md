@@ -215,6 +215,32 @@ Materia fissata dall'utente: Scherma. La bio è costruita sui dati già in `doce
 
 ---
 
+## Giampiero Marchi
+
+**Materia (etichetta sopra il nome):** Latino & Greco antico
+**Foto file:** assets/docenti/marchi.jpg (+ marchi.webp)
+
+### Citazione-firma (1 riga, italic)
+> *Recitare Plauto senza conoscerne il latino è come cantare un'aria senza sentire la lingua in cui è scritta.*
+
+### Bio narrativa (3-4 righe, terza voce calda)
+Direttore del Centro Nazionale di Studi Classici GrecoLatinoVivo, che ha co-fondato nel 2014 e che oggi ha avvicinato migliaia di studenti alla cultura classica con il metodo naturale di Hans H. Ørberg. Dottore in Storia con tesi in Diritto Attico, ha organizzato i Seminari Internazionali di GrecoLatinoVivo al Teatro Niccolini di Firenze e al Mercadante di Napoli. A Prosopon porta una convinzione: l'attore di teatro classico non recita un testo tradotto, ma una lingua viva.
+
+### Cosa imparerai con Giampiero
+- Il latino di Plauto e Terenzio: pronuncia, ritmo, musica della battuta originale
+- Il greco dei tragici e dei comici: suono e struttura del verso prima del significato
+- Leggere il testo originale per scegliere meglio in scena: cosa la traduzione perde, cosa l'attore può recuperare
+
+### Tre credenziali-chip (i 3 trust signal più forti, sintetici)
+- Direttore GrecoLatinoVivo · Firenze
+- Dottore in Storia · tesi Diritto Attico
+- Seminario Internaz. Teatro Niccolini 2017
+
+### Note al committente
+Etichetta-materia "Latino & Greco antico" allineata al brief (lingua dei classici come strumento d'attore). I dati biografici provengono dalla pagina staff ufficiale del sito grecolatinovivo.it (co-fondazione blog maggio 2014, dottorato in Storia con tesi in Diritto Attico, primo Seminario Internazionale al Teatro Niccolini di Firenze marzo 2017 con 400+ docenti, edizione 2018 al Mercadante di Napoli) e dalla pagina istituzionale "Chi siamo" (oltre 5.000 persone avvicinate alla cultura classica, ente accreditato MIUR per aggiornamento docenti, percorsi individuali per oltre 1.200 studenti). I numeri specifici NON sono stati inseriti in chip o bio per prudenza (potrebbero variare nel tempo): se vuoi che entrino, conferma e li integriamo. CV non disponibile in `documenti/cv/` — modale senza bottone download (come Pentericci).
+
+---
+
 ## Tabella riassuntiva — Nome → Materia
 
 | Docente | Materia (etichetta proposta) | Note |
@@ -227,6 +253,7 @@ Materia fissata dall'utente: Scherma. La bio è costruita sui dati già in `doce
 | Massimiliano Viola | Tecniche teatrali & Teatro di figura | **Da confermare** — alternativa: "Tecniche teatrali · Prosa" |
 | Matteo Maria Mascetta | Mimo & Improvvisazione | Conferma l'etichetta già presente sul sito |
 | Caterina Pentericci | Scherma scenica | Fissata dall'utente |
+| Giampiero Marchi | Latino & Greco antico | R9 (2026-05-04) — Direttore GrecoLatinoVivo, ponte filologia ↔ teatro |
 
 ### Dubbi aperti per la direzione (3 punti)
 1. **Marsico** — *cinema* vs *cinema + scherma*. Il CV è massicciamente CSC/Ridley Scott/RAI; la scherma resta skill. Decida la direzione se serve una seconda materia o no.

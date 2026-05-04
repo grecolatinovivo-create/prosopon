@@ -16,7 +16,7 @@ Accademia_prosopon/
 ├── index.html              # Home
 ├── accademia.html          # Chi siamo, missione, direttore artistico, "Voci"
 ├── formazione.html         # Triennale + serali + laboratori + masterclass (4 tab)
-├── docenti.html            # 8 docenti con modali full-screen
+├── docenti.html            # 9 docenti con modali full-screen
 ├── biblioteca.html         # La Biblioteca (fondo teatro classico) + sezione "Aule prove"
 ├── eventi.html             # Spettacoli & eventi (placeholder + newsletter strip)
 ├── iscrizioni.html         # Audizioni triennale + iscrizione corsi serali (FAQ accordion)

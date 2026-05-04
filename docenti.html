@@ -292,6 +292,21 @@
           </div>
         </div>
 
+        <!-- Giampiero Marchi -->
+        <div class="card-docente" onclick="apriDocente('marchi')" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modale-marchi">
+          <div class="card-docente__foto">
+            <picture>
+              <source srcset="assets/docenti/marchi.webp" type="image/webp" />
+              <img src="assets/docenti/marchi.jpg" alt="Ritratto di Giampiero Marchi" width="400" height="533" loading="lazy" style="object-position: center 20%;" />
+            </picture>
+          </div>
+          <div class="card-docente__info">
+            <h3>Giampiero Marchi</h3>
+            <p class="card-docente__ruolo">Latino &amp; Greco antico</p>
+            <span class="card-docente__leggi">Leggi la bio →</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -636,6 +651,44 @@
           <span>Maestro di Scherma · III Livello SNaQ</span>
           <span>Accademia Nazionale Scherma · Napoli</span>
           <span>Arbitro Nazionale FIS · 15+ anni</span>
+        </div>
+
+        <div class="modale-ritratto__azioni">
+          <a class="btn btn--oro" href="iscrizioni.html#form-audizione">Iscriviti alle audizioni</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ——— GIAMPIERO MARCHI ——— -->
+  <div class="modale-docente" id="modale-marchi" role="dialog" aria-modal="true" aria-labelledby="ttl-marchi" aria-hidden="true">
+    <div class="modale-ritratto__pannello">
+      <button class="modale-ritratto__chiudi" onclick="chiudiModale('marchi')" aria-label="Chiudi la scheda di Giampiero Marchi">×</button>
+      <div class="modale-ritratto__foto">
+        <picture>
+          <source srcset="assets/docenti/marchi.webp" type="image/webp" />
+          <img src="assets/docenti/marchi.jpg" alt="Ritratto di Giampiero Marchi" loading="lazy" style="object-position: center 20%;" />
+        </picture>
+      </div>
+      <div class="modale-ritratto__corpo">
+        <p class="modale-ritratto__materia">Latino &amp; Greco antico</p>
+        <h2 id="ttl-marchi" class="modale-ritratto__nome">Giampiero Marchi</h2>
+        <p class="modale-ritratto__citazione">Recitare Plauto senza conoscerne il latino è come cantare un'aria senza sentire la lingua in cui è scritta.</p>
+        <p class="modale-ritratto__bio">Direttore del Centro Nazionale di Studi Classici GrecoLatinoVivo, che ha co-fondato nel 2014 e che oggi ha avvicinato migliaia di studenti alla cultura classica con il metodo naturale di Hans H. Ørberg. Dottore in Storia con tesi in Diritto Attico, ha organizzato i Seminari Internazionali di GrecoLatinoVivo al Teatro Niccolini di Firenze e al Mercadante di Napoli. A Prosopon porta una convinzione: l'attore di teatro classico non recita un testo tradotto, ma una lingua viva.</p>
+
+        <div class="modale-ritratto__imparerai">
+          <p class="modale-ritratto__imparerai-titolo">Cosa imparerai con Giampiero</p>
+          <ul>
+            <li>Il latino di Plauto e Terenzio: pronuncia, ritmo, musica della battuta originale</li>
+            <li>Il greco dei tragici e dei comici: suono e struttura del verso prima del significato</li>
+            <li>Leggere il testo originale per scegliere meglio in scena: cosa la traduzione perde, cosa l'attore può recuperare</li>
+          </ul>
+        </div>
+
+        <div class="modale-ritratto__chip">
+          <span>Direttore GrecoLatinoVivo · Firenze</span>
+          <span>Dottore in Storia · tesi Diritto Attico</span>
+          <span>Seminario Internaz. Teatro Niccolini 2017</span>
         </div>
 
         <div class="modale-ritratto__azioni">

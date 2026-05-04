@@ -1286,6 +1286,9 @@ textarea:focus-visible,
   position: relative;
   min-height: 520px;
   overflow: hidden;
+  /* R10: contiene l'immagine entro la dimensione naturale tipica delle foto sorgente
+     (lato lungo ~1067px), evitando upscaling visibile sui display ad alta densità. */
+  max-width: 500px;
 }
 .modale-ritratto__foto picture,
 .modale-ritratto__foto img {
@@ -1294,6 +1297,10 @@ textarea:focus-visible,
   height: 100%;
   object-fit: cover;
   object-position: center;
+  /* R10: rendering nitido senza filtri di smoothing aggressivi; il browser sceglie
+     l'algoritmo migliore in base alla densità di pixel del display. */
+  image-rendering: auto;
+  background-color: var(--color-grafite);
 }
 
 .modale-ritratto__corpo {
@@ -1467,6 +1474,13 @@ textarea:focus-visible,
     min-height: 0;
     height: 320px;
     aspect-ratio: 16/9;
+    /* R10: su mobile la foto diventa banda 16:9 in alto; rimuovo il limite max-width
+       desktop e tengo il volto centrato in alto per evitare crop sul mento. */
+    max-width: none;
+  }
+  .modale-ritratto__foto picture,
+  .modale-ritratto__foto img {
+    object-position: center top;
   }
   .modale-ritratto__corpo {
     padding: 1.8rem 1.4rem 1.6rem;
