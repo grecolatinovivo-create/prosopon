@@ -89,13 +89,14 @@
             <p style="margin-top:0.4rem; font-size:1.05rem;">Roma, Italia<br>
             <span style="font-style:italic; color:var(--color-grigio); font-size:0.95rem;">Indirizzo completo comunicato in fase di colloquio per audizioni e iscrizioni.</span></p>
 
-            <!-- Mappa placeholder — non si inventano coordinate.
-                 Auditor/utente: sostituire con embed Maps reale appena disponibile l'indirizzo. -->
-            <div role="img" aria-label="Mappa della sede in arrivo. Roma, Italia."
+            <!-- Blocco "posizione riservata" — la mappa puntuale viene condivisa al primo colloquio,
+                 per tutela della privacy degli studenti e della sicurezza degli spazi.
+                 Sostituibile con embed Maps quando si decide di pubblicare l'indirizzo. -->
+            <div role="img" aria-label="Sede a Roma, Italia. Posizione esatta condivisa al primo colloquio."
                  style="margin-top:1rem; background:var(--color-avorio-scuro); border:1px solid rgba(184,150,90,0.25); padding:2rem 1.5rem; text-align:center; min-height:140px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.4rem;">
               <span aria-hidden="true" style="font-size:1.6rem; color:var(--color-oro); line-height:1;">&#9737;</span>
               <span style="font-family:var(--font-titolo); font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-grafite);">Roma · Italia</span>
-              <span style="font-size:0.85rem; font-style:italic; color:var(--color-grigio);">Mappa in arrivo</span>
+              <span style="font-size:0.85rem; font-style:italic; color:var(--color-grigio); max-width:280px; line-height:1.4;">La posizione esatta viene condivisa al primo colloquio, per tutela della privacy e della sicurezza degli spazi.</span>
             </div>
           </div>
 
@@ -107,11 +108,11 @@
             </p>
             <p style="margin-top:0.8rem; font-size:1rem;">
               <span style="display:block; font-family:var(--font-titolo); font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--color-grigio); margin-bottom:0.15rem;">Segreteria</span>
-              <a href="mailto:info@accademiaprosopon.it">info@accademiaprosopon.it</a>
+              <a href="mailto:centroprosopon@gmail.com">centroprosopon@gmail.com</a>
             </p>
             <!-- Nota UX: non si offusca volutamente l'email per non penalizzare
                  l'usabilità (mailto: deve aprire il client di posta). Si fornisce
-                 invece un'identità istituzionale (info@accademiaprosopon.it,
+                 invece un'identità istituzionale (centroprosopon@gmail.com,
                  da configurare a livello DNS/MX) accanto all'email personale,
                  così il visitatore percepisce un canale ufficiale. -->
           </div>
@@ -147,12 +148,14 @@
           <p style="margin-bottom:1.5rem; font-size:0.9rem; color:var(--color-grigio); font-style:italic;">Risposta entro 48 ore lavorative · I tuoi dati restano tuoi.</p>
 
           <form id="form-c"
-                action="https://formspree.io/f/REPLACE_WITH_YOUR_ID"
+                action="https://formsubmit.co/centroprosopon@gmail.com"
                 method="POST"
                 novalidate
                 aria-describedby="stato-contatto">
             <input type="hidden" name="_subject" value="Nuovo messaggio dal sito Prosopon" />
-            <input type="hidden" name="_format" value="plain" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="true" />
+            <input type="hidden" name="_next" value="https://www.accademiaprosopon.it/grazie.html" />
 
             <div class="griglia-2" style="gap:2rem;">
               <div class="form-gruppo">
@@ -210,7 +213,7 @@
               </p>
             </div>
 
-            <p class="form-fallback">Problemi col form? Scrivici a <a href="mailto:info@accademiaprosopon.it?subject=Contatti%20dal%20sito">info@accademiaprosopon.it</a></p>
+            <p class="form-fallback">Problemi col form? Scrivici a <a href="mailto:centroprosopon@gmail.com?subject=Contatti%20dal%20sito">centroprosopon@gmail.com</a></p>
 
             <div id="stato-contatto" class="form-stato" role="status" aria-live="polite" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(184,150,90,0.1); border-left:3px solid var(--color-oro);"></div>
           </form>
@@ -230,14 +233,16 @@
       </div>
 
       <form id="form-nl"
-            action="https://formspree.io/f/REPLACE_WITH_YOUR_ID"
+            action="https://formsubmit.co/centroprosopon@gmail.com"
             method="POST"
             novalidate
             class="form--chiaro"
             style="max-width:500px; margin:0 auto;"
             aria-describedby="stato-newsletter">
         <input type="hidden" name="_subject" value="Nuova iscrizione newsletter Prosopon" />
-        <input type="hidden" name="_format" value="plain" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="true" />
+        <input type="hidden" name="_next" value="https://www.accademiaprosopon.it/grazie.html?tipo=newsletter" />
 
         <div class="griglia-2" style="gap:1.5rem;">
           <div class="form-gruppo">
@@ -265,7 +270,7 @@
           </p>
         </div>
 
-        <p class="form-fallback form-fallback--scura" style="text-align:center;">Problemi col form? Scrivici a <a href="mailto:info@accademiaprosopon.it?subject=Iscrizione%20newsletter">info@accademiaprosopon.it</a></p>
+        <p class="form-fallback form-fallback--scura" style="text-align:center;">Problemi col form? Scrivici a <a href="mailto:centroprosopon@gmail.com?subject=Iscrizione%20newsletter">centroprosopon@gmail.com</a></p>
 
         <div id="stato-newsletter" class="form-stato" role="status" aria-live="polite" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(184,150,90,0.15); border-left:3px solid var(--color-oro); color:var(--color-avorio);"></div>
       </form>
@@ -281,7 +286,7 @@
         <div>
           <div class="footer__logo">Prosopon<span>Accademia di Teatro Classico</span></div>
           <p>Centro di Teatro Classico e Arti Performative.<br>Direttore artistico: Andrea Saverio Puglisi.<br>Roma, dal 2025.</p>
-          <p style="margin-top:0.8rem; font-size:0.9rem;"><a href="mailto:info@accademiaprosopon.it" style="color:var(--color-oro); text-decoration:underline; text-underline-offset:3px;">info@accademiaprosopon.it</a></p>
+          <p style="margin-top:0.8rem; font-size:0.9rem;"><a href="mailto:centroprosopon@gmail.com" style="color:var(--color-oro); text-decoration:underline; text-underline-offset:3px;">centroprosopon@gmail.com</a></p>
         </div>
         <div>
           <p class="footer__titolo">Navigazione</p>
@@ -312,6 +317,7 @@
         </div>
       </div>
       <div class="footer__bottom">
+        <p class="footer-accreditamento"><strong>Ente accreditato dal Ministero dell'Istruzione</strong><span class="sep">·</span>Progetto formativo gestito da GLV srl</p>
         <p>© 2025 Accademia di Teatro Classico Prosopon. Tutti i diritti riservati.</p>
         <p class="footer__legale"><a href="privacy.html">Privacy</a> · <a href="cookie.html">Cookie</a> · <span style="font-style:italic;">Roma, Italia</span></p>
       </div>

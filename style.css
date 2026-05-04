@@ -951,6 +951,93 @@ a.docente-circle:hover .docente-circle__nome {
   color: var(--color-avorio);
 }
 
+/* --- Trust signal: ente accreditato dal Ministero dell'Istruzione ---
+   Posizionato in homepage (sotto hero) e riusabile inline nelle pagine
+   formative. Stile sobrio: sfondo grafite + filetti oro + Cinzel piccolo. */
+.banda-accreditamento {
+  background: var(--color-grafite);
+  border-top: 1px solid rgba(184, 150, 90, 0.28);
+  border-bottom: 1px solid rgba(184, 150, 90, 0.28);
+  padding: 0.85rem 0;
+  text-align: center;
+}
+.banda-accreditamento p {
+  margin: 0;
+  font-family: var(--font-titolo);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-oro-chiaro);
+  line-height: 1.5;
+}
+.banda-accreditamento p strong {
+  color: var(--color-avorio);
+  font-weight: 500;
+}
+.banda-accreditamento .sep {
+  color: rgba(184, 150, 90, 0.55);
+  margin: 0 0.6rem;
+}
+
+/* --- Badge inline "Ente accreditato MIM" usabile in card / titoli --- */
+.badge-accreditamento {
+  display: inline-block;
+  font-family: var(--font-titolo);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-oro-scuro);
+  background: var(--color-avorio);
+  border: 1px solid rgba(184, 150, 90, 0.55);
+  padding: 0.32rem 0.7rem;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.badge-accreditamento--scuro {
+  color: var(--color-oro-chiaro);
+  background: transparent;
+  border-color: rgba(184, 150, 90, 0.6);
+}
+
+/* --- Riga accreditamento nel footer (sopra il copyright) --- */
+.footer-accreditamento {
+  font-family: var(--font-titolo);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-oro-chiaro);
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+  line-height: 1.6;
+}
+.footer-accreditamento strong {
+  color: var(--color-avorio);
+  font-weight: 500;
+}
+.footer-accreditamento .sep {
+  color: rgba(184, 150, 90, 0.45);
+  margin: 0 0.5rem;
+}
+
+/* --- Trust line discreta sopra i form (es. iscrizioni) --- */
+.trust-line-form {
+  display: block;
+  font-family: var(--font-titolo);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-oro-scuro);
+  border-left: 2px solid var(--color-oro);
+  padding: 0.55rem 0 0.55rem 0.9rem;
+  margin: 0 0 1.4rem 0;
+  line-height: 1.55;
+}
+.trust-line-form strong {
+  color: var(--color-grafite);
+  font-weight: 500;
+}
+
 /* --- Reassurance microcopy accanto ai pulsanti di submit --- */
 .form-reassurance {
   font-family: var(--font-corpo);

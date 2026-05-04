@@ -69,7 +69,7 @@ php -S localhost:8000
 Apri quindi `http://localhost:8000` nel browser.
 
 > Nota: aprire i file con `file://` può funzionare per molte pagine, ma rompe i fetch
-> di Formspree, le ancore `?richiesta=...` e i form. Usa sempre un server locale.
+> di FormSubmit, le ancore `?richiesta=...` e i form. Usa sempre un server locale.
 
 ---
 
@@ -79,7 +79,7 @@ Apri quindi `http://localhost:8000` nel browser.
 - CSS3 puro, custom properties, mobile-first, niente framework
 - JavaScript vanilla inline per: hamburger menu, tab, accordion FAQ, modali docenti (focus trap), validazione form
 - Google Fonts (Cormorant Garamond + EB Garamond + Cinzel) via `<link rel="preconnect">` + `display=swap`
-- Form: integrazione Formspree (endpoint placeholder, vedi sotto)
+- Form: integrazione FormSubmit (endpoint live `formsubmit.co/centroprosopon@gmail.com`, attivazione one-click al primo invio)
 
 Nessun build step, nessun bundler, nessun pacchetto npm.
 
@@ -91,10 +91,8 @@ Nessun build step, nessun bundler, nessun pacchetto npm.
 
 Senza questi step, parti del sito non funzionano (form bouncano, mailto cade nel nulla, canonical SEO sbagliato).
 
-1. **Mailbox `info@<dominio>`**
-   La casella `info@accademiaprosopon.it` è usata in 12 punti del sito (footer di tutte le 10 pagine, `privacy.html`, `cookie.html`, `contatti.html`, fallback dei 4 form). Se non esiste, ogni `mailto:` cade in bounce.
-   - Se hai già il dominio: crea la mailbox dal pannello del provider (Aruba, Register.it, GoDaddy, Google Workspace, ecc.).
-   - Se preferisci un alias: configura `info@` come alias verso una casella esistente.
+1. **Mailbox di contatto** — RISOLTO (Round 5, 2026-05-04)
+   Il canale ufficiale del sito è ora `centroprosopon@gmail.com` (Gmail già attiva). Tutte le occorrenze di `info@accademiaprosopon.it` sono state sostituite. Nessuna configurazione DNS/MX richiesta.
 
 2. **Conferma dominio canonical**
    Tutto il sito (canonical, og:url, og:image, sitemap.xml, robots.txt, JSON-LD) usa `accademiaprosopon.it` come placeholder. Se è il dominio definitivo, niente da fare. Altrimenti, sostituisci ovunque:
@@ -107,19 +105,13 @@ Senza questi step, parti del sito non funzionano (form bouncano, mailto cade nel
      -exec sed -i 's/accademiaprosopon\.it/TUO-DOMINIO.it/g' {} +
    ```
 
-3. **Configurazione Formspree (4 form)**
-   I 4 form usano `https://formspree.io/f/REPLACE_WITH_YOUR_ID`. Crea un account su https://formspree.io, ottieni il tuo ID (es. `xrgwdkqv`) e fai un find/replace:
-   ```bash
-   # macOS
-   sed -i '' 's|formspree.io/f/REPLACE_WITH_YOUR_ID|formspree.io/f/IL_TUO_ID|g' iscrizioni.html contatti.html
-   # Linux
-   sed -i 's|formspree.io/f/REPLACE_WITH_YOUR_ID|formspree.io/f/IL_TUO_ID|g' iscrizioni.html contatti.html
-   ```
-   Verifica con `grep -n "REPLACE_WITH_YOUR_ID" *.html` (deve restituire 0 occorrenze). Puoi usare lo stesso ID per tutti e 4 i form (Formspree distingue per `name=` del form) oppure 4 ID separati.
-   *Fino a configurazione, sotto ogni form è già attivo un fallback `mailto:info@accademiaprosopon.it` con `subject=` pre-compilato (Round 3).*
+3. **Backend form — FormSubmit (CONFIGURATO Round 6, 2026-05-04)**
+   I 4 form (`iscrizioni.html` x2 + `contatti.html` x2) puntano direttamente a `https://formsubmit.co/centroprosopon@gmail.com` — zero account, zero ID da configurare.
+   **Unico passo richiesto all'utente:** al primo invio di un form dal sito, FormSubmit invia una mail di conferma una tantum sulla casella `centroprosopon@gmail.com`. È sufficiente cliccare il link "Confirm" contenuto in quella mail per attivare l'endpoint. Da quel momento tutti i 4 form recapitano regolarmente le richieste sulla casella, con captcha automatico anti-spam, formattazione tabellare leggibile e redirect alla pagina di ringraziamento `grazie.html`.
+   *Fallback `mailto:centroprosopon@gmail.com` con `subject=` pre-compilato comunque presente sotto ogni form (Round 3).*
 
-4. **Dati legali in `privacy.html` §1**
-   Il blocco `.blocco-info` dichiara esplicitamente "in via di formalizzazione". Quando l'ente è costituito (associazione culturale, SRL, ditta individuale…), integra: forma giuridica + Partita IVA + Codice Fiscale + indirizzo sede legale completo.
+4. **Dati legali in `privacy.html` §1** — RISOLTO (Round 5, 2026-05-04)
+   Compilato con: GLV srl, Viale Gramsci 47, 50132 Firenze, P.IVA 07036010481, email centroprosopon@gmail.com. L'Accademia è dichiarata come progetto formativo gestito da GLV srl, ente accreditato dal Ministero dell'Istruzione (MIM).
 
 5. **Indirizzo sede operativa in `contatti.html`**
    Oggi: *"Sede operativa a Roma. Indirizzo completo comunicato in fase di colloquio"*. Sostituisci con almeno **quartiere + via** quando disponibile, e poi sostituisci anche il blocco placeholder "Mappa in arrivo" con un `<iframe>` Google Maps o OpenStreetMap. Attenzione: l'embed Maps introduce cookie di terze parti → aggiorna anche `cookie.html` e attiva il banner (snippet pronto in `cookie.html` §6).
@@ -182,7 +174,9 @@ Il sito è pensato per un hosting statico (Netlify, Vercel, GitHub Pages, Cloudf
 ## Convenzioni
 
 - Lingua: italiano (`<html lang="it">`)
-- Email canale ufficiale: `info@accademiaprosopon.it` (placeholder, da configurare)
+- Email canale ufficiale: `centroprosopon@gmail.com`
+- Titolare giuridico: GLV srl — Viale Gramsci 47, 50132 Firenze — P.IVA 07036010481
+- Riconoscimento: ente accreditato dal Ministero dell'Istruzione (MIM)
 - Email diretta direttore: `puglisiandreasaverio@gmail.com` (presente solo in `contatti.html` come "Direzione artistica")
 - Nessun cookie analytics o di profilazione attivi → nessun cookie banner richiesto allo stato attuale
 
