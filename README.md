@@ -1,7 +1,11 @@
 # Accademia di Teatro Classico Prosopon — sito web
 
 Sito istituzionale statico dell'Accademia di Teatro Classico Prosopon (Roma, 2025).
-9 pagine HTML, un solo foglio di stile, zero build step, zero dipendenze JS runtime.
+10 pagine HTML, un solo foglio di stile, zero build step, zero dipendenze JS runtime.
+
+> **Date anno accademico** (Round 2 — aggiornate 2026-05-04):
+> - **Triennale**: A.A. **2027/2028**
+> - **Corsi serali / laboratori / masterclass**: avvio ottobre 2026 → A.A. **2026/2027**
 
 ---
 
@@ -13,6 +17,7 @@ Accademia_prosopon/
 ├── accademia.html          # Chi siamo, missione, direttore artistico, "Voci"
 ├── formazione.html         # Triennale + serali + laboratori + masterclass (4 tab)
 ├── docenti.html            # 8 docenti con modali full-screen
+├── biblioteca.html         # La Biblioteca (fondo teatro classico) + sezione "Aule prove"
 ├── eventi.html             # Spettacoli & eventi (placeholder + newsletter strip)
 ├── iscrizioni.html         # Audizioni triennale + iscrizione corsi serali (FAQ accordion)
 ├── contatti.html           # Form contatto + form newsletter
@@ -20,15 +25,19 @@ Accademia_prosopon/
 ├── cookie.html             # Cookie policy (noindex)
 │
 ├── style.css               # CSS unico, mobile-first, variabili in :root
-├── favicon.svg             # Lettera Π oro su nero
-├── site.webmanifest        # PWA-light manifest
+├── favicon.svg             # Lettera Π oro su nero (sorgente)
+├── favicon-16.png          # Favicon 16×16 (Round 3)
+├── favicon-32.png          # Favicon 32×32 (Round 3)
+├── apple-touch-icon.png    # 180×180 per iOS home screen (Round 3)
+├── favicon.ico             # ICO multi-res 16+32+48 (Round 3)
+├── site.webmanifest        # PWA-light manifest (con tutte le icone)
 ├── sitemap.xml             # Sitemap (esclude privacy/cookie noindex)
 ├── robots.txt              # Disallow /documenti/ (CV interni)
 ├── .gitignore
 │
 ├── assets/
 │   ├── home.webp           # Hero background
-│   └── docenti/            # 8 ritratti docenti (jpg)
+│   └── docenti/            # 8 ritratti: jpg + webp (Round 3)
 │
 ├── documenti/              # NON pubblicato (Disallow in robots)
 │   ├── cv/                 # 7 PDF dei CV docenti (Pentericci esclusa)
@@ -78,42 +87,93 @@ Nessun build step, nessun bundler, nessun pacchetto npm.
 
 ## Pre-deploy checklist
 
-### 1. Sostituire i placeholder
+### STEP 0 — Pre-launch obbligatorio (l'utente deve fare queste cose prima del push)
 
-Vedi sezione finale del `TODO.md` per la lista completa. Sintesi:
+Senza questi step, parti del sito non funzionano (form bouncano, mailto cade nel nulla, canonical SEO sbagliato).
 
-- `REPLACE_WITH_YOUR_ID` → ID Formspree reale (4 occorrenze: 2 in `iscrizioni.html`, 2 in `contatti.html`)
-- `accademiaprosopon.it` (dominio) → confermare o sostituire con il dominio reale (canonical, OG, sitemap, robots, JSON-LD)
-- `info@accademiaprosopon.it` → configurare la casella reale lato MX/DNS oppure sostituire l'indirizzo
-- Dati legali (P.IVA, ragione sociale, sede legale) → integrare in `privacy.html` quando disponibili
-- Indirizzo sede operativa → integrare in `contatti.html` (oggi: "Sede operativa a Roma. Indirizzo completo comunicato in fase di colloquio")
-- Mappa Maps reale → sostituire il blocco placeholder in `contatti.html`
+1. **Mailbox `info@<dominio>`**
+   La casella `info@accademiaprosopon.it` è usata in 12 punti del sito (footer di tutte le 10 pagine, `privacy.html`, `cookie.html`, `contatti.html`, fallback dei 4 form). Se non esiste, ogni `mailto:` cade in bounce.
+   - Se hai già il dominio: crea la mailbox dal pannello del provider (Aruba, Register.it, GoDaddy, Google Workspace, ecc.).
+   - Se preferisci un alias: configura `info@` come alias verso una casella esistente.
 
-### 2. Test prima del go-live
+2. **Conferma dominio canonical**
+   Tutto il sito (canonical, og:url, og:image, sitemap.xml, robots.txt, JSON-LD) usa `accademiaprosopon.it` come placeholder. Se è il dominio definitivo, niente da fare. Altrimenti, sostituisci ovunque:
+   ```bash
+   # macOS / BSD sed
+   find . -type f \( -name "*.html" -o -name "*.xml" -o -name "*.txt" -o -name "*.webmanifest" \) \
+     -exec sed -i '' 's/accademiaprosopon\.it/TUO-DOMINIO.it/g' {} +
+   # Linux / GNU sed
+   find . -type f \( -name "*.html" -o -name "*.xml" -o -name "*.txt" -o -name "*.webmanifest" \) \
+     -exec sed -i 's/accademiaprosopon\.it/TUO-DOMINIO.it/g' {} +
+   ```
 
-Eseguire **manualmente** in browser reale (non automatizzabili da CLI):
+3. **Configurazione Formspree (4 form)**
+   I 4 form usano `https://formspree.io/f/REPLACE_WITH_YOUR_ID`. Crea un account su https://formspree.io, ottieni il tuo ID (es. `xrgwdkqv`) e fai un find/replace:
+   ```bash
+   # macOS
+   sed -i '' 's|formspree.io/f/REPLACE_WITH_YOUR_ID|formspree.io/f/IL_TUO_ID|g' iscrizioni.html contatti.html
+   # Linux
+   sed -i 's|formspree.io/f/REPLACE_WITH_YOUR_ID|formspree.io/f/IL_TUO_ID|g' iscrizioni.html contatti.html
+   ```
+   Verifica con `grep -n "REPLACE_WITH_YOUR_ID" *.html` (deve restituire 0 occorrenze). Puoi usare lo stesso ID per tutti e 4 i form (Formspree distingue per `name=` del form) oppure 4 ID separati.
+   *Fino a configurazione, sotto ogni form è già attivo un fallback `mailto:info@accademiaprosopon.it` con `subject=` pre-compilato (Round 3).*
 
-- [ ] Lighthouse (Performance, Accessibility, SEO, Best Practices) — target ≥ 90 ciascuno
-- [ ] Validatore W3C HTML su tutte e 9 le pagine
-- [ ] Validatore CSS sul `style.css`
-- [ ] Test responsive a 375 / 768 / 1024 / 1440 px
-- [ ] Test funzionale di tutti e 4 i form (post-Formspree configurato)
-- [ ] Test focus trap modali docenti (Tab + Shift+Tab + Esc)
-- [ ] Test screen reader (almeno VoiceOver su macOS o NVDA su Windows)
-- [ ] Test apertura modali da homepage (`docenti.html#puglisi` ecc.)
+4. **Dati legali in `privacy.html` §1**
+   Il blocco `.blocco-info` dichiara esplicitamente "in via di formalizzazione". Quando l'ente è costituito (associazione culturale, SRL, ditta individuale…), integra: forma giuridica + Partita IVA + Codice Fiscale + indirizzo sede legale completo.
 
-### 3. Asset
+5. **Indirizzo sede operativa in `contatti.html`**
+   Oggi: *"Sede operativa a Roma. Indirizzo completo comunicato in fase di colloquio"*. Sostituisci con almeno **quartiere + via** quando disponibile, e poi sostituisci anche il blocco placeholder "Mappa in arrivo" con un `<iframe>` Google Maps o OpenStreetMap. Attenzione: l'embed Maps introduce cookie di terze parti → aggiorna anche `cookie.html` e attiva il banner (snippet pronto in `cookie.html` §6).
 
-- [ ] (Opzionale) Convertire le 8 foto docenti in WebP con `<picture>` fallback
-  ```bash
-  for f in assets/docenti/*.jpg; do
-    cwebp -q 80 -resize 800 0 "$f" -o "${f%.jpg}.webp"
-  done
-  ```
-- [ ] (Opzionale) Generare PNG 16/32 e apple-touch-icon 180 dal favicon SVG
-- [ ] CV mancante per Caterina Pentericci (oggi: link "Scarica CV" non presente nella sua modale)
+6. **Orari biblioteca / aule (`biblioteca.html`)**
+   2 commenti HTML segnaposto: `[ORARI DA DEFINIRE]` e `[FASCE ORARIE DA DEFINIRE]`. Il copy visibile è già prudente; sostituisci appena la direzione conferma.
 
-### 4. Hosting
+### STEP 1 — Test browser-based (eseguire prima del push)
+
+Non automatizzabili da CLI. Esegui ciascuno passo per passo.
+
+#### Lighthouse (Performance · Accessibility · SEO · Best Practices, target ≥ 90)
+
+1. Avvia il sito in locale: `python3 -m http.server 8000` dalla root del progetto
+2. Apri Chrome (versione recente) → vai su `http://localhost:8000/index.html`
+3. Apri DevTools: `Cmd+Opt+I` (macOS) o `F12` (Windows/Linux)
+4. Tab "Lighthouse" → spunta tutte e 4 le categorie → Mode: "Navigation" → Device: prima "Mobile" poi "Desktop" → "Analyze page load"
+5. Ripeti per le 9 pagine pubbliche (esclusa `privacy.html` e `cookie.html` che sono `noindex`): `index`, `accademia`, `formazione`, `docenti`, `biblioteca`, `eventi`, `iscrizioni`, `contatti`. Nota i punteggi e le diagnostiche; i fix più frequenti riguardano LCP (peso immagini hero), CLS (manca width/height su `<img>`), tap targets su mobile.
+
+#### Validatore W3C HTML
+
+1. Vai su https://validator.w3.org/nu/
+2. Per ciascuna delle 10 pagine, opzione "Address": incolla l'URL (post-deploy) oppure usa "File Upload" se sei ancora in locale.
+3. Tollera warning. Zero errori critici. Report già completato in `VALIDATORE_HTML_REPORT.md` (Round 3 — pass).
+
+#### Validatore W3C CSS
+
+1. Vai su https://jigsaw.w3.org/css-validator/
+2. Tab "By file upload" → carica `style.css` → "Profile: CSS level 3 + SVG" → "Vendor Extensions: Warnings".
+3. Tollera warning su custom properties moderne (`text-underline-offset`, `aspect-ratio`, `inset`, `backdrop-filter` — tutte standard CSS3 supportate dai browser correnti).
+
+#### Test responsive (375 / 768 / 1024 / 1440)
+
+1. Apri Chrome → DevTools (`Cmd+Opt+I`)
+2. Toggle device toolbar: `Cmd+Shift+M` (macOS) / `Ctrl+Shift+M` (Windows/Linux)
+3. Dropdown in alto → seleziona "Responsive" e digita le 4 larghezze (375, 768, 1024, 1440). Per 375 puoi anche usare "iPhone SE" preset.
+4. Per ciascuna larghezza testa: nav (hamburger ↔ desktop), hero, griglie card formazione, FAQ accordion, form e checkbox (touch target ≥ 44×44 px), footer.
+
+#### Screen reader
+
+- **macOS** — VoiceOver: avvia con `Cmd+F5`. Naviga con `Ctrl+Opt+→/←`. Esci con `Cmd+F5`. Tutorial ufficiale: `Apple > Tutorial Voice Over`.
+- **Windows** — NVDA: scarica gratis da https://www.nvaccess.org/download/ → installa → `Insert + ↓` per leggere riga per riga, `Tab` per saltare ai link.
+- Test minimo: skip-link "Vai al contenuto" è il primo annunciato? I form leggono i messaggi `aria-live` (success/error)? Le card-docente in homepage leggono "Vai alla scheda di [Nome]"?
+
+#### Cross-browser
+
+Opzioni:
+- **BrowserStack** (free trial): https://www.browserstack.com/users/sign_up — testa Safari iOS, Chrome Android, Edge, Firefox.
+- **LambdaTest** (free trial): https://www.lambdatest.com/ — alternativa equivalente.
+- **Manuale** (gratuito): testa almeno Chrome + Safari + Firefox sul tuo Mac, e apri il sito su iPhone/Android personale.
+
+Prendi nota di ogni regressione visiva, soprattutto su Safari (gestisce `backdrop-filter` e `:focus-visible` in modo particolare).
+
+### STEP 2 — Hosting
 
 Il sito è pensato per un hosting statico (Netlify, Vercel, GitHub Pages, Cloudflare Pages, server LAMP base). Non richiede Node, runtime, database né CMS. Cache consigliata: 1 anno per `/assets/*` con cache-busting via filename, no-cache per `*.html`.
 

@@ -8,8 +8,11 @@
   <link rel="canonical" href="https://www.accademiaprosopon.it/" />
 
   <!-- Favicon e manifest -->
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
   <link rel="manifest" href="site.webmanifest" />
   <meta name="theme-color" content="#0e0d0b" />
 
@@ -182,7 +185,10 @@
     <div class="contenitore">
       <div class="griglia-2" style="gap:4rem; align-items:center;">
         <div style="background:var(--color-grafite); aspect-ratio:1/1; max-width:420px; width:100%; margin:0 auto; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-          <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Saverio Puglisi, direttore artistico dell'Accademia Prosopon" width="420" height="420" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:center 15%;" onerror="this.style.opacity:0.3" />
+          <picture>
+            <source srcset="assets/docenti/andrea-puglisi.webp" type="image/webp" />
+            <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Saverio Puglisi, direttore artistico dell'Accademia Prosopon" width="420" height="420" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:center 15%;" onerror="this.style.opacity:0.3" />
+          </picture>
         </div>
         <div>
           <span class="etichetta">Direzione artistica</span>
@@ -277,7 +283,10 @@
 
         <a href="docenti.html#puglisi" class="docente-circle" aria-label="Vai alla scheda di Andrea Saverio Puglisi">
           <div class="docente-circle__foto">
-            <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Saverio Puglisi" width="120" height="120" onerror="this.style.display='none'" />
+            <picture>
+              <source srcset="assets/docenti/andrea-puglisi.webp" type="image/webp" />
+              <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Saverio Puglisi" width="120" height="120" onerror="this.style.display='none'" />
+            </picture>
           </div>
           <h3 class="docente-circle__nome">Andrea Saverio Puglisi</h3>
           <p class="docente-circle__ruolo">Direttore Artistico</p>
@@ -285,7 +294,10 @@
 
         <a href="docenti.html#rossetto" class="docente-circle" aria-label="Vai alla scheda di Elena Rossetto">
           <div class="docente-circle__foto">
-            <img src="assets/docenti/elena-rossetto.jpg" alt="Ritratto di Elena Rossetto" width="120" height="120" loading="lazy" onerror="this.style.display='none'" />
+            <picture>
+              <source srcset="assets/docenti/elena-rossetto.webp" type="image/webp" />
+              <img src="assets/docenti/elena-rossetto.jpg" alt="Ritratto di Elena Rossetto" width="120" height="120" loading="lazy" onerror="this.style.display='none'" />
+            </picture>
           </div>
           <h3 class="docente-circle__nome">Elena Rossetto</h3>
           <p class="docente-circle__ruolo">Attrice &middot; Doppiatrice</p>
@@ -293,7 +305,10 @@
 
         <a href="docenti.html#sarti" class="docente-circle" aria-label="Vai alla scheda di Rachele Sarti">
           <div class="docente-circle__foto">
-            <img src="assets/docenti/rachele-sarti.jpg" alt="Ritratto di Rachele Sarti" width="120" height="120" loading="lazy" onerror="this.style.display='none'" />
+            <picture>
+              <source srcset="assets/docenti/rachele-sarti.webp" type="image/webp" />
+              <img src="assets/docenti/rachele-sarti.jpg" alt="Ritratto di Rachele Sarti" width="120" height="120" loading="lazy" onerror="this.style.display='none'" />
+            </picture>
           </div>
           <h3 class="docente-circle__nome">Rachele Sarti</h3>
           <p class="docente-circle__ruolo">Attrice</p>
@@ -301,7 +316,10 @@
 
         <a href="docenti.html#pentericci" class="docente-circle" aria-label="Vai alla scheda di Caterina Pentericci">
           <div class="docente-circle__foto">
-            <img src="assets/docenti/caterina-pentericci.jpg" alt="Ritratto di Caterina Pentericci" width="120" height="120" loading="lazy" onerror="this.style.display='none'" />
+            <picture>
+              <source srcset="assets/docenti/caterina-pentericci.webp" type="image/webp" />
+              <img src="assets/docenti/caterina-pentericci.jpg" alt="Ritratto di Caterina Pentericci" width="120" height="120" loading="lazy" onerror="this.style.display='none'" />
+            </picture>
           </div>
           <h3 class="docente-circle__nome">Caterina Pentericci</h3>
           <p class="docente-circle__ruolo">Maestra di Scherma</p>

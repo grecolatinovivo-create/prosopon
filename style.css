@@ -976,6 +976,25 @@ a.docente-circle:hover .docente-circle__nome {
   font-style: normal;
 }
 
+/* --- Mailto fallback sotto i 4 form (Round 3 PROPOSTA-DEFAULT) --- */
+.form-fallback {
+  font-size: 0.85rem;
+  color: var(--color-grigio);
+  margin: 1rem 0 0;
+  line-height: 1.5;
+}
+.form-fallback a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.form-fallback--scura {
+  color: rgba(197, 189, 180, 0.7);
+}
+.form-fallback--scura a {
+  color: var(--color-oro);
+}
+
 /* --- Tab attivi: rinforzo visibilità in formazione.html --- */
 /* .tab-btn vive negli stili interni di formazione.html ma ne potenziamo
    lo stato attivo per renderlo immediatamente leggibile. */
@@ -1027,6 +1046,41 @@ a.docente-circle:hover .docente-circle__nome {
     border-color: var(--color-oro);
     background: rgba(184, 150, 90, 0.08);
   }
+}
+
+/* ============================================================
+   BIBLIOTECA PAGE — classi specifiche di biblioteca.html
+   ============================================================ */
+
+/* Lista "materia/voce" usata nelle card biblioteca (Cosa trovi, Modalità di
+   accesso, A chi si rivolge, Spazi e dotazioni). Definita anche inline in
+   formazione.html per il piano di studi: qui la promuoviamo a classe globale
+   con una versione neutra, riusabile sulle card della pagina Biblioteca. */
+.materia-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.materia-lista li {
+  position: relative;
+  padding: 0.55rem 0 0.55rem 1.2rem;
+  border-bottom: 1px solid rgba(197, 189, 180, 0.4);
+  font-family: var(--font-corpo);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--color-grafite);
+}
+.materia-lista li::before {
+  content: '·';
+  position: absolute;
+  left: 0.2rem;
+  top: 0.45rem;
+  color: var(--color-oro);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.materia-lista li:last-child {
+  border-bottom: none;
 }
 
 /* ============================================================

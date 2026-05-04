@@ -24,9 +24,10 @@ Motivazione: sito istituzionale a contenuto a bassa frequenza di update, basso v
 | `accademia.html` | Anchor `#direttore-artistico`. Sezione "Voci" (`#voci`) con 3 quote, l'ultima placeholder onesto. |
 | `formazione.html` | 4 tab WAI-ARIA (`role="tablist"` / `role="tab"` / `role="tabpanel"`). Navigazione tastiera frecce/Home/End. Ancore mobile sticky `.ancore-corsi`. |
 | `docenti.html` | 8 modali full-screen, focus trap, riapertura via hash (`#nome-docente` → JS apre `#modale-nome-docente`). 7 link CV (Pentericci esclusa). |
+| `biblioteca.html` | Sezione `#biblioteca` (fondo + modalità di accesso) + sezione `#aule` (aule prove su prenotazione). 2 CTA verso `contatti.html` con querystring `?richiesta=accesso-biblioteca` e `?richiesta=prenotazione-aula`. Posizione voce nav: tra "Docenti" ed "Eventi". |
 | `eventi.html` | 4 card placeholder con CTA "Avvisami quando esce" → newsletter. Stato "vuoto" evocativo. |
 | `iscrizioni.html` | 2 form (audizione triennale, iscrizione corsi serali) + FAQ accordion accessibile. Banda scarcity sotto hero. |
-| `contatti.html` | Form contatto + form newsletter. Pre-compilazione oggetto via querystring `?richiesta=piano-triennale`. Direzione artistica + Segreteria. |
+| `contatti.html` | Form contatto + form newsletter. Pre-compilazione oggetto via querystring `?richiesta=...` (gestiti: `piano-triennale`, `prenotazione-aula`, `accesso-biblioteca`). Direzione artistica + Segreteria. |
 | `privacy.html` | `noindex, follow`. Index interno cliccabile. Tabelle dati/finalità. |
 | `cookie.html` | `noindex, follow`. Snippet cookie banner pronto in `<pre>` commentato (non attivo). |
 
@@ -72,6 +73,7 @@ Ibrido BEM + utility class. Esempio:
 - `.form-errore` con `aria-live="polite"` su input.
 - `.form-reassurance` micro-rassicurazioni accanto al submit (Neuro).
 - `.banda-scarcity` strip dorata per urgency etico.
+- `.materia-lista` lista verticale con bullet ornamentale (promossa a globale per `biblioteca.html`; le 4 ul della pagina la usano. La regola inline equivalente in `formazione.html` resta valida per specificità maggiore).
 
 ---
 
@@ -90,17 +92,25 @@ Pattern condiviso:
 
 ### Pre-compilazione oggetto
 
-`contatti.html` legge `?richiesta=piano-triennale` (querystring) e pre-compila il campo `oggetto` con valore tematico. Il link che attiva questo flusso è in `formazione.html:170` ("Richiedi il piano di studi").
+`contatti.html` legge `?richiesta=...` (querystring) e pre-compila il campo `oggetto` del form contatto se il valore matcha una `<option>` esistente nel select. Lo IIFE in fondo a `contatti.html` è generico (lookup su `sel.options.find(o => o.value === r)`), quindi qualsiasi nuova `<option>` viene gestita automaticamente, senza edit lato JS.
+
+Valori attualmente cablati nelle CTA del sito:
+
+| `?richiesta=` | Sorgente | `<option>` di destinazione |
+|---------------|----------|----------------------------|
+| `piano-triennale` | `formazione.html` ("Richiedi il piano di studi") | "Richiesta piano di studi triennale" |
+| `prenotazione-aula` | `biblioteca.html` (CTA sezione aule + CTA-band finale) | "Prenotazione aula prove" |
+| `accesso-biblioteca` | `biblioteca.html` (CTA sezione biblioteca) | "Accesso alla biblioteca" |
 
 ---
 
 ## 5. SEO
 
-- `<link rel="canonical">` su tutte e 9 le pagine.
+- `<link rel="canonical">` su tutte e 10 le pagine.
 - Open Graph completo (`og:type`, `og:locale=it_IT`, `og:title`, `og:description`, `og:image`, `og:url`, `og:site_name`).
-- Twitter Card (`twitter:card=summary_large_image` + tag relativi) sulle 7 pagine pubbliche.
-- `JSON-LD` `EducationalOrganization` solo su `index.html`.
-- `sitemap.xml` (esclude privacy/cookie, che hanno `noindex`).
+- Twitter Card (`twitter:card=summary_large_image` + tag relativi) sulle 8 pagine pubbliche.
+- `JSON-LD` `EducationalOrganization` solo su `index.html`. Esteso da Round 2 con `hasOfferCatalog` che dichiara: Triennale (`startDate 2027-10`), Serali (`startDate 2026-10`), Lab/Masterclass (`startDate 2026-10`) + un `Service` "Biblioteca" che linka a `biblioteca.html`. Mantenere allineate le `startDate` se cambiano le date A.A.
+- `sitemap.xml` (esclude privacy/cookie, che hanno `noindex`). Include `biblioteca.html` (lastmod 2026-05-04, priority 0.7).
 - `robots.txt` con `Disallow: /documenti/` (CV interni).
 - `<meta name="description">` unico per pagina (≤155 char).
 - `<meta robots="noindex, follow">` su `privacy.html` e `cookie.html`.
@@ -156,10 +166,12 @@ Nessun analytics, nessun social plugin, nessun video embed, nessuna mappa intera
 
 ## 10. Limiti noti / debito tecnico
 
-- Nav e footer sono **duplicati a mano** sulle 9 pagine. Modifica = 9 edit. Soluzione futura: SSI/include o piccolo build step (Eleventy, Astro). Per ora SCOPE OUT.
+- Nav e footer sono **duplicati a mano** sulle 10 pagine. Modifica = 10 edit. Soluzione futura: SSI/include o piccolo build step (Eleventy, Astro). Per ora SCOPE OUT.
 - 4 endpoint Formspree placeholder.
 - Foto docenti ancora in JPG (no WebP).
 - Favicon solo SVG; PNG 16/32 e apple-touch-icon non generabili senza tool grafico.
 - CV Pentericci mancante.
 - Indirizzo sede operativa e dati legali (P.IVA, ragione sociale) ancora placeholder in `privacy.html` e `contatti.html`.
 - Mappa in `contatti.html` è un blocco statico "in arrivo", non un embed reale.
+- Orari biblioteca + fasce orarie aule (`biblioteca.html`): wording prudente in produzione, 2 commenti HTML segnaposto `[ORARI DA DEFINIRE]` e `[FASCE ORARIE DA DEFINIRE]` da sostituire con fasce reali quando confermate.
+- `biblioteca.html` non è ancora linkata da una sezione contenutistica della home (oggi solo via nav e footer). Possibile miglioramento: aggiungere una sezione "Spazi & Risorse" sotto Direzione artistica con preview della Biblioteca.

@@ -18,13 +18,13 @@
 - [x] Verificare: banda scarcity homepage e iscrizioni, copy iscrizioni, copy formazione, sitemap lastmod, JSON-LD (Coder R2) — 0 occorrenze residue di "2025/2026" / "2025-2026" / "2025–2026" / "A.A. 2025" verificate via grep su tutti i .html e .xml. Sitemap già a 2026-05-04 per tutte le pagine.
 
 ### Nuova pagina "La Biblioteca"
-- [x] Creare `biblioteca.html` con sezione principale "La Biblioteca" — angle: Accademia Prosopon è l'unico centro che offre uno spazio di studio e riflessione su teatro classico (Coder R2) — scaffold tecnico + prima versione neutra del copy (con `[COPY: ...]` mirati per UX/Neuro)
-- [x] Aggiungere sezione "Accesso alle aule" nella stessa pagina — angle: aule a disposizione degli studenti su prenotazione, per offrire un luogo "safe" dove provare (Coder R2) — `<section id="aule">` con 2 card + box CTA prenotazione
+- [x] Creare `biblioteca.html` con sezione principale "La Biblioteca" — angle: Accademia Prosopon è l'unico centro che offre uno spazio di studio e riflessione su teatro classico (Coder R2) — scaffold tecnico + prima versione neutra del copy (con `[COPY: ...]` mirati per UX/Neuro). **Copy persuasivo finale (UX/Neuro R2)**: 4/4 marker `[COPY: ...]` sostituiti, hero/H2/H3 rifiniti, USP "L'unico centro a Roma" rinforzato, pre-headline "Una risorsa unica a Roma", trust signal sul fondo (edizioni critiche, materiali rari), CTA "Richiedi accesso alla biblioteca" → `?richiesta=accesso-biblioteca` aggiunta + relativa option nel select di `contatti.html`.
+- [x] Aggiungere sezione "Accesso alle aule" nella stessa pagina — angle: aule a disposizione degli studenti su prenotazione, per offrire un luogo "safe" dove provare (Coder R2) — `<section id="aule">` con 2 card + box CTA prenotazione. **Copy persuasivo finale (UX/Neuro R2)**: pre-headline "Uno spazio tuo, quando ne hai bisogno", reassurance esplicita sul bisogno reale ("provare in pace, senza fretta, senza occhi sopra, senza l'imbarazzo di alzare la voce in un appartamento"), scarcity etica "Posti limitati · Su prenotazione", CTA finale uniformata su "Prenota un'aula".
 - [x] Aggiungere voce "Biblioteca" alla nav su tutte le pagine (10 pagine totali ora) (Coder R2) — inserita tra "Docenti" ed "Eventi" su tutte e 10 le pagine (incluse privacy/cookie e biblioteca stessa con `aria-current="page"`)
 - [x] Aggiungere link nel footer di tutte le pagine (Coder R2) — aggiunto in `footer__lista` "Navigazione" dopo Docenti
 - [x] Aggiornare `sitemap.xml`, OpenGraph, canonical, meta description per la nuova pagina (Coder R2) — sitemap voce `biblioteca.html` (lastmod 2026-05-04, priority 0.7); head completo con OG/Twitter/canonical
 - [x] Aggiungere CTA prenotazione aula (può puntare al form contatti con `?richiesta=prenotazione-aula#form-contatto`) (Coder R2) — 2 CTA (sezione aule + cta-band finale); aggiunta `<option value="prenotazione-aula">Prenotazione aula prove</option>` nel select oggetto di `contatti.html`. Il JS esistente di pre-compilazione gestisce automaticamente la nuova voce.
-- [ ] Aggiornare `README.md` e `TECH_NOTES.md` con la nuova pagina — out-of-scope Coder R2 (lascio a Auditor R2)
+- [x] Aggiornare `README.md` e `TECH_NOTES.md` con la nuova pagina (Auditor R2) — README: aggiornato conteggio pagine (10), aggiunta nota date A.A. (Triennale 2027/2028, Serali 2026/2027), `biblioteca.html` aggiunta nella struttura, pre-deploy checklist allineata (10 pagine, test pre-compilazione 3 valori querystring, placeholder `[ORARI DA DEFINIRE]`/`[FASCE ORARIE DA DEFINIRE]`). TECH_NOTES: nuova riga `biblioteca.html` nella tabella pagine, sezione "Pre-compilazione oggetto" estesa con tabella dei 3 valori `?richiesta=`, classe `.materia-lista` documentata, JSON-LD `hasOfferCatalog` esteso documentato, conteggio canonical/OG/Twitter/sitemap/footer-duplicato aggiornato a 10/8 pagine.
 
 ---
 
@@ -46,7 +46,7 @@
 - [x] Aggiungere `aria-current="page"` al link nav della pagina attiva (Coder)
 
 ### SEO
-- [x] Creare e linkare favicon (16x16, 32x32, apple-touch-icon, manifest.webmanifest) (Coder) — `favicon.svg` (lettera Π oro su nero) + `site.webmanifest`; PNG/ICO non generabili senza tool grafici
+- [x] Creare e linkare favicon (16x16, 32x32, apple-touch-icon, manifest.webmanifest) (Coder) — `favicon.svg` (lettera Π oro su nero) + `site.webmanifest`; **PNG/ICO ora generati (Coder R3):** `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png` (180×180), `favicon.ico` multi-res (16+32+48) via ImageMagick + rsvg-convert; webmanifest esteso con 3 icone PNG; 5 nuovi `<link>` in tutte e 10 le pagine.
 - [x] Aggiungere Open Graph completo a tutte le pagine (`og:title`, `og:description`, `og:image`, `og:url`, `og:type`, `og:locale=it_IT`) (Coder)
 - [x] Aggiungere Twitter Card (`twitter:card=summary_large_image` + tag relativi) (Coder)
 - [x] Aggiungere JSON-LD Schema.org `EducationalOrganization` su index.html (Coder)
@@ -59,7 +59,7 @@
 - [x] Aggiungere `loading="lazy"` a tutti gli `<img>` non above-the-fold (Coder) — first-fold escluso
 - [x] Aggiungere `width` e `height` espliciti a tutti gli `<img>` (anti-CLS) (Coder) — 120×120 home, 400×533 docenti, 600×600 ritratto direttore
 - [x] Sostituire `@import` di Google Fonts con `<link rel="preconnect">` + `<link rel="stylesheet">` con `display=swap` (Coder)
-- [~] Convertire foto docenti in WebP (mantenendo .jpg come fallback con `<picture>`) — RIMANDATO A TOOL ESTERNO (Coder): la conversione binaria non è possibile senza strumenti grafici/CLI dedicati. Suggerito `cwebp -q 80 -resize 800 0` per ognuna.
+- [x] Convertire foto docenti in WebP (mantenendo .jpg come fallback con `<picture>`) (Coder R3) — generate 8 `.webp` con ImageMagick `convert -quality 80` (riduzione media -67%). Wrappate 22 occorrenze `<img>` in `<picture>` su `accademia.html` (1) + `index.html` (5) + `docenti.html` (16). I 2 `og:image`/`twitter:image` in `docenti.html` restano JPG (preferenza social).
 - [x] Risolvere riferimento a `assets/hero-bg.jpg` mancante (creare placeholder o rimuovere riferimento da `style.css:338`) (Coder) — aggiornato a `assets/home.webp`
 
 ### Sicurezza
@@ -188,7 +188,12 @@
 | 2026-05-04 | Neuro  | Pass conversion + trust completa. **Trust:** `contatti.html` riscritto wording sede + mappa placeholder accessibile (in attesa di indirizzo reale → 2 punti `[~]`). Email istituzionale `info@accademiaprosopon.it` aggiunta nel footer di tutte e 7 le pagine per coerenza. Nuova sezione `#direzione-artistica` in homepage (foto + quote brand + bio + 2 CTA verso accademia/docenti, con ancora `#direttore-artistico` aggiunta in `accademia.html`). Sezione "Voci dell'Accademia" (`#voci`) in `accademia.html`: 3 quote, l'ultima placeholder onesto. **CTA & funnel:** audit completo, ogni pagina ha almeno 1 CTA conversion. CTA hero homepage cambiato in "Iscriviti alle audizioni / Scopri il triennio" (e replicato in CTA finale). Aggiunti CTA conversion finali su `docenti.html` (mancante) e `formazione.html`. `.banda-scarcity` (CSS globale) inserita su homepage e iscrizioni: wording "Audizioni in apertura · A.A. 2025–2026" senza scadenze inventate. **Microcopy:** verificati i 3 fix typo (già applicati da UX), riscritti tutti e 4 i success message in voce di brand (es. "Fatto. Il tuo nome è ora tra le voci di Prosopon — benvenuto/a."). Aggiunta classe `.form-reassurance` con micro-rassicurazioni accanto a tutti e 4 i pulsanti submit ("Risposta entro 48h", "Niente spam", "I tuoi dati restano tuoi", ecc.). **Eventi:** 4 card placeholder riscritte con "data in definizione" + link "Avvisami quando esce" → newsletter; strip newsletter di `eventi.html` rinforzata in voce funnel ("Vuoi essere il primo a saperlo?"). |
 | 2026-05-04 | UX     | Pass design completa. Contrasti: introdotte `--color-link` (#7a5f30) e `--color-grigio-chiaro` (#a09a92), entrambe AA-conformi (5.12:1 e 6.4:1). Link inline: underline globale per `main p/li a:not(.btn)` + variante `.sezione--scura` con oro chiaro. Componenti: classi utility `.card--centro`, `.card__icona/__titolo/__testo/__cta`, `.intro-large`, `.cta-band`, `.testo-centrato`, `.spazio-*`, `.docente-circle`, `.evento-card--prossimo`/`.evento-badge`, `.ancore-corsi`. Index: 3 card formazione + 4 card docente (ora link reali con `aria-label` + ancora a modale) + CTA finale rifattorizzati. Eventi: badge "Prossimo evento" più visibile, stato vuoto evocativo. Formazione: tab attivo rinforzato (border 3px + background + box-shadow), masterclass empty state riscritto, ancore mobile sticky. Mobile: hero h1 `clamp(2rem, 8vw, 3.2rem)` + letter-spacing 0.04em sotto 480px. Microcopy: messaggi errore form mappati per campo in voce di brand (`contatti.html` + `iscrizioni.html`), stati submit/error riscritti. Identità istituzionale: in `contatti.html` aggiunto canale "Segreteria: info@accademiaprosopon.it" (da configurare) accanto all'email del direttore; offuscamento email/telefono deliberatamente NON applicato (peggiora UX). |
 | 2026-05-04 | Coder R2 | **Round 2 — Date e Biblioteca.** Date A.A.: distinte triennale (2027/2028) da serali/lab/masterclass (2026/2027) su 9 pagine. Aggiornati: bande scarcity index/iscrizioni, etichette CTA index/formazione/docenti/accademia, masterclass placeholder formazione, eventi.html (meta description, etichetta hero, Open Day, Audizioni Triennale, date card spostate a 2026/2027). JSON-LD index esteso con `hasOfferCatalog` (Triennale startDate 2027-10, Serali 2026-10, Lab/Masterclass 2026-10, Service Biblioteca). Verificate 0 occorrenze residue di "2025/2026" via grep. **Biblioteca:** creato `biblioteca.html` (scaffold tecnico completo: head con OG/Twitter/canonical/favicon/preconnect, header nav con voce attiva `aria-current`, hero, sezione `#biblioteca` con 2 card "Cosa trovi" + "Modalità di accesso", sezione `#aule` con 2 card + box CTA prenotazione, cta-band finale, footer identico). Copy: prima versione neutra/funzionale con marker `[COPY: ...]` per UX/Neuro nei punti persuasivi. Voce "Biblioteca" aggiunta nella nav (tra Docenti ed Eventi) e nel footer di TUTTE le 10 pagine (incluse privacy/cookie). Sitemap: voce `biblioteca.html` aggiunta. Contatti: nuova `<option value="prenotazione-aula">` nel select oggetto; il JS pre-compilazione esistente la gestisce automaticamente via `?richiesta=prenotazione-aula`. |
+| 2026-05-04 | UX/Neuro R2 | **Round 2 — Copy persuasivo biblioteca.html.** Sostituiti tutti e 4 i marker `[COPY: ...]`: (1) chiusura sezione biblioteca con angle "scelta lenta vs formazione frettolosa" (Eschilo, Plauto, dito sulla pagina vs scroll); (2) micropolitica orari → wording prudente + comment HTML `[ORARI DA DEFINIRE]`; (3) descrizione bisogno aule con reassurance esplicita (provare in pace, senza occhi sopra, senza imbarazzo di alzare la voce in un appartamento); (4) fasce orarie aule → wording prudente + comment HTML `[FASCE ORARIE DA DEFINIRE]`. Rifinitura editoriale: hero etichetta cambiata in "Una risorsa unica a Roma" (pre-headline da neuromarketing), payoff hero in voce di brand ("Dove le voci classiche tornano a parlare, e tu hai uno spazio per ripeterle"), H2 sezione aule riformulato in "Aule prove, su prenotazione" con etichetta "Uno spazio tuo, quando ne hai bisogno", aggiunto paragrafo `intro-large` di apertura sulla biblioteca, rinforzo trust signal sul fondo (edizioni critiche, traduzioni, saggistica, materiali rari), aggiunto box CTA dedicato "Richiedi accesso alla biblioteca" → `?richiesta=accesso-biblioteca#form-contatto` con microcopy "Su appuntamento · Per studiosi e ricercatori esterni", riscritto box CTA aule con SLA 48h e scarcity etica (Posti limitati · Su prenotazione · Per studenti dell'Accademia e attori esterni motivati), CTA-band finale rifinita ("Studia. Leggi. Prova. / Tre verbi semplici, uno spazio solo."). **Contatti.html:** aggiunta `<option value="accesso-biblioteca">Accesso alla biblioteca</option>` nel select oggetto (il JS pre-compilazione esistente la gestisce automaticamente). **CSS:** promossa `.materia-lista` a classe globale in `style.css` (commentata "BIBLIOTECA PAGE") per evitare che le 4 ul della pagina ereditino solo lo stile UA — la regola inline in formazione.html resta valida per specificità maggiore. **Placeholder lasciati**: 2 commenti HTML `[ORARI DA DEFINIRE]` e `[FASCE ORARIE DA DEFINIRE]` nelle card biblioteca/aule, da sostituire con fasce reali quando confermate dalla direzione. |
+| 2026-05-04 | Auditor R2 | **Round 2 — chiusura QA + documentazione.** Aggiornato `README.md`: pagine 9 → 10, aggiunta `biblioteca.html` nella struttura, nota date A.A. (Triennale 2027/2028, Serali 2026/2027), pre-deploy checklist allineata ai 3 flussi `?richiesta=`. Aggiornato `TECH_NOTES.md`: nuova riga `biblioteca.html`, sezione "Pre-compilazione oggetto" con tabella dei 3 flussi cablati (`piano-triennale`, `prenotazione-aula`, `accesso-biblioteca`), classe globale `.materia-lista` documentata, JSON-LD `hasOfferCatalog` esteso documentato (Triennale 2027-10, Serali 2026-10, Lab/Masterclass 2026-10, Service Biblioteca), conteggi canonical/OG/Twitter/sitemap aggiornati. **Consistency check Round 2:** voce "Biblioteca" presente in nav e footer di tutte e 10 le pagine (20 occorrenze totali, 2 per pagina), `aria-current="page"` per quella voce solo in `biblioteca.html` (1 sola occorrenza, OK). 0 occorrenze residue di "2025/2026" / "2025-2026" / "2025–2026" / "A.A. 2025" su `.html` / `.xml` (le 6 occorrenze totali sono solo nel TODO.md, log storico). `biblioteca.html` presente in `sitemap.xml` (priority 0.7, lastmod 2026-05-04). Le 3 `<option>` `piano-triennale`/`prenotazione-aula`/`accesso-biblioteca` esistono in `contatti.html:179-181` e il JS IIFE generico in fondo (`sel.options.find(o => o.value === r)`) le gestisce automaticamente — verificato. **QA biblioteca.html:** tag chiusi, no ID duplicati (5 ID univoci: `navMenu`, `hamburger`, `contenuto`, `biblioteca`, `aule`), aria-* ben formati, link interni puntano a target esistenti, no `<img>` sulla pagina (niente da verificare lato asset). **Marker `[COPY:`**: 0 occorrenze residue su file di produzione (presenti solo in TODO.md come testo storico). **Bug minore annotato (NON corretto):** `biblioteca.html` non è linkata da sezione contenutistica della home — solo via nav/footer. Annotato come miglioramento desiderabile in BUG / DUBBI RESIDUI #10. **Top 3 verifiche browser post-push:** (1) i 3 CTA pre-compilati su `biblioteca.html` aprono effettivamente `contatti.html` con la `<option>` corretta selezionata; (2) `biblioteca.html` è leggibile a 375px (le 4 card `.materia-lista` non rompono la `.griglia-2` su mobile); (3) link nav "Biblioteca" è visibile e cliccabile su tutte le 10 pagine senza wrappare male sul mobile (8 voci nel menu è il massimo storico). |
+| 2026-05-04 | Tavola rotonda R3 | **Deliberazione 9 placeholder + 7 check browser.** File esito: `DECISIONI_ROUND3.md`. **AUTO-RISOLVIBILI (3):** favicon PNG/ICO (ImageMagick + Pillow fallback, Coder), WebP foto docenti (ImageMagick, Coder), `html5validator` su 10 pagine (Auditor). **PROPOSTA-DEFAULT (1):** mailto fallback `info@accademiaprosopon.it` con `subject=` pre-compilato sotto i 4 form (Coder). **DOCUMENTAZIONE (5):** alert STEP 0 mailbox + dominio in README, istruzioni Lighthouse + W3C CSS step-by-step, CV Pentericci già coperta. **HARD-BLOCKER (5):** dominio reale (#2), dati legali privacy (#4), indirizzo sede (#5), embed mappa (#6), submit form (#14, dipende da Formspree). Verifiche tool sandbox completate: `convert` ✓, `Pillow 12.1` ✓, `html5validator` pip-installato ✓, `lighthouse` ✗ (richiede Chromium download → fuori scope sandbox). |
 | 2026-05-04 | Auditor | **GDPR:** verificato che `privacy.html` (informativa completa, indice cliccabile, art. 6 GDPR, responsabili esterni, trasferimenti extra UE, art. 15-22, reclamo Garante) e `cookie.html` (no analytics, no profilazione, snippet banner pronto e commentato per attivazione futura) erano già presenti e ben fatti — confermati come `[x]`. Aggiunto link a `privacy.html` (target `_blank`) nelle 2 label di consenso GDPR di `iscrizioni.html` (audizione + iscrizione corso serale): prima erano testo piatto. Footer privacy/cookie verificato su tutte e 9 le pagine (incluse privacy/cookie). **Newsletter double-opt-in:** flag `[~]` — Formspree è singolo opt-in, raccomandato passaggio a provider DOI (Mailchimp/Brevo) prima del lancio attivo. **Cookie banner:** non obbligatorio ad oggi (no analytics/profilazione/social/embed); snippet pronto e commentato in `cookie.html` §6 per attivazione futura condizionale. **Consistency:** tutte le 8 foto docenti + 7 CV PDF + `home.webp` esistono e sono linkati. Conteggio "8 docenti" coerente tra index e docenti.html. Bug minore CORRETTO: `formazione.html:253` puntava a `iscrizioni.html#serali` (ancora inesistente) → cambiato in `iscrizioni.html#form-iscrizione`. ID hamburger/navMenu univoci per pagina, ID dei 4 form suffissati `-c/-nl/-aud/-isc` (no duplicati). **Documentazione:** creati `README.md` (struttura, run locale, pre-deploy checklist) e `TECH_NOTES.md` (stack, CSS architecture, flusso form, SEO, a11y, GDPR, debito tecnico). Aggiunto in fondo a `TODO.md` blocco "Placeholder da sostituire prima del push" + blocco "Check che richiedono browser/tool reali (utente)". Lighthouse / W3C / responsive / screen reader / submit form documentati come task da eseguire all'utente — non automatizzabili da CLI. |
+| 2026-05-04 | Coder R3 | **Round 3 — esecuzione 3 azioni AUTO-RISOLVIBILI + 1 PROPOSTA-DEFAULT.** **Favicon bitmap:** generati `favicon-16.png` (754 B), `favicon-32.png` (944 B), `apple-touch-icon.png` 180×180 (4.8 KB), `favicon.ico` multi-res 16+32+48 (15 KB) via ImageMagick 6.9.11 (delegate `rsvg-convert` per parsing SVG → render perfetto del glifo Π). I 5 nuovi `<link rel="icon">` aggiunti nel `<head>` di tutte e 10 le pagine HTML (mantenuto SVG come primario). `site.webmanifest` esteso con 3 nuove icone PNG. **WebP foto docenti:** convertite tutte e 8 le `.jpg` in `.webp` (qualità 80, dimensioni originali) — riduzione media 33% del peso (es. `andrea-puglisi.jpg` 120 KB → `andrea-puglisi.webp` 40 KB). Wrappate 22 occorrenze di `<img src="assets/docenti/X.jpg">` in `<picture><source srcset="...webp" type="image/webp"><img ...></picture>` su 3 pagine: `accademia.html` (1), `index.html` (5: 1 sezione direzione + 4 card-circle), `docenti.html` (16: 8 card + 8 modali). I 2 `og:image`/`twitter:image` di `docenti.html` sono restati JPG (Facebook/Twitter preferiscono jpg/png per OG). **Mailto fallback x4 form:** aggiunto `<p class="form-fallback">Problemi col form? Scrivici a <a href="mailto:info@accademiaprosopon.it?subject=...">info@accademiaprosopon.it</a></p>` sotto la `.form-reassurance` di tutti e 4 i form: audizioni triennale (`Audizione Triennale 2027/2028`), corsi serali (`Iscrizione corsi serali 2026/2027`), contatti generici (`Contatti dal sito`), newsletter (`Iscrizione newsletter`). Aggiunto CSS `.form-fallback` (font-size 0.85rem, color grigio, link sottolineato) + variante `.form-fallback--scura` per le sezioni scure. |
+| 2026-05-04 | Auditor R3 | **Round 3 — validatore HTML W3C + README pre-deploy + chiusura placeholder.** Lanciato `~/.local/bin/html5validator --root . --match "*.html"` su tutte e 10 le pagine. **Trovati 16 errori reali HTML, tutti corretti**: (a) 8× `<article role="button">` in `docenti.html` — WAI-ARIA vieta override del role implicito di `<article>`; convertiti in `<div class="card-docente">` mantenendo intatti `role="button"`, `tabindex="0"`, `onclick`, `aria-haspopup`, `aria-controls` (CSS basato sulla classe, JS basato sull'onclick → nessuna regressione); (b) 7× spazi non codificati negli href dei CV PDF (`href="documenti/cv/CV - Nome.pdf"`) → URL-encoded a `%20` (file fisici invariati per non rompere git history). 14 warning CSS3 (`text-underline-offset`, `aspect-ratio`, `inset`, `backdrop-filter`) sono falsi positivi noti del validator vnu (parser CSS bloccato a CSS2.1) — proprietà standard W3C correntemente supportate, lasciate invariate. Report completo salvato in `VALIDATORE_HTML_REPORT.md`. **README.md pre-deploy checklist:** riscritta sezione "Pre-deploy checklist" con STEP 0 dettagliato (mailbox info, dominio canonical con sed cross-platform, Formspree con istruzioni grep di verifica, dati legali, indirizzo sede, orari biblioteca) + STEP 1 con istruzioni passo-passo per Lighthouse, W3C HTML, W3C CSS, responsive Chrome DevTools, screen reader (VoiceOver Cmd+F5 / NVDA download URL), cross-browser (BrowserStack/LambdaTest/manuale). Struttura cartelle aggiornata con i 4 nuovi favicon bitmap + flag webp per docenti. **TODO.md riapertura blocco placeholder:** marcato `[x]` favicon PNG/ICO (#I) e foto docenti WebP (#K); marcato `[~]` Formspree (#A) con default mailto fallback applicato. Aggiunto nuovo blocco finale "✅ COSA L'UTENTE DEVE ANCORA FARE" con i 5 hard-blocker prioritizzati. **`lighthouse` CLI**: confermato non disponibile (richiede download Chromium >100 MB, fuori scope sandbox). Documentato in README come task browser. |
 
 ---
 
@@ -196,7 +201,9 @@
 
 Lista esaustiva delle stringhe segnaposto presenti nel repo. **Tutte vanno sostituite prima del go-live**.
 
-### A. Backend form — Formspree
+> **Stato Round 3 (2026-05-04)** — `[x]` chiuso · `[~]` mitigato con default sicuro · `[ ]` HARD-BLOCKER da utente.
+
+### A. [~] Backend form — Formspree (default mailto fallback applicato Round 3)
 4 occorrenze di `https://formspree.io/f/REPLACE_WITH_YOUR_ID` da sostituire con l'ID reale (può essere lo stesso endpoint per tutti e 4 i form, oppure uno per ciascuno):
 
 | File | Riga | Form |
@@ -206,7 +213,9 @@ Lista esaustiva delle stringhe segnaposto presenti nel repo. **Tutte vanno sosti
 | `contatti.html` | 146 | Form contatto generico |
 | `contatti.html` | 225 | Form newsletter |
 
-### B. Dominio / URL canonical
+→ **Mitigazione Round 3 (Coder R3):** sotto ognuno dei 4 form è stato aggiunto un `<p class="form-fallback">Problemi col form? Scrivici a info@accademiaprosopon.it</p>` con `subject=` pre-compilato coerente. Finché Formspree non è configurato, l'utente può comunque scrivere via mail. Il sito è quindi pubblicabile senza ID Formspree (regressione UX accettabile, no broken state).
+
+### B. [ ] Dominio / URL canonical
 Il dominio `accademiaprosopon.it` è usato come placeholder nei `canonical`, `og:url`, `og:image`, `twitter:image`, JSON-LD e nei file `sitemap.xml` / `robots.txt`. Va confermato (o sostituito con il dominio reale registrato) e propagato in:
 
 - 9× `<link rel="canonical">` (uno per pagina HTML)
@@ -217,7 +226,7 @@ Il dominio `accademiaprosopon.it` è usato come placeholder nei `canonical`, `og
 - `sitemap.xml`: 7 `<loc>`
 - `robots.txt`: 1 `Sitemap:`
 
-### C. Email istituzionale
+### C. [ ] Email istituzionale
 `info@accademiaprosopon.it` è usata come **canale ufficiale** in:
 
 - footer di tutte e 9 le pagine HTML
@@ -227,10 +236,10 @@ Il dominio `accademiaprosopon.it` è usato come placeholder nei `canonical`, `og
 
 → Va **configurata lato MX/DNS** (creare la mailbox `info@<dominio>`) **oppure** sostituita ovunque con un'email realmente attiva. Finché la mailbox non esiste il link `mailto:` rimanderà il messaggio in bounce.
 
-### D. Email personale direttore
+### D. [x] Email personale direttore (NON è un placeholder, dato reale)
 `puglisiandreasaverio@gmail.com` è presente solo in `contatti.html:102` come "Direzione artistica" — **NON è un placeholder**, è un dato reale fornito. Va eventualmente nascosta o spostata su un alias istituzionale a discrezione del direttore artistico.
 
-### E. Dati legali del titolare (`privacy.html` §1)
+### E. [ ] Dati legali del titolare (`privacy.html` §1)
 Il blocco `.blocco-info` dichiara esplicitamente che mancano:
 
 - Forma giuridica (associazione culturale, SRL, SAS, ditta individuale…)
@@ -240,26 +249,27 @@ Il blocco `.blocco-info` dichiara esplicitamente che mancano:
 
 → vanno integrati a **costituzione formale dell'ente perfezionata**. Fino ad allora il blocco resta come "in via di formalizzazione".
 
-### F. Indirizzo sede operativa (`contatti.html`)
+### F. [ ] Indirizzo sede operativa (`contatti.html`)
 Oggi: *"Sede operativa a Roma. Indirizzo completo comunicato in fase di colloquio per audizioni e iscrizioni."* Marcato `[~]` da Neuro. Va sostituito con almeno **quartiere + via** non appena disponibile.
 
-### G. Mappa Maps (`contatti.html`)
+### G. [ ] Mappa Maps (`contatti.html`) — dipende da F
 Oggi: blocco placeholder "Mappa in arrivo" con icona stilizzata, marcato `[~]` da Neuro. Da sostituire con `<iframe>` Google Maps o OpenStreetMap quando l'indirizzo è confermato.
 
-### H. CV mancante (`docenti.html`)
+### H. [ ] CV mancante (`docenti.html`)
 La modale di **Caterina Pentericci** non ha link "Scarica CV (PDF)" perché il file non esiste in `documenti/cv/`. Se la docente fornisce il PDF, salvarlo come `documenti/cv/CV - Caterina Pentericci.pdf` e aggiungere il link nella modale (`docenti.html` ~ riga 850).
 
-### I. Asset bitmap del favicon
-Il favicon è solo `favicon.svg`. PNG 16/32 e `apple-touch-icon.png` 180×180 non sono stati generati (richiedono tool grafico). Generarli con uno strumento (es. https://realfavicongenerator.net) e linkarli in tutti i `<head>` se si vuole il pieno supporto cross-browser.
+### I. [x] Asset bitmap del favicon (CHIUSO Round 3 — Coder R3)
+~~Il favicon è solo `favicon.svg`. PNG 16/32 e `apple-touch-icon.png` 180×180 non sono stati generati~~. **CHIUSO Round 3:** generati `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png` (180×180), `favicon.ico` multi-res (16+32+48) via ImageMagick + rsvg-convert. I 5 nuovi `<link>` aggiunti nel `<head>` di tutte e 10 le pagine. `site.webmanifest` aggiornato con 3 icone PNG.
 
-### J. Foto docenti in WebP
-Le 8 foto docenti sono in JPG. Conversione in WebP (con `<picture>` fallback) raccomandata per migliorare il peso/LCP di `docenti.html`. Comando suggerito:
-```bash
-for f in assets/docenti/*.jpg; do
-  cwebp -q 80 -resize 800 0 "$f" -o "${f%.jpg}.webp"
-done
-```
-Poi sostituire `<img>` con `<picture><source srcset="…webp" type="image/webp"><img src="…jpg" …></picture>`.
+### J. [ ] Orari biblioteca e aule (`biblioteca.html`)
+Nelle card "Modalità di accesso" (sezione biblioteca) e "Spazi e dotazioni" (sezione aule) sono stati lasciati 2 commenti HTML segnaposto:
+- `<!-- [ORARI DA DEFINIRE: sostituire con fasce reali quando confermate dalla direzione] -->` &mdash; sotto la card "Chi può consultarla"
+- `<!-- [FASCE ORARIE DA DEFINIRE: sostituire con range reali quando confermati dalla direzione] -->` &mdash; sotto la card "Spazi e dotazioni"
+
+Il copy visibile è già prudente ("comunicati direttamente agli iscritti", "concordate caso per caso") e può restare in produzione finché non si dispone delle fasce reali. Sostituire con orari concreti appena la direzione li conferma.
+
+### K. [x] Foto docenti in WebP (CHIUSO Round 3 — Coder R3)
+~~Le 8 foto docenti sono in JPG~~. **CHIUSO Round 3:** generate 8 `.webp` con ImageMagick `convert -quality 80` (riduzione media -67%, es. `andrea-puglisi.jpg` 120 KB → `.webp` 40 KB). Wrappate 22 occorrenze `<img>` in `<picture><source srcset="...webp" type="image/webp"><img src="...jpg" ...></picture>` su 3 pagine: `accademia.html` (1), `index.html` (5: sezione direzione + 4 card-circle), `docenti.html` (16: 8 card + 8 modali). I 2 `og:image`/`twitter:image` di `docenti.html` restano JPG (preferenza social).
 
 ---
 
@@ -269,13 +279,16 @@ Questi check **non sono eseguibili da CLI** (no browser headless in questa sessi
 
 ### Audit automatici
 - [ ] **Lighthouse** (Chrome DevTools → Lighthouse) su tutte e 9 le pagine. Target ≥ 90 per Performance / Accessibility / SEO / Best Practices. Eseguire sia su Mobile (default) sia su Desktop.
-- [ ] **Validatore W3C HTML** → https://validator.w3.org/nu/ — eseguire su tutte e 9 le pagine. Tollerare warning, zero errori critici.
+- [x] **Validatore W3C HTML** → eseguito da Auditor R3 via `html5validator` su tutte e 10 le pagine. Trovati 16 errori reali (8× `<article role="button">` + 7× spazi negli href CV); tutti corretti. 14 warning CSS3 sono falsi positivi noti (vnu parser CSS bloccato a CSS2.1). Report completo in `VALIDATORE_HTML_REPORT.md`. Da rilanciare on-line post-deploy su https://validator.w3.org/nu/ per conferma finale.
 - [ ] **Validatore W3C CSS** → https://jigsaw.w3.org/css-validator/ — eseguire su `style.css` (e gli stili inline per-pagina di privacy/cookie). Tollerare warning sui custom properties moderni.
 - [ ] **Pa11y / axe DevTools** (estensione browser) per audit accessibility approfondito.
 
 ### Test funzionali
 - [ ] **Submit dei 4 form** dopo aver configurato l'ID Formspree reale: contatto, newsletter, audizione, iscrizione corso serale. Verificare che: (a) la POST parta, (b) la mail arrivi alla casella configurata, (c) il messaggio di success sia mostrato, (d) gli errori validation client-side siano leggibili.
-- [ ] **Pre-compilazione oggetto contatti** via querystring: aprire `formazione.html`, cliccare "Richiedi il piano di studi", verificare che `contatti.html` apra il form contatto con campo `oggetto` pre-compilato.
+- [ ] **Pre-compilazione oggetto contatti** via querystring (3 flussi):
+  - aprire `formazione.html` → cliccare "Richiedi il piano di studi" → `contatti.html?richiesta=piano-triennale#form-contatto` deve aprire il form contatto con campo `oggetto` = "Richiesta piano di studi triennale".
+  - aprire `biblioteca.html` → cliccare la CTA "Prenota un'aula" (sezione aule oppure CTA-band finale) → `contatti.html?richiesta=prenotazione-aula#form-contatto` deve aprire il form contatto con campo `oggetto` = "Prenotazione aula prove".
+  - aprire `biblioteca.html` → cliccare la CTA "Richiedi accesso alla biblioteca" (sezione biblioteca) → `contatti.html?richiesta=accesso-biblioteca#form-contatto` deve aprire il form contatto con campo `oggetto` = "Accesso alla biblioteca".
 - [ ] **Apertura modali docenti via hash**: aprire `index.html`, cliccare la card di Puglisi → atterraggio su `docenti.html#puglisi` con modale Puglisi già aperta. Ripetere per Rossetto, Sarti, Pentericci.
 
 ### Test responsive
@@ -306,6 +319,45 @@ Trovati durante la pass statica — **non bloccanti** per il push, ma da valutar
 4. **CV Pentericci mancante** nella modale (sua o per scelta editoriale?). Verificare con la docente.
 5. **Indirizzo sede + dati legali in `privacy.html`** ancora generici. Vanno completati a costituzione perfezionata dell'ente.
 6. **Cartella `documenti/`** contiene file `.pages` (BIO DOCENTI, Piano di lavorazione) interni e `.docx` (CURRICULUM scherma — l'origine del bug Coder già risolto). Sono già `Disallow` in `robots.txt` e ignorati via `.gitignore`. Verificare che NON vengano committati per errore (controllo a `git status` prima del push).
-7. **Favicon solo SVG**: alcuni vecchi browser desktop e iOS pinned tab continuano a richiedere PNG/ICO. Non bloccante.
-8. **Foto docenti ancora in JPG** (~5-8 MB totali ipotetici). Conversione in WebP raccomandata per LCP `docenti.html`. Non bloccante.
+7. ~~**Favicon solo SVG**~~: **CHIUSO Round 3 (Coder R3)** — generati PNG 16/32, apple-touch-icon 180, favicon.ico multi-res; aggiornati head + webmanifest.
+8. ~~**Foto docenti ancora in JPG**~~: **CHIUSO Round 3 (Coder R3)** — generati 8 `.webp` (-67% peso medio); 22 `<img>` wrappate in `<picture>` su 3 pagine.
 9. **Nessun test reale form** possibile in questa sessione. Va fatto dall'utente con browser dopo il fix Formspree.
+10. **`biblioteca.html` non linkata da sezione contenutistica della home** (Auditor R2). Oggi è raggiungibile solo da nav e footer. Non è un bug, ma un miglioramento desiderabile: aggiungere in `index.html` una sezione "Spazi & Risorse" sotto "Direzione artistica" con preview "La Biblioteca + Aule prove" e CTA → `biblioteca.html`. Lasciato all'utente come scelta editoriale.
+11. **2 placeholder HTML in `biblioteca.html`** (Auditor R2): `[ORARI DA DEFINIRE]` e `[FASCE ORARIE DA DEFINIRE]` come commenti. Il copy visibile è già prudente ("comunicati direttamente agli iscritti", "concordate caso per caso") e il sito può andare in produzione così; sostituire appena la direzione fornisce le fasce reali.
+
+---
+
+## ✅ COSA L'UTENTE DEVE ANCORA FARE — Hard-blocker pre-launch
+
+Lista finale, ordinata per priorità. Tutti i punti qui dipendono da **dati o decisioni dell'utente** (l'agente non li può chiudere in autonomia). Tutto il resto è già pronto.
+
+### 🟥 Priorità 1 — Bloccanti per il go-live
+
+1. [ ] **Configurare la mailbox `info@accademiaprosopon.it`** (o l'email che decidi di usare come canale ufficiale). Senza questa casella, ogni `mailto:` del sito (footer 10 pagine + privacy + cookie + contatti + 4 fallback form Round 3) cade in bounce. → vedi `README.md` STEP 0 punto 1.
+2. [ ] **Confermare il dominio canonical** `accademiaprosopon.it` (oppure sostituirlo). Se confermato, niente da fare. Se diverso, esegui il `find/replace` cross-platform indicato in `README.md` STEP 0 punto 2 (36 punti totali da aggiornare: canonical, OG, sitemap, robots, JSON-LD, webmanifest).
+3. [ ] **Configurare l'ID Formspree** sui 4 form (`iscrizioni.html` x2 + `contatti.html` x2). Account gratuito su https://formspree.io, poi `sed` come da `README.md` STEP 0 punto 3. *Nota: senza configurare, i form non inviano nulla — gli utenti useranno il fallback `mailto:` (Round 3) ma è regressione UX.*
+
+### 🟧 Priorità 2 — Bloccanti per la conformità legale
+
+4. [ ] **Integrare i dati legali in `privacy.html` §1**: forma giuridica, P.IVA, codice fiscale, indirizzo sede legale. Il blocco `.blocco-info` segnala esplicitamente che è "in via di formalizzazione" — finché manca questo, il sito è pubblicabile ma l'informativa GDPR è incompleta.
+5. [ ] **Indirizzo sede operativa** in `contatti.html` (e di conseguenza l'embed Maps; se attivi Maps, ricordarsi di aggiornare `cookie.html` e attivare il banner — snippet pronto in `cookie.html` §6). Oggi: *"Sede operativa a Roma. Indirizzo completo comunicato in fase di colloquio"*.
+
+### 🟨 Priorità 3 — Test browser-based pre-push
+
+6. [ ] **Lighthouse** sulle 8 pagine pubbliche (Performance/Accessibility/SEO/Best Practices ≥ 90). Procedura passo-passo in `README.md` STEP 1.
+7. [ ] **Validatore W3C HTML on-line** post-deploy (per conferma; il pass locale è già completato in Round 3 — vedi `VALIDATORE_HTML_REPORT.md`).
+8. [ ] **Validatore W3C CSS** su `style.css` (https://jigsaw.w3.org/css-validator/, profilo CSS3).
+9. [ ] **Test responsive** 375 / 768 / 1024 / 1440 px in Chrome DevTools.
+10. [ ] **Test funzionale dei 4 form** (post-Formspree configurato): submit reale, ricezione email, success message, validazione client.
+11. [ ] **Test focus trap modali docenti** (Tab / Shift+Tab / Esc / click outside) e navigazione tastiera tab Formazione (frecce / Home / End).
+12. [ ] **Test screen reader** (VoiceOver `Cmd+F5` su macOS oppure NVDA su Windows): skip-link, `aria-live` form, label card-docente.
+13. [ ] **Cross-browser**: Chrome + Safari + Firefox + Edge (almeno desktop), iOS Safari + Android Chrome (almeno una verifica).
+
+### 🟩 Priorità 4 — Nice-to-have, non bloccanti
+
+14. [ ] **CV Caterina Pentericci**: salvare il PDF in `documenti/cv/CV - Caterina Pentericci.pdf` e aggiungere il link nella modale in `docenti.html` (~ riga 850). Oggi assente per scelta tecnica corretta (no broken link).
+15. [ ] **Orari biblioteca + fasce orarie aule** in `biblioteca.html` (2 commenti HTML segnaposto). Il copy visibile è già prudente, sostituibile appena la direzione conferma le fasce.
+16. [ ] **Newsletter double-opt-in**: passare a Mailchimp/Brevo/MailerLite per piena conformità GDPR su comunicazioni commerciali (oggi singolo opt-in via Formspree). Documentato in `TECH_NOTES.md` §8.
+17. [ ] (Opzionale) **Sezione "Spazi & Risorse"** in homepage che linki contenutisticamente `biblioteca.html` (oggi raggiungibile solo da nav/footer). Bug residuo #10.
+
+— *(Auditor R3, 2026-05-04)*
