@@ -3,33 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Accademia di Teatro Classico Prosopon</title>
-  <meta name="description" content="Accademia di Teatro Classico Prosopon — formazione triennale, corsi serali, laboratori e masterclass nel segno della grande tradizione teatrale." />
+  <title>Accademia di Teatro Classico Prosopon · Roma</title>
+  <meta name="description" content="Accademia di Teatro Classico Prosopon a Roma: corso triennale, corsi serali, laboratori e masterclass nella grande tradizione del teatro classico." />
+  <link rel="canonical" href="https://www.accademiaprosopon.it/" />
+
+  <!-- Favicon e manifest -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#0e0d0b" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:site_name" content="Accademia di Teatro Classico Prosopon" />
+  <meta property="og:title" content="Accademia di Teatro Classico Prosopon · Roma" />
+  <meta property="og:description" content="Formazione triennale, corsi serali, laboratori e masterclass nel segno della grande tradizione teatrale." />
+  <meta property="og:url" content="https://www.accademiaprosopon.it/" />
+  <meta property="og:image" content="https://www.accademiaprosopon.it/assets/home.webp" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Accademia di Teatro Classico Prosopon · Roma" />
+  <meta name="twitter:description" content="Formazione triennale, corsi serali, laboratori e masterclass nel segno della grande tradizione teatrale." />
+  <meta name="twitter:image" content="https://www.accademiaprosopon.it/assets/home.webp" />
+
+  <!-- Google Fonts (preconnect + stylesheet, anti render-blocking) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;500;600&display=swap" />
+
   <link rel="stylesheet" href="style.css" />
+
+  <!-- JSON-LD: EducationalOrganization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Accademia di Teatro Classico Prosopon",
+    "alternateName": "Prosopon",
+    "url": "https://www.accademiaprosopon.it/",
+    "logo": "https://www.accademiaprosopon.it/favicon.svg",
+    "image": "https://www.accademiaprosopon.it/assets/home.webp",
+    "description": "Centro di Teatro Classico e Arti Performative. Formazione triennale accademica, corsi serali, laboratori intensivi e masterclass nel segno della grande tradizione teatrale.",
+    "foundingDate": "2025",
+    "founder": {
+      "@type": "Person",
+      "name": "Andrea Saverio Puglisi",
+      "jobTitle": "Direttore Artistico"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Roma",
+      "addressRegion": "Lazio",
+      "addressCountry": "IT"
+    },
+    "areaServed": "IT",
+    "sameAs": [
+      "https://www.andreapuglisi.com"
+    ]
+  }
+  </script>
 </head>
 <body>
 
-  <!-- ============ NAVIGAZIONE ============ -->
-  <nav class="nav">
-    <div class="nav__contenitore">
-      <a href="index.html" class="nav__logo">
-        Prosopon
-        <span>Accademia di Teatro Classico</span>
-      </a>
-      <ul class="nav__menu" id="navMenu">
-        <li><a href="index.html" class="nav__link nav__link--attivo">Home</a></li>
-        <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
-        <li><a href="formazione.html" class="nav__link">Formazione</a></li>
-        <li><a href="docenti.html" class="nav__link">Docenti</a></li>
-        <li><a href="eventi.html" class="nav__link">Spettacoli & Eventi</a></li>
-        <li><a href="contatti.html" class="nav__link">Contatti</a></li>
-        <li><a href="iscrizioni.html" class="nav__cta">Iscrizioni</a></li>
-      </ul>
-      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+  <a href="#contenuto" class="skip-link">Vai al contenuto</a>
+
+  <!-- ============ HEADER + NAVIGAZIONE ============ -->
+  <header>
+    <nav class="nav" aria-label="Navigazione principale">
+      <div class="nav__contenitore">
+        <a href="index.html" class="nav__logo">
+          Prosopon
+          <span>Accademia di Teatro Classico</span>
+        </a>
+        <ul class="nav__menu" id="navMenu">
+          <li><a href="index.html" class="nav__link nav__link--attivo" aria-current="page">Home</a></li>
+          <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
+          <li><a href="formazione.html" class="nav__link">Formazione</a></li>
+          <li><a href="docenti.html" class="nav__link">Docenti</a></li>
+          <li><a href="eventi.html" class="nav__link">Spettacoli & Eventi</a></li>
+          <li><a href="contatti.html" class="nav__link">Contatti</a></li>
+          <li><a href="iscrizioni.html" class="nav__cta">Iscrizioni</a></li>
+        </ul>
+        <button class="nav__hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false" aria-controls="navMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenuto">
 
   <!-- ============ HERO ============ -->
   <section class="hero">
@@ -43,11 +107,22 @@
         Dove la voce antica ritrova il corpo vivo.
       </p>
       <div style="display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap;">
-        <a href="formazione.html" class="btn btn--oro">Scopri la Formazione</a>
-        <a href="iscrizioni.html" class="btn btn--contorno">Audizioni & Iscrizioni</a>
+        <a href="iscrizioni.html#form-audizione" class="btn btn--oro">Iscriviti alle audizioni</a>
+        <a href="formazione.html#triennale" class="btn btn--contorno">Scopri il triennio</a>
       </div>
     </div>
   </section>
+
+  <!-- ============ BANDA SCARCITY ETICO ============ -->
+  <aside class="banda-scarcity" role="note" aria-label="Avviso anno accademico">
+    <div class="contenitore" style="display:flex; align-items:center; justify-content:center; gap:0.9rem; flex-wrap:wrap; text-align:center;">
+      <span aria-hidden="true" style="display:inline-block; width:8px; height:8px; background:var(--color-oro); border-radius:50%;"></span>
+      <span style="font-family:var(--font-titolo); font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-avorio);">
+        Audizioni in apertura &middot; Anno Accademico 2025&ndash;2026
+      </span>
+      <a href="iscrizioni.html#form-audizione" style="font-family:var(--font-titolo); font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--color-oro); text-decoration:underline; text-underline-offset:4px;">Candidati</a>
+    </div>
+  </aside>
 
   <!-- ============ CITAZIONE ============ -->
   <section class="sezione sezione--scura">
@@ -58,6 +133,32 @@
       <p style="text-align:right; font-style:italic; font-size:0.9rem; color:var(--color-grigio-light);">
         — Dalla filosofia dell'Accademia
       </p>
+    </div>
+  </section>
+
+  <!-- ============ DIREZIONE ARTISTICA (anteprima fondatore) ============ -->
+  <section class="sezione sezione--avorio-scuro" id="direzione-artistica">
+    <div class="contenitore">
+      <div class="griglia-2" style="gap:4rem; align-items:center;">
+        <div style="background:var(--color-grafite); aspect-ratio:1/1; max-width:420px; width:100%; margin:0 auto; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+          <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Saverio Puglisi, direttore artistico dell'Accademia Prosopon" width="420" height="420" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:center 15%;" onerror="this.style.opacity:0.3" />
+        </div>
+        <div>
+          <span class="etichetta">Direzione artistica</span>
+          <h2 style="margin:0.8rem 0 0.5rem; font-size:1.9rem;">Andrea Saverio Puglisi</h2>
+          <p style="font-style:italic; color:var(--color-grigio); margin-bottom:1.5rem;">Attore &middot; Regista &middot; Autore &middot; Studioso del teatro classico</p>
+          <blockquote style="border-left:3px solid var(--color-oro); padding:0.4rem 0 0.4rem 1.4rem; margin:0 0 1.5rem; font-family:var(--font-corpo); font-style:italic; font-size:1.1rem; line-height:1.55; color:var(--color-grafite);">
+            La maschera non nasconde: rivela. L'attore non interpreta: diventa. Su questa tensione si costruisce il lavoro dell'Accademia.
+          </blockquote>
+          <p style="font-size:1rem;">
+            Laureato con lode in DAMS a Roma Tre, formato alla scuola Fondamenta, attore di teatro, cinema e televisione, regista, autore di tre pubblicazioni e premiato in più festival nazionali. Dirige Prosopon con una precisa vocazione: portare la grande tradizione classica sul corpo e sulla voce dell'attore di oggi.
+          </p>
+          <div style="display:flex; gap:1.2rem; margin-top:1.8rem; flex-wrap:wrap;">
+            <a href="accademia.html#direttore-artistico" class="btn btn--contorno-scuro">Conosci la direzione</a>
+            <a href="docenti.html#puglisi" class="btn btn--oro">Vedi la scheda completa</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -97,26 +198,26 @@
 
       <div class="griglia-3" style="gap:2rem;">
 
-        <div class="card" style="text-align:center; padding:2.5rem 2rem;">
-          <div style="font-family:var(--font-titolo); font-size:2rem; color:var(--color-oro); margin-bottom:1rem;">I · II · III</div>
-          <h3 style="margin-bottom:1rem;">Corso Triennale Accademico</h3>
-          <p style="font-size:1rem;">Il percorso centrale dell'Accademia. Tre anni di formazione intensiva in recitazione classica, voce, movimento, maschera e drammaturgia. Accesso tramite audizione.</p>
-          <a href="formazione.html#triennale" class="btn btn--contorno-scuro" style="margin-top:1.5rem; display:inline-block;">Programma completo</a>
-        </div>
+        <article class="card card--centro card--padding-lg">
+          <div class="card__icona">I &middot; II &middot; III</div>
+          <h3 class="card__titolo">Corso Triennale Accademico</h3>
+          <p class="card__testo">Il percorso centrale dell'Accademia. Tre anni di formazione intensiva in recitazione classica, voce, movimento, maschera e drammaturgia. Accesso tramite audizione.</p>
+          <a href="formazione.html#triennale" class="btn btn--contorno-scuro card__cta">Programma completo</a>
+        </article>
 
-        <div class="card" style="text-align:center; padding:2.5rem 2rem;">
-          <div style="font-family:var(--font-titolo); font-size:2rem; color:var(--color-oro); margin-bottom:1rem;">☽</div>
-          <h3 style="margin-bottom:1rem;">Corsi Serali per Adulti</h3>
-          <p style="font-size:1rem;">Per chi lavora e desidera avvicinarsi al teatro classico. Corsi modulari in orario serale con accesso diretto tramite iscrizione online.</p>
-          <a href="formazione.html#serali" class="btn btn--contorno-scuro" style="margin-top:1.5rem; display:inline-block;">Scopri i corsi</a>
-        </div>
+        <article class="card card--centro card--padding-lg">
+          <div class="card__icona" aria-hidden="true">&#9789;</div>
+          <h3 class="card__titolo">Corsi Serali per Adulti</h3>
+          <p class="card__testo">Per chi lavora e desidera avvicinarsi al teatro classico. Corsi modulari in orario serale con accesso diretto tramite iscrizione online.</p>
+          <a href="formazione.html#serali" class="btn btn--contorno-scuro card__cta">Scopri i corsi</a>
+        </article>
 
-        <div class="card" style="text-align:center; padding:2.5rem 2rem;">
-          <div style="font-family:var(--font-titolo); font-size:2rem; color:var(--color-oro); margin-bottom:1rem;">✦</div>
-          <h3 style="margin-bottom:1rem;">Laboratori & Masterclass</h3>
-          <p style="font-size:1rem;">Workshop intensivi estivi e masterclass con artisti e studiosi di fama nazionale. Aperti a studenti e professionisti.</p>
-          <a href="formazione.html#laboratori" class="btn btn--contorno-scuro" style="margin-top:1.5rem; display:inline-block;">Prossimi appuntamenti</a>
-        </div>
+        <article class="card card--centro card--padding-lg">
+          <div class="card__icona" aria-hidden="true">&#10022;</div>
+          <h3 class="card__titolo">Laboratori &amp; Masterclass</h3>
+          <p class="card__testo">Workshop intensivi estivi e masterclass con artisti e studiosi di fama nazionale. Aperti a studenti e professionisti.</p>
+          <a href="formazione.html#laboratori" class="btn btn--contorno-scuro card__cta">Prossimi appuntamenti</a>
+        </article>
 
       </div>
     </div>
@@ -133,38 +234,37 @@
 
       <div class="griglia-4" style="gap:1.5rem;">
 
-        <div style="text-align:center;">
-          <div style="width:120px; height:120px; border-radius:50%; background:var(--color-grafite); border:1px solid rgba(184,150,90,0.3); margin:0 auto 1rem; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-            <img src="assets/docenti/andrea-puglisi.jpg" alt="Andrea Puglisi" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'" />
-            <span style="font-family:var(--font-titolo); font-size:1.2rem; color:var(--color-oro); display:none;" id="init-ap">AP</span>
+        <a href="docenti.html#puglisi" class="docente-circle" aria-label="Vai alla scheda di Andrea Saverio Puglisi">
+          <div class="docente-circle__foto">
+            <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Saverio Puglisi" width="120" height="120" onerror="this.style.display='none'" />
           </div>
-          <h4 style="color:var(--color-avorio); font-size:0.9rem; letter-spacing:0.1em;">Andrea Saverio Puglisi</h4>
-          <p style="font-size:0.85rem; color:var(--color-oro); font-style:italic;">Direttore Artistico</p>
-        </div>
+          <h3 class="docente-circle__nome">Andrea Saverio Puglisi</h3>
+          <p class="docente-circle__ruolo">Direttore Artistico</p>
+        </a>
 
-        <div style="text-align:center;">
-          <div style="width:120px; height:120px; border-radius:50%; background:var(--color-grafite); border:1px solid rgba(184,150,90,0.3); margin:0 auto 1rem; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-            <img src="assets/docenti/elena-rossetto.jpg" alt="Elena Rossetto" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'" />
+        <a href="docenti.html#rossetto" class="docente-circle" aria-label="Vai alla scheda di Elena Rossetto">
+          <div class="docente-circle__foto">
+            <img src="assets/docenti/elena-rossetto.jpg" alt="Ritratto di Elena Rossetto" width="120" height="120" loading="lazy" onerror="this.style.display='none'" />
           </div>
-          <h4 style="color:var(--color-avorio); font-size:0.9rem; letter-spacing:0.1em;">Elena Rossetto</h4>
-          <p style="font-size:0.85rem; color:var(--color-oro); font-style:italic;">Attrice · Doppiatrice</p>
-        </div>
+          <h3 class="docente-circle__nome">Elena Rossetto</h3>
+          <p class="docente-circle__ruolo">Attrice &middot; Doppiatrice</p>
+        </a>
 
-        <div style="text-align:center;">
-          <div style="width:120px; height:120px; border-radius:50%; background:var(--color-grafite); border:1px solid rgba(184,150,90,0.3); margin:0 auto 1rem; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-            <img src="assets/docenti/rachele-sarti.jpg" alt="Rachele Sarti" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'" />
+        <a href="docenti.html#sarti" class="docente-circle" aria-label="Vai alla scheda di Rachele Sarti">
+          <div class="docente-circle__foto">
+            <img src="assets/docenti/rachele-sarti.jpg" alt="Ritratto di Rachele Sarti" width="120" height="120" loading="lazy" onerror="this.style.display='none'" />
           </div>
-          <h4 style="color:var(--color-avorio); font-size:0.9rem; letter-spacing:0.1em;">Rachele Sarti</h4>
-          <p style="font-size:0.85rem; color:var(--color-oro); font-style:italic;">Attrice</p>
-        </div>
+          <h3 class="docente-circle__nome">Rachele Sarti</h3>
+          <p class="docente-circle__ruolo">Attrice</p>
+        </a>
 
-        <div style="text-align:center;">
-          <div style="width:120px; height:120px; border-radius:50%; background:var(--color-grafite); border:1px solid rgba(184,150,90,0.3); margin:0 auto 1rem; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-            <img src="assets/docenti/caterina-pentericci.jpg" alt="Caterina Pentericci" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'" />
+        <a href="docenti.html#pentericci" class="docente-circle" aria-label="Vai alla scheda di Caterina Pentericci">
+          <div class="docente-circle__foto">
+            <img src="assets/docenti/caterina-pentericci.jpg" alt="Ritratto di Caterina Pentericci" width="120" height="120" loading="lazy" onerror="this.style.display='none'" />
           </div>
-          <h4 style="color:var(--color-avorio); font-size:0.9rem; letter-spacing:0.1em;">Caterina Pentericci</h4>
-          <p style="font-size:0.85rem; color:var(--color-oro); font-style:italic;">Maestra di Scherma</p>
-        </div>
+          <h3 class="docente-circle__nome">Caterina Pentericci</h3>
+          <p class="docente-circle__ruolo">Maestra di Scherma</p>
+        </a>
 
       </div>
 
@@ -202,16 +302,19 @@
   </section>
 
   <!-- ============ CALL TO ACTION ============ -->
-  <section style="background:var(--color-oro); padding:5rem 0; text-align:center;">
+  <section class="cta-band">
     <div class="contenitore" style="max-width:680px;">
-      <p style="font-family:var(--font-titolo); font-size:0.7rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--color-nero); margin-bottom:0.8rem; opacity:0.7;">Anno Accademico 2025–2026</p>
-      <h2 style="color:var(--color-nero); margin-bottom:1.2rem;">Le audizioni sono aperte</h2>
-      <p style="color:var(--color-nero); font-style:italic; margin-bottom:2rem; opacity:0.85;">
-        Sei pronto a intraprendere il percorso? Scopri come candidarti al corso triennale e alle nostre altre attività formative.
-      </p>
-      <a href="iscrizioni.html" class="btn" style="background:var(--color-nero); color:var(--color-avorio);">Candidati ora</a>
+      <span class="cta-band__etichetta">Anno Accademico 2025&ndash;2026</span>
+      <h2>Le audizioni sono aperte</h2>
+      <p>Sei pronto a intraprendere il percorso? Candidati al corso triennale o iscriviti ai corsi serali e ai laboratori.</p>
+      <div style="display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap;">
+        <a href="iscrizioni.html#form-audizione" class="btn">Iscriviti alle audizioni</a>
+        <a href="formazione.html#triennale" class="btn" style="background:transparent; border:1px solid var(--color-nero); color:var(--color-nero);">Scopri il triennio</a>
+      </div>
     </div>
   </section>
+
+  </main>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
@@ -220,6 +323,7 @@
         <div>
           <div class="footer__logo">Prosopon<span>Accademia di Teatro Classico</span></div>
           <p>Centro di Teatro Classico e Arti Performative.<br>Direttore artistico: Andrea Saverio Puglisi.<br>Roma, dal 2025.</p>
+          <p style="margin-top:0.8rem; font-size:0.9rem;"><a href="mailto:info@accademiaprosopon.it" style="color:var(--color-oro); text-decoration:underline; text-underline-offset:3px;">info@accademiaprosopon.it</a></p>
         </div>
         <div>
           <p class="footer__titolo">Navigazione</p>
@@ -250,30 +354,20 @@
       </div>
       <div class="footer__bottom">
         <p>© 2025 Accademia di Teatro Classico Prosopon. Tutti i diritti riservati.</p>
-        <p style="font-style:italic; font-size:0.8rem; color:var(--color-grigio);">Roma, Italia</p>
+        <p class="footer__legale"><a href="privacy.html">Privacy</a> · <a href="cookie.html">Cookie</a> · <span style="font-style:italic;">Roma, Italia</span></p>
       </div>
     </div>
   </footer>
 
   <!-- ============ SCRIPT ============ -->
   <script>
-    // Hamburger menu
+    // Hamburger menu con aria-expanded
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
     hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('aperto');
-    });
-
-    // Gestione immagini mancanti (avatar iniziali)
-    document.querySelectorAll('.avatar-placeholder').forEach(el => {
-      const img = el.querySelector('img');
-      const span = el.querySelector('span');
-      if (img && span) {
-        img.addEventListener('error', () => {
-          img.style.display = 'none';
-          span.style.display = 'block';
-        });
-      }
+      const aperto = navMenu.classList.toggle('aperto');
+      hamburger.setAttribute('aria-expanded', String(aperto));
+      hamburger.setAttribute('aria-label', aperto ? 'Chiudi menu' : 'Apri menu');
     });
   </script>
 </body>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /documenti/
+Disallow: /assets/docenti/Foto%20docenti%20/
+
+Sitemap: https://www.accademiaprosopon.it/sitemap.xml

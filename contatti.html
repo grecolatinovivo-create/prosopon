@@ -4,32 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contatti · Prosopon</title>
-  <meta name="description" content="Contatta l'Accademia di Teatro Classico Prosopon. Sede a Roma. Iscriviti alla newsletter." />
+  <meta name="description" content="Contatta l'Accademia di Teatro Classico Prosopon. Sede a Roma, modulo di contatto e iscrizione alla newsletter Prosopon." />
+  <link rel="canonical" href="https://www.accademiaprosopon.it/contatti.html" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#0e0d0b" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:site_name" content="Accademia di Teatro Classico Prosopon" />
+  <meta property="og:title" content="Contatti · Prosopon" />
+  <meta property="og:description" content="Scrivici, vienici a trovare a Roma, iscriviti alla newsletter Prosopon." />
+  <meta property="og:url" content="https://www.accademiaprosopon.it/contatti.html" />
+  <meta property="og:image" content="https://www.accademiaprosopon.it/assets/home.webp" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contatti · Prosopon" />
+  <meta name="twitter:description" content="Scrivici, vienici a trovare a Roma, iscriviti alla newsletter Prosopon." />
+  <meta name="twitter:image" content="https://www.accademiaprosopon.it/assets/home.webp" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;500;600&display=swap" />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ============ NAVIGAZIONE ============ -->
-  <nav class="nav">
-    <div class="nav__contenitore">
-      <a href="index.html" class="nav__logo">
-        Prosopon
-        <span>Accademia di Teatro Classico</span>
-      </a>
-      <ul class="nav__menu" id="navMenu">
-        <li><a href="index.html" class="nav__link">Home</a></li>
-        <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
-        <li><a href="formazione.html" class="nav__link">Formazione</a></li>
-        <li><a href="docenti.html" class="nav__link">Docenti</a></li>
-        <li><a href="eventi.html" class="nav__link">Spettacoli & Eventi</a></li>
-        <li><a href="contatti.html" class="nav__link nav__link--attivo">Contatti</a></li>
-        <li><a href="iscrizioni.html" class="nav__cta">Iscrizioni</a></li>
-      </ul>
-      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+  <a href="#contenuto" class="skip-link">Vai al contenuto</a>
+
+  <!-- ============ HEADER + NAVIGAZIONE ============ -->
+  <header>
+    <nav class="nav" aria-label="Navigazione principale">
+      <div class="nav__contenitore">
+        <a href="index.html" class="nav__logo">
+          Prosopon
+          <span>Accademia di Teatro Classico</span>
+        </a>
+        <ul class="nav__menu" id="navMenu">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
+          <li><a href="formazione.html" class="nav__link">Formazione</a></li>
+          <li><a href="docenti.html" class="nav__link">Docenti</a></li>
+          <li><a href="eventi.html" class="nav__link">Spettacoli & Eventi</a></li>
+          <li><a href="contatti.html" class="nav__link nav__link--attivo" aria-current="page">Contatti</a></li>
+          <li><a href="iscrizioni.html" class="nav__cta">Iscrizioni</a></li>
+        </ul>
+        <button class="nav__hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false" aria-controls="navMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenuto">
 
   <!-- ============ HERO PAGINA ============ -->
   <section class="hero-pagina">
@@ -41,7 +71,7 @@
   </section>
 
   <!-- ============ CONTATTI + FORM ============ -->
-  <section class="sezione sezione--avorio">
+  <section class="sezione sezione--avorio" id="form-contatto">
     <div class="contenitore">
       <div class="griglia-2" style="gap:5rem; align-items:start;">
 
@@ -51,29 +81,48 @@
           <h2 style="margin:0.8rem 0 2rem; font-size:1.8rem;">Come raggiungerci</h2>
 
           <div style="margin-bottom:2rem;">
-            <p class="etichetta" style="color:var(--color-grigio);">Sede</p>
+            <p class="etichetta" style="color:var(--color-grigio);">Sede operativa</p>
             <p style="margin-top:0.4rem; font-size:1.05rem;">Roma, Italia<br>
-            <span style="font-style:italic; color:var(--color-grigio); font-size:0.95rem;">(indirizzo completo comunicato agli iscritti)</span></p>
+            <span style="font-style:italic; color:var(--color-grigio); font-size:0.95rem;">Indirizzo completo comunicato in fase di colloquio per audizioni e iscrizioni.</span></p>
+
+            <!-- Mappa placeholder — non si inventano coordinate.
+                 Auditor/utente: sostituire con embed Maps reale appena disponibile l'indirizzo. -->
+            <div role="img" aria-label="Mappa della sede in arrivo. Roma, Italia."
+                 style="margin-top:1rem; background:var(--color-avorio-scuro); border:1px solid rgba(184,150,90,0.25); padding:2rem 1.5rem; text-align:center; min-height:140px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.4rem;">
+              <span aria-hidden="true" style="font-size:1.6rem; color:var(--color-oro); line-height:1;">&#9737;</span>
+              <span style="font-family:var(--font-titolo); font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-grafite);">Roma · Italia</span>
+              <span style="font-size:0.85rem; font-style:italic; color:var(--color-grigio);">Mappa in arrivo</span>
+            </div>
           </div>
 
           <div style="margin-bottom:2rem;">
             <p class="etichetta" style="color:var(--color-grigio);">Email</p>
-            <p style="margin-top:0.4rem; font-size:1.05rem;">
-              <a href="mailto:puglisiandreasaverio@gmail.com" style="color:var(--color-oro-scuro);">puglisiandreasaverio@gmail.com</a>
+            <p style="margin-top:0.6rem; font-size:1rem;">
+              <span style="display:block; font-family:var(--font-titolo); font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--color-grigio); margin-bottom:0.15rem;">Direzione artistica</span>
+              <a href="mailto:puglisiandreasaverio@gmail.com">puglisiandreasaverio@gmail.com</a>
             </p>
+            <p style="margin-top:0.8rem; font-size:1rem;">
+              <span style="display:block; font-family:var(--font-titolo); font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--color-grigio); margin-bottom:0.15rem;">Segreteria</span>
+              <a href="mailto:info@accademiaprosopon.it">info@accademiaprosopon.it</a>
+            </p>
+            <!-- Nota UX: non si offusca volutamente l'email per non penalizzare
+                 l'usabilità (mailto: deve aprire il client di posta). Si fornisce
+                 invece un'identità istituzionale (info@accademiaprosopon.it,
+                 da configurare a livello DNS/MX) accanto all'email personale,
+                 così il visitatore percepisce un canale ufficiale. -->
           </div>
 
           <div style="margin-bottom:2rem;">
             <p class="etichetta" style="color:var(--color-grigio);">Telefono</p>
             <p style="margin-top:0.4rem; font-size:1.05rem;">
-              <a href="tel:+393480624140" style="color:var(--color-oro-scuro);">+39 348 062 4140</a>
+              <a href="tel:+393480624140" style="color:var(--color-oro-scuro); text-decoration:underline;">+39 348 062 4140</a>
             </p>
           </div>
 
           <div style="margin-bottom:2rem;">
             <p class="etichetta" style="color:var(--color-grigio);">Web</p>
             <p style="margin-top:0.4rem; font-size:1.05rem;">
-              <a href="https://www.andreapuglisi.com" target="_blank" style="color:var(--color-oro-scuro);">www.andreapuglisi.com</a>
+              <a href="https://www.andreapuglisi.com" target="_blank" rel="noopener noreferrer" style="color:var(--color-oro-scuro); text-decoration:underline;">www.andreapuglisi.com</a>
             </p>
           </div>
 
@@ -90,46 +139,72 @@
         <!-- Form contatto -->
         <div>
           <span class="etichetta">Scrivici</span>
-          <h2 style="margin:0.8rem 0 2rem; font-size:1.8rem;">Modulo di contatto</h2>
+          <h2 style="margin:0.8rem 0 0.8rem; font-size:1.8rem;">Modulo di contatto</h2>
+          <p style="margin-bottom:1.5rem; font-size:0.9rem; color:var(--color-grigio); font-style:italic;">Risposta entro 48 ore lavorative · I tuoi dati restano tuoi.</p>
 
-          <form onsubmit="inviaContatto(event)">
+          <form id="form-c"
+                action="https://formspree.io/f/REPLACE_WITH_YOUR_ID"
+                method="POST"
+                novalidate
+                aria-describedby="stato-contatto">
+            <input type="hidden" name="_subject" value="Nuovo messaggio dal sito Prosopon" />
+            <input type="hidden" name="_format" value="plain" />
+
             <div class="griglia-2" style="gap:2rem;">
               <div class="form-gruppo">
                 <label for="nome-c">Nome *</label>
-                <input type="text" id="nome-c" name="nome" placeholder="Il tuo nome" required />
+                <input type="text" id="nome-c" name="nome" placeholder="Il tuo nome" required autocomplete="given-name" aria-required="true" aria-describedby="err-nome-c" />
+                <span class="form-errore" id="err-nome-c" aria-live="polite"></span>
               </div>
               <div class="form-gruppo">
                 <label for="cognome-c">Cognome *</label>
-                <input type="text" id="cognome-c" name="cognome" placeholder="Il tuo cognome" required />
+                <input type="text" id="cognome-c" name="cognome" placeholder="Il tuo cognome" required autocomplete="family-name" aria-required="true" aria-describedby="err-cognome-c" />
+                <span class="form-errore" id="err-cognome-c" aria-live="polite"></span>
               </div>
             </div>
             <div class="form-gruppo">
               <label for="email-c">Email *</label>
-              <input type="email" id="email-c" name="email" placeholder="tua@email.com" required />
+              <input type="email" id="email-c" name="email" placeholder="tua@email.com" required autocomplete="email" aria-required="true" aria-describedby="err-email-c" />
+              <span class="form-errore" id="err-email-c" aria-live="polite"></span>
             </div>
             <div class="form-gruppo">
               <label for="oggetto-c">Oggetto *</label>
-              <select id="oggetto-c" name="oggetto" required>
+              <select id="oggetto-c" name="oggetto" required aria-required="true" aria-describedby="err-oggetto-c">
                 <option value="" disabled selected>Seleziona...</option>
                 <option value="info-triennale">Informazioni corso triennale</option>
                 <option value="info-serali">Informazioni corsi serali</option>
                 <option value="info-laboratori">Informazioni laboratori</option>
                 <option value="info-masterclass">Informazioni masterclass</option>
+                <option value="piano-triennale">Richiesta piano di studi triennale</option>
                 <option value="collaborazione">Proposta di collaborazione</option>
                 <option value="stampa">Stampa e media</option>
                 <option value="altro">Altro</option>
               </select>
+              <span class="form-errore" id="err-oggetto-c" aria-live="polite"></span>
             </div>
             <div class="form-gruppo">
               <label for="messaggio-c">Messaggio *</label>
-              <textarea id="messaggio-c" name="messaggio" rows="5" placeholder="Scrivi qui il tuo messaggio..." required></textarea>
+              <textarea id="messaggio-c" name="messaggio" rows="5" placeholder="Scrivi qui il tuo messaggio..." required aria-required="true" aria-describedby="err-messaggio-c"></textarea>
+              <span class="form-errore" id="err-messaggio-c" aria-live="polite"></span>
             </div>
-            <div style="margin-top:1.5rem;">
-              <button type="submit" class="btn btn--oro">Invia il messaggio</button>
+
+            <div class="form-gruppo" style="margin-top:0.5rem;">
+              <label style="display:flex; align-items:flex-start; gap:0.8rem; cursor:pointer; font-family:var(--font-corpo); font-size:0.9rem; text-transform:none; letter-spacing:0; color:var(--color-grafite);">
+                <input type="checkbox" id="privacy-c" name="consenso_privacy" required style="margin-top:3px; flex-shrink:0; accent-color:var(--color-oro);" />
+                <span>Ho letto l'<a href="privacy.html" target="_blank" rel="noopener" style="color:var(--color-link); text-decoration:underline;">informativa privacy</a> e acconsento al trattamento dei miei dati per rispondere alla mia richiesta. *</span>
+              </label>
             </div>
-            <div id="conferma-contatto" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(184,150,90,0.1); border-left:3px solid var(--color-oro);">
-              <p>Messaggio inviato. Ti risponderemo entro 48 ore lavorative.</p>
+
+            <div style="margin-top:1.5rem; display:flex; flex-wrap:wrap; align-items:center; gap:1.5rem;">
+              <button type="submit" class="btn btn--oro" id="btn-c">Invia il messaggio</button>
+              <p class="form-reassurance">
+                <span class="form-reassurance__riga"><span class="form-reassurance__icona" aria-hidden="true">&#10003;</span>Risposta entro 48h</span>
+                <span class="form-reassurance__riga"><span class="form-reassurance__icona" aria-hidden="true">&#10003;</span>Niente spam</span>
+                <span class="form-reassurance__riga"><span class="form-reassurance__icona" aria-hidden="true">&#10003;</span>I tuoi dati restano tuoi</span>
+              </p>
             </div>
+
+            <div id="stato-contatto" class="form-stato" role="status" aria-live="polite" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(184,150,90,0.1); border-left:3px solid var(--color-oro);"></div>
           </form>
         </div>
 
@@ -146,32 +221,48 @@
         <p>Iscriviti per ricevere aggiornamenti su spettacoli, audizioni, open day, nuovi corsi e masterclass. Niente spam: solo ciò che conta.</p>
       </div>
 
-      <form onsubmit="inviaNewsletter(event)" style="max-width:500px; margin:0 auto;" class="form--chiaro">
+      <form id="form-nl"
+            action="https://formspree.io/f/REPLACE_WITH_YOUR_ID"
+            method="POST"
+            novalidate
+            class="form--chiaro"
+            style="max-width:500px; margin:0 auto;"
+            aria-describedby="stato-newsletter">
+        <input type="hidden" name="_subject" value="Nuova iscrizione newsletter Prosopon" />
+        <input type="hidden" name="_format" value="plain" />
+
         <div class="griglia-2" style="gap:1.5rem;">
           <div class="form-gruppo">
             <label for="nome-nl">Nome *</label>
-            <input type="text" id="nome-nl" name="nome" placeholder="Il tuo nome" required />
+            <input type="text" id="nome-nl" name="nome" placeholder="Il tuo nome" required autocomplete="given-name" aria-required="true" aria-describedby="err-nome-nl" />
+            <span class="form-errore" id="err-nome-nl" aria-live="polite"></span>
           </div>
           <div class="form-gruppo">
             <label for="email-nl">Email *</label>
-            <input type="email" id="email-nl" name="email" placeholder="tua@email.com" required />
+            <input type="email" id="email-nl" name="email" placeholder="tua@email.com" required autocomplete="email" aria-required="true" aria-describedby="err-email-nl" />
+            <span class="form-errore" id="err-email-nl" aria-live="polite"></span>
           </div>
         </div>
         <div class="form-gruppo" style="margin-top:0.5rem;">
           <label style="display:flex; align-items:flex-start; gap:0.8rem; cursor:pointer; font-family:var(--font-corpo); font-size:0.9rem; text-transform:none; letter-spacing:0; color:rgba(197,189,180,0.8);">
-            <input type="checkbox" required style="margin-top:3px; flex-shrink:0; accent-color:var(--color-oro);" />
-            Acconsento al trattamento dei dati personali per l'invio della newsletter.
+            <input type="checkbox" id="privacy-nl" name="consenso_privacy" required style="margin-top:3px; flex-shrink:0; accent-color:var(--color-oro);" />
+            <span>Ho letto l'<a href="privacy.html" target="_blank" rel="noopener" style="color:var(--color-oro-chiaro); text-decoration:underline;">informativa privacy</a> e acconsento al trattamento dei dati personali per l'invio della newsletter. *</span>
           </label>
         </div>
-        <div style="margin-top:1.5rem;">
-          <button type="submit" class="btn btn--oro">Iscriviti alla newsletter</button>
+        <div style="margin-top:1.5rem; display:flex; flex-wrap:wrap; align-items:center; gap:1.2rem; justify-content:center;">
+          <button type="submit" class="btn btn--oro" id="btn-nl">Iscriviti alla newsletter</button>
+          <p class="form-reassurance form-reassurance--scura" style="text-align:center;">
+            <span class="form-reassurance__riga"><span class="form-reassurance__icona" aria-hidden="true">&#10003;</span>Solo aggiornamenti utili</span>
+            <span class="form-reassurance__riga"><span class="form-reassurance__icona" aria-hidden="true">&#10003;</span>Disiscrizione in un click</span>
+          </p>
         </div>
-        <div id="conferma-newsletter" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(184,150,90,0.15); border-left:3px solid var(--color-oro);">
-          <p style="color:var(--color-avorio);">Iscrizione completata. Bentornato/a nel mondo di Prosopon.</p>
-        </div>
+
+        <div id="stato-newsletter" class="form-stato" role="status" aria-live="polite" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(184,150,90,0.15); border-left:3px solid var(--color-oro); color:var(--color-avorio);"></div>
       </form>
     </div>
   </section>
+
+  </main>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
@@ -180,6 +271,7 @@
         <div>
           <div class="footer__logo">Prosopon<span>Accademia di Teatro Classico</span></div>
           <p>Centro di Teatro Classico e Arti Performative.<br>Direttore artistico: Andrea Saverio Puglisi.<br>Roma, dal 2025.</p>
+          <p style="margin-top:0.8rem; font-size:0.9rem;"><a href="mailto:info@accademiaprosopon.it" style="color:var(--color-oro); text-decoration:underline; text-underline-offset:3px;">info@accademiaprosopon.it</a></p>
         </div>
         <div>
           <p class="footer__titolo">Navigazione</p>
@@ -210,7 +302,7 @@
       </div>
       <div class="footer__bottom">
         <p>© 2025 Accademia di Teatro Classico Prosopon. Tutti i diritti riservati.</p>
-        <p style="font-style:italic; font-size:0.8rem; color:var(--color-grigio);">Roma, Italia</p>
+        <p class="footer__legale"><a href="privacy.html">Privacy</a> · <a href="cookie.html">Cookie</a> · <span style="font-style:italic;">Roma, Italia</span></p>
       </div>
     </div>
   </footer>
@@ -218,21 +310,108 @@
   <script>
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
-    hamburger.addEventListener('click', () => navMenu.classList.toggle('aperto'));
+    hamburger.addEventListener('click', () => {
+      const aperto = navMenu.classList.toggle('aperto');
+      hamburger.setAttribute('aria-expanded', String(aperto));
+      hamburger.setAttribute('aria-label', aperto ? 'Chiudi menu' : 'Apri menu');
+    });
 
-    function inviaContatto(e) {
-      e.preventDefault();
-      document.getElementById('conferma-contatto').style.display = 'block';
-      e.target.reset();
-      e.target.querySelector('button').disabled = true;
+    // Messaggi di errore in voce di brand (UX): chiari, asciutti, mai burocratici.
+    // Mappati per nome campo; fallback generico se il name non è registrato.
+    const MSG_VUOTO = {
+      nome:        'Manca il nome — chi sei?',
+      cognome:     'E il cognome? Anche quello, per favore.',
+      email:       'Senza email non possiamo risponderti.',
+      oggetto:     'Scegli di che cosa vuoi parlarci.',
+      messaggio:   'Per parlarci serve almeno una motivazione.',
+    };
+    const MSG_EMAIL_INVALIDA = "Quest'email sembra incompleta. Riprova.";
+
+    function validaCampo(input, msgId, regola) {
+      const errorEl = document.getElementById(msgId);
+      const valore = (input.value || '').trim();
+      let messaggio = '';
+      if (input.required && !valore) {
+        messaggio = MSG_VUOTO[input.name] || 'Questo campo serve davvero. Riprova.';
+      } else if (regola === 'email' && valore && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valore)) {
+        messaggio = MSG_EMAIL_INVALIDA;
+      }
+      if (errorEl) errorEl.textContent = messaggio;
+      input.setAttribute('aria-invalid', messaggio ? 'true' : 'false');
+      return !messaggio;
     }
 
-    function inviaNewsletter(e) {
-      e.preventDefault();
-      document.getElementById('conferma-newsletter').style.display = 'block';
-      e.target.reset();
-      e.target.querySelector('button').disabled = true;
+    function gestisciForm(formId, statoId, btnId, etichettaSuccesso) {
+      const form = document.getElementById(formId);
+      if (!form) return;
+      const stato = document.getElementById(statoId);
+      const btn = document.getElementById(btnId);
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const campiObbligatori = form.querySelectorAll('[required]');
+        let tuttoOk = true;
+        campiObbligatori.forEach(c => {
+          if (c.type === 'checkbox') {
+            if (!c.checked) tuttoOk = false;
+            return;
+          }
+          const errId = c.getAttribute('aria-describedby');
+          const regola = c.type === 'email' ? 'email' : null;
+          if (errId && !validaCampo(c, errId, regola)) tuttoOk = false;
+        });
+
+        if (!tuttoOk) {
+          stato.style.display = 'block';
+          stato.textContent = 'Manca qualcosa: controlla i campi segnalati e riprova.';
+          return;
+        }
+
+        stato.style.display = 'block';
+        stato.textContent = 'Stiamo facendo partire il messaggio…';
+        btn.disabled = true;
+
+        try {
+          const data = new FormData(form);
+          const resp = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+          if (resp.ok) {
+            stato.textContent = etichettaSuccesso;
+            form.reset();
+          } else {
+            const errData = await resp.json().catch(() => ({}));
+            stato.textContent = (errData && errData.error)
+              ? 'Qualcosa non ha funzionato: ' + errData.error
+              : 'Il messaggio non è partito. Riprova più tardi, oppure scrivici direttamente via email.';
+            btn.disabled = false;
+          }
+        } catch (err) {
+          stato.textContent = 'La rete fa le bizze. Controlla la connessione e riprova fra un istante.';
+          btn.disabled = false;
+        }
+      });
     }
+
+    gestisciForm('form-c', 'stato-contatto', 'btn-c',
+      'Grazie. Il tuo messaggio è arrivato — ti rispondiamo entro 48 ore lavorative.');
+    gestisciForm('form-nl', 'stato-newsletter', 'btn-nl',
+      'Fatto. Il tuo nome è ora tra le voci di Prosopon — benvenuto/a.');
+
+    // Pre-compilazione oggetto contatto se proviene da formazione (?richiesta=piano-triennale)
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const r = params.get('richiesta');
+      if (r) {
+        const sel = document.getElementById('oggetto-c');
+        if (sel) {
+          const opt = Array.from(sel.options).find(o => o.value === r);
+          if (opt) sel.value = r;
+        }
+      }
+    })();
   </script>
 </body>
 </html>

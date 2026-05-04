@@ -4,7 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Spettacoli & Eventi · Prosopon</title>
-  <meta name="description" content="Il calendario di spettacoli, audizioni, open day e masterclass dell'Accademia di Teatro Classico Prosopon." />
+  <meta name="description" content="Calendario di spettacoli, audizioni, open day, laboratori e masterclass dell'Accademia di Teatro Classico Prosopon, anno 2025–2026." />
+  <link rel="canonical" href="https://www.accademiaprosopon.it/eventi.html" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#0e0d0b" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:site_name" content="Accademia di Teatro Classico Prosopon" />
+  <meta property="og:title" content="Spettacoli & Eventi · Prosopon" />
+  <meta property="og:description" content="Spettacoli, audizioni, open day, laboratori e masterclass." />
+  <meta property="og:url" content="https://www.accademiaprosopon.it/eventi.html" />
+  <meta property="og:image" content="https://www.accademiaprosopon.it/assets/home.webp" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Spettacoli & Eventi · Prosopon" />
+  <meta name="twitter:description" content="Spettacoli, audizioni, open day, laboratori e masterclass." />
+  <meta name="twitter:image" content="https://www.accademiaprosopon.it/assets/home.webp" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;500;600&display=swap" />
+
   <link rel="stylesheet" href="style.css" />
   <style>
     .filtri {
@@ -48,9 +72,7 @@
       z-index: 1;
       position: relative;
     }
-    .evento-data {
-      text-align: center;
-    }
+    .evento-data { text-align: center; }
     .evento-data__giorno {
       font-family: var(--font-titolo);
       font-size: 2rem;
@@ -81,9 +103,34 @@
     }
     .tipo-spettacolo { color: var(--color-rosso); border-color: var(--color-rosso); }
     .tipo-audizione  { color: var(--color-oro-scuro); border-color: var(--color-oro); }
-    .tipo-openday   { color: #2a6b4a; border-color: #2a6b4a; }
-    .tipo-masterclass { color: var(--color-grafite); border-color: var(--color-grafite); }
-    .tipo-laboratorio { color: #3a5a8a; border-color: #3a5a8a; }
+    .tipo-openday    { color: #2a6b4a; border-color: #2a6b4a; }
+    .tipo-masterclass{ color: var(--color-grafite); border-color: var(--color-grafite); }
+    .tipo-laboratorio{ color: #3a5a8a; border-color: #3a5a8a; }
+
+    /* Badge "PROSSIMO EVENTO" sulla card più imminente.
+       L'allineamento e la palette riprendono la classe .evento-card--prossimo
+       definita in style.css; qui rinforziamo il contesto locale e cambiamo
+       il testo del badge in "Prossimo evento" (più leggibile a colpo d'occhio). */
+    .evento-imminente {
+      position: relative;
+      border-left-color: var(--color-oro) !important;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      background: linear-gradient(to right, rgba(184,150,90,0.05), var(--color-avorio) 25%);
+    }
+    .evento-imminente::after {
+      content: 'Prossimo evento';
+      position: absolute;
+      top: 0.6rem; right: 0.8rem;
+      font-family: var(--font-titolo);
+      font-size: 0.55rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-nero);
+      background: var(--color-oro);
+      padding: 0.28rem 0.7rem;
+      font-weight: 500;
+      line-height: 1;
+    }
 
     @media(max-width:768px) {
       .evento-item { grid-template-columns: 70px 1fr; }
@@ -93,27 +140,33 @@
 </head>
 <body>
 
-  <!-- ============ NAVIGAZIONE ============ -->
-  <nav class="nav">
-    <div class="nav__contenitore">
-      <a href="index.html" class="nav__logo">
-        Prosopon
-        <span>Accademia di Teatro Classico</span>
-      </a>
-      <ul class="nav__menu" id="navMenu">
-        <li><a href="index.html" class="nav__link">Home</a></li>
-        <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
-        <li><a href="formazione.html" class="nav__link">Formazione</a></li>
-        <li><a href="docenti.html" class="nav__link">Docenti</a></li>
-        <li><a href="eventi.html" class="nav__link nav__link--attivo">Spettacoli & Eventi</a></li>
-        <li><a href="contatti.html" class="nav__link">Contatti</a></li>
-        <li><a href="iscrizioni.html" class="nav__cta">Iscrizioni</a></li>
-      </ul>
-      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+  <a href="#contenuto" class="skip-link">Vai al contenuto</a>
+
+  <!-- ============ HEADER + NAVIGAZIONE ============ -->
+  <header>
+    <nav class="nav" aria-label="Navigazione principale">
+      <div class="nav__contenitore">
+        <a href="index.html" class="nav__logo">
+          Prosopon
+          <span>Accademia di Teatro Classico</span>
+        </a>
+        <ul class="nav__menu" id="navMenu">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
+          <li><a href="formazione.html" class="nav__link">Formazione</a></li>
+          <li><a href="docenti.html" class="nav__link">Docenti</a></li>
+          <li><a href="eventi.html" class="nav__link nav__link--attivo" aria-current="page">Spettacoli & Eventi</a></li>
+          <li><a href="contatti.html" class="nav__link">Contatti</a></li>
+          <li><a href="iscrizioni.html" class="nav__cta">Iscrizioni</a></li>
+        </ul>
+        <button class="nav__hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false" aria-controls="navMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenuto">
 
   <!-- ============ HERO PAGINA ============ -->
   <section class="hero-pagina">
@@ -128,18 +181,18 @@
   <section class="sezione sezione--avorio">
     <div class="contenitore">
 
-      <div class="filtri" id="filtri">
-        <button class="filtro-btn attivo" data-filtro="tutti">Tutti</button>
-        <button class="filtro-btn" data-filtro="spettacolo">Spettacoli</button>
-        <button class="filtro-btn" data-filtro="audizione">Audizioni</button>
-        <button class="filtro-btn" data-filtro="openday">Open Day</button>
-        <button class="filtro-btn" data-filtro="masterclass">Masterclass</button>
-        <button class="filtro-btn" data-filtro="laboratorio">Laboratori</button>
+      <div class="filtri" id="filtri" role="group" aria-label="Filtra per tipo di evento">
+        <button class="filtro-btn attivo" data-filtro="tutti" aria-pressed="true">Tutti</button>
+        <button class="filtro-btn" data-filtro="spettacolo" aria-pressed="false">Spettacoli</button>
+        <button class="filtro-btn" data-filtro="audizione" aria-pressed="false">Audizioni</button>
+        <button class="filtro-btn" data-filtro="openday" aria-pressed="false">Open Day</button>
+        <button class="filtro-btn" data-filtro="masterclass" aria-pressed="false">Masterclass</button>
+        <button class="filtro-btn" data-filtro="laboratorio" aria-pressed="false">Laboratori</button>
       </div>
 
       <div class="evento-lista" id="eventoLista">
 
-        <div class="evento-item" data-tipo="openday">
+        <article class="evento-item evento-imminente" data-tipo="openday">
           <div class="evento-data">
             <div class="evento-data__giorno">15</div>
             <div class="evento-data__mese">Maggio 2025</div>
@@ -150,9 +203,9 @@
             <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">Roma · ore 17:00</p>
           </div>
           <span class="evento-tipo tipo-openday">Open Day</span>
-        </div>
+        </article>
 
-        <div class="evento-item" data-tipo="audizione">
+        <article class="evento-item" data-tipo="audizione">
           <div class="evento-data">
             <div class="evento-data__giorno">07</div>
             <div class="evento-data__mese">Giugno 2025</div>
@@ -163,9 +216,9 @@
             <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">Roma · su prenotazione</p>
           </div>
           <span class="evento-tipo tipo-audizione">Audizione</span>
-        </div>
+        </article>
 
-        <div class="evento-item" data-tipo="laboratorio">
+        <article class="evento-item" data-tipo="laboratorio">
           <div class="evento-data">
             <div class="evento-data__giorno">14</div>
             <div class="evento-data__mese">Luglio 2025</div>
@@ -176,65 +229,76 @@
             <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">Roma · 14–25 Luglio</p>
           </div>
           <span class="evento-tipo tipo-laboratorio">Laboratorio</span>
-        </div>
+        </article>
 
-        <div class="evento-item" data-tipo="masterclass">
+        <article class="evento-item" data-tipo="masterclass">
           <div class="evento-data">
-            <div class="evento-data__giorno">—</div>
+            <div class="evento-data__giorno" aria-hidden="true">&middot;</div>
             <div class="evento-data__mese">Autunno 2025</div>
           </div>
           <div class="evento-info">
-            <h3>Masterclass — In programma</h3>
-            <p>Ospite da annunciare. Masterclass aperta a studenti e professionisti. Iscriviti alla newsletter per aggiornamenti.</p>
-            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">Data e luogo da confermare</p>
+            <h3>Masterclass &mdash; In programmazione</h3>
+            <p>Ospite e date in definizione. Masterclass aperta a studenti del triennio e professionisti.</p>
+            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">
+              <a href="contatti.html#newsletter">Avvisami quando esce</a>
+            </p>
           </div>
           <span class="evento-tipo tipo-masterclass">Masterclass</span>
-        </div>
+        </article>
 
-        <div class="evento-item" data-tipo="spettacolo">
+        <article class="evento-item" data-tipo="spettacolo">
           <div class="evento-data">
-            <div class="evento-data__giorno">—</div>
+            <div class="evento-data__giorno" aria-hidden="true">&middot;</div>
             <div class="evento-data__mese">Dicembre 2025</div>
           </div>
           <div class="evento-info">
             <h3>Saggio di Fine Semestre</h3>
-            <p>Prima pubblica dei lavori degli studenti del corso triennale. Ingresso su invito.</p>
-            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">Roma · data da confermare</p>
+            <p>Prima pubblica dei lavori degli studenti del corso triennale. Ingresso su invito. Data in definizione.</p>
+            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">
+              <a href="contatti.html#newsletter">Avvisami quando esce</a>
+            </p>
           </div>
           <span class="evento-tipo tipo-spettacolo">Spettacolo</span>
-        </div>
+        </article>
 
-        <div class="evento-item" data-tipo="audizione">
+        <article class="evento-item" data-tipo="audizione">
           <div class="evento-data">
-            <div class="evento-data__giorno">—</div>
+            <div class="evento-data__giorno" aria-hidden="true">&middot;</div>
             <div class="evento-data__mese">Febbraio 2026</div>
           </div>
           <div class="evento-info">
-            <h3>Audizioni Straordinarie — Corso Triennale</h3>
-            <p>Sessione straordinaria per i candidati che non hanno partecipato alle audizioni di giugno.</p>
-            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">Roma · su prenotazione</p>
+            <h3>Audizioni Straordinarie &mdash; Corso Triennale</h3>
+            <p>Sessione straordinaria per chi non ha partecipato alle audizioni di giugno. Data esatta in definizione.</p>
+            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">
+              <a href="contatti.html#newsletter">Avvisami quando esce</a>
+            </p>
           </div>
           <span class="evento-tipo tipo-audizione">Audizione</span>
-        </div>
+        </article>
 
-        <div class="evento-item" data-tipo="spettacolo">
+        <article class="evento-item" data-tipo="spettacolo">
           <div class="evento-data">
-            <div class="evento-data__giorno">—</div>
+            <div class="evento-data__giorno" aria-hidden="true">&middot;</div>
             <div class="evento-data__mese">Maggio 2026</div>
           </div>
           <div class="evento-info">
             <h3>Spettacolo di Fine Anno Accademico</h3>
-            <p>Produzione finale degli studenti del triennio. Testo e drammaturgia da annunciare. Ingresso aperto al pubblico.</p>
-            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">Roma · data da confermare</p>
+            <p>Produzione finale degli studenti del triennio. Testo, regia e date in definizione. Ingresso aperto al pubblico.</p>
+            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">
+              <a href="contatti.html#newsletter">Avvisami quando esce</a>
+            </p>
           </div>
           <span class="evento-tipo tipo-spettacolo">Spettacolo</span>
-        </div>
+        </article>
 
       </div>
 
-      <!-- Avviso nessun evento -->
-      <div id="nessunoEvento" style="display:none; text-align:center; padding:4rem 0; color:var(--color-grigio);">
-        <p style="font-style:italic;">Nessun evento in questa categoria al momento.</p>
+      <!-- Avviso nessun evento (stato vuoto, voce di brand) -->
+      <div id="nessunoEvento" role="status" aria-live="polite" style="display:none; text-align:center; padding:4rem 0;">
+        <p style="font-style:italic; font-size:1.15rem; color:var(--color-grafite);">Il sipario non si è ancora alzato su questa categoria.</p>
+        <p style="margin-top:0.6rem; font-size:0.95rem; color:var(--color-grigio);">
+          <a href="contatti.html#newsletter">Iscriviti alla newsletter</a> per non perderti il prossimo annuncio.
+        </p>
       </div>
 
     </div>
@@ -244,12 +308,15 @@
   <section style="background:var(--color-grafite); padding:4rem 0; border-top:1px solid rgba(184,150,90,0.15);">
     <div class="contenitore" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:2rem;">
       <div>
-        <span class="etichetta" style="display:block; margin-bottom:0.5rem;">Non perdere nessun appuntamento</span>
-        <h3 style="color:var(--color-avorio);">Iscriviti alla newsletter</h3>
+        <span class="etichetta" style="display:block; margin-bottom:0.5rem;">Lista d'attesa &amp; notifiche</span>
+        <h2 style="color:var(--color-avorio); font-size:1.4rem;">Vuoi essere il primo a saperlo?</h2>
+        <p style="color:var(--color-avorio-scuro); margin-top:0.4rem; font-size:0.95rem; max-width:520px;">Date, ospiti, posti disponibili: gli annunci passano prima dalla newsletter di Prosopon.</p>
       </div>
-      <a href="contatti.html#newsletter" class="btn btn--oro">Iscriviti ora</a>
+      <a href="contatti.html#newsletter" class="btn btn--oro">Iscriviti alla newsletter</a>
     </div>
   </section>
+
+  </main>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
@@ -258,6 +325,7 @@
         <div>
           <div class="footer__logo">Prosopon<span>Accademia di Teatro Classico</span></div>
           <p>Centro di Teatro Classico e Arti Performative.<br>Direttore artistico: Andrea Saverio Puglisi.<br>Roma, dal 2025.</p>
+          <p style="margin-top:0.8rem; font-size:0.9rem;"><a href="mailto:info@accademiaprosopon.it" style="color:var(--color-oro); text-decoration:underline; text-underline-offset:3px;">info@accademiaprosopon.it</a></p>
         </div>
         <div>
           <p class="footer__titolo">Navigazione</p>
@@ -288,7 +356,7 @@
       </div>
       <div class="footer__bottom">
         <p>© 2025 Accademia di Teatro Classico Prosopon. Tutti i diritti riservati.</p>
-        <p style="font-style:italic; font-size:0.8rem; color:var(--color-grigio);">Roma, Italia</p>
+        <p class="footer__legale"><a href="privacy.html">Privacy</a> · <a href="cookie.html">Cookie</a> · <span style="font-style:italic;">Roma, Italia</span></p>
       </div>
     </div>
   </footer>
@@ -296,13 +364,21 @@
   <script>
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
-    hamburger.addEventListener('click', () => navMenu.classList.toggle('aperto'));
+    hamburger.addEventListener('click', () => {
+      const aperto = navMenu.classList.toggle('aperto');
+      hamburger.setAttribute('aria-expanded', String(aperto));
+      hamburger.setAttribute('aria-label', aperto ? 'Chiudi menu' : 'Apri menu');
+    });
 
     // Filtri eventi
     document.querySelectorAll('.filtro-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('attivo'));
+        document.querySelectorAll('.filtro-btn').forEach(b => {
+          b.classList.remove('attivo');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('attivo');
+        btn.setAttribute('aria-pressed', 'true');
         const filtro = btn.dataset.filtro;
         const eventi = document.querySelectorAll('.evento-item');
         let visibili = 0;

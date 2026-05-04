@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" fill="#0e0d0b"/>
+  <text x="50%" y="50%"
+        text-anchor="middle"
+        dominant-baseline="central"
+        font-family="'Cinzel', 'Times New Roman', serif"
+        font-size="44"
+        font-weight="500"
+        fill="#b8965a"
+        letter-spacing="0">Π</text>
+</svg>

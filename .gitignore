@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node / build
+node_modules/
+dist/
+build/
+
+# File sorgenti interni Apple Pages (non pubblicare)
+*.pages
+
+# Log
+*.log
+npm-debug.log*
+
+# Temporanei
+*.tmp
+*.bak

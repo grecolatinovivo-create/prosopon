@@ -4,7 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Audizioni & Iscrizioni · Prosopon</title>
-  <meta name="description" content="Come candidarsi al corso triennale e iscriversi ai corsi serali e laboratori dell'Accademia di Teatro Classico Prosopon." />
+  <meta name="description" content="Come candidarsi al corso triennale e iscriversi a corsi serali e laboratori dell'Accademia Prosopon. Tutte le info su audizioni, percorso e FAQ." />
+  <link rel="canonical" href="https://www.accademiaprosopon.it/iscrizioni.html" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#0e0d0b" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:site_name" content="Accademia di Teatro Classico Prosopon" />
+  <meta property="og:title" content="Audizioni & Iscrizioni · Prosopon" />
+  <meta property="og:description" content="Come candidarsi al corso triennale e iscriversi a corsi serali e laboratori." />
+  <meta property="og:url" content="https://www.accademiaprosopon.it/iscrizioni.html" />
+  <meta property="og:image" content="https://www.accademiaprosopon.it/assets/home.webp" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Audizioni & Iscrizioni · Prosopon" />
+  <meta name="twitter:description" content="Come candidarsi al corso triennale e iscriversi a corsi serali e laboratori." />
+  <meta name="twitter:image" content="https://www.accademiaprosopon.it/assets/home.webp" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;500;600&display=swap" />
+
   <link rel="stylesheet" href="style.css" />
   <style>
     .percorso-step {
@@ -23,36 +47,46 @@
       color: var(--color-oro);
       flex-shrink: 0;
     }
-    .percorso-step__contenuto h4 {
+    .percorso-step__contenuto h3 {
       margin-bottom: 0.5rem;
       font-size: 1rem;
     }
     .percorso-step__contenuto p { font-size: 1rem; }
+
+    .faq-domanda[aria-expanded="true"] .faq-icona {
+      transform: rotate(45deg);
+    }
   </style>
 </head>
 <body>
 
-  <!-- ============ NAVIGAZIONE ============ -->
-  <nav class="nav">
-    <div class="nav__contenitore">
-      <a href="index.html" class="nav__logo">
-        Prosopon
-        <span>Accademia di Teatro Classico</span>
-      </a>
-      <ul class="nav__menu" id="navMenu">
-        <li><a href="index.html" class="nav__link">Home</a></li>
-        <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
-        <li><a href="formazione.html" class="nav__link">Formazione</a></li>
-        <li><a href="docenti.html" class="nav__link">Docenti</a></li>
-        <li><a href="eventi.html" class="nav__link">Spettacoli & Eventi</a></li>
-        <li><a href="contatti.html" class="nav__link">Contatti</a></li>
-        <li><a href="iscrizioni.html" class="nav__cta nav__link--attivo">Iscrizioni</a></li>
-      </ul>
-      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+  <a href="#contenuto" class="skip-link">Vai al contenuto</a>
+
+  <!-- ============ HEADER + NAVIGAZIONE ============ -->
+  <header>
+    <nav class="nav" aria-label="Navigazione principale">
+      <div class="nav__contenitore">
+        <a href="index.html" class="nav__logo">
+          Prosopon
+          <span>Accademia di Teatro Classico</span>
+        </a>
+        <ul class="nav__menu" id="navMenu">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
+          <li><a href="formazione.html" class="nav__link">Formazione</a></li>
+          <li><a href="docenti.html" class="nav__link">Docenti</a></li>
+          <li><a href="eventi.html" class="nav__link">Spettacoli & Eventi</a></li>
+          <li><a href="contatti.html" class="nav__link">Contatti</a></li>
+          <li><a href="iscrizioni.html" class="nav__cta nav__link--attivo" aria-current="page">Iscrizioni</a></li>
+        </ul>
+        <button class="nav__hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false" aria-controls="navMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenuto">
 
   <!-- ============ HERO PAGINA ============ -->
   <section class="hero-pagina">
@@ -63,83 +97,93 @@
     </div>
   </section>
 
+  <!-- ============ BANDA SCARCITY ETICO ============ -->
+  <aside class="banda-scarcity" role="note" aria-label="Avviso anno accademico">
+    <div class="contenitore" style="display:flex; align-items:center; justify-content:center; gap:0.9rem; flex-wrap:wrap; text-align:center;">
+      <span aria-hidden="true" style="display:inline-block; width:8px; height:8px; background:var(--color-oro); border-radius:50%;"></span>
+      <span style="font-family:var(--font-titolo); font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-avorio);">
+        Audizioni in apertura &middot; Anno Accademico 2025&ndash;2026
+      </span>
+    </div>
+  </aside>
+
   <!-- ============ DUE PERCORSI ============ -->
   <section class="sezione sezione--avorio">
     <div class="contenitore">
       <div class="griglia-2" style="gap:3rem; align-items:start;">
 
         <!-- TRIENNALE -->
-        <div style="background:var(--color-avorio-scuro); padding:3rem;">
+        <article style="background:var(--color-avorio-scuro); padding:3rem;">
           <span class="etichetta">Corso triennale accademico</span>
           <h2 style="margin:0.8rem 0 1.5rem; font-size:1.8rem;">Candidatura tramite audizione</h2>
           <p>L'accesso al corso triennale avviene tramite <strong>audizione e selezione</strong>. Il processo di selezione valuta le capacità espressive, la voce, la presenza corporea e la motivazione del candidato. Non è richiesta una formazione teatrale specifica, ma una genuina vocazione artistica.</p>
 
           <div style="margin:2rem 0;">
             <div class="percorso-step">
-              <div class="percorso-step__numero">01</div>
+              <div class="percorso-step__numero" aria-hidden="true">01</div>
               <div class="percorso-step__contenuto">
-                <h4>Invia la pre-candidatura</h4>
+                <h3>Invia la pre-candidatura</h3>
                 <p>Compila il modulo qui sotto con i tuoi dati e una breve presentazione della tua motivazione. Allega eventuale curriculum artistico.</p>
               </div>
             </div>
             <div class="percorso-step">
-              <div class="percorso-step__numero">02</div>
+              <div class="percorso-step__numero" aria-hidden="true">02</div>
               <div class="percorso-step__contenuto">
-                <h4>Convocazione all'audizione</h4>
+                <h3>Convocazione all'audizione</h3>
                 <p>La segreteria ti contatterà per fissare la data dell'audizione. Le audizioni si svolgono individualmente o in piccoli gruppi.</p>
               </div>
             </div>
             <div class="percorso-step">
-              <div class="percorso-step__numero">03</div>
+              <div class="percorso-step__numero" aria-hidden="true">03</div>
               <div class="percorso-step__contenuto">
-                <h4>L'audizione</h4>
+                <h3>L'audizione</h3>
                 <p>Un incontro con il direttore artistico e parte del corpo docente. Ti verrà chiesto di presentare un monologo a scelta e di partecipare a esercizi di gruppo.</p>
               </div>
             </div>
             <div class="percorso-step">
-              <div class="percorso-step__numero">04</div>
+              <div class="percorso-step__numero" aria-hidden="true">04</div>
               <div class="percorso-step__contenuto">
-                <h4>Esito e iscrizione</h4>
+                <h3>Esito e iscrizione</h3>
                 <p>Riceverai l'esito entro 7 giorni. In caso positivo, procederai con l'iscrizione ufficiale all'anno accademico.</p>
               </div>
             </div>
           </div>
 
           <a href="#form-audizione" class="btn btn--oro">Candidati al triennio</a>
-        </div>
+        </article>
 
         <!-- CORSI SERALI / LABORATORI -->
-        <div style="background:var(--color-avorio); padding:3rem; border:1px solid rgba(184,150,90,0.2);">
+        <article style="background:var(--color-avorio); padding:3rem; border:1px solid rgba(184,150,90,0.2);">
           <span class="etichetta">Corsi serali & laboratori</span>
           <h2 style="margin:0.8rem 0 1.5rem; font-size:1.8rem;">Iscrizione diretta online</h2>
           <p>I corsi serali per adulti e i laboratori intensivi sono accessibili tramite <strong>iscrizione diretta</strong>, senza selezione preventiva. I posti sono limitati e vengono assegnati in ordine di iscrizione.</p>
 
           <div style="margin:2rem 0;">
             <div class="percorso-step">
-              <div class="percorso-step__numero">01</div>
+              <div class="percorso-step__numero" aria-hidden="true">01</div>
               <div class="percorso-step__contenuto">
-                <h4>Scegli il corso o il laboratorio</h4>
+                <h3>Scegli il corso o il laboratorio</h3>
                 <p>Consulta l'offerta formativa nella sezione <a href="formazione.html#serali" style="color:var(--color-oro-scuro); text-decoration:underline;">Formazione</a> e identifica il percorso che fa per te.</p>
               </div>
             </div>
             <div class="percorso-step">
-              <div class="percorso-step__numero">02</div>
+              <div class="percorso-step__numero" aria-hidden="true">02</div>
               <div class="percorso-step__contenuto">
-                <h4>Compila il modulo di iscrizione</h4>
+                <h3>Compila il modulo di iscrizione</h3>
                 <p>Inserisci i tuoi dati e indica il corso scelto. Riceverai una conferma via email entro 48 ore.</p>
               </div>
             </div>
             <div class="percorso-step">
-              <div class="percorso-step__numero">03</div>
+              <div class="percorso-step__numero" aria-hidden="true">03</div>
               <div class="percorso-step__contenuto">
-                <h4>Conferma e pagamento</h4>
+                <h3>Conferma e pagamento</h3>
                 <p>La segreteria ti invierà le modalità di pagamento della quota di partecipazione e tutti i dettagli pratici.</p>
               </div>
             </div>
           </div>
 
           <a href="#form-iscrizione" class="btn btn--contorno-scuro">Iscriviti a un corso serale</a>
-        </div>
+        </article>
 
       </div>
     </div>
@@ -152,32 +196,44 @@
         <span class="etichetta">Corso triennale</span>
         <h2 style="color:var(--color-avorio);">Modulo di pre-candidatura</h2>
         <p>Compila il modulo per richiedere la convocazione all'audizione di ammissione al corso triennale.</p>
+        <p style="margin-top:0.6rem; font-size:0.9rem; color:rgba(197,189,180,0.75); font-style:italic;">Risposta entro 5 giorni lavorativi · I tuoi dati restano tuoi.</p>
       </div>
 
-      <form class="form--chiaro" onsubmit="inviaForm(event, 'audizione')">
+      <form class="form--chiaro"
+            id="form-aud"
+            action="https://formspree.io/f/REPLACE_WITH_YOUR_ID"
+            method="POST"
+            novalidate
+            aria-describedby="stato-aud">
+        <input type="hidden" name="_subject" value="Pre-candidatura corso triennale Prosopon" />
+        <input type="hidden" name="_format" value="plain" />
+
         <div class="griglia-2" style="gap:2rem;">
           <div class="form-gruppo">
             <label for="nome-aud">Nome *</label>
-            <input type="text" id="nome-aud" name="nome" placeholder="Il tuo nome" required />
+            <input type="text" id="nome-aud" name="nome" placeholder="Il tuo nome" required autocomplete="given-name" aria-required="true" aria-describedby="err-nome-aud" />
+            <span class="form-errore" id="err-nome-aud" aria-live="polite"></span>
           </div>
           <div class="form-gruppo">
             <label for="cognome-aud">Cognome *</label>
-            <input type="text" id="cognome-aud" name="cognome" placeholder="Il tuo cognome" required />
+            <input type="text" id="cognome-aud" name="cognome" placeholder="Il tuo cognome" required autocomplete="family-name" aria-required="true" aria-describedby="err-cognome-aud" />
+            <span class="form-errore" id="err-cognome-aud" aria-live="polite"></span>
           </div>
         </div>
         <div class="griglia-2" style="gap:2rem;">
           <div class="form-gruppo">
             <label for="email-aud">Email *</label>
-            <input type="email" id="email-aud" name="email" placeholder="tua@email.com" required />
+            <input type="email" id="email-aud" name="email" placeholder="tua@email.com" required autocomplete="email" aria-required="true" aria-describedby="err-email-aud" />
+            <span class="form-errore" id="err-email-aud" aria-live="polite"></span>
           </div>
           <div class="form-gruppo">
             <label for="tel-aud">Telefono</label>
-            <input type="tel" id="tel-aud" name="telefono" placeholder="+39 000 0000000" />
+            <input type="tel" id="tel-aud" name="telefono" placeholder="+39 000 0000000" autocomplete="tel" />
           </div>
         </div>
         <div class="form-gruppo">
           <label for="eta-aud">Età</label>
-          <input type="number" id="eta-aud" name="eta" placeholder="La tua età" min="16" max="99" />
+          <input type="number" id="eta-aud" name="eta" placeholder="La tua età" min="16" max="99" inputmode="numeric" />
         </div>
         <div class="form-gruppo">
           <label for="formazione-aud">Formazione artistica (se presente)</label>
@@ -185,15 +241,27 @@
         </div>
         <div class="form-gruppo">
           <label for="motivazione-aud">Motivazione * <span style="font-family:var(--font-corpo); text-transform:none; letter-spacing:0; color:rgba(197,189,180,0.7); font-size:0.85rem;">(perché vuoi studiare al Prosopon)</span></label>
-          <textarea id="motivazione-aud" name="motivazione" placeholder="Raccontaci cosa ti ha portato a voler studiare il teatro classico e cosa cerchi in questo percorso..." rows="5" required></textarea>
+          <textarea id="motivazione-aud" name="motivazione" placeholder="Raccontaci cosa ti ha portato a voler studiare il teatro classico e cosa cerchi in questo percorso..." rows="5" required aria-required="true" aria-describedby="err-motivazione-aud"></textarea>
+          <span class="form-errore" id="err-motivazione-aud" aria-live="polite"></span>
         </div>
+
+        <div class="form-gruppo" style="margin-top:0.5rem;">
+          <label style="display:flex; align-items:flex-start; gap:0.8rem; cursor:pointer; font-family:var(--font-corpo); font-size:0.9rem; text-transform:none; letter-spacing:0; color:rgba(197,189,180,0.85);">
+            <input type="checkbox" id="privacy-aud" name="consenso_privacy" required style="margin-top:3px; flex-shrink:0; accent-color:var(--color-oro);" />
+            <span>Ho letto l'<a href="privacy.html" target="_blank" rel="noopener" style="color:var(--color-oro-chiaro); text-decoration:underline;">informativa privacy</a> e acconsento al trattamento dei miei dati per la valutazione della candidatura. *</span>
+          </label>
+        </div>
+
         <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; margin-top:1rem;">
-          <button type="submit" class="btn btn--oro">Invia la candidatura</button>
-          <p style="font-size:0.85rem; color:rgba(197,189,180,0.6); font-style:italic;">* campi obbligatori</p>
+          <button type="submit" class="btn btn--oro" id="btn-aud">Invia la candidatura</button>
+          <p class="form-reassurance form-reassurance--scura">
+            <span class="form-reassurance__riga"><span class="form-reassurance__icona" aria-hidden="true">&#10003;</span>Risposta entro 5 giorni</span>
+            <span class="form-reassurance__riga"><span class="form-reassurance__icona" aria-hidden="true">&#10003;</span>I tuoi dati restano tuoi</span>
+          </p>
+          <p style="font-size:0.85rem; color:rgba(197,189,180,0.6); font-style:italic; width:100%; margin:0;">* campi obbligatori</p>
         </div>
-        <div id="messaggio-aud" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(184,150,90,0.15); border-left:3px solid var(--color-oro);">
-          <p style="color:var(--color-avorio);">La tua candidatura è stata inviata. Ti contatteremo entro 5 giorni lavorativi per fissare la data dell'audizione.</p>
-        </div>
+
+        <div id="stato-aud" class="form-stato" role="status" aria-live="polite" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(184,150,90,0.15); border-left:3px solid var(--color-oro); color:var(--color-avorio);"></div>
       </form>
     </div>
   </section>
@@ -205,32 +273,43 @@
         <span class="etichetta">Corsi serali & Laboratori</span>
         <h2 style="margin:0.8rem 0 1.5rem;">Modulo di iscrizione</h2>
         <p style="text-align:left;">Iscriviti direttamente a un corso serale o a un laboratorio intensivo.</p>
+        <p style="text-align:left; margin-top:0.6rem; font-size:0.9rem; color:var(--color-grigio); font-style:italic;">Conferma via email entro 48 ore · I tuoi dati restano tuoi.</p>
       </div>
 
-      <form onsubmit="inviaForm(event, 'iscrizione')">
+      <form id="form-isc"
+            action="https://formspree.io/f/REPLACE_WITH_YOUR_ID"
+            method="POST"
+            novalidate
+            aria-describedby="stato-isc">
+        <input type="hidden" name="_subject" value="Iscrizione corso serale / laboratorio Prosopon" />
+        <input type="hidden" name="_format" value="plain" />
+
         <div class="griglia-2" style="gap:2rem;">
           <div class="form-gruppo">
             <label for="nome-isc">Nome *</label>
-            <input type="text" id="nome-isc" name="nome" placeholder="Il tuo nome" required />
+            <input type="text" id="nome-isc" name="nome" placeholder="Il tuo nome" required autocomplete="given-name" aria-required="true" aria-describedby="err-nome-isc" />
+            <span class="form-errore" id="err-nome-isc" aria-live="polite"></span>
           </div>
           <div class="form-gruppo">
             <label for="cognome-isc">Cognome *</label>
-            <input type="text" id="cognome-isc" name="cognome" placeholder="Il tuo cognome" required />
+            <input type="text" id="cognome-isc" name="cognome" placeholder="Il tuo cognome" required autocomplete="family-name" aria-required="true" aria-describedby="err-cognome-isc" />
+            <span class="form-errore" id="err-cognome-isc" aria-live="polite"></span>
           </div>
         </div>
         <div class="griglia-2" style="gap:2rem;">
           <div class="form-gruppo">
             <label for="email-isc">Email *</label>
-            <input type="email" id="email-isc" name="email" placeholder="tua@email.com" required />
+            <input type="email" id="email-isc" name="email" placeholder="tua@email.com" required autocomplete="email" aria-required="true" aria-describedby="err-email-isc" />
+            <span class="form-errore" id="err-email-isc" aria-live="polite"></span>
           </div>
           <div class="form-gruppo">
             <label for="tel-isc">Telefono</label>
-            <input type="tel" id="tel-isc" name="telefono" placeholder="+39 000 0000000" />
+            <input type="tel" id="tel-isc" name="telefono" placeholder="+39 000 0000000" autocomplete="tel" />
           </div>
         </div>
         <div class="form-gruppo">
           <label for="corso-isc">Corso o laboratorio di interesse *</label>
-          <select id="corso-isc" name="corso" required>
+          <select id="corso-isc" name="corso" required aria-required="true" aria-describedby="err-corso-isc">
             <option value="" disabled selected>Seleziona un corso...</option>
             <optgroup label="Corsi Serali">
               <option value="mod-a">Modulo A — Recitazione Classica Base</option>
@@ -244,18 +323,30 @@
               <option value="voce-canto">Workshop Voce e Canto</option>
             </optgroup>
           </select>
+          <span class="form-errore" id="err-corso-isc" aria-live="polite"></span>
         </div>
         <div class="form-gruppo">
           <label for="esperienza-isc">Esperienza teatrale</label>
-          <textarea id="esperienza-isc" name="esperienza" placeholder="Descrivi brevemente il tuo background (anche senza esperienza è benvenuto)..." rows="3"></textarea>
+          <textarea id="esperienza-isc" name="esperienza" placeholder="Descrivi brevemente il tuo background. Anche chi non ha esperienza è benvenuto." rows="3"></textarea>
         </div>
+
+        <div class="form-gruppo" style="margin-top:0.5rem;">
+          <label style="display:flex; align-items:flex-start; gap:0.8rem; cursor:pointer; font-family:var(--font-corpo); font-size:0.9rem; text-transform:none; letter-spacing:0; color:var(--color-grafite);">
+            <input type="checkbox" id="privacy-isc" name="consenso_privacy" required style="margin-top:3px; flex-shrink:0; accent-color:var(--color-oro);" />
+            <span>Ho letto l'<a href="privacy.html" target="_blank" rel="noopener" style="color:var(--color-link); text-decoration:underline;">informativa privacy</a> e acconsento al trattamento dei miei dati per la gestione dell'iscrizione. *</span>
+          </label>
+        </div>
+
         <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; margin-top:1rem;">
-          <button type="submit" class="btn btn--oro">Invia la richiesta</button>
-          <p style="font-size:0.85rem; color:var(--color-grigio); font-style:italic;">* campi obbligatori</p>
+          <button type="submit" class="btn btn--oro" id="btn-isc">Invia la richiesta</button>
+          <p class="form-reassurance">
+            <span class="form-reassurance__riga"><span class="form-reassurance__icona" aria-hidden="true">&#10003;</span>Conferma entro 48h</span>
+            <span class="form-reassurance__riga"><span class="form-reassurance__icona" aria-hidden="true">&#10003;</span>Niente spam</span>
+          </p>
+          <p style="font-size:0.85rem; color:var(--color-grigio); font-style:italic; width:100%; margin:0;">* campi obbligatori</p>
         </div>
-        <div id="messaggio-isc" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(184,150,90,0.1); border-left:3px solid var(--color-oro);">
-          <p>La tua richiesta di iscrizione è stata inviata. Riceverai una conferma e le istruzioni per completare l'iscrizione entro 48 ore.</p>
-        </div>
+
+        <div id="stato-isc" class="form-stato" role="status" aria-live="polite" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(184,150,90,0.1); border-left:3px solid var(--color-oro);"></div>
       </form>
     </div>
   </section>
@@ -270,57 +361,79 @@
 
       <div id="faq">
         <div class="faq-item" style="border-bottom:1px solid rgba(184,150,90,0.2); padding:1.2rem 0;">
-          <button class="faq-domanda" style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero);">
-            È necessaria un'esperienza teatrale per candidarsi al triennio?
-            <span style="font-size:1.2rem; color:var(--color-oro); transition:transform 0.3s;" class="faq-icona">+</span>
-          </button>
-          <div class="faq-risposta" style="display:none; padding-top:0.8rem;">
-            <p style="font-size:1rem;">No. L'Accademia seleziona in base al potenziale espressivo e alla motivazione, non all'esperienza accumulata. Candidati con nessuna esperienza teatrale sono stati ammessi grazie alla qualità della loro presenza e alla sincerità della loro vocazione.</p>
+          <h3 style="margin:0;">
+            <button class="faq-domanda" type="button"
+                    aria-expanded="false" aria-controls="faq-r1" id="faq-q1"
+                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
+              È necessaria un'esperienza teatrale per candidarsi al triennio?
+              <span class="faq-icona" aria-hidden="true" style="font-size:1.4rem; color:var(--color-oro); transition:transform 0.3s; line-height:1;">+</span>
+            </button>
+          </h3>
+          <div class="faq-risposta" id="faq-r1" role="region" aria-labelledby="faq-q1" hidden style="padding-top:0.8rem;">
+            <p style="font-size:1rem;">No. L'Accademia seleziona in base al potenziale espressivo e alla motivazione, non all'esperienza accumulata. Candidati senza esperienza teatrale sono stati ammessi grazie alla qualità della loro presenza e alla sincerità della loro vocazione.</p>
           </div>
         </div>
 
         <div class="faq-item" style="border-bottom:1px solid rgba(184,150,90,0.2); padding:1.2rem 0;">
-          <button class="faq-domanda" style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero);">
-            Qual è l'età minima per il corso triennale?
-            <span style="font-size:1.2rem; color:var(--color-oro); transition:transform 0.3s;" class="faq-icona">+</span>
-          </button>
-          <div class="faq-risposta" style="display:none; padding-top:0.8rem;">
+          <h3 style="margin:0;">
+            <button class="faq-domanda" type="button"
+                    aria-expanded="false" aria-controls="faq-r2" id="faq-q2"
+                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
+              Qual è l'età minima per il corso triennale?
+              <span class="faq-icona" aria-hidden="true" style="font-size:1.4rem; color:var(--color-oro); transition:transform 0.3s; line-height:1;">+</span>
+            </button>
+          </h3>
+          <div class="faq-risposta" id="faq-r2" role="region" aria-labelledby="faq-q2" hidden style="padding-top:0.8rem;">
             <p style="font-size:1rem;">Il corso triennale è aperto a candidati dai 18 anni in su. Casi eccezionali per candidati di 16–17 anni possono essere valutati su richiesta specifica con consenso dei genitori.</p>
           </div>
         </div>
 
         <div class="faq-item" style="border-bottom:1px solid rgba(184,150,90,0.2); padding:1.2rem 0;">
-          <button class="faq-domanda" style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero);">
-            Cosa devo preparare per l'audizione?
-            <span style="font-size:1.2rem; color:var(--color-oro); transition:transform 0.3s;" class="faq-icona">+</span>
-          </button>
-          <div class="faq-risposta" style="display:none; padding-top:0.8rem;">
-            <p style="font-size:1rem;">Un monologo a scelta della durata di 2–3 minuti. Può essere tratto da qualsiasi periodo teatrale. È preferibile presentare un testo che si sente proprio, piuttosto che uno ritenuto "adatto". L'audizione prevede anche esercizi di gruppo con gli altri candidati.</p>
+          <h3 style="margin:0;">
+            <button class="faq-domanda" type="button"
+                    aria-expanded="false" aria-controls="faq-r3" id="faq-q3"
+                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
+              Cosa devo preparare per l'audizione?
+              <span class="faq-icona" aria-hidden="true" style="font-size:1.4rem; color:var(--color-oro); transition:transform 0.3s; line-height:1;">+</span>
+            </button>
+          </h3>
+          <div class="faq-risposta" id="faq-r3" role="region" aria-labelledby="faq-q3" hidden style="padding-top:0.8rem;">
+            <p style="font-size:1rem;">Un monologo a scelta della durata di 2–3 minuti. Può essere tratto da qualsiasi periodo teatrale. È preferibile presentare un testo che si sente proprio, piuttosto che uno ritenuto «adatto». L'audizione prevede anche esercizi di gruppo con gli altri candidati.</p>
           </div>
         </div>
 
         <div class="faq-item" style="border-bottom:1px solid rgba(184,150,90,0.2); padding:1.2rem 0;">
-          <button class="faq-domanda" style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero);">
-            È possibile frequentare i corsi serali abitando fuori Roma?
-            <span style="font-size:1.2rem; color:var(--color-oro); transition:transform 0.3s;" class="faq-icona">+</span>
-          </button>
-          <div class="faq-risposta" style="display:none; padding-top:0.8rem;">
+          <h3 style="margin:0;">
+            <button class="faq-domanda" type="button"
+                    aria-expanded="false" aria-controls="faq-r4" id="faq-q4"
+                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
+              È possibile frequentare i corsi serali abitando fuori Roma?
+              <span class="faq-icona" aria-hidden="true" style="font-size:1.4rem; color:var(--color-oro); transition:transform 0.3s; line-height:1;">+</span>
+            </button>
+          </h3>
+          <div class="faq-risposta" id="faq-r4" role="region" aria-labelledby="faq-q4" hidden style="padding-top:0.8rem;">
             <p style="font-size:1rem;">I corsi si svolgono in presenza a Roma. Per informazioni su possibilità di frequenza da remoto per specifici moduli, si prega di contattare direttamente la segreteria.</p>
           </div>
         </div>
 
         <div class="faq-item" style="padding:1.2rem 0;">
-          <button class="faq-domanda" style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero);">
-            Ho domande non presenti qui. Come posso contattarvi?
-            <span style="font-size:1.2rem; color:var(--color-oro); transition:transform 0.3s;" class="faq-icona">+</span>
-          </button>
-          <div class="faq-risposta" style="display:none; padding-top:0.8rem;">
+          <h3 style="margin:0;">
+            <button class="faq-domanda" type="button"
+                    aria-expanded="false" aria-controls="faq-r5" id="faq-q5"
+                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
+              Ho domande non presenti qui. Come posso contattarvi?
+              <span class="faq-icona" aria-hidden="true" style="font-size:1.4rem; color:var(--color-oro); transition:transform 0.3s; line-height:1;">+</span>
+            </button>
+          </h3>
+          <div class="faq-risposta" id="faq-r5" role="region" aria-labelledby="faq-q5" hidden style="padding-top:0.8rem;">
             <p style="font-size:1rem;">Scrivici attraverso il <a href="contatti.html" style="color:var(--color-oro-scuro); text-decoration:underline;">modulo di contatto</a> o direttamente via email. Risponderemo entro 48 ore lavorative.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
@@ -329,6 +442,7 @@
         <div>
           <div class="footer__logo">Prosopon<span>Accademia di Teatro Classico</span></div>
           <p>Centro di Teatro Classico e Arti Performative.<br>Direttore artistico: Andrea Saverio Puglisi.<br>Roma, dal 2025.</p>
+          <p style="margin-top:0.8rem; font-size:0.9rem;"><a href="mailto:info@accademiaprosopon.it" style="color:var(--color-oro); text-decoration:underline; text-underline-offset:3px;">info@accademiaprosopon.it</a></p>
         </div>
         <div>
           <p class="footer__titolo">Navigazione</p>
@@ -359,33 +473,117 @@
       </div>
       <div class="footer__bottom">
         <p>© 2025 Accademia di Teatro Classico Prosopon. Tutti i diritti riservati.</p>
-        <p style="font-style:italic; font-size:0.8rem; color:var(--color-grigio);">Roma, Italia</p>
+        <p class="footer__legale"><a href="privacy.html">Privacy</a> · <a href="cookie.html">Cookie</a> · <span style="font-style:italic;">Roma, Italia</span></p>
       </div>
     </div>
   </footer>
 
   <script>
+    // Hamburger menu
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
-    hamburger.addEventListener('click', () => navMenu.classList.toggle('aperto'));
+    hamburger.addEventListener('click', () => {
+      const aperto = navMenu.classList.toggle('aperto');
+      hamburger.setAttribute('aria-expanded', String(aperto));
+      hamburger.setAttribute('aria-label', aperto ? 'Chiudi menu' : 'Apri menu');
+    });
 
-    // Form mock submit
-    function inviaForm(e, tipo) {
-      e.preventDefault();
-      document.getElementById('messaggio-' + tipo).style.display = 'block';
-      e.target.reset();
-      e.target.querySelector('button[type="submit"]').disabled = true;
+    // ===== FORM AUDIZIONE & ISCRIZIONE =====
+    // Microcopy errori in voce di brand (UX): asciutto, evocativo, mai burocratico.
+    const MSG_VUOTO = {
+      nome:        'Manca il nome — chi sei?',
+      cognome:     'E il cognome? Anche quello, per favore.',
+      email:       'Senza email non possiamo contattarti.',
+      corso:       'Scegli il corso o il laboratorio che ti interessa.',
+      motivazione: 'Per valutarti serve almeno una motivazione.',
+    };
+    const MSG_EMAIL_INVALIDA = "Quest'email sembra incompleta. Riprova.";
+
+    function validaCampo(input, msgId, regola) {
+      const errorEl = document.getElementById(msgId);
+      const valore = input.value.trim();
+      let messaggio = '';
+      if (input.required && !valore) {
+        messaggio = MSG_VUOTO[input.name] || 'Questo campo serve davvero. Riprova.';
+      } else if (regola === 'email' && valore && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valore)) {
+        messaggio = MSG_EMAIL_INVALIDA;
+      }
+      if (errorEl) errorEl.textContent = messaggio;
+      input.setAttribute('aria-invalid', messaggio ? 'true' : 'false');
+      return !messaggio;
     }
 
-    // FAQ accordion
+    function gestisciForm(formId, statoId, btnId, etichetta) {
+      const form = document.getElementById(formId);
+      if (!form) return;
+      const stato = document.getElementById(statoId);
+      const btn = document.getElementById(btnId);
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Validazione
+        const campiObbligatori = form.querySelectorAll('[required]');
+        let tuttoOk = true;
+        campiObbligatori.forEach(c => {
+          if (c.type === 'checkbox') {
+            if (!c.checked) tuttoOk = false;
+            return;
+          }
+          const errId = c.getAttribute('aria-describedby');
+          const regola = c.type === 'email' ? 'email' : null;
+          if (errId && !validaCampo(c, errId, regola)) tuttoOk = false;
+        });
+
+        if (!tuttoOk) {
+          stato.style.display = 'block';
+          stato.textContent = 'Manca qualcosa: controlla i campi segnalati e riprova.';
+          return;
+        }
+
+        // Stato di invio
+        stato.style.display = 'block';
+        stato.textContent = 'Stiamo facendo partire la tua candidatura…';
+        btn.disabled = true;
+
+        try {
+          const data = new FormData(form);
+          const resp = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+          if (resp.ok) {
+            stato.textContent = etichetta;
+            form.reset();
+          } else {
+            const errData = await resp.json().catch(() => ({}));
+            stato.textContent = (errData && errData.error)
+              ? 'Qualcosa non ha funzionato: ' + errData.error
+              : 'La candidatura non è partita. Riprova più tardi, oppure scrivici via email.';
+            btn.disabled = false;
+          }
+        } catch (err) {
+          stato.textContent = 'La rete fa le bizze. Controlla la connessione e riprova fra un istante.';
+          btn.disabled = false;
+        }
+      });
+    }
+
+    gestisciForm('form-aud', 'stato-aud', 'btn-aud',
+      'Candidatura ricevuta. Hai mosso il primo passo: ti contatteremo entro 5 giorni lavorativi per fissare la data della tua audizione.');
+    gestisciForm('form-isc', 'stato-isc', 'btn-isc',
+      'Richiesta arrivata. Entro 48 ore ti scriviamo con conferma del posto e istruzioni per completare l\'iscrizione.');
+
+    // ===== FAQ accordion accessibile =====
     document.querySelectorAll('.faq-domanda').forEach(btn => {
       btn.addEventListener('click', () => {
-        const risposta = btn.nextElementSibling;
+        const espanso = btn.getAttribute('aria-expanded') === 'true';
+        const risposta = document.getElementById(btn.getAttribute('aria-controls'));
+        btn.setAttribute('aria-expanded', String(!espanso));
+        if (risposta) risposta.hidden = espanso;
         const icona = btn.querySelector('.faq-icona');
-        const aperta = risposta.style.display === 'block';
-        risposta.style.display = aperta ? 'none' : 'block';
-        icona.textContent = aperta ? '+' : '−';
-        icona.style.transform = aperta ? 'rotate(0deg)' : 'rotate(180deg)';
+        if (icona) icona.textContent = espanso ? '+' : '−';
       });
     });
   </script>

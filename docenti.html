@@ -4,7 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Docenti · Prosopon</title>
-  <meta name="description" content="Il corpo docente dell'Accademia di Teatro Classico Prosopon: attori, registi e maestri della scena classica." />
+  <meta name="description" content="Il corpo docente dell'Accademia di Teatro Classico Prosopon: 8 fra attori, registi, maestri e studiosi della scena classica." />
+  <link rel="canonical" href="https://www.accademiaprosopon.it/docenti.html" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#0e0d0b" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:site_name" content="Accademia di Teatro Classico Prosopon" />
+  <meta property="og:title" content="Docenti · Prosopon" />
+  <meta property="og:description" content="Il corpo docente dell'Accademia di Teatro Classico Prosopon." />
+  <meta property="og:url" content="https://www.accademiaprosopon.it/docenti.html" />
+  <meta property="og:image" content="https://www.accademiaprosopon.it/assets/docenti/andrea-puglisi.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Docenti · Prosopon" />
+  <meta name="twitter:description" content="Il corpo docente dell'Accademia di Teatro Classico Prosopon." />
+  <meta name="twitter:image" content="https://www.accademiaprosopon.it/assets/docenti/andrea-puglisi.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;500;600&display=swap" />
+
   <link rel="stylesheet" href="style.css" />
   <style>
     .griglia-docenti {
@@ -38,7 +62,6 @@
     .card-docente:hover .card-docente__foto img {
       transform: scale(1.04);
     }
-    /* Overlay scuro al hover con nome */
     .card-docente__foto::after {
       content: '';
       position: absolute;
@@ -48,21 +71,7 @@
       transition: opacity 0.35s ease;
       pointer-events: none;
     }
-    .card-docente:hover .card-docente__foto::after {
-      opacity: 1;
-    }
-    .card-docente__foto .iniziali {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-titolo);
-      font-size: 2.5rem;
-      color: var(--color-oro);
-      letter-spacing: 0.1em;
-      background: var(--color-avorio-scuro);
-    }
+    .card-docente:hover .card-docente__foto::after { opacity: 1; }
     .card-docente__info {
       padding: 1.2rem 1.2rem 1.5rem;
       background: var(--color-avorio);
@@ -90,9 +99,7 @@
       display: inline-block;
       transition: color var(--transizione);
     }
-    .card-docente:hover .card-docente__leggi {
-      color: var(--color-oro-scuro);
-    }
+    .card-docente:hover .card-docente__leggi { color: var(--color-oro-scuro); }
 
     /* Modale docente */
     .modale-docente {
@@ -148,7 +155,6 @@
     }
     .modale-docente__chiudi:hover { background: var(--color-oro-scuro); }
 
-    /* Sezioni interne della modale */
     .modale-sezione {
       margin-top: 1.8rem;
       padding-top: 1.5rem;
@@ -213,6 +219,26 @@
       line-height: 1.75;
       color: var(--color-grafite);
     }
+    .modale-cv {
+      margin-top: 1.8rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--color-avorio-scuro);
+    }
+    .modale-cv a {
+      font-family: var(--font-titolo);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-oro-scuro);
+      border: 1px solid var(--color-oro-scuro);
+      padding: 0.55rem 1.2rem;
+      display: inline-block;
+      transition: all var(--transizione);
+    }
+    .modale-cv a:hover {
+      background: var(--color-oro-scuro);
+      color: var(--color-avorio);
+    }
 
     @media(max-width:768px) {
       .griglia-docenti { grid-template-columns: 1fr 1fr; }
@@ -226,27 +252,33 @@
 </head>
 <body>
 
-  <!-- ============ NAVIGAZIONE ============ -->
-  <nav class="nav">
-    <div class="nav__contenitore">
-      <a href="index.html" class="nav__logo">
-        Prosopon
-        <span>Accademia di Teatro Classico</span>
-      </a>
-      <ul class="nav__menu" id="navMenu">
-        <li><a href="index.html" class="nav__link">Home</a></li>
-        <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
-        <li><a href="formazione.html" class="nav__link">Formazione</a></li>
-        <li><a href="docenti.html" class="nav__link nav__link--attivo">Docenti</a></li>
-        <li><a href="eventi.html" class="nav__link">Spettacoli & Eventi</a></li>
-        <li><a href="contatti.html" class="nav__link">Contatti</a></li>
-        <li><a href="iscrizioni.html" class="nav__cta">Iscrizioni</a></li>
-      </ul>
-      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+  <a href="#contenuto" class="skip-link">Vai al contenuto</a>
+
+  <!-- ============ HEADER + NAVIGAZIONE ============ -->
+  <header>
+    <nav class="nav" aria-label="Navigazione principale">
+      <div class="nav__contenitore">
+        <a href="index.html" class="nav__logo">
+          Prosopon
+          <span>Accademia di Teatro Classico</span>
+        </a>
+        <ul class="nav__menu" id="navMenu">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="accademia.html" class="nav__link">L'Accademia</a></li>
+          <li><a href="formazione.html" class="nav__link">Formazione</a></li>
+          <li><a href="docenti.html" class="nav__link nav__link--attivo" aria-current="page">Docenti</a></li>
+          <li><a href="eventi.html" class="nav__link">Spettacoli & Eventi</a></li>
+          <li><a href="contatti.html" class="nav__link">Contatti</a></li>
+          <li><a href="iscrizioni.html" class="nav__cta">Iscrizioni</a></li>
+        </ul>
+        <button class="nav__hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false" aria-controls="navMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenuto">
 
   <!-- ============ HERO PAGINA ============ -->
   <section class="hero-pagina">
@@ -263,125 +295,132 @@
       <div class="griglia-docenti">
 
         <!-- Andrea Saverio Puglisi -->
-        <div class="card-docente" onclick="apriDocente('puglisi')" role="button" tabindex="0">
+        <article class="card-docente" onclick="apriDocente('puglisi')" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modale-puglisi">
           <div class="card-docente__foto">
-            <img src="assets/docenti/andrea-puglisi.jpg" alt="Andrea Saverio Puglisi" style="object-position: center 15%;" />
-            <div class="iniziali">AP</div>
+            <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Saverio Puglisi" width="400" height="533" style="object-position: center 15%;" />
           </div>
           <div class="card-docente__info">
             <h3>Andrea Saverio Puglisi</h3>
             <p class="card-docente__ruolo">Direttore Artistico · Attore · Regista</p>
             <span class="card-docente__leggi">Leggi la bio →</span>
           </div>
-        </div>
+        </article>
 
         <!-- Elena Rossetto -->
-        <div class="card-docente" onclick="apriDocente('rossetto')" role="button" tabindex="0">
+        <article class="card-docente" onclick="apriDocente('rossetto')" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modale-rossetto">
           <div class="card-docente__foto">
-            <img src="assets/docenti/elena-rossetto.jpg" alt="Elena Rossetto" style="object-position: center 10%;" />
-            <div class="iniziali">ER</div>
+            <img src="assets/docenti/elena-rossetto.jpg" alt="Ritratto di Elena Rossetto" width="400" height="533" loading="lazy" style="object-position: center 10%;" />
           </div>
           <div class="card-docente__info">
             <h3>Elena Rossetto</h3>
             <p class="card-docente__ruolo">Attrice · Doppiatrice · Speaker</p>
             <span class="card-docente__leggi">Leggi la bio →</span>
           </div>
-        </div>
+        </article>
 
         <!-- Rachele Sarti -->
-        <div class="card-docente" onclick="apriDocente('sarti')" role="button" tabindex="0">
+        <article class="card-docente" onclick="apriDocente('sarti')" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modale-sarti">
           <div class="card-docente__foto">
-            <img src="assets/docenti/rachele-sarti.jpg" alt="Rachele Sarti" style="object-position: center 10%;" />
-            <div class="iniziali">RS</div>
+            <img src="assets/docenti/rachele-sarti.jpg" alt="Ritratto di Rachele Sarti" width="400" height="533" loading="lazy" style="object-position: center 10%;" />
           </div>
           <div class="card-docente__info">
             <h3>Rachele Sarti</h3>
             <p class="card-docente__ruolo">Attrice</p>
             <span class="card-docente__leggi">Leggi la bio →</span>
           </div>
-        </div>
+        </article>
 
         <!-- Francesco Rizzo -->
-        <div class="card-docente" onclick="apriDocente('rizzo')" role="button" tabindex="0">
+        <article class="card-docente" onclick="apriDocente('rizzo')" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modale-rizzo">
           <div class="card-docente__foto">
-            <img src="assets/docenti/francesco-rizzo.jpg" alt="Francesco Rizzo" style="object-position: center 15%;" />
-            <div class="iniziali">FR</div>
+            <img src="assets/docenti/francesco-rizzo.jpg" alt="Ritratto di Francesco Rizzo" width="400" height="533" loading="lazy" style="object-position: center 15%;" />
           </div>
           <div class="card-docente__info">
             <h3>Francesco Rizzo</h3>
             <p class="card-docente__ruolo">Attore</p>
             <span class="card-docente__leggi">Leggi la bio →</span>
           </div>
-        </div>
+        </article>
 
         <!-- Gaetano Marsico -->
-        <div class="card-docente" onclick="apriDocente('marsico')" role="button" tabindex="0">
+        <article class="card-docente" onclick="apriDocente('marsico')" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modale-marsico">
           <div class="card-docente__foto">
-            <img src="assets/docenti/gaetano-marsico.jpg" alt="Gaetano Marsico" style="object-position: center 20%;" />
-            <div class="iniziali">GM</div>
+            <img src="assets/docenti/gaetano-marsico.jpg" alt="Ritratto di Gaetano Marsico" width="400" height="533" loading="lazy" style="object-position: center 20%;" />
           </div>
           <div class="card-docente__info">
             <h3>Gaetano Marsico</h3>
             <p class="card-docente__ruolo">Attore · Scherma</p>
             <span class="card-docente__leggi">Leggi la bio →</span>
           </div>
-        </div>
+        </article>
 
         <!-- Massimiliano Viola -->
-        <div class="card-docente" onclick="apriDocente('viola')" role="button" tabindex="0">
+        <article class="card-docente" onclick="apriDocente('viola')" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modale-viola">
           <div class="card-docente__foto">
-            <img src="assets/docenti/massimiliano-viola.jpg" alt="Massimiliano Viola" style="object-position: center 10%;" />
-            <div class="iniziali">MV</div>
+            <img src="assets/docenti/massimiliano-viola.jpg" alt="Ritratto di Massimiliano Viola" width="400" height="533" loading="lazy" style="object-position: center 10%;" />
           </div>
           <div class="card-docente__info">
             <h3>Massimiliano Viola</h3>
             <p class="card-docente__ruolo">Attore · Tecnico Teatrale</p>
             <span class="card-docente__leggi">Leggi la bio →</span>
           </div>
-        </div>
+        </article>
 
         <!-- Matteo Mascetta -->
-        <div class="card-docente" onclick="apriDocente('mascetta')" role="button" tabindex="0">
+        <article class="card-docente" onclick="apriDocente('mascetta')" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modale-mascetta">
           <div class="card-docente__foto">
-            <img src="assets/docenti/matteo-mascetta.jpg" alt="Matteo Maria Mascetta" style="object-position: center 15%;" />
-            <div class="iniziali">MM</div>
+            <img src="assets/docenti/matteo-mascetta.jpg" alt="Ritratto di Matteo Maria Mascetta" width="400" height="533" loading="lazy" style="object-position: center 15%;" />
           </div>
           <div class="card-docente__info">
             <h3>Matteo Maria Mascetta</h3>
             <p class="card-docente__ruolo">Attore · Mimo · Improvvisazione</p>
             <span class="card-docente__leggi">Leggi la bio →</span>
           </div>
-        </div>
+        </article>
 
         <!-- Caterina Pentericci -->
-        <div class="card-docente" onclick="apriDocente('pentericci')" role="button" tabindex="0">
+        <article class="card-docente" onclick="apriDocente('pentericci')" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="modale-pentericci">
           <div class="card-docente__foto">
-            <img src="assets/docenti/caterina-pentericci.jpg" alt="Caterina Pentericci" style="object-position: center 20%;" />
-            <div class="iniziali">CP</div>
+            <img src="assets/docenti/caterina-pentericci.jpg" alt="Ritratto di Caterina Pentericci" width="400" height="533" loading="lazy" style="object-position: center 20%;" />
           </div>
           <div class="card-docente__info">
             <h3>Caterina Pentericci</h3>
             <p class="card-docente__ruolo">Maestra di Scherma · Tecnico III Livello SNaQ</p>
             <span class="card-docente__leggi">Leggi la bio →</span>
           </div>
-        </div>
+        </article>
 
       </div>
     </div>
   </section>
 
+  <!-- ============ CTA conversion ============ -->
+  <section class="cta-band">
+    <div class="contenitore" style="max-width:680px;">
+      <span class="cta-band__etichetta">Anno Accademico 2025&ndash;2026</span>
+      <h2>Studia con loro.</h2>
+      <p>Le audizioni del corso triennale sono in apertura. Il corpo docente di Prosopon ti aspetta.</p>
+      <div style="display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap;">
+        <a href="iscrizioni.html#form-audizione" class="btn">Iscriviti alle audizioni</a>
+        <a href="formazione.html#triennale" class="btn" style="background:transparent; border:1px solid var(--color-nero); color:var(--color-nero);">Scopri il triennio</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
   <!-- ============ MODALI DOCENTI ============ -->
 
   <!-- ——— ANDREA SAVERIO PUGLISI ——— -->
-  <div class="modale-docente" id="modale-puglisi">
+  <div class="modale-docente" id="modale-puglisi" role="dialog" aria-modal="true" aria-labelledby="ttl-puglisi" aria-hidden="true">
     <div class="modale-docente__pannello">
-      <button class="modale-docente__chiudi" onclick="chiudiModale('puglisi')">✕</button>
+      <button class="modale-docente__chiudi" onclick="chiudiModale('puglisi')" aria-label="Chiudi la scheda di Andrea Saverio Puglisi">✕</button>
       <div class="modale-docente__foto">
-        <img src="assets/docenti/andrea-puglisi.jpg" alt="Andrea Saverio Puglisi" style="object-position: center 15%;" />
+        <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Saverio Puglisi" loading="lazy" style="object-position: center 15%;" />
       </div>
       <div class="modale-docente__corpo">
         <span class="etichetta">Direttore Artistico</span>
-        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Andrea Saverio Puglisi</h2>
+        <h2 id="ttl-puglisi" style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Andrea Saverio Puglisi</h2>
         <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attore · Regista · Autore</p>
         <div class="modale-tag">
           <span>Italiano · Inglese · Francese</span>
@@ -438,20 +477,24 @@
             <li><span class="modale-crediti__anno">2018</span><span>Miglior Attore al festival In-Corto</span></li>
           </ul>
         </div>
+
+        <div class="modale-cv">
+          <a href="documenti/cv/CV - Andrea Saverio Puglisi .pdf" download>Scarica CV (PDF)</a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ——— ELENA ROSSETTO ——— -->
-  <div class="modale-docente" id="modale-rossetto">
+  <div class="modale-docente" id="modale-rossetto" role="dialog" aria-modal="true" aria-labelledby="ttl-rossetto" aria-hidden="true">
     <div class="modale-docente__pannello">
-      <button class="modale-docente__chiudi" onclick="chiudiModale('rossetto')">✕</button>
+      <button class="modale-docente__chiudi" onclick="chiudiModale('rossetto')" aria-label="Chiudi la scheda di Elena Rossetto">✕</button>
       <div class="modale-docente__foto">
-        <img src="assets/docenti/elena-rossetto.jpg" alt="Elena Rossetto" style="object-position: center 10%;" />
+        <img src="assets/docenti/elena-rossetto.jpg" alt="Ritratto di Elena Rossetto" loading="lazy" style="object-position: center 10%;" />
       </div>
       <div class="modale-docente__corpo">
         <span class="etichetta">Docente</span>
-        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Elena Rossetto</h2>
+        <h2 id="ttl-rossetto" style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Elena Rossetto</h2>
         <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attrice · Doppiatrice · Speaker · Presentatrice</p>
         <div class="modale-tag">
           <span>Italiano · Inglese · Francese · Spagnolo C1</span>
@@ -507,20 +550,24 @@
             <li><span class="modale-crediti__anno">2025</span><span>Miglior Attrice Non Protagonista — 4ª edizione LP Film Festival</span></li>
           </ul>
         </div>
+
+        <div class="modale-cv">
+          <a href="documenti/cv/CV - Elena Rossetto .pdf" download>Scarica CV (PDF)</a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ——— RACHELE SARTI ——— -->
-  <div class="modale-docente" id="modale-sarti">
+  <div class="modale-docente" id="modale-sarti" role="dialog" aria-modal="true" aria-labelledby="ttl-sarti" aria-hidden="true">
     <div class="modale-docente__pannello">
-      <button class="modale-docente__chiudi" onclick="chiudiModale('sarti')">✕</button>
+      <button class="modale-docente__chiudi" onclick="chiudiModale('sarti')" aria-label="Chiudi la scheda di Rachele Sarti">✕</button>
       <div class="modale-docente__foto">
-        <img src="assets/docenti/rachele-sarti.jpg" alt="Rachele Sarti" style="object-position: center 10%;" />
+        <img src="assets/docenti/rachele-sarti.jpg" alt="Ritratto di Rachele Sarti" loading="lazy" style="object-position: center 10%;" />
       </div>
       <div class="modale-docente__corpo">
         <span class="etichetta">Docente</span>
-        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Rachele Sarti</h2>
+        <h2 id="ttl-sarti" style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Rachele Sarti</h2>
         <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attrice</p>
         <div class="modale-tag">
           <span>Inglese (ottimo) · Tedesco (buono)</span>
@@ -557,20 +604,24 @@
             <li><span class="modale-crediti__anno">2022</span><span><em>Di pietre e di Rose</em> — Voice Over, regia Paola Mattioli</span></li>
           </ul>
         </div>
+
+        <div class="modale-cv">
+          <a href="documenti/cv/CV - Rachele Sarti .pdf" download>Scarica CV (PDF)</a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ——— FRANCESCO RIZZO ——— -->
-  <div class="modale-docente" id="modale-rizzo">
+  <div class="modale-docente" id="modale-rizzo" role="dialog" aria-modal="true" aria-labelledby="ttl-rizzo" aria-hidden="true">
     <div class="modale-docente__pannello">
-      <button class="modale-docente__chiudi" onclick="chiudiModale('rizzo')">✕</button>
+      <button class="modale-docente__chiudi" onclick="chiudiModale('rizzo')" aria-label="Chiudi la scheda di Francesco Rizzo">✕</button>
       <div class="modale-docente__foto">
-        <img src="assets/docenti/francesco-rizzo.jpg" alt="Francesco Rizzo" style="object-position: center 15%;" />
+        <img src="assets/docenti/francesco-rizzo.jpg" alt="Ritratto di Francesco Rizzo" loading="lazy" style="object-position: center 15%;" />
       </div>
       <div class="modale-docente__corpo">
         <span class="etichetta">Docente</span>
-        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Francesco Rizzo</h2>
+        <h2 id="ttl-rizzo" style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Francesco Rizzo</h2>
         <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attore · Pedagogo</p>
         <div class="modale-tag">
           <span>Cosentino · Calabrese</span>
@@ -604,20 +655,24 @@
             <li><span class="modale-crediti__anno">–</span><span>Pedagogo — Compagnia Scena Verticale</span></li>
           </ul>
         </div>
+
+        <div class="modale-cv">
+          <a href="documenti/cv/CV - Francesco Rizzo.pdf" download>Scarica CV (PDF)</a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ——— GAETANO MARSICO ——— -->
-  <div class="modale-docente" id="modale-marsico">
+  <div class="modale-docente" id="modale-marsico" role="dialog" aria-modal="true" aria-labelledby="ttl-marsico" aria-hidden="true">
     <div class="modale-docente__pannello">
-      <button class="modale-docente__chiudi" onclick="chiudiModale('marsico')">✕</button>
+      <button class="modale-docente__chiudi" onclick="chiudiModale('marsico')" aria-label="Chiudi la scheda di Gaetano Marsico">✕</button>
       <div class="modale-docente__foto">
-        <img src="assets/docenti/gaetano-marsico.jpg" alt="Gaetano Marsico" style="object-position: center 20%;" />
+        <img src="assets/docenti/gaetano-marsico.jpg" alt="Ritratto di Gaetano Marsico" loading="lazy" style="object-position: center 20%;" />
       </div>
       <div class="modale-docente__corpo">
         <span class="etichetta">Docente</span>
-        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Gaetano Marsico</h2>
+        <h2 id="ttl-marsico" style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Gaetano Marsico</h2>
         <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attore · Maestro di Scherma</p>
         <div class="modale-tag">
           <span>Italiano · Inglese · Spagnolo</span>
@@ -653,20 +708,24 @@
             <li><span class="modale-crediti__anno">2024</span><span><em>Tra passato e presente</em> — ruolo Abelardo, Rai 3</span></li>
           </ul>
         </div>
+
+        <div class="modale-cv">
+          <a href="documenti/cv/CV - Gaetano Marsico.pdf" download>Scarica CV (PDF)</a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ——— MASSIMILIANO VIOLA ——— -->
-  <div class="modale-docente" id="modale-viola">
+  <div class="modale-docente" id="modale-viola" role="dialog" aria-modal="true" aria-labelledby="ttl-viola" aria-hidden="true">
     <div class="modale-docente__pannello">
-      <button class="modale-docente__chiudi" onclick="chiudiModale('viola')">✕</button>
+      <button class="modale-docente__chiudi" onclick="chiudiModale('viola')" aria-label="Chiudi la scheda di Massimiliano Viola">✕</button>
       <div class="modale-docente__foto">
-        <img src="assets/docenti/massimiliano-viola.jpg" alt="Massimiliano Viola" style="object-position: center 10%;" />
+        <img src="assets/docenti/massimiliano-viola.jpg" alt="Ritratto di Massimiliano Viola" loading="lazy" style="object-position: center 10%;" />
       </div>
       <div class="modale-docente__corpo">
         <span class="etichetta">Docente</span>
-        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Massimiliano Viola</h2>
+        <h2 id="ttl-viola" style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Massimiliano Viola</h2>
         <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attore · Tecnico Teatrale · Burattinaio</p>
         <div class="modale-tag">
           <span>Italiano · Inglese B1 · Francese A1</span>
@@ -696,20 +755,24 @@
             <li><span class="modale-crediti__anno">2015–18</span><span>Speaker radiofonico — Radio PNR Tortona</span></li>
           </ul>
         </div>
+
+        <div class="modale-cv">
+          <a href="documenti/cv/CV - Massimiliano Viola Grosso .pdf" download>Scarica CV (PDF)</a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ——— MATTEO MARIA MASCETTA ——— -->
-  <div class="modale-docente" id="modale-mascetta">
+  <div class="modale-docente" id="modale-mascetta" role="dialog" aria-modal="true" aria-labelledby="ttl-mascetta" aria-hidden="true">
     <div class="modale-docente__pannello">
-      <button class="modale-docente__chiudi" onclick="chiudiModale('mascetta')">✕</button>
+      <button class="modale-docente__chiudi" onclick="chiudiModale('mascetta')" aria-label="Chiudi la scheda di Matteo Maria Mascetta">✕</button>
       <div class="modale-docente__foto">
-        <img src="assets/docenti/matteo-mascetta.jpg" alt="Matteo Maria Mascetta" style="object-position: center 15%;" />
+        <img src="assets/docenti/matteo-mascetta.jpg" alt="Ritratto di Matteo Maria Mascetta" loading="lazy" style="object-position: center 15%;" />
       </div>
       <div class="modale-docente__corpo">
         <span class="etichetta">Docente</span>
-        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Matteo Maria Mascetta</h2>
+        <h2 id="ttl-mascetta" style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Matteo Maria Mascetta</h2>
         <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Attore · Mimo · Improvvisazione</p>
         <div class="modale-tag">
           <span>Italiano · Inglese B1 · Spagnolo B1</span>
@@ -736,20 +799,24 @@
             <li><span class="modale-crediti__anno">2025</span><span><em>La Lista di Babbo Natale</em> — regia Tiko Rossi Vairo, Roma</span></li>
           </ul>
         </div>
+
+        <div class="modale-cv">
+          <a href="documenti/cv/CV - Matteo Maria Mascetta .pdf" download>Scarica CV (PDF)</a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ——— CATERINA PENTERICCI ——— -->
-  <div class="modale-docente" id="modale-pentericci">
+  <div class="modale-docente" id="modale-pentericci" role="dialog" aria-modal="true" aria-labelledby="ttl-pentericci" aria-hidden="true">
     <div class="modale-docente__pannello">
-      <button class="modale-docente__chiudi" onclick="chiudiModale('pentericci')">✕</button>
+      <button class="modale-docente__chiudi" onclick="chiudiModale('pentericci')" aria-label="Chiudi la scheda di Caterina Pentericci">✕</button>
       <div class="modale-docente__foto">
-        <img src="assets/docenti/caterina-pentericci.jpg" alt="Caterina Pentericci" style="object-position: center 20%;" />
+        <img src="assets/docenti/caterina-pentericci.jpg" alt="Ritratto di Caterina Pentericci" loading="lazy" style="object-position: center 20%;" />
       </div>
       <div class="modale-docente__corpo">
         <span class="etichetta">Docente</span>
-        <h2 style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Caterina Pentericci</h2>
+        <h2 id="ttl-pentericci" style="margin:0.5rem 0 0.2rem; font-size:1.5rem;">Caterina Pentericci</h2>
         <p style="font-style:italic; color:var(--color-grigio); margin-bottom:0.8rem;">Maestra di Scherma Olimpica · Tecnico di III Livello SNaQ</p>
         <div class="modale-tag">
           <span>Fioretto · Spada · Sciabola</span>
@@ -802,6 +869,7 @@
             <li><span class="modale-crediti__anno">2019</span><span>Curatrice di <em>Personaggi in scena: il Parasitus</em> (con G. Bandini, intr. R. Danese) — Carocci Editore, Roma</span></li>
           </ul>
         </div>
+        <!-- CV non disponibile per Caterina Pentericci -->
       </div>
     </div>
   </div>
@@ -813,6 +881,7 @@
         <div>
           <div class="footer__logo">Prosopon<span>Accademia di Teatro Classico</span></div>
           <p>Centro di Teatro Classico e Arti Performative.<br>Direttore artistico: Andrea Saverio Puglisi.<br>Roma, dal 2025.</p>
+          <p style="margin-top:0.8rem; font-size:0.9rem;"><a href="mailto:info@accademiaprosopon.it" style="color:var(--color-oro); text-decoration:underline; text-underline-offset:3px;">info@accademiaprosopon.it</a></p>
         </div>
         <div>
           <p class="footer__titolo">Navigazione</p>
@@ -843,7 +912,7 @@
       </div>
       <div class="footer__bottom">
         <p>© 2025 Accademia di Teatro Classico Prosopon. Tutti i diritti riservati.</p>
-        <p style="font-style:italic; font-size:0.8rem; color:var(--color-grigio);">Roma, Italia</p>
+        <p class="footer__legale"><a href="privacy.html">Privacy</a> · <a href="cookie.html">Cookie</a> · <span style="font-style:italic;">Roma, Italia</span></p>
       </div>
     </div>
   </footer>
@@ -851,38 +920,100 @@
   <script>
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
-    hamburger.addEventListener('click', () => navMenu.classList.toggle('aperto'));
+    hamburger.addEventListener('click', () => {
+      const aperto = navMenu.classList.toggle('aperto');
+      hamburger.setAttribute('aria-expanded', String(aperto));
+      hamburger.setAttribute('aria-label', aperto ? 'Chiudi menu' : 'Apri menu');
+    });
+
+    // ===== MODALI DOCENTI con focus trap =====
+    let ultimoFocus = null;
+    let modaleAperta = null;
+
+    function focusabili(root) {
+      return root.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+    }
 
     function apriDocente(id) {
-      document.getElementById('modale-' + id).classList.add('aperta');
+      const m = document.getElementById('modale-' + id);
+      if (!m) return;
+      ultimoFocus = document.activeElement;
+      modaleAperta = m;
+      m.classList.add('aperta');
+      m.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      // sposta il focus al pulsante chiudi
+      const chiudi = m.querySelector('.modale-docente__chiudi');
+      if (chiudi) chiudi.focus();
     }
+
     function chiudiModale(id) {
-      document.getElementById('modale-' + id).classList.remove('aperta');
+      const m = document.getElementById('modale-' + id);
+      if (!m) return;
+      m.classList.remove('aperta');
+      m.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      modaleAperta = null;
+      if (ultimoFocus && typeof ultimoFocus.focus === 'function') {
+        ultimoFocus.focus();
+      }
     }
-    // Chiudi cliccando fuori
+
+    // Click sullo sfondo per chiudere
     document.querySelectorAll('.modale-docente').forEach(m => {
       m.addEventListener('click', e => {
         if (e.target === m) {
           m.classList.remove('aperta');
+          m.setAttribute('aria-hidden', 'true');
           document.body.style.overflow = '';
+          modaleAperta = null;
+          if (ultimoFocus && typeof ultimoFocus.focus === 'function') ultimoFocus.focus();
         }
       });
     });
-    // Chiudi con Escape
+
+    // Tasti globali: Escape e Tab (focus trap)
     document.addEventListener('keydown', e => {
+      if (!modaleAperta) return;
       if (e.key === 'Escape') {
-        document.querySelectorAll('.modale-docente.aperta').forEach(m => {
-          m.classList.remove('aperta');
-          document.body.style.overflow = '';
-        });
+        const id = modaleAperta.id.replace('modale-', '');
+        chiudiModale(id);
+        return;
+      }
+      if (e.key === 'Tab') {
+        const elementi = Array.from(focusabili(modaleAperta));
+        if (elementi.length === 0) { e.preventDefault(); return; }
+        const primo = elementi[0];
+        const ultimo = elementi[elementi.length - 1];
+        if (e.shiftKey && document.activeElement === primo) {
+          e.preventDefault();
+          ultimo.focus();
+        } else if (!e.shiftKey && document.activeElement === ultimo) {
+          e.preventDefault();
+          primo.focus();
+        }
       }
     });
-    // Keyboard navigation per le card
+
+    // Tastiera (Enter + Space) sulle card docente
     document.querySelectorAll('.card-docente').forEach(c => {
-      c.addEventListener('keydown', e => { if (e.key === 'Enter') c.click(); });
+      c.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          c.click();
+        }
+      });
     });
+
+    // Apertura diretta da hash (#nome-docente)
+    (function() {
+      const hash = window.location.hash.replace('#','');
+      if (hash && document.getElementById('modale-' + hash)) {
+        apriDocente(hash);
+      }
+    })();
   </script>
 </body>
 </html>

@@ -1,0 +1,19 @@
+{
+  "name": "Accademia di Teatro Classico Prosopon",
+  "short_name": "Prosopon",
+  "description": "Accademia di Teatro Classico Prosopon — formazione triennale, corsi serali, laboratori e masterclass nel segno della grande tradizione teatrale.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0e0d0b",
+  "theme_color": "#b8965a",
+  "lang": "it",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

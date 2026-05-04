@@ -3,8 +3,8 @@
    Sistema di Design Globale
    ============================================================ */
 
-/* ---------- Google Fonts ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;500;600&display=swap');
+/* I font Google sono caricati via <link rel="preconnect"> + <link rel="stylesheet">
+   nel <head> di ogni pagina, al posto del vecchio @import (anti-render-block). */
 
 /* ---------- Variabili CSS ---------- */
 :root {
@@ -16,8 +16,16 @@
   --color-oro:         #b8965a;
   --color-oro-chiaro:  #d4b07a;
   --color-oro-scuro:   #8a6e3a;
+  /* --color-link: variante scurita di oro-scuro per i link inline su sfondo avorio.
+     Contrasto verificato (UX): #7a5f30 su #f5f0e8 ≈ 5.12:1 → conforme WCAG AA (≥ 4.5:1)
+     per testo normale. La precedente #8a6e3a era ≈ 4.21:1, sotto la soglia. */
+  --color-link:        #7a5f30;
   --color-rosso:       #7a1f1f;
   --color-grigio:      #6b6560;
+  /* --color-grigio-chiaro: variante schiarita di --color-grigio per testo footer su nero.
+     Contrasto verificato (UX): #a09a92 su #0e0d0b ≈ 6.4:1 → conforme WCAG AA (≥ 4.5:1).
+     Il precedente #6b6560 dava ≈ 3.1:1, sotto la soglia. */
+  --color-grigio-chiaro:#a09a92;
   --color-grigio-light:#c5bdb4;
 
   /* Tipografia */
@@ -335,7 +343,7 @@ p {
 .hero__sfondo {
   position: absolute;
   inset: 0;
-  background-image: url('assets/hero-bg.jpg');
+  background-image: url('assets/home.webp');
   background-size: cover;
   background-position: center;
   opacity: 0.25;
@@ -565,7 +573,37 @@ p {
 
 .footer__bottom p {
   font-size: 0.85rem;
-  color: var(--color-grigio);
+  /* Era var(--color-grigio) (#6b6560) → ratio ≈ 3.1:1 su nero, sotto AA.
+     Sostituito con var(--color-grigio-chiaro) (#a09a92) → ratio ≈ 6.4:1, AA OK. */
+  color: var(--color-grigio-chiaro);
+}
+
+/* Override esplicito sui paragrafi inline-styled del footer (es. "Roma, Italia").
+   Le pagine HTML usavano style="color:var(--color-grigio)" su sfondo nero del
+   footer__bottom: garantiamo qui il colore accessibile evitando di toccare l'inline. */
+.footer__bottom p[style*="--color-grigio"] {
+  color: var(--color-grigio-chiaro) !important;
+}
+
+/* Link legali (Privacy / Cookie) nel footer__bottom.
+   Aggiunti dall'Auditor: WCAG AA su sfondo nero (#a09a92 ≈ 6.4:1 di base,
+   underline esplicito per riconoscibilità). */
+.footer__legale {
+  font-size: 0.85rem;
+  color: var(--color-grigio-chiaro);
+  margin: 0;
+}
+.footer__legale a {
+  color: var(--color-grigio-chiaro);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(160, 154, 146, 0.5);
+  transition: color var(--transizione), text-decoration-color var(--transizione);
+}
+.footer__legale a:hover,
+.footer__legale a:focus-visible {
+  color: var(--color-oro);
+  text-decoration-color: var(--color-oro);
 }
 
 /* ---------- Form ---------- */
@@ -722,4 +760,357 @@ p {
 @media (max-width: 480px) {
   .hero__sottotitolo { font-size: 1.1rem; }
   .btn { padding: 0.8rem 1.6rem; font-size: 0.68rem; }
+  /* Hero h1 su mobile: la dimensione massima a 3.2rem evita che le 3 righe
+     ("Accademia di | Teatro Classico | Prosopon") sforino oltre i 360-380px.
+     letter-spacing ridotto a 0.04em per evitare overflow su parole lunghe. */
+  .hero__titolo {
+    font-size: clamp(2rem, 8vw, 3.2rem);
+    letter-spacing: 0.04em;
+  }
 }
+
+/* ============================================================
+   UTILITY UI — classi che sostituiscono pattern inline ricorrenti
+   (introdotte dalla pass UX per uniformare titoli card, intro,
+   bande CTA, allineamenti e link testuali ad accessibilità AA).
+   ============================================================ */
+
+/* --- Link inline nei contenuti testuali --- */
+/* Underline esplicito + colore con contrasto AA (var(--color-link) = #7a5f30).
+   Vale per i link che vivono dentro <p> e <li> della <main>: mailto, tel,
+   link a pagine interne in mezzo al testo. Esclude la nav e bottoni .btn. */
+main p a:not(.btn),
+main li a:not(.btn) {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(122, 95, 48, 0.55);
+  transition: color var(--transizione), text-decoration-color var(--transizione);
+}
+main p a:not(.btn):hover,
+main li a:not(.btn):hover {
+  color: var(--color-nero);
+  text-decoration-color: var(--color-link);
+}
+/* Variante per sezioni scure: usiamo l'oro chiaro (contrasto OK su grafite/nero). */
+.sezione--scura p a:not(.btn),
+.sezione--scura li a:not(.btn) {
+  color: var(--color-oro-chiaro);
+  text-decoration-color: rgba(212, 176, 122, 0.55);
+}
+.sezione--scura p a:not(.btn):hover,
+.sezione--scura li a:not(.btn):hover {
+  color: var(--color-avorio);
+  text-decoration-color: var(--color-oro-chiaro);
+}
+
+/* --- Card omogenee (sostituiscono inline ricorrenti) --- */
+.card--centro     { text-align: center; }
+.card--padding-lg { padding: 2.5rem 2rem; }
+
+/* Titolo di card centrale con icona/glifo oro sopra (3 ricorrenze in index, 3 in formazione). */
+.card__icona {
+  font-family: var(--font-titolo);
+  font-size: 2rem;
+  color: var(--color-oro);
+  margin-bottom: 1rem;
+}
+.card__icona--sm { font-size: 1.8rem; }
+
+.card__titolo { margin-bottom: 1rem; }
+.card__testo  { font-size: 1rem; }
+.card__cta    { margin-top: 1.5rem; display: inline-block; }
+
+/* --- Tipografia di testo intro grande (4+ ricorrenze tra formazione/iscrizioni) --- */
+.intro-large {
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* --- CTA band: la fascia oro-piena di chiusura pagina (homepage e simili) --- */
+.cta-band {
+  background: var(--color-oro);
+  padding: 5rem 0;
+  text-align: center;
+}
+.cta-band__etichetta {
+  font-family: var(--font-titolo);
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-nero);
+  margin-bottom: 0.8rem;
+  opacity: 0.7;
+  display: block;
+}
+.cta-band h2 {
+  color: var(--color-nero);
+  margin-bottom: 1.2rem;
+}
+.cta-band p {
+  color: var(--color-nero);
+  font-style: italic;
+  margin-bottom: 2rem;
+  opacity: 0.85;
+}
+.cta-band .btn {
+  background: var(--color-nero);
+  color: var(--color-avorio);
+}
+
+/* --- Allineamento e spaziature ricorrenti --- */
+.testo-centrato       { text-align: center; }
+.spazio-sotto-piccolo { margin-bottom: 1rem; }
+.spazio-sotto-medio   { margin-bottom: 2rem; }
+.spazio-sotto-grande  { margin-bottom: 3rem; }
+.spazio-sopra-piccolo { margin-top: 1rem; }
+.spazio-sopra-medio   { margin-top: 2rem; }
+.spazio-sopra-grande  { margin-top: 3rem; }
+
+/* --- Card docente "stilo home" (cerchi 120px) — già usata 4 volte in index --- */
+.docente-circle {
+  text-align: center;
+  display: block;
+  color: inherit;
+}
+.docente-circle__foto {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: var(--color-grafite);
+  border: 1px solid rgba(184, 150, 90, 0.3);
+  margin: 0 auto 1rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--transizione), transform var(--transizione);
+}
+.docente-circle__foto img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.docente-circle__nome {
+  color: var(--color-avorio);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  font-family: var(--font-titolo);
+  font-weight: 400;
+  margin: 0;
+}
+.docente-circle__ruolo {
+  font-size: 0.85rem;
+  color: var(--color-oro);
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+a.docente-circle:hover .docente-circle__foto {
+  border-color: var(--color-oro);
+  transform: translateY(-2px);
+}
+a.docente-circle:hover .docente-circle__nome {
+  color: var(--color-oro-chiaro);
+}
+
+/* --- Badge "PROSSIMO EVENTO" sulla card-evento più imminente --- */
+/* La regola .evento-imminente è già definita in eventi.html ma usa la stringa
+   "Prossimo". Forniamo qui una classe dedicata, più visibile e riusabile,
+   se in futuro si volesse spostare gli stili nel CSS globale. */
+.evento-card--prossimo {
+  position: relative;
+  border-left-color: var(--color-oro) !important;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+}
+.evento-badge {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.8rem;
+  font-family: var(--font-titolo);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-nero);
+  background: var(--color-oro);
+  padding: 0.28rem 0.7rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* --- Banda discreta di scarcity etico (homepage / iscrizioni) ---
+   Wording prudente: non promette date che non sono confermate.
+   Comunica solo apertura del periodo audizioni e linka direttamente al form. */
+.banda-scarcity {
+  background: var(--color-grafite);
+  border-top: 1px solid rgba(184, 150, 90, 0.2);
+  border-bottom: 1px solid rgba(184, 150, 90, 0.2);
+  padding: 0.9rem 0;
+}
+.banda-scarcity a:hover {
+  color: var(--color-avorio);
+}
+
+/* --- Reassurance microcopy accanto ai pulsanti di submit --- */
+.form-reassurance {
+  font-family: var(--font-corpo);
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--color-grigio);
+  margin: 0;
+  line-height: 1.45;
+}
+.form-reassurance--scura {
+  color: rgba(197, 189, 180, 0.7);
+}
+.form-reassurance__riga {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.form-reassurance__riga + .form-reassurance__riga {
+  margin-left: 1rem;
+}
+.form-reassurance__icona {
+  color: var(--color-oro);
+  font-style: normal;
+}
+
+/* --- Tab attivi: rinforzo visibilità in formazione.html --- */
+/* .tab-btn vive negli stili interni di formazione.html ma ne potenziamo
+   lo stato attivo per renderlo immediatamente leggibile. */
+.tab-btn.attivo,
+.tab-btn[aria-selected="true"] {
+  border-bottom-width: 3px !important;
+  border-bottom-color: var(--color-oro) !important;
+  background: rgba(184, 150, 90, 0.10) !important;
+  color: var(--color-link) !important;
+  box-shadow: 0 1px 0 rgba(184, 150, 90, 0.25);
+  font-weight: 500;
+}
+
+/* --- Menu di ancore sticky per pagine corso (mobile only) --- */
+.ancore-corsi {
+  display: none; /* visibile solo su mobile, vedi @media sotto */
+}
+@media (max-width: 768px) {
+  .ancore-corsi {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    position: sticky;
+    top: var(--nav-height);
+    z-index: 50;
+    background: rgba(245, 240, 232, 0.97);
+    backdrop-filter: blur(6px);
+    padding: 0.6rem var(--spazio-md);
+    margin: 0 calc(var(--spazio-md) * -1) 1rem;
+    border-bottom: 1px solid rgba(184, 150, 90, 0.25);
+  }
+  .ancore-corsi a {
+    flex-shrink: 0;
+    font-family: var(--font-titolo);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-link);
+    padding: 0.45rem 0.8rem;
+    border: 1px solid rgba(122, 95, 48, 0.3);
+    background: var(--color-avorio);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .ancore-corsi a:hover,
+  .ancore-corsi a:focus {
+    border-color: var(--color-oro);
+    background: rgba(184, 150, 90, 0.08);
+  }
+}
+
+/* ============================================================
+   ACCESSIBILITÀ — focus visibile, skip link, riduzione movimento
+   ============================================================ */
+
+/* Focus chiaramente visibile su tutti gli elementi interattivi */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-oro);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip link "Vai al contenuto" */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--color-nero);
+  color: var(--color-oro);
+  padding: 0.8rem 1.4rem;
+  font-family: var(--font-titolo);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  z-index: 10000;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--color-oro);
+}
+
+/* Form: messaggi di errore accessibili */
+.form-errore {
+  display: block;
+  font-family: var(--font-corpo);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--color-rosso);
+  margin-top: 0.4rem;
+  min-height: 1.2em;
+}
+
+.form--chiaro .form-errore {
+  color: #e8a4a4;
+}
+
+.form-gruppo input[aria-invalid="true"],
+.form-gruppo select[aria-invalid="true"],
+.form-gruppo textarea[aria-invalid="true"] {
+  border-bottom-color: var(--color-rosso);
+}
+
+/* Stato di submit: live region (aria-live) per screen reader */
+.form-stato {
+  font-family: var(--font-corpo);
+  font-size: 0.95rem;
+}
+
+/* Indica la pagina corrente nella nav (aria-current) */
+.nav__link[aria-current="page"] {
+  color: var(--color-oro);
+}
+.nav__link[aria-current="page"]::after {
+  width: 100%;
+}
+
+/* Preferenze movimento ridotto */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
