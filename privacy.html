@@ -78,6 +78,9 @@
       border-collapse: collapse;
       margin: 1rem 0;
       font-size: 0.95rem;
+      /* fix overflow R17 — URL e parole lunghe non sforano la cella su mobile */
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
     }
     .legale table th,
     .legale table td {
@@ -85,6 +88,9 @@
       padding: 0.7rem 0.9rem;
       border-bottom: 1px solid rgba(184, 150, 90, 0.25);
       vertical-align: top;
+      /* fix overflow R17 — testo lungo si spezza, niente scroll laterale */
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
     .legale table th {
       font-family: var(--font-titolo);

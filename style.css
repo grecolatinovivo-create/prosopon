@@ -55,6 +55,14 @@
   padding: 0;
 }
 
+/* Anti-overflow orizzontale globale (R17 — fix swipe laterale mobile)
+   Rete di sicurezza: blocca lo scroll orizzontale del documento.
+   Usiamo `clip` (anziché `hidden`) per non interferire con position:sticky. */
+html, body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
 html {
   scroll-behavior: smooth;
   font-size: 16px;
@@ -73,6 +81,15 @@ body {
 img {
   max-width: 100%;
   display: block;
+}
+
+/* fix overflow R17 — email/url lunghe (es. puglisiandreasaverio@gmail.com)
+   non devono sforare il container su viewport stretti. */
+a[href^="mailto:"],
+a[href^="tel:"],
+a[href^="http"] {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 a {
@@ -670,6 +687,9 @@ p {
 .form-gruppo select,
 .form-gruppo textarea {
   width: 100%;
+  /* fix overflow R17 — su browser che ignorano box-sizing per i form, blindiamo */
+  max-width: 100%;
+  box-sizing: border-box;
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--color-grigio-light);
@@ -832,6 +852,40 @@ p {
   .banda-scarcity .contenitore {
     flex-direction: column !important;
     gap: 0.5rem !important;
+  }
+
+  /* fix overflow R17 — Banda accreditamento MIM: testo lungo con letter-spacing 0.22em
+     poteva sforare su schermi <360px. Riduco lo spacing e permetto il wrap pulito. */
+  .banda-accreditamento p {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+  .banda-accreditamento .sep {
+    margin: 0 0.35rem;
+  }
+
+  /* fix overflow R17 — accademia.html: termine greco "πρόσωπον" a 3rem + letter-spacing
+     sforava l'aside (~80px di padding) su iPhone SE. Riduco font e padding lato. */
+  .aside-prosopon-def {
+    padding: 2rem 1.4rem !important;
+  }
+  .aside-prosopon-def__termine {
+    font-size: clamp(1.8rem, 9vw, 3rem) !important;
+    letter-spacing: 0.04em !important;
+    overflow-wrap: anywhere;
+  }
+
+  /* fix overflow R17 — index.html riquadro PROSŌPON in homepage (sezione "Un percorso").
+     "PROSŌPON" a 3.5rem + letter-spacing 0.2em sforava su 320-360px viewport. */
+  .riquadro-prosopon__nome {
+    font-size: clamp(2rem, 10vw, 3.5rem) !important;
+    letter-spacing: 0.08em !important;
+  }
+  .riquadro-prosopon__sub {
+    font-size: 0.7rem !important;
+    letter-spacing: 0.18em !important;
   }
 
   /* R16 — Hero CTA: i due bottoni in stack pieno per evitare wrap rotto */
@@ -1633,6 +1687,10 @@ textarea:focus-visible,
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     scrollbar-width: thin;
+    /* fix overflow R17 — il container deve scrollare DENTRO sé stesso,
+       non spingere il body fuori dal viewport. */
+    max-width: 100%;
+    overscroll-behavior-x: contain;
   }
   .tab-nav .tab-btn,
   .tab-nav button {

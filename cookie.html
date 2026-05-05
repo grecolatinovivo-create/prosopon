@@ -78,6 +78,10 @@
       border-collapse: collapse;
       margin: 1rem 0;
       font-size: 0.93rem;
+      /* fix overflow R17 — il layout fixed permette al contenuto di rispettare la larghezza colonna */
+      table-layout: auto;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
     }
     .legale table th,
     .legale table td {
@@ -85,6 +89,15 @@
       padding: 0.7rem 0.9rem;
       border-bottom: 1px solid rgba(184, 150, 90, 0.25);
       vertical-align: top;
+      /* fix overflow R17 — URL lunghi possono spezzarsi senza rompere il layout */
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    /* fix overflow R17 — wrapper scrollabile per tabelle troppo larghe (mobile) */
+    .legale .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      max-width: 100%;
     }
     .legale table th {
       font-family: var(--font-titolo);
@@ -103,6 +116,9 @@
       line-height: 1.5;
       margin: 1rem 0;
       white-space: pre;
+      /* fix overflow R17 — il blocco di codice scrolla DENTRO sé stesso, non spinge il body */
+      max-width: 100%;
+      box-sizing: border-box;
     }
   </style>
 

@@ -10,6 +10,62 @@
 
 ---
 
+## 🔵 ROUND 17 — FIX OVERFLOW ORIZZONTALE MOBILE (2026-05-04)
+
+> **2026-05-04 — R17 Auditor: fix overflow orizzontale mobile (audit pagina per pagina)**
+>
+> Problema segnalato: "Il sito fa swipe a destra/sinistra in qualche pagina su mobile".
+> Diagnosi: classico overflow orizzontale del viewport. Su mobile lo scroll laterale non
+> deve mai esistere (eccetto in container opt-in tipo tab nav o caroselli).
+
+### Setup difensivo (rete di sicurezza)
+- [x] **Anti-overflow globale** in `style.css` (subito dopo il reset universale): `html, body { overflow-x: clip; max-width: 100%; }`. Usato `clip` (non `hidden`) per non rompere `position: sticky`. È un fallback — restano comunque corretti i fix specifici.
+- [x] **Viewport meta** verificato in tutte le 11 pagine HTML: presente e corretto (`width=device-width, initial-scale=1.0`).
+
+### Cause di overflow trovate e corrette
+
+1. **`index.html` riquadro "PROSŌPON" sezione "Un percorso articolato"** (line 281)
+   - "PROSŌPON" a `font-size: 3.5rem` + `letter-spacing: 0.2em`. Su 320–360px viewport il testo (≈350px solo larghezza) sforava il container.
+   - Aggiunte classi `.riquadro-prosopon__nome` / `__sub` + override mobile in style.css con `clamp(2rem, 10vw, 3.5rem)` e letter-spacing ridotto a 0.08em.
+
+2. **`accademia.html` aside-definizione greco "πρόσωπον"** (line 103)
+   - Termine greco a `3rem` + `letter-spacing: 0.1em` dentro aside con `padding: 3rem 2.5rem`. Su iPhone SE l'aside aveva ~280px utili e il testo ne occupava di più.
+   - Aggiunte classi `.aside-prosopon-def` / `__termine` + override mobile (`clamp(1.8rem, 9vw, 3rem)`, letter-spacing 0.04em, padding ridotto, `overflow-wrap: anywhere`).
+
+3. **`contatti.html` link mailto lunghi** (puglisiandreasaverio@gmail.com = 31 caratteri)
+   - Link `mailto:`, `tel:` e `http` non spezzabili sforavano il container su 320px.
+   - Aggiunta regola globale CSS: `a[href^="mailto:"], a[href^="tel:"], a[href^="http"] { overflow-wrap: anywhere; word-break: break-word; }`.
+
+4. **Banda accreditamento MIM (homepage)**
+   - `<p>` con `letter-spacing: 0.22em` + font Cinzel su `Ente accreditato dal Ministero dell'Istruzione · Progetto formativo riconosciuto`. Su <360px, parole come "Ministero" / "Istruzione" non spezzabili sforavano.
+   - Override mobile in style.css: font 0.62rem, letter-spacing 0.14em, `overflow-wrap: anywhere`, separatore con margin ridotto.
+
+5. **`privacy.html` e `cookie.html` tabelle legali**
+   - Tabelle `width: 100%` ma le celle con URL lunghi (es. `formsubmit.co/privacy`, `fonts.googleapis.com`) potevano sforare in mobile stretto.
+   - Aggiunti `word-break: break-word` + `overflow-wrap: anywhere` su `.legale table` e celle. Su `cookie.html` aggiunto anche `max-width: 100%` + `box-sizing: border-box` su `pre.snippet` (snippet codice) per garantire scroll INTERNO del blocco anziché spinta del body.
+
+6. **Tab Formazione (formazione.html) — scroll-x container**
+   - `.tab-nav` su mobile aveva `flex-wrap: nowrap; overflow-x: auto` ma mancava `max-width: 100%` esplicito: in alcuni casi limite poteva spingere il body.
+   - Aggiunto `max-width: 100%` + `overscroll-behavior-x: contain` (impedisce il "rubber-band" laterale di iOS).
+
+7. **Form input/select/textarea**
+   - Già `width: 100%`, ma in alcuni browser (Safari iOS legacy) i form ignorano `box-sizing` ereditato. Aggiunti esplicitamente `max-width: 100%` + `box-sizing: border-box` per blindare.
+
+### Verifiche grep finali
+- `100vw` in HTML/CSS: **0 occorrenze** (escluso il TODO.md). Pulito.
+- `width: ###px` (fissi >=100px) in HTML/CSS: solo `width: 120px` (avatar icona biblioteca, non problematico).
+- `margin: -…` o `margin-right/left: -…`: **0 occorrenze**.
+- `min-width: ###px` (fissi): **0 occorrenze** (solo media query).
+- `iframe / embed / object`: **0 occorrenze** (nessuna mappa embed pericolosa).
+- Tutti gli elementi `position: fixed` (sticky-cta-mobile, wa-fab, modale-docente, nav__menu) usano `left: 0; right: 0` (non `width: 100vw`) e dimensioni controllate.
+
+### Possibili residui da verificare in browser reale
+- iPhone SE 1ª gen (320px viewport): tutti i copy con letter-spacing alto sopra 0.18em sono potenzialmente borderline. Da occhiare in particolare la card "Prossimo evento" e i bottoni con padding generoso.
+- Android piccoli (360px): badge MIM e banda scarcity ora ridimensionati, ma da verificare estetica.
+- Modali docenti su mobile in landscape (height stretta): la foto 16:9 ha `height: 320px` fissa, da verificare che non spinga il body verticalmente (problema diverso ma adiacente).
+
+---
+
 ## 🔵 ROUND 16 — MOBILE OPTIMIZATION (UX + Neuro + Performance) (2026-05-04)
 
 > **2026-05-04 — R16 Mobile: applicato pacchetto coordinato fix mobile (UX + Neuro + Performance)**
