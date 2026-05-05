@@ -683,7 +683,7 @@ p {
   margin-bottom: 0.4rem;
 }
 
-.form-gruppo input,
+.form-gruppo input:not([type="checkbox"]):not([type="radio"]),
 .form-gruppo select,
 .form-gruppo textarea {
   width: 100%;
@@ -713,6 +713,70 @@ p {
 .form-gruppo textarea {
   resize: vertical;
   min-height: 100px;
+}
+
+/* R19 — Fix consenso privacy GDPR (mobile)
+   Causa: il selettore `.form-gruppo input` applicava width:100% + min-height:44px
+   a TUTTI gli input inclusi i checkbox del consenso. Il checkbox occupava
+   l'intera larghezza del flex container e lo span del testo veniva schiacciato
+   in una colonna larga 1ch, impilando ogni parola in verticale.
+   Fix: i selettori sopra ora escludono [type="checkbox"] e [type="radio"];
+   qui sotto regole esplicite per il blocco label-checkbox. */
+.form-gruppo input[type="checkbox"],
+.form-gruppo input[type="radio"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  min-width: 1.15rem;
+  min-height: 1.15rem;
+  max-width: 1.15rem;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: auto;
+  appearance: auto;
+  accent-color: var(--color-oro);
+  cursor: pointer;
+}
+
+/* Label che contiene un checkbox (consenso privacy) — forza riga orizzontale */
+.form-gruppo label:has(> input[type="checkbox"]),
+.form-gruppo label:has(> input[type="radio"]) {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-corpo);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-grafite);
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+/* Lo span con il testo del consenso deve avvolgersi naturalmente,
+   prendendo tutto lo spazio rimanente accanto al checkbox. */
+.form-gruppo label:has(> input[type="checkbox"]) > span,
+.form-gruppo label:has(> input[type="radio"]) > span {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: block;
+}
+
+.form-gruppo label:has(> input[type="checkbox"]) a,
+.form-gruppo label:has(> input[type="radio"]) a {
+  color: var(--color-oro-scuro);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.form--chiaro .form-gruppo label:has(> input[type="checkbox"]) a,
+.form--chiaro .form-gruppo label:has(> input[type="radio"]) a {
+  color: var(--color-oro-chiaro);
 }
 
 /* Form su sfondo scuro */

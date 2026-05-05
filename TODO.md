@@ -10,6 +10,44 @@
 
 ---
 
+## 🔴 ROUND 19 — FIX LAYOUT CONSENSO PRIVACY GDPR (mobile) (2026-05-05)
+
+> **2026-05-04 — R19: fix layout consenso privacy GDPR rotto su mobile (verticale, tagliato fuori dal viewport)**
+>
+> **Sintomo segnalato dall'utente (screenshot iPhone su `contatti.html`):** il blocco
+> di consenso privacy GDPR ("Ho letto l'informativa privacy, acconsento al trattamento
+> dei dati…") era renderizzato verticalmente sulla destra del viewport, una parola/sillaba
+> per riga ("Ho", "l'inf", "priv", "acc", "al", "trat"…), tagliato fuori dallo schermo,
+> con scrollbar interno visibile. Layout completamente rotto.
+>
+> **Causa root:** in `style.css` la regola generica `.form-gruppo input, .form-gruppo select,
+> .form-gruppo textarea { width: 100%; min-height: 44px; padding: 0.85rem 0; ... }` colpiva
+> ANCHE il `<input type="checkbox">` del consenso privacy. Il checkbox prendeva quindi
+> 100% della larghezza del flex container (`<label style="display:flex">`) e occupava
+> tutta la riga; lo `<span>` del testo veniva schiacciato in una colonna larga ~1ch e
+> ogni parola si impilava verticalmente. Il `flex-shrink:0` sul checkbox (inline)
+> peggiorava la situazione bloccando il restringimento.
+>
+> **Fix applicato (style.css ~riga 686-790):**
+> 1. Modificato il selettore generico in `.form-gruppo input:not([type="checkbox"]):not([type="radio"]), .form-gruppo select, .form-gruppo textarea` — esclude esplicitamente checkbox e radio dal `width:100%`/`min-height:44px`.
+> 2. Aggiunte regole esplicite `.form-gruppo input[type="checkbox"], .form-gruppo input[type="radio"]` con `width: 1.15rem`, `height: 1.15rem`, `flex: 0 0 auto`, `accent-color: oro`, `appearance: auto` (riattiva il rendering nativo del checkbox, sovrascritto da `-webkit-appearance: none` ereditato).
+> 3. Aggiunte regole `.form-gruppo label:has(> input[type="checkbox"])` per garantire che il label-consenso sia un flex orizzontale su tutta la larghezza del form, con lo `<span>` di testo che cresce a `flex: 1 1 auto`, `min-width: 0` (evita lock di overflow), `line-height: 1.5`, `font-size: 0.95rem` per leggibilità mobile.
+> 4. Link "informativa privacy" dentro il consenso forzato a `color: var(--color-oro-scuro)` + `text-decoration: underline` + `text-underline-offset: 2px` (variante chiara su `.form--chiaro` per il form newsletter su sfondo scuro).
+
+### File toccati
+- [x] `style.css` riga ~686 (selettore `.form-gruppo input` esteso con `:not([type="checkbox"]):not([type="radio"])`) + nuovo blocco regole R19 a riga ~717-790. *(UI/UX R19)*
+
+### Form verificati (struttura HTML identica in tutti e 4)
+- [x] `contatti.html` form contatto principale (label `privacy-c`, line 209-213). *(UI/UX R19)*
+- [x] `contatti.html` form newsletter (label `privacy-nl`, line 268-272). Stile chiaro su sfondo scuro coperto da `.form--chiaro` override. *(UI/UX R19)*
+- [x] `iscrizioni.html` form audizione triennale (label `privacy-aud`, line 269-272). *(UI/UX R19)*
+- [x] `iscrizioni.html` form iscrizione corsi serali (label `privacy-isc`, line 358-361). *(UI/UX R19)*
+
+### Risultato atteso
+Su tutti i form, il blocco consenso ora appare come una riga normale sotto il textarea/ultimo campo: checkbox quadrato 1.15rem allineato in alto a sinistra, testo del label che avvolge naturalmente sulla destra a piena larghezza, link "informativa privacy" sottolineato in oro. Niente scroll interno, niente impilamento verticale, niente overflow.
+
+---
+
 ## 🔵 ROUND 18 — DECLUTTER HOME (versione MEDIA) (2026-05-04)
 
 > **2026-05-04 — R18 Declutter MEDIA: home alleggerita (MIM 1×, sticky+FAB rimossi solo dalla home, banda scarcity rimossa, etichetta location rimossa)**
