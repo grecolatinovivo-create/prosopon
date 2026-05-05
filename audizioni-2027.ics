@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Accademia PROSOPON//Audizioni 2027-2028//IT
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:audizioni-2027-prosopon@accademiaprosopon.it
+DTSTAMP:20260504T120000Z
+DTSTART:20270601T100000
+DTEND:20270601T180000
+SUMMARY:Audizioni Triennale - Accademia PROSOPON
+DESCRIPTION:[DATA AUDIZIONI 2027/2028 - DA DEFINIRE]\n\nAudizioni per il Corso Triennale Accademico dell'Accademia di Teatro Classico e Arti Performative PROSOPON.\n\nMaggiori informazioni: https://www.accademiaprosopon.it/iscrizioni.html\n\nNOTA: data placeholder - aggiornare appena confermata dalla direzione.
+LOCATION:Roma (sede da confermare)
+URL:https://www.accademiaprosopon.it/iscrizioni.html#form-audizione
+STATUS:TENTATIVE
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

@@ -328,7 +328,7 @@ p {
   background: var(--color-oro-chiaro);
 }
 
-/* Hamburger mobile */
+/* Hamburger mobile — R16: touch target 44x44 minimo (WCAG AA 2.5.5) */
 .nav__hamburger {
   display: none;
   flex-direction: column;
@@ -336,7 +336,11 @@ p {
   cursor: pointer;
   background: none;
   border: none;
-  padding: 4px;
+  padding: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav__hamburger span {
@@ -367,6 +371,15 @@ p {
   opacity: 0.25;
 }
 
+/* R16: hero mobile bg ridotto (86 KB invece di 692 KB) per LCP mobile.
+   Servito sotto i 768px tramite media query CSS — preload nelle pagine
+   gestito via <link rel="preload" media="..."> nel <head>. */
+@media (max-width: 768px) {
+  .hero__sfondo {
+    background-image: url('assets/home-mobile.webp');
+  }
+}
+
 .hero__contenuto {
   position: relative;
   z-index: 1;
@@ -387,6 +400,7 @@ p {
 .hero__titolo {
   color: var(--color-avorio);
   margin-bottom: var(--spazio-sm);
+  text-wrap: balance; /* R16: distribuisce le parole in righe più armoniche (browser moderni). */
 }
 
 /* Riga "e Arti Performative" trattata in dimensione minore (stessa famiglia
@@ -659,9 +673,10 @@ p {
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--color-grigio-light);
-  padding: 0.6rem 0;
+  padding: 0.85rem 0; /* R16: aumentato da 0.6rem per touch target 44px */
+  min-height: 44px; /* R16: WCAG AA touch target su mobile */
   font-family: var(--font-corpo);
-  font-size: 1rem;
+  font-size: 1rem; /* anti-zoom iOS (≥16px) */
   color: var(--color-nero);
   outline: none;
   transition: border-color var(--transizione);
@@ -736,6 +751,8 @@ p {
   line-height: 1;
   font-family: var(--font-corpo);
   transition: color var(--transizione);
+  min-width: 44px; /* R16: touch target */
+  min-height: 44px;
 }
 
 .modale__chiudi:hover {
@@ -804,6 +821,40 @@ p {
   .hero__titolo-sub {
     font-size: 0.5em;
   }
+
+  /* R16 — Banda scarcity: letter-spacing meno aggressivo + Candidati su riga propria */
+  .banda-scarcity {
+    padding: 0.8rem 0;
+  }
+  .banda-scarcity .contenitore > span:nth-of-type(2) {
+    letter-spacing: 0.14em !important;
+  }
+  .banda-scarcity .contenitore {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+
+  /* R16 — Hero CTA: i due bottoni in stack pieno per evitare wrap rotto */
+  .hero__contenuto > div:last-child .btn {
+    width: 100%;
+  }
+}
+
+/* R16 — Hero h1 fix overflow su iPhone SE / dispositivi <360px */
+@media (max-width: 360px) {
+  .hero__titolo {
+    font-size: 1.55rem;
+    letter-spacing: 0.02em;
+    word-spacing: -0.05em;
+  }
+}
+
+/* R16 — Safe-area-inset (iPhone notch / home indicator) */
+.nav {
+  padding-top: env(safe-area-inset-top, 0);
+}
+.footer {
+  padding-bottom: calc(var(--spazio-md) + env(safe-area-inset-bottom, 0));
 }
 
 /* ============================================================
@@ -1347,6 +1398,9 @@ textarea:focus-visible,
   flex-direction: column;
   gap: 1.2rem;
   max-height: 92vh;
+  /* R16: previene il rimbalzo del body durante lo scroll della modale su iOS */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modale-ritratto__materia {
@@ -1473,8 +1527,11 @@ textarea:focus-visible,
   position: absolute;
   top: 1rem;
   right: 1rem;
-  width: 38px;
-  height: 38px;
+  /* R16: touch target 44x44 (WCAG AA 2.5.5) */
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
   background: rgba(245, 240, 232, 0.92);
   border: 1px solid var(--color-oro);
@@ -1501,8 +1558,11 @@ textarea:focus-visible,
   .modale-docente { padding: 0; }
   .modale-ritratto__pannello {
     grid-template-columns: 1fr;
+    /* R16: 100dvh con fallback 100vh — su iOS evita il taglio della UI da barra browser */
     max-height: 100vh;
+    max-height: 100dvh;
     height: 100vh;
+    height: 100dvh;
     width: 100%;
     border: none;
     border-radius: 0;
@@ -1520,7 +1580,8 @@ textarea:focus-visible,
     object-position: center top;
   }
   .modale-ritratto__corpo {
-    padding: 1.8rem 1.4rem 1.6rem;
+    /* R16: padding bottom rispetta safe-area iOS (home indicator) */
+    padding: 1.8rem 1.4rem max(1.6rem, env(safe-area-inset-bottom));
     max-height: none;
     flex: 1;
   }
@@ -1547,3 +1608,307 @@ textarea:focus-visible,
   }
 }
 
+
+/* ============================================================
+   ROUND 16 — MOBILE OPTIMIZATION (UX + Neuro + Performance)
+   ============================================================ */
+
+/* --- FAQ touch target (B1) --- */
+.faq-domanda {
+  min-height: 48px;
+  padding: 0.6rem 0.2rem;
+}
+@media (max-width: 768px) {
+  .faq-item {
+    /* L'intera riga FAQ diventa tappabile (anche bordi laterali) */
+    cursor: pointer;
+  }
+}
+
+/* --- Tab Formazione: scroll orizzontale fluido (B6) --- */
+@media (max-width: 768px) {
+  .tab-nav {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  .tab-nav .tab-btn,
+  .tab-nav button {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+  /* Su mobile la .ancore-corsi (sticky chip) è ridondante con .tab-nav scrollabile.
+     La nascondiamo per evitare doppia navigazione confondente. */
+  .ancore-corsi {
+    display: none !important;
+  }
+}
+
+/* --- Badge eventi mobile (B7) — pill in alto invece che nascosto --- */
+@media (max-width: 768px) {
+  .evento-tipo {
+    display: inline-block !important;
+    order: -1;
+    margin-bottom: 0.4rem;
+    align-self: flex-start;
+    background: rgba(184, 150, 90, 0.12);
+    color: var(--color-oro-scuro);
+    font-family: var(--font-titolo);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(184, 150, 90, 0.4);
+    line-height: 1;
+  }
+  .sezione--scura .evento-tipo {
+    background: rgba(184, 150, 90, 0.15);
+    color: var(--color-oro-chiaro);
+  }
+}
+
+/* --- Body padding-bottom su mobile per non coprire il contenuto con la sticky bar (C1) --- */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 64px;
+  }
+}
+
+/* --- STICKY BOTTOM CTA MOBILE (C1) --- */
+.sticky-cta-mobile {
+  display: none; /* visible solo <768px */
+}
+@media (max-width: 768px) {
+  .sticky-cta-mobile {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: rgba(14, 13, 11, 0.97);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(184, 150, 90, 0.3);
+    padding: 0.7rem 0.9rem max(0.7rem, env(safe-area-inset-bottom));
+    box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.25);
+  }
+  .sticky-cta-mobile__btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-oro);
+    color: var(--color-nero);
+    font-family: var(--font-titolo);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.85rem 1rem;
+    min-height: 44px;
+    text-decoration: none;
+    transition: background var(--transizione);
+  }
+  .sticky-cta-mobile__btn:hover,
+  .sticky-cta-mobile__btn:focus-visible {
+    background: var(--color-oro-chiaro);
+    color: var(--color-nero);
+  }
+  .sticky-cta-mobile__tel {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-oro);
+    color: var(--color-oro);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background var(--transizione), color var(--transizione);
+  }
+  .sticky-cta-mobile__tel:hover,
+  .sticky-cta-mobile__tel:focus-visible {
+    background: var(--color-oro);
+    color: var(--color-nero);
+  }
+  .sticky-cta-mobile__tel svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* --- WHATSAPP FAB (C2) --- */
+.wa-fab {
+  position: fixed;
+  right: 1rem;
+  bottom: 1.5rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  z-index: 60;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.wa-fab:hover,
+.wa-fab:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+  outline: 2px solid var(--color-oro);
+  outline-offset: 3px;
+}
+.wa-fab svg {
+  width: 30px;
+  height: 30px;
+  fill: #fff;
+}
+@media (max-width: 768px) {
+  /* Su mobile la sticky bar occupa i bottom 64px → spostiamo il FAB sopra */
+  .wa-fab {
+    bottom: 80px;
+  }
+}
+
+/* --- Trust pill MIM nell'hero homepage (C4) --- */
+.hero__trust-pill {
+  display: inline-block;
+  font-family: var(--font-titolo);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-avorio);
+  background: rgba(14, 13, 11, 0.45);
+  border: 1px solid rgba(184, 150, 90, 0.55);
+  padding: 0.35rem 0.85rem;
+  margin: 0.4rem auto 0.9rem;
+  line-height: 1.3;
+  max-width: max-content;
+}
+@media (max-width: 480px) {
+  .hero__trust-pill {
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    padding: 0.3rem 0.7rem;
+  }
+}
+
+/* --- Hero: link sottolineato sotto il bottone primario (C3) --- */
+.hero__link-secondario {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--font-titolo);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-avorio-scuro);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-color: rgba(184, 150, 90, 0.6);
+  transition: color var(--transizione), text-decoration-color var(--transizione);
+}
+.hero__link-secondario:hover,
+.hero__link-secondario:focus-visible {
+  color: var(--color-oro);
+  text-decoration-color: var(--color-oro);
+}
+
+/* --- Tap-to-call nel footer (C8) --- */
+.footer__tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-grigio-light);
+  text-decoration: none;
+  transition: color var(--transizione);
+}
+.footer__tel:hover,
+.footer__tel:focus-visible {
+  color: var(--color-oro);
+}
+.footer__tel svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+/* --- Counter caratteri textarea (C7 — form audizione) --- */
+.form-counter {
+  display: block;
+  font-family: var(--font-corpo);
+  font-size: 0.78rem;
+  color: var(--color-grigio);
+  text-align: right;
+  margin-top: 0.3rem;
+  font-style: italic;
+  letter-spacing: 0;
+}
+.form--chiaro .form-counter {
+  color: rgba(197, 189, 180, 0.75);
+}
+.form-counter--limite {
+  color: var(--color-rosso);
+  font-style: normal;
+}
+
+/* --- Grazie.html: blocco "Mentre aspetti" (C5) --- */
+.grazie-engagement {
+  background: var(--color-avorio-scuro);
+  border-left: 3px solid var(--color-oro);
+  padding: 1.8rem 1.6rem;
+  margin: 2.5rem auto 0;
+  max-width: 560px;
+  text-align: left;
+}
+.grazie-engagement__titolo {
+  font-family: var(--font-titolo);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-oro-scuro);
+  margin: 0 0 1rem;
+}
+.grazie-engagement__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+}
+.grazie-engagement__lista a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-corpo);
+  font-size: 1rem;
+  color: var(--color-grafite);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(184, 150, 90, 0.5);
+  padding: 0.5rem 0;
+  min-height: 44px;
+  transition: color var(--transizione);
+}
+.grazie-engagement__lista a:hover,
+.grazie-engagement__lista a:focus-visible {
+  color: var(--color-link);
+  text-decoration-color: var(--color-oro);
+}
+.grazie-engagement__lista span[aria-hidden="true"] {
+  display: inline-block;
+  width: 26px;
+  text-align: center;
+  color: var(--color-oro);
+  font-size: 1.1rem;
+}

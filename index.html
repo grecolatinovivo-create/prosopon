@@ -31,12 +31,23 @@
   <meta name="twitter:description" content="Formazione triennale, corsi serali, laboratori e masterclass nel segno della grande tradizione teatrale." />
   <meta name="twitter:image" content="https://www.accademiaprosopon.it/assets/home.webp" />
 
+  <!-- R16: Preload hero responsive (LCP) — desktop full + mobile compresso -->
+  <link rel="preload" as="image" href="assets/home.webp" media="(min-width: 769px)" />
+  <link rel="preload" as="image" href="assets/home-mobile.webp" media="(max-width: 768px)" />
+
   <!-- Google Fonts (preconnect + stylesheet, anti render-blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400&display=swap" />
 
   <link rel="stylesheet" href="style.css" />
+
+  <!-- R16 — Tracking placeholder (commentati, attivare quando IDs disponibili) -->
+  <!-- Meta Pixel — sostituire REPLACE_WITH_META_PIXEL_ID con il pixel ID quando attivato -->
+  <!-- <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','REPLACE_WITH_META_PIXEL_ID');fbq('track','PageView');</script> -->
+  <!-- GA4 — sostituire REPLACE_WITH_GA4_MEASUREMENT_ID quando attivato -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=REPLACE_WITH_GA4_MEASUREMENT_ID"></script> -->
+  <!-- <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','REPLACE_WITH_GA4_MEASUREMENT_ID');</script> -->
 
   <!-- JSON-LD: EducationalOrganization -->
   <script type="application/ld+json">
@@ -172,6 +183,7 @@
     <div class="hero__sfondo"></div>
     <div class="hero__contenuto">
       <p class="hero__etichetta">Roma · Est. 2025</p>
+      <p class="hero__trust-pill">Ente accreditato dal Ministero dell'Istruzione</p>
       <h1 class="hero__titolo">
         Accademia di Teatro Classico
         <span class="hero__titolo-sub">e Arti Performative</span>
@@ -182,9 +194,10 @@
         Nel luogo dove la maschera rivela il volto.<br>
         Dove la voce antica ritrova il corpo vivo.
       </p>
-      <div style="display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap;">
+      <!-- R16 — CTA singolo (oro) + link sottolineato secondario per ridurre concorrenza visiva -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem;">
         <a href="iscrizioni.html#form-audizione" class="btn btn--oro">Iscriviti alle audizioni</a>
-        <a href="formazione.html#triennale" class="btn btn--contorno">Scopri il triennio</a>
+        <a href="formazione.html#triennale" class="hero__link-secondario">Scopri il triennio</a>
       </div>
     </div>
   </section>
@@ -201,7 +214,7 @@
     <div class="contenitore" style="display:flex; align-items:center; justify-content:center; gap:0.9rem; flex-wrap:wrap; text-align:center;">
       <span aria-hidden="true" style="display:inline-block; width:8px; height:8px; background:var(--color-oro); border-radius:50%;"></span>
       <span style="font-family:var(--font-titolo); font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-avorio);">
-        Audizioni triennale &middot; A.A. 2027/2028 &mdash; in apertura
+        Audizioni triennale &middot; A.A. 2027/2028 &middot; iscrizioni aperte
       </span>
       <a href="iscrizioni.html#form-audizione" style="font-family:var(--font-titolo); font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--color-oro); text-decoration:underline; text-underline-offset:4px;">Candidati</a>
     </div>
@@ -226,7 +239,7 @@
         <div style="background:var(--color-grafite); aspect-ratio:1/1; max-width:420px; width:100%; margin:0 auto; overflow:hidden; display:flex; align-items:center; justify-content:center;">
           <picture>
             <source srcset="assets/docenti/andrea-puglisi.webp" type="image/webp" />
-            <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Saverio Puglisi, direttore artistico dell'Accademia PROSŌPON" width="420" height="420" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:center 15%;" onerror="this.style.opacity:0.3" />
+            <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Saverio Puglisi, direttore artistico dell'Accademia PROSŌPON" width="420" height="420" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover; object-position:center 15%;" onerror="this.style.opacity:0.3" />
           </picture>
         </div>
         <div>
@@ -323,8 +336,8 @@
         <a href="docenti.html#puglisi" class="docente-circle" aria-label="Vai alla scheda di Andrea Saverio Puglisi">
           <div class="docente-circle__foto">
             <picture>
-              <source srcset="assets/docenti/andrea-puglisi.webp" type="image/webp" />
-              <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Saverio Puglisi" width="120" height="120" onerror="this.style.display='none'" />
+              <source srcset="assets/docenti/andrea-puglisi-mini.webp" type="image/webp" />
+              <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Saverio Puglisi" width="120" height="120" decoding="async" onerror="this.style.display='none'" />
             </picture>
           </div>
           <h3 class="docente-circle__nome">Andrea Saverio Puglisi</h3>
@@ -334,8 +347,8 @@
         <a href="docenti.html#rossetto" class="docente-circle" aria-label="Vai alla scheda di Elena Rossetto">
           <div class="docente-circle__foto">
             <picture>
-              <source srcset="assets/docenti/elena-rossetto.webp" type="image/webp" />
-              <img src="assets/docenti/elena-rossetto.jpg" alt="Ritratto di Elena Rossetto" width="120" height="120" loading="lazy" onerror="this.style.display='none'" />
+              <source srcset="assets/docenti/elena-rossetto-mini.webp" type="image/webp" />
+              <img src="assets/docenti/elena-rossetto.jpg" alt="Ritratto di Elena Rossetto" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none'" />
             </picture>
           </div>
           <h3 class="docente-circle__nome">Elena Rossetto</h3>
@@ -345,8 +358,8 @@
         <a href="docenti.html#sarti" class="docente-circle" aria-label="Vai alla scheda di Rachele Sarti">
           <div class="docente-circle__foto">
             <picture>
-              <source srcset="assets/docenti/rachele-sarti.webp" type="image/webp" />
-              <img src="assets/docenti/rachele-sarti.jpg" alt="Ritratto di Rachele Sarti" width="120" height="120" loading="lazy" onerror="this.style.display='none'" />
+              <source srcset="assets/docenti/rachele-sarti-mini.webp" type="image/webp" />
+              <img src="assets/docenti/rachele-sarti.jpg" alt="Ritratto di Rachele Sarti" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none'" />
             </picture>
           </div>
           <h3 class="docente-circle__nome">Rachele Sarti</h3>
@@ -356,8 +369,8 @@
         <a href="docenti.html#pentericci" class="docente-circle" aria-label="Vai alla scheda di Caterina Pentericci">
           <div class="docente-circle__foto">
             <picture>
-              <source srcset="assets/docenti/caterina-pentericci.webp" type="image/webp" />
-              <img src="assets/docenti/caterina-pentericci.jpg" alt="Ritratto di Caterina Pentericci" width="120" height="120" loading="lazy" onerror="this.style.display='none'" />
+              <source srcset="assets/docenti/caterina-pentericci-mini.webp" type="image/webp" />
+              <img src="assets/docenti/caterina-pentericci.jpg" alt="Ritratto di Caterina Pentericci" width="120" height="120" loading="lazy" decoding="async" onerror="this.style.display='none'" />
             </picture>
           </div>
           <h3 class="docente-circle__nome">Caterina Pentericci</h3>
@@ -422,6 +435,10 @@
           <div class="footer__logo">PROSŌPON<span>Accademia di Teatro Classico</span></div>
           <p>Centro di Teatro Classico e Arti Performative.<br>Direttore artistico: Andrea Saverio Puglisi.<br>Roma, dal 2025.</p>
           <p style="margin-top:0.8rem; font-size:0.9rem;"><a href="mailto:centroprosopon@gmail.com" style="color:var(--color-oro); text-decoration:underline; text-underline-offset:3px;">centroprosopon@gmail.com</a></p>
+          <a href="tel:+393480624140" class="footer__tel" aria-label="Chiama Accademia PROSŌPON">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.5c-1.2 0-2.4-.2-3.6-.6-.3-.1-.7 0-1 .2l-2.2 2.2c-2.8-1.4-5.1-3.7-6.5-6.5l2.2-2.2c.2-.3.3-.7.2-1-.4-1.2-.6-2.4-.6-3.6 0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1 0 9.4 7.6 17 17 17 .6 0 1-.4 1-1v-3.5c0-.6-.4-1-1-1z"/></svg>
+            +39 348 0624140
+          </a>
         </div>
         <div>
           <p class="footer__titolo">Navigazione</p>
@@ -458,6 +475,19 @@
       </div>
     </div>
   </footer>
+
+  <!-- R16 — STICKY CTA MOBILE (visibile <768px) -->
+  <aside class="sticky-cta-mobile" aria-label="Azioni rapide">
+    <a href="iscrizioni.html#form-audizione" class="sticky-cta-mobile__btn">Candidati alle audizioni</a>
+    <a href="tel:+393480624140" class="sticky-cta-mobile__tel" aria-label="Chiama PROSŌPON">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M20 15.5c-1.2 0-2.4-.2-3.6-.6-.3-.1-.7 0-1 .2l-2.2 2.2c-2.8-1.4-5.1-3.7-6.5-6.5l2.2-2.2c.2-.3.3-.7.2-1-.4-1.2-.6-2.4-.6-3.6 0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1 0 9.4 7.6 17 17 17 .6 0 1-.4 1-1v-3.5c0-.6-.4-1-1-1z"/></svg>
+    </a>
+  </aside>
+
+  <!-- R16 — WHATSAPP FAB -->
+  <a href="https://wa.me/393480624140?text=Ciao%20PROS%C5%8CPON%2C%20vorrei%20info%20su..." class="wa-fab" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp" title="Scrivici su WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 4.9L2 22l5.3-1.3c1.4.7 2.9 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3C4.2 15.1 3.8 13.6 3.8 12 3.8 7.5 7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2z"/></svg>
+  </a>
 
   <!-- ============ SCRIPT ============ -->
   <script>

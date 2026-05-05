@@ -10,6 +10,48 @@
 
 ---
 
+## 🔵 ROUND 16 — MOBILE OPTIMIZATION (UX + Neuro + Performance) (2026-05-04)
+
+> **2026-05-04 — R16 Mobile: applicato pacchetto coordinato fix mobile (UX + Neuro + Performance)**
+
+### 🟢 Performance — Quick wins
+
+- [x] **A1. Hero immagine mobile dedicata** — generato `assets/home-mobile.webp` (1280×698, q78, **86 KB** vs i 692 KB del desktop = -88%). CSS `.hero__sfondo @media (max-width:768px)` punta al nuovo file. `<link rel="preload" as="image" media="(min-width: 769px)">` per desktop e `media="(max-width: 768px)"` per mobile aggiunti in `index.html` per LCP ottimizzato.
+- [x] **A2. Google Fonts: 15 → 6 weights** — sostituito su tutti gli 11 HTML il vecchio URL multi-weight con `Cinzel:400,600 + Cormorant Garamond:400,500,400i + EB Garamond:400`. Riduzione stimata payload font da ~85 KB a ~32 KB (-62%).
+- [x] **A3. Foto docenti WebP rigenerate** — backup vecchi WebP in `assets/docenti/_backup_pre_r16/`. Rigenerate 8 foto con Pillow (cwebp non disponibile in sandbox) q=72 method=6. **Risultato**: media WebP scesa da ~140 KB a **40.9 KB** (-71%). Tutti i WebP ora effettivamente più leggeri dei JPG (era il problema R10). Marchi (57 KB) lasciato invariato come da specifica.
+- [x] **A4. Mini docenti homepage** — generate 4 versioni `*-mini.webp` (240×320, q80, 5-8 KB ciascuna) per Puglisi/Rossetto/Sarti/Pentericci. `<picture>` in `index.html` aggiornati per usare il mini come source primario WebP.
+- [x] **A5. `decoding="async"` sotto la fold** — applicato a tutte le `<img>` in `index.html` (5), `accademia.html` (1) e `docenti.html` (18).
+
+### 🟢 UX/UI — Fix critici mobile
+
+- [x] **B1. Touch targets WCAG AA (44×44 min)** — `.nav__hamburger` (44×44 + padding 10px), `.faq-domanda` (min-height 48), `.modale__chiudi` (44×44), `.modale-ritratto__chiudi` (38→44px), input/textarea/select form (`padding 0.85rem 0`, `min-height 44`, font-size 16px anti-zoom iOS).
+- [x] **B2. Hero h1 fix overflow <360px** — nuova media query `@media (max-width: 360px)` con `font-size: 1.55rem`, `letter-spacing: 0.02em`, `word-spacing: -0.05em`. Aggiunto `text-wrap: balance` su `.hero__titolo`.
+- [x] **B3. Banda scarcity** — `letter-spacing: 0.14em !important` su <480px, layout `flex-direction: column` con "Candidati" su riga propria. Testo aggiornato a "iscrizioni aperte" (urgency soft).
+- [x] **B4. CTA hero mobile** — i bottoni ora `width:100%` su <480px (stack obbligato).
+- [x] **B5. Modale docente — fix scroll-trap iOS** — `.modale-ritratto__pannello` usa `100dvh` con fallback `100vh`. `.modale-ritratto__corpo` ha `overscroll-behavior: contain` + `padding-bottom: max(1.6rem, env(safe-area-inset-bottom))` su mobile.
+- [x] **B6. Tab Formazione** — `.tab-nav` su <768px: `flex-wrap: nowrap !important`, `overflow-x: auto`, `-webkit-overflow-scrolling: touch`, `scroll-snap-type: x mandatory`. `.ancore-corsi` nascoste (ridondanti con tab scrollabile).
+- [x] **B7. Badge eventi mobile** — `.evento-tipo` non più nascosto su mobile, ora pill `order: -1` in alto. Modificato anche il `<style>` interno di `eventi.html`.
+- [x] **B8. Safe-area-inset (iPhone notch)** — `.nav { padding-top: env(safe-area-inset-top, 0) }`, `.footer { padding-bottom: calc(... + env(safe-area-inset-bottom)) }`, sticky bar con `padding-bottom: max(0.7rem, env(safe-area-inset-bottom))`.
+
+### 🟢 Conversion — Neuromarketing
+
+- [x] **C1. Sticky bottom CTA mobile** — nuovo componente `.sticky-cta-mobile` (fixed bottom, z-index 50, sfondo nero opaco) con bottone primario contestuale + icona telefono cerchio oro. Applicato su 5 pagine (`index.html`, `accademia.html`, `formazione.html`, `docenti.html`, `biblioteca.html`, `eventi.html`). NON applicato su `iscrizioni.html`/`contatti.html` (form già presenti) e `privacy.html`/`cookie.html`/`grazie.html` (legal/post-form). Body padding-bottom 64px su mobile per evitare overlap col footer.
+- [x] **C2. WhatsApp FAB** — `.wa-fab` floating (cerchio 56×56, verde #25D366, SVG inline, z-index 60) su tutte le 11 pagine. Link `https://wa.me/393480624140?text=Ciao%20PROSŌPON%2C%20vorrei%20info%20su...`. Su mobile spostato a `bottom: 80px` per non sovrapporsi alla sticky bar.
+- [x] **C3. Singolo CTA hero homepage** — "Iscriviti alle audizioni" rimane btn oro primario, "Scopri il triennio" trasformato in link sottolineato (`.hero__link-secondario`) sotto al bottone, riducendo concorrenza visiva.
+- [x] **C4. MIM trust pill nel first fold** — nuovo `.hero__trust-pill` posizionato sotto "Roma · Est. 2025" e SOPRA al titolo, prima del fold mobile. Sfondo nero trasparente, micro-font, contorno oro.
+- [x] **C5. `grazie.html` reattivato** — headline da "Il tuo messaggio è arrivato" a **"Sei dentro. Ora seguici per non perdere la data delle audizioni."** Aggiunto blocco `.grazie-engagement` con 3 azioni: Instagram (placeholder `REPLACE_WITH_IG_HANDLE`), download `audizioni-2027.ics` (creato file con placeholder data), iscrizione newsletter. Aggiunto commento per evento conversione GA4/Meta Pixel.
+- [x] **C6. Pixel tracking placeholder** — snippet commentati con `REPLACE_WITH_META_PIXEL_ID` e `REPLACE_WITH_GA4_MEASUREMENT_ID` aggiunti prima di `</head>` su tutte le 11 pagine (incl. `grazie.html` con commento `gtag('event', 'conversion'...)`).
+- [x] **C7. Microcopy form audizione** — textarea motivazione: label da "Raccontaci cosa ti ha portato a voler studiare il teatro classico" a **"In 2 righe: perché PROSŌPON?"** + `maxlength="280"` + counter caratteri live (`form-counter` CSS + JS inline). Banda scarcity: aggiunto "iscrizioni aperte". Headline grazie: vedi C5.
+- [x] **C8. Tap-to-call globale** — link `tel:+393480624140` con icona telefono SVG aggiunto al footer di tutte le 11 pagine (classe `.footer__tel`).
+
+### 📦 File creati/modificati
+
+- **Creati**: `assets/home-mobile.webp` (86 KB), `assets/docenti/*-mini.webp` (4 file), `audizioni-2027.ics`, `assets/docenti/_backup_pre_r16/` (9 file).
+- **Modificati**: tutti gli 11 HTML (`index.html`, `accademia.html`, `formazione.html`, `docenti.html`, `biblioteca.html`, `eventi.html`, `iscrizioni.html`, `contatti.html`, `privacy.html`, `cookie.html`, `grazie.html`), `style.css` (+~365 righe in coda + 8 modifiche puntuali).
+- **Rigenerati**: 8 foto WebP in `assets/docenti/`.
+
+---
+
 ## 🆕 ROUND 15 — Fix tipografico "e Arti Performative" + Prosopon → PROSŌPON (2026-05-05)
 
 - [x] 2026-05-04 — R15: 'e Arti Performative' in stesso case e font ridotto + Prosopon → PROSŌPON ovunque nel testo visibile (URL/email/path tecnici intatti). **(A) Fix tipografico** `style.css`: rimossi `text-transform: uppercase` e `letter-spacing: 0.3em` da `.hero__titolo-sub`; rimossi/normalizzati su `.nav__logo .nav__logo-sub` (text-transform: none, letter-spacing 0.2em — stesso del titolo). Ora "e Arti Performative" è renderizzato in Cinzel, stesso case e letter-spacing del titolo principale, solo dimensione ridotta (0.55em hero, 0.6em logo header) e opacity 0.85 per gerarchia. Adattamento mobile @480 mantenuto, semplificato. Aggiunto fallback `'EB Garamond'` in `--font-titolo` per coprire glifo Ō se Cinzel non lo include. **(B) Sostituzione testo visibile**: 138 occorrenze di "Prosopon" → "PROSŌPON" su 12 file (10 HTML + site.webmanifest). Coperti: title, meta description, OG/Twitter, JSON-LD (`name`, `alternateName`, `provider.name`), header logo, hero H1, footer logo, footer copyright, payoff "«PROSŌPON»: la maschera...", bio docenti, CTA, webmanifest `name`/`short_name`. Carattere Ō (U+014C) usato direttamente in UTF-8 (no entity HTML). **(C) Verifica**: grep finale "Prosopon" testo visibile = 0; grep "PROSŌPON" = 138; URL `accademiaprosopon.it` = 55 (intatti); email `centroprosopon@gmail.com` = 27 (intatte); sitemap.xml invariato. File .md (TODO/README/etc) non toccati: documentazione interna, non testo visibile pubblico.
@@ -427,6 +469,19 @@ Lista finale, ordinata per priorità. Tutti i punti qui dipendono da **dati o de
 11. [ ] **Test focus trap modali docenti** (Tab / Shift+Tab / Esc / click outside) e navigazione tastiera tab Formazione (frecce / Home / End).
 12. [ ] **Test screen reader** (VoiceOver `Cmd+F5` su macOS oppure NVDA su Windows): skip-link, `aria-live` form, label card-docente.
 13. [ ] **Cross-browser**: Chrome + Safari + Firefox + Edge (almeno desktop), iOS Safari + Android Chrome (almeno una verifica).
+
+### 🟦 Round 16 — Placeholder marketing/analytics da sostituire
+
+> Tutti commentati e marcati con stringhe identificabili via `grep`. Quando l'utente fornirà i valori, basta:
+> - `grep -rn "REPLACE_WITH_META_PIXEL_ID" .` → 11 occorrenze (una per pagina) → sostituire con il Pixel ID e DECOMMENTARE i 2 blocchi `<!-- ... -->` per ogni pagina.
+> - `grep -rn "REPLACE_WITH_GA4_MEASUREMENT_ID" .` → idem, sostituire con `G-XXXXXXXXXX` e decommentare.
+> - `grep -rn "REPLACE_WITH_IG_HANDLE" .` → 1 occorrenza in `grazie.html` (link Instagram).
+> - `audizioni-2027.ics`: sostituire `DTSTART:20270601T100000` e `DTEND:20270601T180000` con le date reali, e nella `DESCRIPTION` rimuovere "[DATA AUDIZIONI 2027/2028 - DA DEFINIRE]". Aggiornare anche il copy della banda scarcity in `index.html` se opportuno.
+
+- [ ] **R16-P1. Meta Pixel ID** — necessario per remarketing Instagram/Facebook. Recuperabile da Business Manager → Eventi → impostazioni Pixel.
+- [ ] **R16-P2. GA4 Measurement ID** — necessario per analytics e conversion tracking (formato `G-XXXXXXXXXX`). Recuperabile da Google Analytics → Amministratore → Stream di dati.
+- [ ] **R16-P3. Instagram handle** — il link in `grazie.html` punta oggi a `instagram.com/REPLACE_WITH_IG_HANDLE`. Comunicare l'handle ufficiale (es. `prosopon.accademia`).
+- [ ] **R16-P4. Data precisa audizioni 2027/2028** — necessaria per (a) il file `audizioni-2027.ics` e (b) per rendere la banda scarcity più specifica ("Audizioni il GG/MM/AAAA" anziché generico "iscrizioni aperte").
 
 ### 🟩 Priorità 4 — Nice-to-have, non bloccanti
 
