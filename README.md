@@ -1,6 +1,6 @@
-# Accademia di Teatro Classico Prosopon — sito web
+# Accademia di Teatro Classico e Arti Performative Prosopon — sito web
 
-Sito istituzionale statico dell'Accademia di Teatro Classico Prosopon (Roma, 2025).
+Sito istituzionale statico dell'Accademia di Teatro Classico e Arti Performative Prosopon (Roma, 2025).
 10 pagine HTML, un solo foglio di stile, zero build step, zero dipendenze JS runtime.
 
 > **Date anno accademico** (Round 2 — aggiornate 2026-05-04):

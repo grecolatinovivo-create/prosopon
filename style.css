@@ -29,7 +29,7 @@
   --color-grigio-light:#c5bdb4;
 
   /* Tipografia */
-  --font-titolo:    'Cinzel', serif;
+  --font-titolo:    'Cinzel', 'EB Garamond', serif;
   --font-corpo:     'Cormorant Garamond', serif;
   --font-alt:       'EB Garamond', serif;
 
@@ -251,6 +251,24 @@ p {
   margin-top: 2px;
 }
 
+/* Sub-tagline minore "e Arti Performative" sotto il logo header.
+   Stesso font/case/letter-spacing del titolo principale, solo dimensione
+   ridotta e leggera opacity per gerarchia visiva. */
+.nav__logo .nav__logo-sub {
+  display: block;
+  font-size: 0.6em;
+  letter-spacing: 0.2em;
+  text-transform: none;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+@media (max-width: 480px) {
+  /* Su mobile compatto il sub per evitare overflow nella nav. */
+  .nav__logo span { font-size: 0.55rem; letter-spacing: 0.25em; }
+  .nav__logo .nav__logo-sub { font-size: 0.55em; letter-spacing: 0.18em; }
+}
+
 .nav__menu {
   display: flex;
   align-items: center;
@@ -369,6 +387,19 @@ p {
 .hero__titolo {
   color: var(--color-avorio);
   margin-bottom: var(--spazio-sm);
+}
+
+/* Riga "e Arti Performative" trattata in dimensione minore (stessa famiglia
+   font, stesso case e stesso letter-spacing del titolo principale).
+   Solo nei punti display visivi (hero homepage). Nei testi puramente
+   testuali (title, meta, footer, JSON-LD) il nome resta scritto per intero
+   senza distinzione. */
+.hero__titolo-sub {
+  display: block;
+  font-size: 0.55em;
+  opacity: 0.85;
+  margin: 0.2em 0;
+  font-weight: 400;
 }
 
 .hero__sottotitolo {
@@ -761,11 +792,17 @@ p {
   .hero__sottotitolo { font-size: 1.1rem; }
   .btn { padding: 0.8rem 1.6rem; font-size: 0.68rem; }
   /* Hero h1 su mobile: la dimensione massima a 3.2rem evita che le 3 righe
-     ("Accademia di | Teatro Classico | Prosopon") sforino oltre i 360-380px.
-     letter-spacing ridotto a 0.04em per evitare overflow su parole lunghe. */
+     ("Accademia di Teatro Classico | e Arti Performative | Prosopon")
+     sforino oltre i 360-380px. letter-spacing ridotto a 0.04em per
+     evitare overflow su parole lunghe. */
   .hero__titolo {
-    font-size: clamp(2rem, 8vw, 3.2rem);
+    font-size: clamp(1.7rem, 7.5vw, 2.8rem);
     letter-spacing: 0.04em;
+  }
+  /* Su mobile riduco la dimensione del sottotitolo "e Arti Performative"
+     per evitare overflow orizzontale su schermi <380px. */
+  .hero__titolo-sub {
+    font-size: 0.5em;
   }
 }
 
