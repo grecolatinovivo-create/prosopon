@@ -1894,9 +1894,14 @@ textarea:focus-visible,
   fill: #fff;
 }
 @media (max-width: 768px) {
-  /* Su mobile la sticky bar occupa i bottom 64px → spostiamo il FAB sopra */
+  /* Default: FAB più in basso (per pagine SENZA sticky bar mobile, es. contatti, iscrizioni, home, privacy, cookie, grazie) */
   .wa-fab {
-    bottom: 80px;
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
+  }
+  /* Quando la sticky CTA mobile è presente (pagine "calde": accademia, formazione, docenti, biblioteca, eventi),
+     il FAB si alza automaticamente sopra di essa grazie al sibling selector */
+  .sticky-cta-mobile ~ .wa-fab {
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
   }
 }
 
