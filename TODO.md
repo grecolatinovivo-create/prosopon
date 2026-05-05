@@ -10,6 +10,38 @@
 
 ---
 
+## 🔵 ROUND 18 — DECLUTTER HOME (versione MEDIA) (2026-05-04)
+
+> **2026-05-04 — R18 Declutter MEDIA: home alleggerita (MIM 1×, sticky+FAB rimossi solo dalla home, banda scarcity rimossa, etichetta location rimossa)**
+>
+> L'imprenditore ha approvato la versione MEDIA del decluttering della home: ridurre la
+> ridondanza di MIM, eliminare distrazioni multiple e abbassare il cognitive load del
+> first fold senza toccare le altre pagine. Le sticky bar e i FAB restano attivi su tutte
+> le altre pagine (accademia, formazione, docenti, biblioteca, eventi, iscrizioni, contatti, privacy, cookie, grazie).
+
+### Rimozioni applicate (solo `index.html`)
+- [x] **Etichetta hero "Roma · Est. 2025"** rimossa (`<p class="hero__etichetta">`). L'info location resta nel logo header e nel footer. *(Coder R18)*
+- [x] **Banda accreditamento MIM** dopo l'hero rimossa (`<section class="banda-accreditamento">`). Il MIM resta presente nella trust-pill hero (1 volta forte, sopra il fold) e nel footer (rinforzo distanziato). *(Coder R18)*
+- [x] **Banda scarcity** "Audizioni triennale · A.A. 2027/2028 · iscrizioni aperte" rimossa (`<aside class="banda-scarcity">`). L'info "audizioni aperte" resta veicolata dal CTA hero "Iscriviti alle audizioni" e dalla cta-band a fondo pagina. *(Coder R18)*
+- [x] **Sticky CTA mobile** rimossa SOLO da `index.html` (`<aside class="sticky-cta-mobile">`). Resta intatta su tutte le altre pagine. *(Coder R18)*
+- [x] **WhatsApp FAB** rimosso SOLO da `index.html` (`<a class="wa-fab">`). Resta intatto su tutte le altre pagine. *(Coder R18)*
+- [x] **Pulizia aria/id collegati**: nessun `aria-controls` puntava agli elementi rimossi. Pulito. *(Coder R18)*
+- [x] **Padding-bottom mobile**: la regola CSS `body { padding-bottom: 64px }` su `<768px` resta globale (innocua sulla home senza sticky bar — lascia solo poco spazio extra in fondo, non rompe nulla). Decisione: tenere la regola per non introdurre side-effect sulle altre pagine. *(Coder R18)*
+
+### Verifica integrità altre pagine
+- [x] `accademia.html`, `formazione.html`, `docenti.html`, `biblioteca.html`, `eventi.html`, `iscrizioni.html`, `contatti.html`, `privacy.html`, `cookie.html`, `grazie.html`: nessuna modifica. Sticky CTA + WhatsApp FAB ancora presenti (verificato via grep `sticky-cta-mobile|wa-fab` → 12 file CON match meno `index.html` = 10 pagine + style.css + TODO.md). *(Coder R18)*
+
+### First fold home post-R18 (atteso)
+1. Logo header + nav
+2. Trust-pill MIM (sopra il titolo, piccola)
+3. H1 titolo brand a 3 righe
+4. Payoff/sottotitolo
+5. CTA primario "Iscriviti alle audizioni" (oro pieno) + link secondario "Scopri il triennio"
+
+Stop. Niente sticky bar, niente FAB, niente banda scarcity, niente banda MIM ridondante, niente etichetta location.
+
+---
+
 ## 🔵 ROUND 17 — FIX OVERFLOW ORIZZONTALE MOBILE (2026-05-04)
 
 > **2026-05-04 — R17 Auditor: fix overflow orizzontale mobile (audit pagina per pagina)**
