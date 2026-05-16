@@ -10,6 +10,129 @@
 
 ---
 
+## ⏰ REMINDER STRATEGICO — A.A. 2027/2028
+
+🔴 **AL LANCIO DELL'ANNO ACCADEMICO 2027/2028 in presenza:**
+- [ ] Rimuovere la tab "Online" da `formazione.html` (5ª tab, id="tab-online" e id="online")
+- [ ] Rimuovere l'ancora `<a href="#online">Online</a>` dal blocco `.ancore-corsi` mobile
+- [ ] Rimuovere il link "Online" dal footer di TUTTE le 10 pagine
+- [ ] Rimuovere l'opzione `info-corsi-online` dal select oggetto in `contatti.html`
+- [ ] Eventualmente archiviare i materiali dei corsi online erogati in `documenti/archivio-online/` per memoria storica
+- [ ] Aggiornare README e TECH_NOTES rimuovendo i riferimenti
+- [ ] **Al lancio: ripristinare wording specifico con date reali per Triennale e Serali** (oggi è generico anti-aspettative — R21 ha rimosso "A.A. 2027/2028" e "A.A. 2026/2027" da hero, cta-band, banda scarcity, card eventi, JSON-LD startDate per evitare di promettere date non confermate). Cercare le occorrenze attuali "Audizioni in apertura" + "Iscriviti alla newsletter" e ripristinare la formula con date precise quando confermate.
+- [ ] **Quando avremo eventi pubblici reali (saggi, spettacoli, open day datati), aggiornare le card di `eventi.html` con date specifiche.** Oggi tutte le 5 card mostrano placeholder "In arrivo" (R22 — separazione eventi/formazione). Cercare nelle card `.evento-item` di eventi.html le occorrenze "In arrivo" e sostituire con giorno + mese reali (struttura: `<div class="evento-data__giorno">14</div><div class="evento-data__mese">Luglio 2026</div>`).
+
+Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il triennio in presenza sarà attivo, il focus didattico torna in sede a Roma. La tab è uno strumento di "ponte" 2026 → 2027 mentre la sede si allestisce.
+
+---
+
+## 🟢 ROUND 22 — SEPARAZIONE EVENTI / FORMAZIONE (strada B) (2026-05-04)
+
+> **2026-05-04 — R22: separazione eventi/formazione (strada B) — eventi diventa vetrina pubblica (open day, audizioni, spettacoli), no più laboratori/masterclass**
+>
+> Decisione utente: la pagina `eventi.html` diventa SOLO vetrina pubblica (open day, audizioni,
+> saggi/spettacoli degli allievi, presentazioni/conferenze). I corsi/laboratori/masterclass
+> sono OFFERTA FORMATIVA, non eventi — quindi vivono solo in `formazione.html`.
+> Concetto guida: *"Eventi = cosa puoi VEDERE/PARTECIPARE. Formazione = cosa puoi STUDIARE."*
+
+### File toccati — `eventi.html`
+- [x] **Meta tag riposizionati**: `<title>`, `<meta name="description">`, `og:title`, `og:description`, `twitter:title`, `twitter:description` riformulati senza menzionare laboratori/masterclass. Nuovo titolo: "Eventi · Saggi · Audizioni · PROSŌPON". *(Coder R22)*
+- [x] **Hero pagina riformulato**: H1 da "Spettacoli & Eventi" → "Eventi · Saggi · Audizioni"; intro riscritto per dichiarare il nuovo posizionamento + link inline a `formazione.html`. *(Coder R22)*
+- [x] **Card rimosse** (cancellati blocchi `<article>` interi):
+  - Card "Summer Lab — Teatro Greco e Maschera" (data 14 Luglio 2026, tipo laboratorio) → ora vive solo in formazione.html tab Laboratori.
+  - Card "Masterclass — In programmazione" (data Autunno 2026, tipo masterclass) → ora vive solo in formazione.html tab Masterclass.
+- [x] **Card neutralizzate** (date rimosse, copy riformulato):
+  - "Saggio di Fine Semestre" (Dicembre 2026) → "Saggio degli allievi" + "In arrivo"; pill da "Spettacolo" → "Saggio".
+  - "Audizioni Straordinarie" (Febbraio 2027) → mantenuto titolo, data → "In arrivo".
+  - "Spettacolo di Fine Anno Accademico" (Maggio 2026) → "Spettacolo di produzione" + "In arrivo".
+- [x] **Card mantenute invariate**: Open Day (già "In arrivo"), Audizioni Triennale (già "In arrivo").
+- [x] **Filtri aggiornati**: rimossi i pulsanti "Masterclass" e "Laboratori"; lasciati Tutti / Open Day / Audizioni / "Spettacoli & Saggi". Il JS di filtro non si rompe (gira sui `data-filtro` superstiti). *(Coder R22)*
+
+### File toccati — `formazione.html`
+- [x] Tab "Laboratori, Workshop e Residenze": aggiunta sotto la griglia delle 4 card una micro-frase italica centrata: *"Le date delle prossime edizioni vengono annunciate via newsletter"* (link a `contatti.html#newsletter`). *(Coder R22)*
+- [x] Tab "Masterclass": già presente la frase "Iscriviti alla newsletter per ricevere ogni annuncio in tempo utile" — non aggiunti duplicati. *(Coder R22)*
+- [x] Tab "Online": invariata (già ha il copy corretto sulle prossime edizioni). *(Coder R22)*
+
+### Verifiche
+- [x] Footer di tutte le 10+ pagine: link "Spettacoli & Eventi" (testo visibile) continua a puntare a `eventi.html` — invariato.
+- [x] Link interni del tipo `eventi.html#laboratorio` o `eventi.html#masterclass` cercati nell'intero progetto via grep: **0 occorrenze**, nessun redirect necessario.
+- [x] Reminder strategico aggiornato in cima al TODO con la voce "Quando avremo eventi pubblici reali, aggiornare le card di eventi.html con date specifiche".
+
+### Risultato atteso
+La pagina Eventi presenta ora **5 card** tutte con placeholder "In arrivo":
+1. Open Day — Corso Triennale
+2. Audizioni — Corso Triennale
+3. Saggio degli allievi
+4. Audizioni Straordinarie — Corso Triennale
+5. Spettacolo di produzione
+
+Nessuna promessa di data. Coerenza con R21 (wording generico anti-aspettative).
+
+---
+
+## 🟢 ROUND 21 — WORDING GENERICO TRIENNALE+SERALI + OFFERTA FORMATIVA + RESIDENZE (2026-05-04)
+
+> **2026-05-04 — R21: wording generico per triennale+serali (no date), nuova frase offerta formativa con 5 voci in maiuscoletto oro, tab Laboratori rinominata "Laboratori, Workshop e Residenze" + scaffolding Residenze Artistiche**
+>
+> L'utente ha deciso di RIMUOVERE temporaneamente tutti i riferimenti specifici a date di
+> anno accademico ("A.A. 2027/2028" per il triennale, "A.A. 2026/2027" + "avvio ottobre
+> 2026" per i serali) per non vincolarsi a promesse non confermate prima del lancio reale.
+> Il copy si trasforma in formula generica: "Audizioni in apertura — iscriviti alla
+> newsletter per ricevere il bando" (triennale) e "Iscriviti alla newsletter per ricevere
+> l'apertura della prossima edizione dei corsi serali". Vedi il REMINDER STRATEGICO in
+> cima al file per il rollback al lancio.
+
+### File toccati — wording triennale generico
+- [x] `iscrizioni.html` — banda scarcity sostituita: "Audizioni triennale · A.A. 2027/2028 — in apertura" → "Audizioni in apertura — iscriviti alla newsletter per ricevere il bando". Subject form audizioni: rimossa "2027/2028" → "Nuova candidatura — Audizione Triennale". *(Coder R21)*
+- [x] `eventi.html` — meta description senza date; etichetta hero "Calendario aggiornato di volta in volta"; card Open Day e Audizioni Triennale: rimosse date specifiche (15 Maggio 2027, 07 Giugno 2027) → placeholder "In arrivo" + microcopy "Annuncio in arrivo. Iscriviti alla newsletter". *(Coder R21)*
+- [x] `accademia.html` — card "voci future": etichetta cambiata da "Triennale A.A. 2027/2028 · Serali A.A. 2026/2027" → "In attesa della prima generazione di voci". *(Coder R21)*
+- [x] `docenti.html` — cta-band: etichetta "Audizioni triennale in apertura" + paragrafo riformulato con frase B ("Audizioni in apertura per l'ammissione al triennio. Iscriviti alla newsletter per ricevere il bando"). *(Coder R21)*
+- [x] `index.html` — cta-band: etichetta + paragrafo aggiornati con frase B; CTA secondario diventa "Iscriviti alla newsletter" (linka `contatti.html#newsletter`); pulsante primario rinominato "Pre-candidati al triennio". JSON-LD: rimossi `startDate` ed `endDate` dai Course "Corso Triennale" e "Corsi Serali". *(Coder R21)*
+- [x] `formazione.html` — cta-band aggiornata con frase B; CTA secondario → "Iscriviti alla newsletter". *(Coder R21)*
+
+### File toccati — wording serali generico
+- [x] `iscrizioni.html` — subject form serali: rimossa "2026/2027" → "Nuova iscrizione corsi serali". *(Coder R21)*
+- [x] Tutti gli aggiornamenti dei cta-band (index, formazione, docenti) includono ora un cenno alla newsletter per i serali, accorpato al messaggio triennale (un unico canale di annuncio). *(Coder R21)*
+
+### File toccati — frase OFFERTA FORMATIVA (5 voci maiuscoletto oro)
+- [x] `index.html` — inserita la frase "L'offerta formativa di PROSŌPON comprende il **Corso Triennale Accademico**, i **Corsi Serali per adulti**, i **Laboratori e Workshop intensivi**, le **Residenze Artistiche** e i **Corsi Online**." nella sezione "Un percorso articolato", subito sotto il titolo, prima della griglia delle 3 card. Le 5 voci sono in `<span class="offerta-voce">`. *(Coder R21)*
+- [x] `style.css` — aggiunto blocco `.offerta-formativa` + `.offerta-voce` in coda al file. Scelta: `text-transform: uppercase` + `font-size: 0.78em` + `font-family: var(--font-titolo)` (Cinzel) + `color: var(--color-oro)` + `letter-spacing: 0.08em` + `white-space: nowrap` (con `normal` su breakpoint mobile ≤480px). Rationale: il fallback a uppercase è più affidabile cross-browser di `font-variant: small-caps` su Cormorant Garamond, che ha set OpenType small-caps incompleto. Cinzel come font garantisce un'estetica "maiuscoletto monumentale" coerente con il design system. *(Coder R21)*
+
+### File toccati — rinomina tab Laboratori + Residenze
+- [x] `formazione.html` — pulsante tab "Laboratori Intensivi" → "Laboratori, Workshop e Residenze". `aria-controls="laboratori"` e `id="laboratori"` del pannello INVARIATI per non rompere ancore esistenti. Ancora mobile `.ancore-corsi` aggiornata: "Laboratori" → "Laboratori e Residenze". H2 pannello → "Laboratori, Workshop e Residenze". Descrizione introduttiva aggiornata per includere le residenze ("Periodi di lavoro concentrato. Laboratori e workshop per studenti e professionisti che vogliono approfondire una tecnica o lavorare su un progetto specifico in poco tempo. Residenze artistiche per chi cerca uno spazio dedicato alla creazione e alla ricerca."). Aggiunta 4ª card "Residenze Artistiche" con glifo Unicode &#8962; (⌂, casa) come scaffolding ("Periodi di residenza dedicati alla ricerca, alla creazione e all'incontro con maestri ospiti. Programma annunciato di volta in volta."). CTA del pannello cambiata da "Prossimi laboratori" → "Prossimi appuntamenti". *(Coder R21)*
+- [x] `iscrizioni.html` — `<optgroup label="Laboratori Intensivi">` del select corso → `<optgroup label="Laboratori, Workshop e Residenze">` per coerenza. *(Coder R21)*
+- [x] `index.html` JSON-LD — Course "Laboratori Intensivi & Masterclass" rinominato in "Laboratori, Workshop, Residenze & Masterclass", descrizione estesa per includere residenze artistiche. *(Coder R21)*
+
+### Footer verificato
+- Le voci del footer in tutte le 10+ pagine usano "Laboratori" (forma corta), non "Laboratori Intensivi" → nessuna modifica necessaria nel footer.
+
+---
+
+## 🟢 ROUND 20 — TAB "ONLINE" TRANSITORIA IN FORMAZIONE (2026-05-04)
+
+> **2026-05-04 — R20: aggiunta 5ª tab "Online" in formazione.html come contenitore per corsi online transitori (da rimuovere all'avvio A.A. 2027/2028)**
+>
+> Aggiunta una quinta tab "Online" come scaffolding neutro per accogliere corsi online
+> a formato breve (poche ore / un weekend), in attesa che l'utente decida titolo, materia,
+> durata e prezzo del primo corso concreto da pubblicare. Soluzione esplicitamente
+> TRANSITORIA: al lancio del triennio in presenza A.A. 2027/2028 la tab e tutte le sue
+> diramazioni (ancora mobile, link footer su 10 pagine, opzione del select contatti)
+> vanno rimosse — vedi il blocco "REMINDER STRATEGICO — A.A. 2027/2028" in cima al file.
+
+### File toccati
+- [x] `formazione.html` — aggiunta 5ª tab `#tab-online` + tab-pannello `#online` con scaffolding neutro (heading, intro, CTA "Richiedi informazioni" verso `contatti.html?richiesta=info-corsi-online`, box "Prossime edizioni in programma" con link newsletter, commento HTML con pattern card pronto da popolare). Aggiunta voce `<a href="#online">Online</a>` in `.ancore-corsi`. Aggiornato l'array `tabIds` del JS apertura-da-anchor con `'online'`. *(Coder R20)*
+- [x] `contatti.html` — aggiunta `<option value="info-corsi-online">Informazioni corsi online</option>` nel select `oggetto-c` (dopo `info-masterclass`). Pre-compilazione automatica tramite il JS esistente che legge `?richiesta=`. *(Coder R20)*
+- [x] Footer "Formazione" aggiornato in tutte le 10 pagine (index, accademia, formazione, docenti, biblioteca, eventi, iscrizioni, contatti, privacy, cookie, grazie): aggiunta voce `<li><a href="formazione.html#online">Online</a></li>` come ultima nel blocco `Formazione`. *(Coder R20)*
+- [x] `COUNCIL_corso_online.md` cancellato (era una proposta fuori scope precedente). *(Coder R20)*
+
+### Stato del contenuto
+La tab pubblica al momento solo il "wrapper" (intro + box "in arrivo"). Il primo corso
+online concreto va inserito sostituendo il commento HTML `<!-- SCAFFOLDING -->` interno
+al pannello `#online` con una `<article class="card">` popolata (esempio pattern già
+nel commento). Nessun corso è stato inventato per non vincolare le decisioni dell'utente.
+
+---
+
 ## 🔴 ROUND 19 — FIX LAYOUT CONSENSO PRIVACY GDPR (mobile) (2026-05-05)
 
 > **2026-05-04 — R19: fix layout consenso privacy GDPR rotto su mobile (verticale, tagliato fuori dal viewport)**

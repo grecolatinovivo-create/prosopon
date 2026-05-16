@@ -2039,3 +2039,39 @@ textarea:focus-visible,
   color: var(--color-oro);
   font-size: 1.1rem;
 }
+
+/* --- OFFERTA FORMATIVA (R21) ---
+   Frase di sintesi sotto al titolo "Un percorso articolato" in homepage.
+   Le 5 voci dell'offerta sono evidenziate in MAIUSCOLETTO color ORO.
+   Implementazione: text-transform:uppercase + font-size ridotto (più
+   robusto cross-browser di font-variant:small-caps su Cormorant). */
+.offerta-formativa {
+  max-width: 920px;
+  margin: 3rem auto 0;
+  padding: 2rem 2.5rem;
+  text-align: center;
+}
+.offerta-formativa p {
+  font-family: var(--font-corpo);
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: var(--color-grafite);
+  margin: 0;
+}
+.offerta-voce {
+  font-family: var(--font-titolo);
+  text-transform: uppercase;
+  font-size: 0.78em;
+  letter-spacing: 0.08em;
+  color: var(--color-oro);
+  font-weight: 500;
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .offerta-formativa {
+    padding: 1.4rem 1.2rem;
+    margin-top: 2rem;
+  }
+  .offerta-formativa p { font-size: 1.05rem; }
+  .offerta-voce { white-space: normal; }
+}
