@@ -26,6 +26,25 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 31 — AUDIT ACCESSIBILITÀ WCAG 2.1 AA + FIX-IT-PASS (2026-05-04)
+
+> **2026-05-04 — R31 Auditor: audit accessibilità WCAG AA + correzioni applicate**
+
+### Contesto
+Pass sistematico WCAG 2.1 AA su tutto il sito. Focus: contrasti testo, alt-text, lang, focus, target tap, micro-copy leggibile. Nessuna modifica al brand (oro/avorio/nero, Cinzel/Cormorant).
+
+### Fix applicati
+- [x] **R31.1 — Sostituzione massiva `var(--color-grigio)` → `var(--color-grafite)` nei file HTML su sfondo chiaro**: il grigio #6b6560 su avorio #f5f0e8 dava ratio ≈ 4.3:1 (borderline AA per testo normale, FAIL per piccoli italic). Tutte le occorrenze inline-style sono ora `--color-grafite` (#1c1b18, ratio > 12:1, AAA). File toccati: `index.html`, `accademia.html`, `formazione.html`, `iscrizioni.html`, `contatti.html`, `biblioteca.html`, `eventi.html`, `grazie.html`, `privacy.html`, `cookie.html`. I testi italic piccoli (microcopy "Conferma entro 48h", "* campi obbligatori", indirizzo riservato, orari, etichette numeri identità) sono ora pienamente leggibili. *(Auditor R31)*
+- [x] **R31.2 — Promozione contrasto in CSS componenti riusabili**: `.form-reassurance`, `.form-fallback`, `.form-counter`, `.modale__chiudi` passati da `--color-grigio` a `--color-grafite` con commento di motivazione WCAG. La X di chiusura modale è ora più visibile. *(Auditor R31)*
+- [x] **R31.3 — Verifiche passate senza modifiche necessarie**: tutte le `<img>` hanno `alt=` descrittivo (24 immagini), tutte le 11 pagine HTML hanno `<html lang="it">`, ogni pagina ha esattamente un `<h1>`, il `:focus-visible` globale è già in style.css (outline 2px oro, offset 3px), i touch target `.btn`, `.nav__hamburger`, `.faq-domanda`, `.modale__chiudi` hanno min-height ≥ 44/48px (R16), il footer copyright usa già `--color-grigio-chiaro` (#a09a92, ratio 6.4:1 su nero, AA OK), gli aria-label sono presenti (74 occorrenze su 11 file). *(Auditor R31)*
+
+### Residui sotto vigilanza brand
+- `--color-oro` (#b8965a) come testo decorativo su avorio resta ≈ 3.8:1 — conforme solo per testo grande (≥24px o ≥18.5px bold). Già usato correttamente solo su titoli, etichette uppercase grandi e icone. Nessun corpo di testo lungo lo usa. Decisione: mantenere per coerenza brand.
+- `.cta-band__etichetta` usa `--color-nero` con `opacity:0.7` su sfondo oro: contrasto effettivo borderline ma testo è uppercase grande (`letter-spacing:0.35em`), accettabile.
+- Vedi `AUDIT_REPORT.md` per il dettaglio tecnico completo.
+
+---
+
 ## 🟢 ROUND 30 — FIX CARD CORSO MASCHERA: FOTO PENTERICCI DEDICATA + ALLINEAMENTO + LEGGIBILITÀ (2026-05-04)
 
 > **2026-05-04 — R30: fix card corso Maschera (foto Pentericci dedicata al corso, allineamento team avatars, leggibilità testi)**

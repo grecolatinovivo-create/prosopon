@@ -130,11 +130,11 @@ p {
 
 .etichetta {
   font-family: var(--font-titolo);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-oro);
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .citazione {
@@ -832,7 +832,9 @@ p {
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
-  color: var(--color-grigio);
+  /* R31 Auditor: era var(--color-grigio) sul fondo bianco della modale (≈ 4.3:1, borderline).
+     Promosso a grafite per contrasto AAA — l'icona X dev'essere chiaramente leggibile. */
+  color: var(--color-grafite);
   line-height: 1;
   font-family: var(--font-corpo);
   transition: color var(--transizione);
@@ -1250,7 +1252,9 @@ a.docente-circle:hover .docente-circle__nome {
   font-family: var(--font-corpo);
   font-size: 0.82rem;
   font-style: italic;
-  color: var(--color-grigio);
+  /* R31 Auditor: era var(--color-grigio) #6b6560 su avorio ≈ 4.3:1 (borderline AA).
+     Promosso a --color-grafite per AAA, mantenendo italic e dimensione discreta. */
+  color: var(--color-grafite);
   margin: 0;
   line-height: 1.45;
 }
@@ -1273,7 +1277,8 @@ a.docente-circle:hover .docente-circle__nome {
 /* --- Mailto fallback sotto i 4 form (Round 3 PROPOSTA-DEFAULT) --- */
 .form-fallback {
   font-size: 0.85rem;
-  color: var(--color-grigio);
+  /* R31 Auditor: era var(--color-grigio) (≈ 4.3:1 borderline). Promosso a grafite per AAA. */
+  color: var(--color-grafite);
   margin: 1rem 0 0;
   line-height: 1.5;
 }
@@ -1976,7 +1981,8 @@ textarea:focus-visible,
   display: block;
   font-family: var(--font-corpo);
   font-size: 0.78rem;
-  color: var(--color-grigio);
+  /* R31 Auditor: era var(--color-grigio). Promosso a grafite per leggibilità AA su avorio. */
+  color: var(--color-grafite);
   text-align: right;
   margin-top: 0.3rem;
   font-style: italic;
