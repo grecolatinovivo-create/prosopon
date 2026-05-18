@@ -26,6 +26,18 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 30 — FIX CARD CORSO MASCHERA: FOTO PENTERICCI DEDICATA + ALLINEAMENTO + LEGGIBILITÀ (2026-05-04)
+
+> **2026-05-04 — R30: fix card corso Maschera (foto Pentericci dedicata al corso, allineamento team avatars, leggibilità testi)**
+
+### Fix applicati
+
+- [x] **R30.1 — Foto Pentericci dedicata al solo corso Maschera**: sorgente HEIC fornita dall'utente `caterina2.jpg` (2268×4032, EXIF orient 1, in realtà HEIC nonostante l'estensione .jpg). Decodificata via `pillow-heif`, crop 3:4 centrato orizzontalmente con top a 6% (favorisce il volto nel terzo superiore tipico delle foto verticali), generati 3 derivati nuovi DEDICATI in `assets/docenti/`: `caterina-pentericci-corso-maschera.jpg` (600×800, q92, 116 KB), `caterina-pentericci-corso-maschera.webp` (600×800, q80, 41 KB), `caterina-pentericci-corso-maschera-mini.webp` (240×320, q78, 8 KB). La foto generale `caterina-pentericci.jpg/.webp/-mini.webp` resta intoccata (continua a essere usata in docenti.html, index.html e altre pagine). Sorgenti `caterina.jpg` + `caterina2.jpg` spostate in `assets/docenti/_backup_pre_r30/`. *(Image Engineer R30)*
+- [x] **R30.2 — Allineamento team-docenti-corso**: ogni wrapper dei 3 docenti (Puglisi, Pentericci, Summa) passato da `max-width:200px; flex:1 1 160px` a `width:200px` (larghezza fissa, niente flex-grow asimmetrico). Su ogni `<img>` aggiunto `display:block; margin:0 auto 0.9rem;` (rimosso il vecchio `margin-bottom:0.9rem` ridondante) per garantire centratura orizzontale rispetto al testo sotto. Parent `.team-docenti-corso` mantiene `flex-wrap:wrap` per il mobile. *(Coder R30)*
+- [x] **R30.3 — Leggibilità testi card corso Maschera**: sublabel docenti (3 ritrattini) da `font-size:0.85rem` → `0.92rem` + aggiunto `font-weight:500; line-height:1.5` per tutti e 3 (inclusa la qualifica "artigiano e artista specializzato nella maschera" di Summa). Etichette uppercase (Calendario, Modalità, Destinatari, Attestato, Cosa imparerai, Quota di partecipazione) hanno `font-size:0.78rem` inline (override del default 0.7rem definito in style.css per `.etichetta`). Righe date calendario `0.98rem → 1.02rem`. Riga "5 incontri · 10 ore totali · frequenza bisettimanale" `0.88rem → 0.95rem`. Bullet "Cosa imparerai" `0.98rem → 1rem`. Colori `var(--color-grafite)` mantenuti. *(UI/UX R30)*
+
+---
+
 ## 🟢 ROUND 28 — RIMOZIONE BOX "PROSSIME EDIZIONI" + STRIPE PAYMENT LINK PLACEHOLDER (2026-05-04)
 
 > **2026-05-04 — R28: rimossi box "Prossime edizioni" da formazione.html (Online, Masterclass, Laboratori) + Stripe Payment Link placeholder per corso Maschera Classica**
