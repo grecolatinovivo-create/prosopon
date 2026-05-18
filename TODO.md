@@ -26,6 +26,28 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 23 — SOSTITUZIONE FOTO ANDREA PUGLISI (2026-05-04)
+
+> **2026-05-04 — R23: sostituita foto Andrea Puglisi con puglisi3.JPG (nuova versione fornita dall'utente)**
+>
+> Nuova foto sorgente fornita dall'utente: `puglisi3.JPG` (1486x1981, 152 KB, JPEG sRGB, già 3:4 verticale, nessun EXIF Orientation).
+> Rigenerati i 3 asset web preservando i nomi file (referenziati negli HTML).
+
+### File toccati — `assets/docenti/`
+- [x] **Backup creato**: `_backup_pre_r23/` con `andrea-puglisi.jpg` (128 KB), `andrea-puglisi.webp` (38 KB), `andrea-puglisi-mini.webp` (4.7 KB) — versioni precedenti preservate. *(Image Engineer R23)*
+- [x] **`andrea-puglisi.jpg` rigenerato**: 800x1067 (3:4), qualità 92, unsharp 0x1+0.5+0, saturazione +3%, sRGB strip EXIF, 97 KB. *(Image Engineer R23)*
+- [x] **`andrea-puglisi.webp` rigenerato**: 800x1067, qualità 85, 39 KB. *(Image Engineer R23)*
+- [x] **`andrea-puglisi-mini.webp` rigenerato**: 240x320, qualità 82, 4.9 KB. *(Image Engineer R23)*
+- [x] **`puglisi3.JPG` (source) spostato in backup**: `_backup_pre_r23/puglisi3-source.JPG`. *(Image Engineer R23)*
+- [x] **`andrea-puglisi2.jpg` (residuo non referenziato) spostato in backup**: verificato con grep — zero occorrenze in `*.html`, `*.css`, `*.js`, `*.md`. *(Image Engineer R23)*
+- [x] **`.DS_Store` eliminato** da `assets/docenti/` (già in `.gitignore`). *(Image Engineer R23)*
+
+### Integrazione HTML (nessuna modifica necessaria)
+- [x] Verificato che tutti i tag `<picture>` di Puglisi (index.html, docenti.html, accademia.html) referenziano già i nomi `andrea-puglisi.jpg` / `andrea-puglisi.webp` / `andrea-puglisi-mini.webp`. Sostituzione fisica = sostituzione live. *(Image Engineer R23)*
+- [x] Verificato `width`/`height` degli `<img>`: 400x533 in docenti.html (3:4 = 0.7505) coerente con 800x1067 (3:4 = 0.7498). I 420x420 / 120x120 / 600x600 sono cerchi/quadrati con `object-fit:cover` — compatibili con qualsiasi sorgente 3:4. Nessun adeguamento richiesto. *(Image Engineer R23)*
+
+---
+
 ## 🟢 ROUND 22 — SEPARAZIONE EVENTI / FORMAZIONE (strada B) (2026-05-04)
 
 > **2026-05-04 — R22: separazione eventi/formazione (strada B) — eventi diventa vetrina pubblica (open day, audizioni, spettacoli), no più laboratori/masterclass**
