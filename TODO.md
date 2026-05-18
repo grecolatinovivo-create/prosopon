@@ -26,6 +26,29 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 28 — RIMOZIONE BOX "PROSSIME EDIZIONI" + STRIPE PAYMENT LINK PLACEHOLDER (2026-05-04)
+
+> **2026-05-04 — R28: rimossi box "Prossime edizioni" da formazione.html (Online, Masterclass, Laboratori) + Stripe Payment Link placeholder per corso Maschera Classica**
+
+### Fix applicati
+
+- [x] **R28.1 — Tab Online**: rimosso il box `<div>` con `h4 "Prossime edizioni"` e copy "Il calendario delle prossime edizioni viene comunicato di volta in volta..." subito DOPO l'`</article>` con `id="corso-maschera-classica"`. *(Coder R28)*
+- [x] **R28.2 — Tab Masterclass**: rimosso il box `<div>` con `h4 "Prossime masterclass in programma"` + due paragrafi + CTA "Iscriviti alla newsletter". Il tab ora si chiude subito dopo la CTA "Prossime masterclass". *(Coder R28)*
+- [x] **R28.3 — Tab Laboratori, Workshop e Residenze**: rimossa la micro-frase `<p>` con "Le date delle prossime edizioni vengono annunciate via newsletter" (aggiunta in R22). *(Coder R28)*
+- [x] **R28.4 — Stripe Payment Link**: sostituito il CTA singolo "Richiedi iscrizione · €170" della card `#corso-maschera-classica` con un blocco a 2 CTA affiancati: (a) primario `Iscriviti e paga · €170` con href `REPLACE_WITH_STRIPE_PAYMENT_LINK` (target=_blank, rel=noopener noreferrer, attributi `data-corso` e `data-prezzo` per tracking futuro), (b) secondario testo-link "Hai domande? Scrivici prima di iscriverti" verso `contatti.html?richiesta=corso-online-maschera#form-contatto`. Il blocco usa `flex-wrap:wrap` quindi su mobile i 2 CTA vanno a capo. Aggiunto commento HTML `AZIONE UTENTE` sopra il blocco con riferimento al TODO.md. *(Coder R28)*
+- [x] **R28.5 — Istruzioni utente non-tecnico**: aggiunto blocco `💳 AZIONE UTENTE — Creare lo Stripe Payment Link (5 minuti)` nella sezione "COSA L'UTENTE DEVE ANCORA FARE" con procedura passo-passo (registrazione Stripe, dati GLV srl, creazione prodotto, generazione Payment Link, sostituzione placeholder, test, passaggio Live mode) + nota costi (1.5% + 0.25€) e webhook opzionale. *(Coder R28)*
+
+### File toccati
+- [x] `formazione.html` — 3 rimozioni box "Prossime edizioni" + sostituzione CTA card Maschera con 2 pulsanti (Stripe placeholder + link contatti). *(Coder R28)*
+- [x] `TODO.md` — log R28 + nuovo punto 19 in "AZIONE UTENTE" con procedura Stripe Payment Link. *(Coder R28)*
+
+### Da verificare in browser (utente)
+1. Aprire `formazione.html`: nessuno dei 3 tab (Laboratori, Masterclass, Online) mostra più copy/box su "prossime edizioni".
+2. Tab Online → card Maschera Classica: ora compare il CTA "Iscriviti e paga · €170" + sotto/accanto il link testuale "Hai domande? Scrivici prima di iscriverti". Cliccando il primo (con placeholder ancora attivo) si va su `https://REPLACE_WITH_STRIPE_PAYMENT_LINK` (404 — atteso fino a sostituzione).
+3. Mobile 375px: i 2 CTA devono andare a capo correttamente grazie a `flex-wrap:wrap`.
+
+---
+
 ## 🟢 ROUND 25 — CONVERSIONE CARD CORSO ONLINE MASCHERA (2026-05-04)
 
 > **2026-05-04 — R25: P1 conversione corso Maschera (outcome, CTA, anchor deep-link, grazie contestuale, subject email)**
@@ -797,6 +820,28 @@ Lista finale, ordinata per priorità. Tutti i punti qui dipendono da **dati o de
 - [ ] **R16-P2. GA4 Measurement ID** — necessario per analytics e conversion tracking (formato `G-XXXXXXXXXX`). Recuperabile da Google Analytics → Amministratore → Stream di dati.
 - [ ] **R16-P3. Instagram handle** — il link in `grazie.html` punta oggi a `instagram.com/REPLACE_WITH_IG_HANDLE`. Comunicare l'handle ufficiale (es. `prosopon.accademia`).
 - [ ] **R16-P4. Data precisa audizioni 2027/2028** — necessaria per (a) il file `audizioni-2027.ics` e (b) per rendere la banda scarcity più specifica ("Audizioni il GG/MM/AAAA" anziché generico "iscrizioni aperte").
+
+### 🟪 Pagamenti — Stripe Payment Link (R28, 2026-05-04)
+
+### 💳 AZIONE UTENTE — Creare lo Stripe Payment Link (5 minuti)
+
+Per agganciare il pagamento reale del corso Maschera Classica (€170):
+
+1. Vai su **https://dashboard.stripe.com/register** e crea un account (gratis, ti chiederà solo email + password).
+2. Compila i dati della tua attività (GLV srl, P.IVA 07036010481, sede Firenze) — Stripe te lo chiederà per i payout sul tuo conto.
+3. Una volta dentro, dal menu sinistro vai su **"Prodotti"** → **"Crea prodotto"**:
+   - Nome: `Corso online — Storia, teoria e pratica attoriale della maschera classica`
+   - Descrizione (opzionale): `Prima edizione · 10 ore in 5 incontri · Live online · Attestato MIM`
+   - Prezzo: `170,00 EUR`, tipo `Pagamento singolo`
+4. Salva il prodotto. Sulla pagina del prodotto, in alto a destra, clicca **"Crea link di pagamento"** → conferma.
+5. Stripe ti darà un URL del tipo `https://buy.stripe.com/XXXXXXXXXX`. **Copialo.**
+6. Mandami questo URL e io lo sostituisco al placeholder `REPLACE_WITH_STRIPE_PAYMENT_LINK` in `formazione.html`. In alternativa, se vuoi farlo da solo: apri `formazione.html` con un editor di testo, cerca `REPLACE_WITH_STRIPE_PAYMENT_LINK` (4 occorrenze max), sostituisci con il tuo URL, salva, fai un nuovo `git push`.
+7. **Test**: clicca il CTA "Iscriviti e paga · €170" sul sito live. Devi essere portato alla pagina di pagamento Stripe; usa una carta di test (Stripe ti fornisce numeri test in modalità Test Mode) per verificare il flow.
+8. Quando sei pronto a ricevere pagamenti veri: dal Dashboard Stripe, passa da **Test mode** a **Live mode** (toggle in alto a destra), genera un NUOVO Payment Link in Live mode (quello precedente era di test), e sostituiscilo nel sito.
+
+**Costi Stripe**: 1.5% + 0.25€ per transazione europea. Su €170: ~2.80€ trattenuti, 167.20€ accreditati. Nessun canone mensile.
+
+**Conferma email cliente**: Stripe invia automaticamente la ricevuta. Lato tuo, ricevi notifica email a ogni pagamento. Puoi anche configurare un webhook che ti manda i dati su Google Sheet o simili — ma non è necessario per partire.
 
 ### 🟩 Priorità 4 — Nice-to-have, non bloccanti
 
