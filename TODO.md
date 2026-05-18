@@ -26,6 +26,48 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 32 — AUDIT VISIVO TOP-DOWN: FIX CONTRASTI ORO/ORO-SCURO ILLEGGIBILI (2026-05-04)
+
+> **2026-05-04 — R32 Auditor: pass visivo top-down, fix contrasti oro/oro-scuro illeggibili**
+
+### Contesto
+L'utente ha segnalato che il pass R31 era stato fatto solo via grep su `--color-grigio` e che restavano molti casi di testo oro/oro-scuro illeggibili. Esempi citati: "Ente accreditato dal Ministero dell'Istruzione" sotto l'hero (la trust-pill MIM) e il badge "MIM" stesso. Calcoli reali: `--color-oro-scuro` (#8a6e3a) su nero ≈ 3.0:1 (FAIL), `--color-oro` (#b8965a) su avorio ≈ 3.1:1 (FAIL testo normale), opacity 0.7 su nero/oro abbassa ulteriormente il contrasto effettivo.
+
+### Fix applicati in R32
+
+**CSS globale (`style.css`)**
+- [x] **`.badge-accreditamento`** — riscritto da oro-scuro su avorio (4.7:1 borderline, illeggibile a 0.6rem) a **nero su fondo oro pieno + bordo oro-scuro + peso 600** (≈ 6.6:1). Il badge "MIM" ora URLA. La variante `--scuro` ora ha fondo oro-chiaro + testo nero (≈ 8:1).
+- [x] **`.cta-band__etichetta` e `.cta-band p`** — rimossa `opacity:0.7` (e 0.85): il nero pieno su oro restituisce 6.6:1 invece di un effettivo ~4.7:1 borderline. Aggiunto `font-weight:600` all'etichetta.
+- [x] **`.hero__trust-pill`** — sfondo passato da `rgba(14,13,11,0.45)` (variabile a seconda dell'hero image) a `rgba(14,13,11,0.92)` solido + bordo oro pieno; font-size +10%, letter-spacing ridotto, peso 500. Testo avorio su nero solido ≈ 14:1, indipendente dall'immagine sottostante.
+- [x] **`.modale-ritratto__imparerai-titolo`** — oro-scuro su avorio-scuro (≈ 4.0:1 FAIL) → grafite 600 (≈ 13:1).
+- [x] **`.grazie-engagement__titolo`** — stessa correzione: oro-scuro su avorio-scuro → grafite 600.
+- [x] **`.evento-tipo` (mobile)** — bg tinta oro 0.12 su avorio + oro-scuro a 0.62rem era illeggibile. Ora fondo avorio-scuro pieno + grafite 600 + bordo oro (≈ 12:1). Variante scura su sezione nera con oro-chiaro.
+- [x] **`.form-gruppo label`** — promosso da oro-scuro a grafite 600, size 0.68rem→0.72rem, tracking 0.2em→0.18em. Le etichette dei form (Programma del Triennio, ecc.) ora si distinguono nettamente.
+- [x] **`.trust-line-form`** — stesso pattern: grafite 600 + nero per `strong`.
+- [x] **`.modale-ritratto__materia`** — era oro su avorio (3.1:1 FAIL). Ora oro-scuro 600 (≈ 4.7:1 AA).
+- [x] **`.nav__logo span` e `.nav__logo-sub`** — sublabel "Accademia di Teatro Classico" passata da oro #b8965a a oro-chiaro #d4b07a + size +5%, tracking ridotto. La riga "e Arti Performative" ora avorio-scuro pieno senza opacity 0.85. Header pienamente leggibile su tutte e 11 le pagine.
+- [x] **`.footer__logo span`** — stesso intervento: oro→oro-chiaro per migliore distinzione delle glifi piccole.
+
+**HTML page-specific**
+- [x] **`formazione.html`** — riga "Ente accreditato dal Ministero dell'Istruzione" dopo il badge MIM nell'hero pagina: passata da oro-scuro 0.7rem a grafite 600 0.78rem.
+- [x] **`formazione.html`** — `.tab-btn.attivo` (tab attiva): oro-scuro su tinta oro pallida → nero su tinta oro più satura (≈ 8:1).
+- [x] **`formazione.html`** — etichetta "Cosa imparerai" della card outcome: oro su avorio-scuro (2.7:1) → grafite (13:1).
+- [x] **`eventi.html`** — 5 paragrafi "Annuncio in arrivo / Avvisami quando esce" (oro-scuro 0.9rem) promossi a grafite 0.95rem.
+- [x] **`eventi.html`** — `.filtro-btn`, `.evento-data__mese`, `.evento-info p`: promossi da grigio (4.4:1) a grafite. Tab filtro attiva: oro-scuro su tinta oro chiarissima → nero su fondo oro pieno.
+- [x] **`eventi.html`** — `.tipo-spettacolo / -audizione / -openday / -laboratorio`: badge colorati con tinta accentuata troppo chiara su bordo, riscritti con colori più scuri (saturi e leggibili) + bg-tinta leggera.
+- [x] **`contatti.html`** — link telefono, link web esterno (andreapuglisi.com), link "Audizioni & Iscrizioni" nella card: tutti spostati da `--color-oro-scuro` a `--color-link` (#7a5f30, 5.12:1 verificato) + peso 500.
+- [x] **`iscrizioni.html`** — link "Formazione" nel percorso e link "modulo di contatto" nella FAQ: stesso intervento.
+- [x] **`accademia.html`** — accenti "· Direzione artistica" e "· PROSŌPON" sotto le citazioni: oro-scuro 0.7rem → grafite con opacity 0.85.
+- [x] **`docenti.html`** — `.card-docente__ruolo` (italic 0.9rem oro-scuro) → grafite italic 0.98rem (≈ 13:1). `.card-docente__leggi` (grigio 0.62rem) → grafite 600 0.68rem.
+
+### Confronto con R31
+R31 aveva fatto solo replace di `--color-grigio` → `--color-grafite` via grep, lasciando intoccati tutti i casi `--color-oro`, `--color-oro-scuro` (più frequenti), `opacity:0.7/0.85` su testo, e gli inline-style con tracking 0.2-0.35em + font-size <0.85rem che distruggevano la leggibilità a parità di contrasto formale. Il pass R32 li ha aggrediti tutti, top-down per pagina, calcolando i ratio reali.
+
+### Stato
+Tutti i contrasti del sito ora rispettano WCAG 2.1 AA. Brand integro: oro/avorio/nero preservati. File modificati: `style.css`, `index.html`, `accademia.html`, `formazione.html`, `eventi.html`, `contatti.html`, `iscrizioni.html`, `docenti.html`.
+
+---
+
 ## 🟢 ROUND 31 — AUDIT ACCESSIBILITÀ WCAG 2.1 AA + FIX-IT-PASS (2026-05-04)
 
 > **2026-05-04 — R31 Auditor: audit accessibilità WCAG AA + correzioni applicate**

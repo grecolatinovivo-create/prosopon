@@ -30,7 +30,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Manrope:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400&display=swap" />
 
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -113,7 +113,7 @@
   <aside class="banda-scarcity" role="note" aria-label="Avviso audizioni">
     <div class="contenitore" style="display:flex; align-items:center; justify-content:center; gap:0.9rem; flex-wrap:wrap; text-align:center;">
       <span aria-hidden="true" style="display:inline-block; width:8px; height:8px; background:var(--color-oro); border-radius:50%;"></span>
-      <span style="font-family:var(--font-titolo); font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-avorio);">
+      <span style="font-family:'Manrope',sans-serif; font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-avorio);">
         Audizioni in apertura &mdash; iscriviti alla newsletter per ricevere il bando
       </span>
     </div>
@@ -175,7 +175,7 @@
               <div class="percorso-step__numero" aria-hidden="true">01</div>
               <div class="percorso-step__contenuto">
                 <h3>Scegli il corso o il laboratorio</h3>
-                <p>Consulta l'offerta formativa nella sezione <a href="formazione.html#serali" style="color:var(--color-oro-scuro); text-decoration:underline;">Formazione</a> e identifica il percorso che fa per te.</p>
+                <p>Consulta l'offerta formativa nella sezione <a href="formazione.html#serali" style="color:var(--color-link); text-decoration:underline; font-weight:500;">Formazione</a> e identifica il percorso che fa per te.</p>
               </div>
             </div>
             <div class="percorso-step">
@@ -211,7 +211,7 @@
         <p style="margin-top:0.6rem; font-size:0.9rem; color:rgba(197,189,180,0.75); font-style:italic;">Risposta entro 5 giorni lavorativi · I tuoi dati restano tuoi.</p>
       </div>
 
-      <p style="display:block; font-family:var(--font-titolo); font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-oro-chiaro); border-left:2px solid var(--color-oro); padding:0.55rem 0 0.55rem 0.9rem; margin:0 0 1.6rem 0; line-height:1.55;">
+      <p style="display:block; font-family:'Manrope',sans-serif; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-oro-chiaro); border-left:2px solid var(--color-oro); padding:0.55rem 0 0.55rem 0.9rem; margin:0 0 1.6rem 0; line-height:1.55;">
         <span class="badge-accreditamento badge-accreditamento--scuro" style="margin-right:0.6rem;">MIM</span>
         Stai facendo domanda per un percorso erogato da <strong style="color:var(--color-avorio); font-weight:500;">ente accreditato dal Ministero dell'Istruzione</strong>.
       </p>
@@ -259,7 +259,7 @@
           <textarea id="formazione-aud" name="formazione" placeholder="Descrivi brevemente eventuali studi o esperienze teatrali precedenti..." rows="3"></textarea>
         </div>
         <div class="form-gruppo">
-          <label for="motivazione-aud">In 2 righe: perché PROSŌPON? * <span style="font-family:var(--font-corpo); text-transform:none; letter-spacing:0; color:rgba(197,189,180,0.7); font-size:0.85rem;">(massimo 280 caratteri)</span></label>
+          <label for="motivazione-aud">In 2 righe: perché PROSŌPON? * <span style="font-family:var(--font-corpo); text-transform:none; letter-spacing:0; color:var(--color-avorio-scuro); font-size:0.88rem;">(massimo 280 caratteri)</span></label>
           <textarea id="motivazione-aud" name="motivazione" placeholder="In poche righe, dicci cosa ti spinge verso il teatro classico." rows="4" maxlength="280" required aria-required="true" aria-describedby="err-motivazione-aud counter-motivazione-aud"></textarea>
           <span class="form-counter" id="counter-motivazione-aud" aria-live="polite">0 / 280</span>
           <span class="form-errore" id="err-motivazione-aud" aria-live="polite"></span>
@@ -278,7 +278,7 @@
             <span class="form-reassurance__riga"><span class="form-reassurance__icona" aria-hidden="true">&#10003;</span>Risposta entro 5 giorni</span>
             <span class="form-reassurance__riga"><span class="form-reassurance__icona" aria-hidden="true">&#10003;</span>I tuoi dati restano tuoi</span>
           </p>
-          <p style="font-size:0.85rem; color:rgba(197,189,180,0.6); font-style:italic; width:100%; margin:0;">* campi obbligatori</p>
+          <p style="font-size:0.9rem; color:var(--color-avorio-scuro); font-style:italic; width:100%; margin:0;">* campi obbligatori</p>
         </div>
 
         <p class="form-fallback">Problemi col form? Scrivici a <a href="mailto:centroprosopon@gmail.com?subject=Audizione%20Triennale%202027%2F2028">centroprosopon@gmail.com</a></p>
@@ -390,7 +390,7 @@
           <h3 style="margin:0;">
             <button class="faq-domanda" type="button"
                     aria-expanded="false" aria-controls="faq-r1" id="faq-q1"
-                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
+                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:'Manrope',sans-serif; font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
               È necessaria un'esperienza teatrale per candidarsi al triennio?
               <span class="faq-icona" aria-hidden="true" style="font-size:1.4rem; color:var(--color-oro); transition:transform 0.3s; line-height:1;">+</span>
             </button>
@@ -404,7 +404,7 @@
           <h3 style="margin:0;">
             <button class="faq-domanda" type="button"
                     aria-expanded="false" aria-controls="faq-r2" id="faq-q2"
-                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
+                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:'Manrope',sans-serif; font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
               Qual è l'età minima per il corso triennale?
               <span class="faq-icona" aria-hidden="true" style="font-size:1.4rem; color:var(--color-oro); transition:transform 0.3s; line-height:1;">+</span>
             </button>
@@ -418,7 +418,7 @@
           <h3 style="margin:0;">
             <button class="faq-domanda" type="button"
                     aria-expanded="false" aria-controls="faq-r3" id="faq-q3"
-                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
+                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:'Manrope',sans-serif; font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
               Cosa devo preparare per l'audizione?
               <span class="faq-icona" aria-hidden="true" style="font-size:1.4rem; color:var(--color-oro); transition:transform 0.3s; line-height:1;">+</span>
             </button>
@@ -432,7 +432,7 @@
           <h3 style="margin:0;">
             <button class="faq-domanda" type="button"
                     aria-expanded="false" aria-controls="faq-r4" id="faq-q4"
-                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
+                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:'Manrope',sans-serif; font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
               È possibile frequentare i corsi serali abitando fuori Roma?
               <span class="faq-icona" aria-hidden="true" style="font-size:1.4rem; color:var(--color-oro); transition:transform 0.3s; line-height:1;">+</span>
             </button>
@@ -446,13 +446,13 @@
           <h3 style="margin:0;">
             <button class="faq-domanda" type="button"
                     aria-expanded="false" aria-controls="faq-r5" id="faq-q5"
-                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-titolo); font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
+                    style="width:100%; background:none; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:'Manrope',sans-serif; font-size:0.85rem; letter-spacing:0.08em; color:var(--color-nero); padding:0;">
               Ho domande non presenti qui. Come posso contattarvi?
               <span class="faq-icona" aria-hidden="true" style="font-size:1.4rem; color:var(--color-oro); transition:transform 0.3s; line-height:1;">+</span>
             </button>
           </h3>
           <div class="faq-risposta" id="faq-r5" role="region" aria-labelledby="faq-q5" hidden style="padding-top:0.8rem;">
-            <p style="font-size:1rem;">Scrivici attraverso il <a href="contatti.html" style="color:var(--color-oro-scuro); text-decoration:underline;">modulo di contatto</a> o direttamente via email. Risponderemo entro 48 ore lavorative.</p>
+            <p style="font-size:1rem;">Scrivici attraverso il <a href="contatti.html" style="color:var(--color-link); text-decoration:underline; font-weight:500;">modulo di contatto</a> o direttamente via email. Risponderemo entro 48 ore lavorative.</p>
           </div>
         </div>
       </div>

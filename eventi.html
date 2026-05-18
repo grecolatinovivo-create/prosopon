@@ -30,7 +30,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Manrope:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400&display=swap" />
 
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -42,20 +42,23 @@
     }
     .filtro-btn {
       font-family: var(--font-titolo);
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      padding: 0.5rem 1.2rem;
+      padding: 0.55rem 1.2rem;
       background: transparent;
-      border: 1px solid var(--color-grigio-light);
-      color: var(--color-grigio);
+      border: 1px solid var(--color-grafite);
+      /* R32 Auditor: grigio #6b6560 era 4.4:1 (FAIL testo piccolo). Promosso a grafite. */
+      color: var(--color-grafite);
+      font-weight: 600;
       cursor: pointer;
       transition: all var(--transizione);
     }
     .filtro-btn:hover, .filtro-btn.attivo {
-      border-color: var(--color-oro);
-      color: var(--color-oro-scuro);
-      background: rgba(184,150,90,0.06);
+      border-color: var(--color-nero);
+      /* R32 Auditor: oro-scuro su lieve tinta oro era illeggibile. Nero pieno + bg oro. */
+      color: var(--color-nero);
+      background: var(--color-oro);
     }
 
     .evento-lista { display: flex; flex-direction: column; gap: 1px; }
@@ -84,10 +87,12 @@
     }
     .evento-data__mese {
       font-family: var(--font-titolo);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--color-grigio);
+      /* R32 Auditor: grigio su avorio ≈ 4.4:1 fail testo piccolo. Promosso a grafite. */
+      color: var(--color-grafite);
+      font-weight: 600;
       margin-top: 0.2rem;
     }
     .evento-info h3 {
@@ -95,7 +100,8 @@
       letter-spacing: 0.05em;
       margin-bottom: 0.3rem;
     }
-    .evento-info p { font-size: 0.95rem; color: var(--color-grigio); }
+    /* R32 Auditor: paragrafi card eventi ora in grafite (era grigio ≈ 4.4:1). */
+    .evento-info p { font-size: 0.98rem; color: var(--color-grafite); }
     .evento-tipo {
       font-family: var(--font-titolo);
       font-size: 0.6rem;
@@ -104,11 +110,14 @@
       padding: 0.3rem 0.8rem;
       border: 1px solid;
     }
-    .tipo-spettacolo { color: var(--color-rosso); border-color: var(--color-rosso); }
-    .tipo-audizione  { color: var(--color-oro-scuro); border-color: var(--color-oro); }
-    .tipo-openday    { color: #2a6b4a; border-color: #2a6b4a; }
+    /* R32 Auditor: badge tipo evento — il color sul bordo era oro-scuro
+       (≈ 4.7:1 ma a 0.6rem con tracking 0.2em illeggibile).
+       Sostituito con grafite + bg avorio-scuro per AA chiaro. */
+    .tipo-spettacolo { color: #5a1717; border-color: var(--color-rosso); background: rgba(122,31,31,0.06); }
+    .tipo-audizione  { color: var(--color-grafite); border-color: var(--color-oro); background: rgba(184,150,90,0.12); }
+    .tipo-openday    { color: #1a4a30; border-color: #2a6b4a; background: rgba(42,107,74,0.06); }
     .tipo-masterclass{ color: var(--color-grafite); border-color: var(--color-grafite); }
-    .tipo-laboratorio{ color: #3a5a8a; border-color: #3a5a8a; }
+    .tipo-laboratorio{ color: #1f3a5a; border-color: #3a5a8a; background: rgba(58,90,138,0.06); }
 
     /* Badge "PROSSIMO EVENTO" sulla card più imminente.
        L'allineamento e la palette riprendono la classe .evento-card--prossimo
@@ -211,7 +220,7 @@
           <div class="evento-info">
             <h3>Open Day — Corso Triennale</h3>
             <p>Presentazione del corso triennale, incontro con il corpo docente, visita della sede. Accesso libero e gratuito.</p>
-            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">Annuncio in arrivo. <a href="contatti.html#newsletter">Iscriviti alla newsletter</a>.</p>
+            <p style="margin-top:0.3rem; color:var(--color-grafite); font-size:0.95rem;">Annuncio in arrivo. <a href="contatti.html#newsletter">Iscriviti alla newsletter</a>.</p>
           </div>
           <span class="evento-tipo tipo-openday">Open Day</span>
         </article>
@@ -224,7 +233,7 @@
           <div class="evento-info">
             <h3>Audizioni — Corso Triennale</h3>
             <p>Selezione per l'ammissione al primo anno del corso triennale accademico. Su appuntamento.</p>
-            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">Annuncio in arrivo. <a href="contatti.html#newsletter">Iscriviti alla newsletter</a>.</p>
+            <p style="margin-top:0.3rem; color:var(--color-grafite); font-size:0.95rem;">Annuncio in arrivo. <a href="contatti.html#newsletter">Iscriviti alla newsletter</a>.</p>
           </div>
           <span class="evento-tipo tipo-audizione">Audizione</span>
         </article>
@@ -237,7 +246,7 @@
           <div class="evento-info">
             <h3>Saggio degli allievi</h3>
             <p>Prima pubblica dei lavori degli studenti del corso triennale. Apertura al pubblico secondo le modalità che verranno comunicate.</p>
-            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">
+            <p style="margin-top:0.3rem; color:var(--color-grafite); font-size:0.95rem;">
               <a href="contatti.html#newsletter">Avvisami quando esce</a>
             </p>
           </div>
@@ -252,7 +261,7 @@
           <div class="evento-info">
             <h3>Audizioni Straordinarie &mdash; Corso Triennale</h3>
             <p>Sessione straordinaria per chi non ha partecipato alla sessione ordinaria. Data in definizione.</p>
-            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">
+            <p style="margin-top:0.3rem; color:var(--color-grafite); font-size:0.95rem;">
               <a href="contatti.html#newsletter">Avvisami quando esce</a>
             </p>
           </div>
@@ -267,7 +276,7 @@
           <div class="evento-info">
             <h3>Spettacolo di produzione</h3>
             <p>Produzione finale degli studenti del triennio. Testo, regia e modalità di apertura al pubblico in definizione.</p>
-            <p style="margin-top:0.3rem; color:var(--color-oro-scuro); font-size:0.9rem;">
+            <p style="margin-top:0.3rem; color:var(--color-grafite); font-size:0.95rem;">
               <a href="contatti.html#newsletter">Avvisami quando esce</a>
             </p>
           </div>

@@ -30,7 +30,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Manrope:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400&display=swap" />
 
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -89,20 +89,24 @@
     .card-docente__ruolo {
       font-family: var(--font-corpo);
       font-style: italic;
-      font-size: 0.9rem;
-      color: var(--color-oro-scuro);
+      font-size: 0.98rem;
+      /* R32 Auditor: era oro-scuro su avorio ≈ 4.7:1 borderline + italic riduceva
+         la leggibilità di un altro mezzo step. Promosso a grafite (≈ 13:1). */
+      color: var(--color-grafite);
     }
     .card-docente__leggi {
       font-family: var(--font-titolo);
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--color-grigio);
+      /* R32 Auditor: era grigio #6b6560 ≈ 4.4:1 (FAIL testo piccolo). Grafite + 600. */
+      color: var(--color-grafite);
+      font-weight: 600;
       margin-top: 0.8rem;
       display: inline-block;
       transition: color var(--transizione);
     }
-    .card-docente:hover .card-docente__leggi { color: var(--color-oro-scuro); }
+    .card-docente:hover .card-docente__leggi { color: var(--color-nero); text-decoration: underline; text-underline-offset: 3px; }
 
     /* Modale docente — wrapper (overlay). Pannello e contenuti
        sono definiti in style.css come .modale-ritratto__* */

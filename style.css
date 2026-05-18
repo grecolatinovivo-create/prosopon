@@ -129,9 +129,9 @@ p {
 }
 
 .etichetta {
-  font-family: var(--font-titolo);
-  font-size: 0.85rem;
-  letter-spacing: 0.22em;
+  font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-oro);
   font-weight: 800;
@@ -263,28 +263,32 @@ p {
 
 .nav__logo span {
   display: block;
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
-  color: var(--color-oro);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  /* R32 Auditor: era oro #b8965a (≈ 5.6:1) ma a 0.65rem + tracking 0.35em
+     l'occhio non riusciva a distinguere le glifi. Promosso a oro-chiaro
+     (#d4b07a ≈ 8:1) + size +5% + tracking ridotto. */
+  color: var(--color-oro-chiaro);
   margin-top: 2px;
 }
 
 /* Sub-tagline minore "e Arti Performative" sotto il logo header.
    Stesso font/case/letter-spacing del titolo principale, solo dimensione
-   ridotta e leggera opacity per gerarchia visiva. */
+   ridotta. R32 Auditor: rimosso opacity 0.85 (era 4.8:1), ora color
+   avorio puro su nav nera ≈ 13:1. */
 .nav__logo .nav__logo-sub {
   display: block;
-  font-size: 0.6em;
+  font-size: 0.62em;
   letter-spacing: 0.2em;
   text-transform: none;
-  opacity: 0.85;
+  color: var(--color-avorio-scuro);
   margin-top: 2px;
 }
 
 @media (max-width: 480px) {
   /* Su mobile compatto il sub per evitare overflow nella nav. */
-  .nav__logo span { font-size: 0.55rem; letter-spacing: 0.25em; }
-  .nav__logo .nav__logo-sub { font-size: 0.55em; letter-spacing: 0.18em; }
+  .nav__logo span { font-size: 0.6rem; letter-spacing: 0.22em; }
+  .nav__logo .nav__logo-sub { font-size: 0.58em; letter-spacing: 0.16em; }
 }
 
 .nav__menu {
@@ -591,9 +595,11 @@ p {
 
 .footer__logo span {
   display: block;
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
-  color: var(--color-oro);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  /* R32 Auditor: promosso a oro-chiaro per migliore distinzione delle glifi
+     a piccola dimensione. Su nero ≈ 8:1. */
+  color: var(--color-oro-chiaro);
   margin-top: 2px;
 }
 
@@ -677,10 +683,14 @@ p {
 .form-gruppo label {
   display: block;
   font-family: var(--font-titolo);
-  font-size: 0.68rem;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-oro-scuro);
+  /* R32 Auditor: era oro-scuro su avorio ≈ 4.7:1 (borderline AA) e a 0.68rem
+     il tracking 0.2em rendeva l'etichetta illeggibile. Promosso a grafite
+     (≈ 13:1) + peso 600. */
+  color: var(--color-grafite);
+  font-weight: 600;
   margin-bottom: 0.4rem;
 }
 
@@ -770,7 +780,10 @@ p {
 
 .form-gruppo label:has(> input[type="checkbox"]) a,
 .form-gruppo label:has(> input[type="radio"]) a {
-  color: var(--color-oro-scuro);
+  /* R32 Auditor: era oro-scuro su avorio (4.7:1 borderline). Promosso a
+     --color-link (#7a5f30, 5.12:1) + peso 500 per leggibilità garantita. */
+  color: var(--color-link);
+  font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -1047,23 +1060,25 @@ main li a:not(.btn):hover {
 }
 .cta-band__etichetta {
   font-family: var(--font-titolo);
-  font-size: 0.7rem;
-  letter-spacing: 0.35em;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
+  /* R32 Auditor: rimosso opacity:0.7 — su sfondo oro #b8965a portava il
+     nero effettivo a #36322d (~4.7:1, borderline). Ora nero pieno ≈ 6.6:1. */
   color: var(--color-nero);
   margin-bottom: 0.8rem;
-  opacity: 0.7;
   display: block;
+  font-weight: 600;
 }
 .cta-band h2 {
   color: var(--color-nero);
   margin-bottom: 1.2rem;
 }
 .cta-band p {
+  /* R32 Auditor: rimosso opacity:0.85 per piena leggibilità (≈ 6.6:1). */
   color: var(--color-nero);
   font-style: italic;
   margin-bottom: 2rem;
-  opacity: 0.85;
 }
 .cta-band .btn {
   background: var(--color-nero);
@@ -1188,25 +1203,32 @@ a.docente-circle:hover .docente-circle__nome {
   margin: 0 0.6rem;
 }
 
-/* --- Badge inline "Ente accreditato MIM" usabile in card / titoli --- */
+/* --- Badge inline "Ente accreditato MIM" usabile in card / titoli ---
+   R32 Auditor: il badge piccolo (0.6rem) deve URLARE.
+   Prima: oro-scuro #8a6e3a su avorio #f5f0e8 ≈ 4.7:1 ma con font 0.6rem
+   + tracking 0.2em l'occhio non riusciva a fissare le glifi. Sostituito
+   con fondo oro pieno + testo nero puro + peso 600: contrasto ≈ 6.6:1,
+   nessuna ambiguità ottica. */
 .badge-accreditamento {
   display: inline-block;
   font-family: var(--font-titolo);
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-oro-scuro);
-  background: var(--color-avorio);
-  border: 1px solid rgba(184, 150, 90, 0.55);
-  padding: 0.32rem 0.7rem;
+  color: var(--color-nero);
+  background: var(--color-oro);
+  border: 1px solid var(--color-oro-scuro);
+  padding: 0.36rem 0.75rem;
   line-height: 1;
   vertical-align: middle;
   white-space: nowrap;
+  font-weight: 600;
 }
 .badge-accreditamento--scuro {
-  color: var(--color-oro-chiaro);
-  background: transparent;
-  border-color: rgba(184, 150, 90, 0.6);
+  /* Su sfondo nero/grafite: oro-chiaro #d4b07a ≈ 8:1 conforme AA. */
+  color: var(--color-nero);
+  background: var(--color-oro-chiaro);
+  border-color: var(--color-oro);
 }
 
 /* --- Riga accreditamento nel footer (sopra il copyright) --- */
@@ -1229,22 +1251,25 @@ a.docente-circle:hover .docente-circle__nome {
   margin: 0 0.5rem;
 }
 
-/* --- Trust line discreta sopra i form (es. iscrizioni) --- */
+/* --- Trust line discreta sopra i form (es. iscrizioni) ---
+   R32 Auditor: a 0.65rem oro-scuro su avorio ≈ 4.7:1 ma con tracking 0.2em
+   le glifi mini erano illeggibili. Promosso a grafite + size 0.72rem. */
 .trust-line-form {
   display: block;
   font-family: var(--font-titolo);
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-oro-scuro);
+  color: var(--color-grafite);
   border-left: 2px solid var(--color-oro);
-  padding: 0.55rem 0 0.55rem 0.9rem;
+  padding: 0.6rem 0 0.6rem 0.95rem;
   margin: 0 0 1.4rem 0;
   line-height: 1.55;
+  font-weight: 500;
 }
 .trust-line-form strong {
-  color: var(--color-grafite);
-  font-weight: 500;
+  color: var(--color-nero);
+  font-weight: 700;
 }
 
 /* --- Reassurance microcopy accanto ai pulsanti di submit --- */
@@ -1529,10 +1554,13 @@ textarea:focus-visible,
 
 .modale-ritratto__materia {
   font-family: var(--font-titolo);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-oro);
+  /* R32 Auditor: era oro #b8965a su avorio ≈ 3.1:1 (FAIL).
+     Promosso a oro-scuro #8a6e3a (≈ 4.7:1) + 600. */
+  color: var(--color-oro-scuro);
+  font-weight: 600;
   margin: 0;
 }
 
@@ -1576,7 +1604,10 @@ textarea:focus-visible,
   font-size: 0.78rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-oro-scuro);
+  /* R32 Auditor: oro-scuro #8a6e3a su avorio-scuro #e8e0d0 dava ≈ 4.0:1
+     (FAIL testo normale). Promosso a grafite per AAA. */
+  color: var(--color-grafite);
+  font-weight: 600;
   margin: 0 0 0.7rem;
 }
 .modale-ritratto__imparerai ul {
@@ -1781,19 +1812,23 @@ textarea:focus-visible,
     order: -1;
     margin-bottom: 0.4rem;
     align-self: flex-start;
-    background: rgba(184, 150, 90, 0.12);
-    color: var(--color-oro-scuro);
+    /* R32 Auditor: bg tinta su tinta + oro-scuro 0.62rem era illeggibile.
+       Promosso a grafite su avorio-scuro pieno (≈ 12:1). */
+    background: var(--color-avorio-scuro);
+    color: var(--color-grafite);
     font-family: var(--font-titolo);
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    padding: 0.3rem 0.7rem;
-    border: 1px solid rgba(184, 150, 90, 0.4);
+    padding: 0.32rem 0.72rem;
+    border: 1px solid var(--color-oro);
     line-height: 1;
+    font-weight: 600;
   }
   .sezione--scura .evento-tipo {
-    background: rgba(184, 150, 90, 0.15);
+    background: rgba(14, 13, 11, 0.6);
     color: var(--color-oro-chiaro);
+    border-color: var(--color-oro);
   }
 }
 
@@ -1911,26 +1946,31 @@ textarea:focus-visible,
   }
 }
 
-/* --- Trust pill MIM nell'hero homepage (C4) --- */
+/* --- Trust pill MIM nell'hero homepage (C4) ---
+   R32 Auditor: sfondo trasparente (rgba 0.45) sopra hero image dava
+   contrasto incostante in base allo sfondo dell'immagine. Sostituito
+   con sfondo nero solido al 92% + bordo oro pieno: testo avorio
+   #f5f0e8 su nero ≈ 14:1, indipendente dall'immagine sotto. */
 .hero__trust-pill {
   display: inline-block;
   font-family: var(--font-titolo);
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-avorio);
-  background: rgba(14, 13, 11, 0.45);
-  border: 1px solid rgba(184, 150, 90, 0.55);
-  padding: 0.35rem 0.85rem;
+  background: rgba(14, 13, 11, 0.92);
+  border: 1px solid var(--color-oro);
+  padding: 0.4rem 0.95rem;
   margin: 0.4rem auto 0.9rem;
   line-height: 1.3;
   max-width: max-content;
+  font-weight: 500;
 }
 @media (max-width: 480px) {
   .hero__trust-pill {
-    font-size: 0.55rem;
-    letter-spacing: 0.12em;
-    padding: 0.3rem 0.7rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    padding: 0.34rem 0.78rem;
   }
 }
 
@@ -2010,7 +2050,9 @@ textarea:focus-visible,
   font-size: 0.78rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-oro-scuro);
+  /* R32 Auditor: oro-scuro su avorio-scuro ≈ 4.0:1 → fail. Promosso a grafite. */
+  color: var(--color-grafite);
+  font-weight: 600;
   margin: 0 0 1rem;
 }
 .grazie-engagement__lista {

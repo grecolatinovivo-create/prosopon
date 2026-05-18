@@ -30,7 +30,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Manrope:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400&display=swap" />
 
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -41,9 +41,9 @@
       flex-wrap: wrap;
     }
     .tab-btn {
-      font-family: var(--font-titolo);
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 1rem 2rem;
       background: none;
@@ -51,16 +51,18 @@
       border-bottom: 2px solid transparent;
       cursor: pointer;
       color: var(--color-grafite);
-      font-weight: 600;
+      font-weight: 700;
       transition: all var(--transizione);
       margin-bottom: -1px;
     }
     .tab-btn:hover { color: var(--color-nero); }
     .tab-btn.attivo,
     .tab-btn[aria-selected="true"] {
-      color: var(--color-oro-scuro);
+      /* R32 Auditor: era oro-scuro su tinta oro chiarissima → contrasto basso.
+         Tab attiva ora in nero pieno con bg oro chiaro (≈ 8:1). */
+      color: var(--color-nero);
       border-bottom-color: var(--color-oro);
-      background: rgba(184,150,90,0.04);
+      background: rgba(184,150,90,0.18);
     }
     .tab-pannello { display: none; padding-top: var(--spazio-lg); }
     .tab-pannello.attivo { display: block; }
@@ -142,7 +144,7 @@
       <span class="etichetta">Offerta formativa</span>
       <h1 style="margin:0.8rem 0 1rem;">Formazione</h1>
       <p>Dal corso triennale ai laboratori intensivi:<br>un percorso per ogni vocazione teatrale.</p>
-      <p style="margin-top:1.2rem;"><span class="badge-accreditamento">MIM</span> <span style="font-family:var(--font-titolo); font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--color-oro-scuro); margin-left:0.4rem;">Ente accreditato dal Ministero dell'Istruzione</span></p>
+      <p style="margin-top:1.2rem;"><span class="badge-accreditamento">MIM</span> <span style="font-family:'Manrope',sans-serif; font-size:0.78rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--color-grafite); font-weight:600; margin-left:0.4rem;">Ente accreditato dal Ministero dell'Istruzione</span></p>
     </div>
   </section>
 
@@ -445,7 +447,7 @@
           </div>
 
           <div class="card-outcome" style="background:var(--color-avorio-scuro); border-left:3px solid var(--color-oro); padding:1.5rem 1.8rem; margin-top:2rem;">
-            <p class="etichetta" style="color:var(--color-oro); margin-bottom:0.8rem; font-size:0.78rem;">Cosa imparerai</p>
+            <p class="etichetta" style="color:var(--color-grafite); margin-bottom:0.8rem; font-size:0.82rem;">Cosa imparerai</p>
             <ul style="list-style:none; padding:0; margin:0; font-size:1rem; line-height:1.7;">
               <li style="padding:0.35rem 0; padding-left:1.6rem; position:relative;"><span style="position:absolute; left:0; top:0.45rem; color:var(--color-oro); font-size:0.7rem; line-height:1;">&#9670;</span>Conoscerai la storia e le funzioni dell'oggetto maschera in scena</li>
               <li style="padding:0.35rem 0; padding-left:1.6rem; position:relative;"><span style="position:absolute; left:0; top:0.45rem; color:var(--color-oro); font-size:0.7rem; line-height:1;">&#9670;</span>Riconoscerai le tipologie di maschera nel teatro classico e i loro caratteri</li>
@@ -458,7 +460,7 @@
           <div style="margin-top:2rem; padding-top:1.8rem; border-top:1px solid var(--color-avorio-scuro); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.2rem;">
             <div>
               <p class="etichetta" style="color:var(--color-grafite); margin-bottom:0.3rem; font-size:0.78rem;">Quota di partecipazione</p>
-              <p style="font-family:var(--font-titolo); font-size:1.8rem; color:var(--color-oro); margin:0; letter-spacing:0.03em;">&euro;&nbsp;170</p>
+              <p style="font-family:'Manrope',sans-serif; font-size:1.8rem; color:var(--color-oro); margin:0; letter-spacing:0.03em;">&euro;&nbsp;170</p>
             </div>
             <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center;">
               <!-- CTA PRIMARIO: Stripe Payment Link (R29 — integrato 2026-05-04) -->
@@ -564,6 +566,11 @@
       btn.classList.add('attivo');
       btn.setAttribute('aria-selected', 'true');
       btn.setAttribute('tabindex', '0');
+      // Aggiorna l'URL hash al click (non al deep-link iniziale), così il link è condivisibile.
+      // Usa replaceState per non inquinare la cronologia.
+      if (evt && history && history.replaceState) {
+        history.replaceState(null, '', '#' + id);
+      }
     }
 
     // Apertura diretta da anchor (#triennale, #serali, ecc., oppure #anno1/#anno2/#anno3, oppure card-id come #corso-maschera-classica)
