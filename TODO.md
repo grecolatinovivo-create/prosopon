@@ -26,6 +26,24 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 24 — RICROP FOTO ANDREA PUGLISI (2026-05-04)
+
+> **2026-05-04 — R24: ricroppata foto Andrea Puglisi (testa al primo terzo, eliminato tavolo)**
+>
+> La versione R23 aveva la sommità del cranio quasi tagliata al bordo superiore e troppo spazio nella parte bassa (tavolo bianco + sigaro + bordo del busto). Ricroppato dal sorgente `_backup_pre_r23/puglisi3-source.JPG` (1486×1981) per applicare la regola dei terzi: cranio nel primo terzo, mano alla tempia ben visibile, tavolo completamente eliminato.
+
+### File toccati — `assets/docenti/`
+- [x] **Backup creato**: `_backup_pre_r24/` con i 3 asset web R23 precedenti (`andrea-puglisi.jpg` 99 KB, `andrea-puglisi.webp` 39 KB, `andrea-puglisi-mini.webp` 4.9 KB). *(Image Engineer R24)*
+- [x] **Crop scelto — Variante C**: 990×1320 px da `(x=466, y=0)` sul sorgente 1486×1981. Mantiene proporzione 3:4 verticale. Confronto delle 4 varianti testate (A 900×1200, B 1050×1400, C 990×1320, D 1020×1360): C ha il miglior bilanciamento orizzontale, cranio ben staccato dal bordo superiore, mano alla tempia integra, tavolo eliminato (residuo sigaro appena percettibile nel margine inferiore, ininfluente). *(Image Engineer R24)*
+- [x] **`andrea-puglisi.jpg` rigenerato**: 800×1067 (3:4), qualità 92, unsharp 0x1+0.5+0, sRGB, strip EXIF, 128 KB. *(Image Engineer R24)*
+- [x] **`andrea-puglisi.webp` rigenerato**: 800×1067, qualità 80, method=6, 45 KB. *(Image Engineer R24)*
+- [x] **`andrea-puglisi-mini.webp` rigenerato**: 240×320, qualità 78, 3.9 KB (leggermente sotto il target 5-15 KB perché sfondo monocromatico ad alta compressibilità — qualità visiva resta ottima). *(Image Engineer R24)*
+
+### Integrazione HTML (nessuna modifica necessaria)
+- [x] I tag `<picture>` di Puglisi continuano a referenziare gli stessi nomi (`andrea-puglisi.jpg` / `.webp` / `-mini.webp`). Sostituzione fisica = live update. *(Image Engineer R24)*
+
+---
+
 ## 🟢 ROUND 23 — SOSTITUZIONE FOTO ANDREA PUGLISI (2026-05-04)
 
 > **2026-05-04 — R23: sostituita foto Andrea Puglisi con puglisi3.JPG (nuova versione fornita dall'utente)**
