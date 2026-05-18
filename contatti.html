@@ -191,6 +191,7 @@
                 <option value="info-laboratori">Informazioni laboratori</option>
                 <option value="info-masterclass">Informazioni masterclass</option>
                 <option value="info-corsi-online">Informazioni corsi online</option>
+                <option value="corso-online-maschera">Iscrizione corso online &mdash; Maschera classica</option>
                 <option value="piano-triennale">Richiesta piano di studi triennale</option>
                 <option value="prenotazione-aula">Prenotazione aula prove</option>
                 <option value="accesso-biblioteca">Accesso alla biblioteca</option>
@@ -431,15 +432,55 @@
     gestisciForm('form-nl', 'stato-newsletter', 'btn-nl',
       'Fatto. Il tuo nome è ora tra le voci di PROSŌPON — benvenuto/a.');
 
-    // Pre-compilazione oggetto contatto se proviene da formazione (?richiesta=piano-triennale)
+    // Pre-compilazione oggetto contatto + subject email + _next contestuali
+    // se la pagina viene aperta con ?richiesta=...
     (function() {
       const params = new URLSearchParams(window.location.search);
       const r = params.get('richiesta');
-      if (r) {
-        const sel = document.getElementById('oggetto-c');
-        if (sel) {
-          const opt = Array.from(sel.options).find(o => o.value === r);
-          if (opt) sel.value = r;
+      if (!r) return;
+
+      // 1) Pre-seleziona l'opzione del select "oggetto"
+      const sel = document.getElementById('oggetto-c');
+      if (sel) {
+        const opt = Array.from(sel.options).find(o => o.value === r);
+        if (opt) sel.value = r;
+      }
+
+      // 2) Mappa richiesta -> subject email Formsubmit
+      //    Default (fallback): valore originale dell'hidden _subject ("Nuovo messaggio dal sito PROSŌPON")
+      const richiestaToSubject = {
+        'corso-online-maschera': 'ISCRIZIONE Maschera Classica — €170 da confermare',
+        'piano-triennale': 'Richiesta piano di studi triennale',
+        'prenotazione-aula': 'Prenotazione aula prove',
+        'accesso-biblioteca': 'Richiesta accesso biblioteca',
+        'info-corsi-online': 'Richiesta informazioni corsi online',
+        'info-triennale': 'Richiesta informazioni corso triennale',
+        'info-serali': 'Richiesta informazioni corsi serali',
+        'info-laboratori': 'Richiesta informazioni laboratori',
+        'info-masterclass': 'Richiesta informazioni masterclass',
+        'collaborazione': 'Proposta di collaborazione',
+        'stampa': 'Richiesta stampa e media'
+      };
+      const form = document.getElementById('form-c');
+      if (form) {
+        const subjEl = form.querySelector('input[type="hidden"][name="_subject"]');
+        if (subjEl && richiestaToSubject[r]) {
+          subjEl.value = richiestaToSubject[r];
+        }
+
+        // 3) Aggiorna _next per portare ?tipo=<richiesta> a grazie.html
+        //    Pattern scalabile: funziona per tutte le richieste future.
+        const nextEl = form.querySelector('input[type="hidden"][name="_next"]');
+        if (nextEl) {
+          try {
+            const u = new URL(nextEl.value, window.location.origin);
+            u.searchParams.set('tipo', r);
+            nextEl.value = u.toString();
+          } catch (e) {
+            // Fallback: append manuale se _next non è una URL parseable
+            const sep = nextEl.value.includes('?') ? '&' : '?';
+            nextEl.value = nextEl.value + sep + 'tipo=' + encodeURIComponent(r);
+          }
         }
       }
     })();

@@ -66,9 +66,9 @@
   <!-- ============ HERO ============ -->
   <section class="hero-pagina">
     <div class="contenitore" style="max-width:720px; text-align:center;">
-      <span class="etichetta">Messaggio ricevuto</span>
-      <h1 style="margin:0.8rem 0 1rem; font-size:clamp(2rem, 5.5vw, 3.4rem);">Sei dentro.</h1>
-      <p style="font-size:1.15rem;">Ora seguici per non perdere la data delle audizioni.</p>
+      <span class="etichetta" id="grazie-etichetta">Messaggio ricevuto</span>
+      <h1 id="grazie-titolo" style="margin:0.8rem 0 1rem; font-size:clamp(2rem, 5.5vw, 3.4rem);">Sei dentro.</h1>
+      <p id="grazie-sottotitolo" style="font-size:1.15rem;">Ora seguici per non perdere la data delle audizioni.</p>
     </div>
   </section>
 
@@ -76,7 +76,7 @@
   <section class="sezione sezione--avorio">
     <div class="contenitore" style="max-width:680px; text-align:center;">
 
-      <p style="font-size:1.1rem; line-height:1.7; margin-bottom:1.2rem;">
+      <p id="grazie-messaggio" style="font-size:1.1rem; line-height:1.7; margin-bottom:1.2rem;">
         Ti rispondiamo entro <strong>48 ore lavorative</strong>. Per le candidature alle audizioni del corso triennale, il tempo di risposta è di <strong>5 giorni lavorativi</strong>.
       </p>
 
@@ -187,6 +187,48 @@
       hamburger.setAttribute('aria-expanded', String(aperto));
       hamburger.setAttribute('aria-label', aperto ? 'Chiudi menu' : 'Apri menu');
     });
+
+    // R25 — Messaggio contestuale in base al ?tipo= passato dal form di contatti
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const tipo = params.get('tipo');
+      if (!tipo) return;
+
+      const etichetta = document.getElementById('grazie-etichetta');
+      const titolo = document.getElementById('grazie-titolo');
+      const sottotitolo = document.getElementById('grazie-sottotitolo');
+      const messaggio = document.getElementById('grazie-messaggio');
+
+      // Mappa tipo -> contenuti contestuali. Estendibile per future richieste.
+      const tipoToContenuti = {
+        'corso-online-maschera': {
+          etichetta: 'Richiesta ricevuta',
+          titolo: 'Richiesta ricevuta.',
+          sottotitolo: 'Stiamo preparando le istruzioni per la tua iscrizione.',
+          messaggio: 'Riceverai entro <strong>24 ore</strong> una email con le istruzioni per il pagamento e la conferma del posto al corso <em>"Storia, teoria e pratica attoriale della maschera classica"</em>.'
+        },
+        'piano-triennale': {
+          etichetta: 'Richiesta ricevuta',
+          titolo: 'Richiesta ricevuta.',
+          sottotitolo: 'Ti invieremo il piano di studi del triennio.',
+          messaggio: 'Riceverai entro <strong>48 ore lavorative</strong> una email con il piano di studi del corso triennale e le informazioni sulle audizioni.'
+        },
+        'newsletter': {
+          etichetta: 'Iscrizione confermata',
+          titolo: 'Sei dentro.',
+          sottotitolo: 'Riceverai gli annunci dell\'Accademia.',
+          messaggio: 'Da ora riceverai gli annunci di PROSŌPON: bando audizioni, nuove edizioni dei corsi, eventi e spettacoli.'
+        }
+      };
+
+      const c = tipoToContenuti[tipo];
+      if (!c) return;
+
+      if (etichetta && c.etichetta) etichetta.textContent = c.etichetta;
+      if (titolo && c.titolo) titolo.textContent = c.titolo;
+      if (sottotitolo && c.sottotitolo) sottotitolo.textContent = c.sottotitolo;
+      if (messaggio && c.messaggio) messaggio.innerHTML = c.messaggio;
+    })();
   </script>
 
   <!-- R16 — WHATSAPP FAB -->

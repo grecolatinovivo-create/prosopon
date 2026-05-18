@@ -26,6 +26,32 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 25 — CONVERSIONE CARD CORSO ONLINE MASCHERA (2026-05-04)
+
+> **2026-05-04 — R25: P1 conversione corso Maschera (outcome, CTA, anchor deep-link, grazie contestuale, subject email)**
+>
+> Applicati i 5 fix P1 raccomandati da Neuromarketer + UX sulla card del primo corso online (`#corso-maschera-classica` in `formazione.html`, tab Online) per alzare la probabilità di conversione del lead pagante.
+
+### Fix applicati
+- [x] **P1.1 — Blocco "Cosa imparerai"**: aggiunto box outcome (sfondo avorio scuro + border-left oro + 4 bullet) sopra la riga prezzo/CTA. I 4 outcome sono proposte NM con commento HTML `<!-- OUTCOME — Sostituire i 4 punti sotto con i veri outcome del corso quando definiti -->` per facile editing futuro. *(Coder R25)*
+- [x] **P1.2 — Label CTA**: cambiato "Iscriviti al corso" → **"Richiedi iscrizione · €170"**. Mantenuti href, classe `.btn btn--oro` e `data-corso`. Prezzo grande oro sopra il bottone preservato come anchoring (doppia menzione prezzo intenzionale). *(Coder R25)*
+- [x] **P1.3 — Deep-link `#corso-maschera-classica`**: esteso lo IIFE deep-link in `formazione.html` con una mappa `cardToTab` (`'corso-maschera-classica': 'online'`). Quando l'hash matcha una card, apre prima il tab corretto e poi scrolla con `scrollIntoView({behavior:'smooth', block:'start'})`. Pattern scalabile per future card. *(Coder R25)*
+- [x] **P1.4 — `grazie.html` contestuale**: aggiunti `id` agli elementi hero (`grazie-etichetta`, `grazie-titolo`, `grazie-sottotitolo`, `grazie-messaggio`) e IIFE che legge `?tipo=` e popola contenuti specifici. Mappa `tipoToContenuti` con varianti per `corso-online-maschera`, `piano-triennale`, `newsletter` (estendibile). Per la maschera: titolo "Richiesta ricevuta." + messaggio "Riceverai entro 24 ore una email con le istruzioni per il pagamento...". *(Coder R25)*
+- [x] **P1.5 — Subject email Formsubmit dinamico + `_next` con `?tipo=`**: esteso lo IIFE di pre-compilazione in `contatti.html`. Mappa `richiestaToSubject` (corso-online-maschera → "ISCRIZIONE Maschera Classica — €170 da confermare", + altre 10 voci). Inoltre il JS aggiorna `_next` aggiungendo `?tipo=<richiesta>` così la grazie.html riceve il contesto. Default fallback preservato per submit senza querystring. *(Coder R25)*
+
+### File toccati
+- [x] `formazione.html` — block outcome + CTA label + estensione JS deep-link con `cardToTab`. *(Coder R25)*
+- [x] `contatti.html` — IIFE richiesta esteso con `richiestaToSubject` (modifica `_subject`) e update di `_next` con `?tipo=<r>`. *(Coder R25)*
+- [x] `grazie.html` — aggiunti id ai 4 elementi hero/messaggio + nuovo IIFE che legge `?tipo=` e applica contenuti contestuali da mappa `tipoToContenuti`. *(Coder R25)*
+
+### Da verificare in browser (utente)
+1. Aprire `formazione.html` → tab Online → la card mostra il blocco "Cosa imparerai" (4 bullet con bullet oro) e il CTA "Richiedi iscrizione · €170".
+2. Da un nuovo tab, testare il link diretto `formazione.html#corso-maschera-classica`: deve aprire automaticamente la tab Online e scrollare alla card.
+3. Cliccare il CTA → su `contatti.html?richiesta=corso-online-maschera#form-contatto` il select "Oggetto" è già su "Iscrizione corso online — Maschera classica" e (DevTools) il campo nascosto `_subject` mostra "ISCRIZIONE Maschera Classica — €170 da confermare", il campo `_next` mostra `grazie.html?tipo=corso-online-maschera`.
+4. Compilare e inviare il form → atterraggio su `grazie.html?tipo=corso-online-maschera` con titolo "Richiesta ricevuta." e messaggio sulle 24 ore per le istruzioni di pagamento.
+
+---
+
 ## 🟢 ROUND 24 — RICROP FOTO ANDREA PUGLISI (2026-05-04)
 
 > **2026-05-04 — R24: ricroppata foto Andrea Puglisi (testa al primo terzo, eliminato tavolo)**
