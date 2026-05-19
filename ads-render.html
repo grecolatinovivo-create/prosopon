@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mockup Ads — Corso Maschera Classica · PROSŌPON</title>
+
+  <!-- Google Fonts: Cinzel (titoli), Manrope (UI/uppercase), Cormorant Garamond (body italic) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================
+       PALETTE & TOKENS (identica al brand PROSOPON)
+       ========================================================== */
+    :root {
+      --nero:         #0e0d0b;
+      --grafite:      #1c1b18;
+      --avorio:       #f5f0e8;
+      --avorio-scuro: #e8e0d0;
+      --oro:          #b8965a;
+      --oro-chiaro:   #d4b07a;
+      --oro-scuro:    #8a6e3a;
+
+      --f-display: 'Cinzel', 'EB Garamond', serif;
+      --f-ui:      'Manrope', system-ui, sans-serif;
+      --f-body:    'Cormorant Garamond', 'EB Garamond', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: var(--avorio);
+      color: var(--nero);
+      font-family: var(--f-body);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    /* ==========================================================
+       HEADER PAGINA (non fa parte degli screenshot)
+       ========================================================== */
+    .page-header {
+      background: var(--nero);
+      color: var(--avorio);
+      padding: 3rem 2rem 2.5rem;
+      border-bottom: 4px solid var(--oro);
+    }
+    .page-header__inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .page-header h1 {
+      font-family: var(--f-display);
+      font-weight: 600;
+      font-size: 2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--oro-chiaro);
+      margin-bottom: 0.6rem;
+    }
+    .page-header h1 .rombo { color: var(--oro); margin: 0 0.5rem; }
+    .page-header p {
+      font-family: var(--f-body);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--avorio-scuro);
+      margin-bottom: 1.5rem;
+      max-width: 720px;
+    }
+    .page-header__instructions {
+      background: var(--grafite);
+      border-left: 3px solid var(--oro);
+      padding: 1rem 1.25rem;
+      font-family: var(--f-ui);
+      font-size: 0.85rem;
+      color: var(--avorio);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .page-header__instructions strong {
+      color: var(--oro-chiaro);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .formats-list {
+      font-family: var(--f-ui);
+      font-size: 0.82rem;
+      color: var(--avorio-scuro);
+      list-style: none;
+    }
+    .formats-list li {
+      padding: 0.3rem 0;
+      letter-spacing: 0.04em;
+    }
+    .formats-list .rombo { color: var(--oro); margin-right: 0.5rem; }
+
+    /* ==========================================================
+       GRIGLIA MOCKUP (scale visivo, non altera dimensioni reali)
+       ========================================================== */
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      padding: 3rem 2rem 5rem;
+      align-items: flex-start;
+    }
+    .mockup-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .mockup-wrap .label {
+      font-family: var(--f-ui);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--oro-scuro);
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+      text-align: center;
+    }
+    .mockup-wrap .label .dim {
+      color: var(--nero);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+    }
+
+    /* Frame esterno con ombra — contiene il mockup a dimensioni reali via scale */
+    .mockup-frame {
+      box-shadow: 0 14px 40px rgba(14,13,11,0.18), 0 2px 8px rgba(14,13,11,0.08);
+      border: 1px solid var(--avorio-scuro);
+      background: var(--avorio);
+      overflow: hidden;
+    }
+
+    /* Le dimensioni esterne del frame seguono lo scale 0.35 per fitting a video,
+       ma il mockup interno rimane a dimensioni reali grazie a transform:scale */
+
+    /* Frame 1080x1080 → display 378x378 */
+    .mockup-frame.sq { width: 378px; height: 378px; }
+    /* Frame 1080x1920 → display 378x672 */
+    .mockup-frame.story { width: 378px; height: 672px; }
+    /* Frame 1200x628 → display 420x220 (con leggera variazione per non spezzare la griglia) */
+    .mockup-frame.landscape { width: 420px; height: 220px; }
+
+    .scaled {
+      transform-origin: top left;
+      transform: scale(0.35);
+    }
+
+    /* ==========================================================
+       MOCKUP — DIMENSIONI REALI (pixel-perfect)
+       ========================================================== */
+
+    /* CONTENITORE BASE — i 1080/1920/1200 sono ESATTI sul DOM */
+    .ad {
+      position: relative;
+      overflow: hidden;
+      font-family: var(--f-body);
+      color: var(--nero);
+    }
+    .ad[data-format="1080x1080"] { width: 1080px; height: 1080px; }
+    .ad[data-format="1080x1920"] { width: 1080px; height: 1920px; }
+    .ad[data-format="1200x628"]  { width: 1200px; height: 628px; }
+
+    /* ------- ELEMENTI TIPOGRAFICI BRAND ------- */
+    .brand-logo {
+      font-family: var(--f-display);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .ui-label {
+      font-family: var(--f-ui);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+    }
+    .display-title {
+      font-family: var(--f-display);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      line-height: 0.98;
+    }
+    .quote {
+      font-family: var(--f-body);
+      font-style: italic;
+      line-height: 1.35;
+    }
+    .price {
+      font-family: var(--f-display);
+      font-weight: 600;
+      color: var(--oro);
+      letter-spacing: 0.04em;
+    }
+
+    /* Pulsante CTA oro pieno con freccia decorativa */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--oro);
+      color: var(--nero);
+      font-family: var(--f-ui);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      padding: 1.1rem 2.2rem;
+      border: 2px solid var(--oro);
+    }
+    .cta .arrow {
+      font-family: var(--f-ui);
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    /* Badge MIM */
+    .mim-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--nero);
+      color: var(--oro);
+      font-family: var(--f-ui);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--oro);
+    }
+    .mim-badge .rombo { color: var(--oro); }
+
+    .rombo { display: inline-block; }
+    .gold  { color: var(--oro); }
+    .ivory { color: var(--avorio); }
+
+    /* Linea decorativa oro */
+    .gold-rule {
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--oro);
+    }
+
+    /* ==========================================================
+       1A — INSTAGRAM FEED SQUARE 1080x1080 — VARIANTE A
+       Foto Puglisi a sinistra (50%) + testo a destra
+       ========================================================== */
+    .ad-1a {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--avorio);
+    }
+    .ad-1a__photo {
+      position: relative;
+      background: var(--nero);
+      overflow: hidden;
+    }
+    .ad-1a__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: contrast(1.02) saturate(0.95);
+    }
+    .ad-1a__photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(14,13,11,0.15) 0%, rgba(14,13,11,0.45) 100%);
+    }
+    .ad-1a__photo .docente-tag {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      color: var(--avorio);
+      z-index: 2;
+    }
+    .ad-1a__photo .docente-tag .ui-label {
+      font-size: 14px;
+      color: var(--oro-chiaro);
+      margin-bottom: 0.4rem;
+    }
+    .ad-1a__photo .docente-tag .nome {
+      font-family: var(--f-display);
+      font-weight: 600;
+      font-size: 30px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+    .ad-1a__content {
+      background: var(--avorio);
+      padding: 70px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .ad-1a__content .top { }
+    .ad-1a__content .brand-logo {
+      font-size: 22px;
+      color: var(--oro-scuro);
+      margin-bottom: 0.4rem;
+    }
+    .ad-1a__content .micro {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--oro-scuro);
+      margin-bottom: 2.2rem;
+    }
+    .ad-1a__content .display-title {
+      font-size: 64px;
+      color: var(--nero);
+      margin-bottom: 1.4rem;
+    }
+    .ad-1a__content .display-title em {
+      font-style: normal;
+      color: var(--oro-scuro);
+    }
+    .ad-1a__content .quote {
+      font-size: 26px;
+      color: var(--grafite);
+      margin-bottom: 1.5rem;
+      max-width: 90%;
+    }
+    .ad-1a__content .meta {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--grafite);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+    .ad-1a__content .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1.4rem;
+      margin-bottom: 1.6rem;
+    }
+    .ad-1a__content .price {
+      font-size: 64px;
+    }
+    .ad-1a__content .price-row .rate {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--oro-scuro);
+    }
+    .ad-1a__content .mim-badge { font-size: 11px; }
+    .ad-1a__content .bottom {
+      border-top: 1px solid var(--avorio-scuro);
+      padding-top: 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--f-ui);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--oro-scuro);
+    }
+
+    /* ==========================================================
+       1B — INSTAGRAM FEED SQUARE 1080x1080 — VARIANTE B
+       Full-bleed dark, titolo centrato grande, prezzo grande oro
+       ========================================================== */
+    .ad-1b {
+      background:
+        radial-gradient(ellipse at top, rgba(184,150,90,0.12), transparent 60%),
+        var(--nero);
+      color: var(--avorio);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 70px;
+      text-align: center;
+    }
+    .ad-1b__top .brand-logo {
+      font-size: 22px;
+      color: var(--oro);
+      margin-bottom: 0.8rem;
+    }
+    .ad-1b__top .ui-label {
+      font-size: 12px;
+      color: var(--oro-chiaro);
+    }
+    .ad-1b__center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.6rem;
+    }
+    .ad-1b__center .pretitle {
+      font-family: var(--f-body);
+      font-style: italic;
+      font-size: 30px;
+      color: var(--avorio-scuro);
+    }
+    .ad-1b__center .display-title {
+      font-size: 110px;
+      color: var(--avorio);
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+    .ad-1b__center .display-title .gold-word {
+      color: var(--oro);
+    }
+    .ad-1b__center .gold-rule {
+      margin: 0.5rem 0;
+    }
+    .ad-1b__center .quote {
+      font-size: 28px;
+      color: var(--avorio-scuro);
+      max-width: 720px;
+    }
+    .ad-1b__center .price {
+      font-size: 130px;
+      line-height: 1;
+      margin-top: 0.4rem;
+    }
+    .ad-1b__center .price-meta {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      color: var(--oro-chiaro);
+      text-transform: uppercase;
+    }
+    .ad-1b__bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .ad-1b__bottom .mim-badge { font-size: 12px; }
+    .ad-1b__bottom .cta { font-size: 14px; padding: 1.2rem 2.6rem; }
+    .ad-1b__bottom .url {
+      font-family: var(--f-ui);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: var(--oro-scuro);
+      text-transform: uppercase;
+    }
+
+    /* ==========================================================
+       2A — INSTAGRAM STORY 1080x1920 — VARIANTE A
+       Foto Puglisi background full-bleed + overlay scuro
+       ========================================================== */
+    .ad-2a {
+      position: relative;
+      background: var(--nero);
+      color: var(--avorio);
+      overflow: hidden;
+    }
+    .ad-2a__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .ad-2a__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 22%;
+      filter: contrast(1.05) saturate(0.92) brightness(0.95);
+    }
+    .ad-2a__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(14,13,11,0.75) 0%,
+        rgba(14,13,11,0.35) 35%,
+        rgba(14,13,11,0.55) 65%,
+        rgba(14,13,11,0.95) 100%
+      );
+      z-index: 1;
+    }
+    .ad-2a__content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      padding: 110px 70px 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .ad-2a__top { text-align: center; }
+    .ad-2a__top .brand-logo {
+      font-size: 28px;
+      color: var(--oro);
+      margin-bottom: 0.5rem;
+    }
+    .ad-2a__top .ui-label {
+      font-size: 14px;
+      color: var(--oro-chiaro);
+    }
+    .ad-2a__middle { text-align: center; }
+    .ad-2a__middle .pretitle {
+      font-family: var(--f-body);
+      font-style: italic;
+      font-size: 32px;
+      color: var(--avorio-scuro);
+      margin-bottom: 1rem;
+    }
+    .ad-2a__middle .display-title {
+      font-size: 120px;
+      line-height: 0.95;
+      color: var(--avorio);
+      margin-bottom: 1.6rem;
+    }
+    .ad-2a__middle .display-title .gold-word { color: var(--oro); }
+    .ad-2a__middle .gold-rule {
+      margin: 1.5rem auto;
+      width: 90px;
+    }
+    .ad-2a__middle .docenti {
+      font-family: var(--f-ui);
+      font-size: 16px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--avorio-scuro);
+      line-height: 1.8;
+    }
+    .ad-2a__middle .docenti strong {
+      color: var(--oro-chiaro);
+      font-weight: 600;
+    }
+    .ad-2a__bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.4rem;
+    }
+    .ad-2a__bottom .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1.4rem;
+    }
+    .ad-2a__bottom .price { font-size: 120px; line-height: 1; }
+    .ad-2a__bottom .rate {
+      font-family: var(--f-ui);
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--oro-chiaro);
+    }
+    .ad-2a__bottom .mim-badge { font-size: 14px; }
+    .ad-2a__bottom .cta { font-size: 18px; padding: 1.4rem 3rem; }
+    .ad-2a__bottom .handle {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      color: var(--oro-scuro);
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    /* ==========================================================
+       2B — INSTAGRAM STORY 1080x1920 — VARIANTE B
+       Design "rituale" con simbolo Π grande, payoff, prezzo, date
+       ========================================================== */
+    .ad-2b {
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(184,150,90,0.10), transparent 55%),
+        var(--nero);
+      color: var(--avorio);
+      padding: 130px 80px 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+    }
+    .ad-2b__top { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+    .ad-2b__top .brand-logo {
+      font-size: 28px;
+      color: var(--oro);
+    }
+    .ad-2b__top .ui-label {
+      font-size: 14px;
+      color: var(--oro-chiaro);
+    }
+    .ad-2b__symbol {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 520px;
+      line-height: 0.85;
+      color: var(--oro);
+      text-shadow: 0 0 60px rgba(184,150,90,0.20);
+      margin: -40px 0 -20px;
+    }
+    .ad-2b__symbol .rombo-deco {
+      display: block;
+      font-size: 36px;
+      color: var(--oro-scuro);
+      letter-spacing: 1.5rem;
+      margin-top: -10px;
+    }
+    .ad-2b__middle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.4rem;
+    }
+    .ad-2b__middle .pretitle {
+      font-family: var(--f-body);
+      font-style: italic;
+      font-size: 32px;
+      color: var(--avorio-scuro);
+    }
+    .ad-2b__middle .display-title {
+      font-size: 80px;
+      line-height: 1;
+      color: var(--avorio);
+    }
+    .ad-2b__middle .display-title .gold-word { color: var(--oro); }
+    .ad-2b__middle .gold-rule { margin: 0.8rem auto; width: 90px; }
+    .ad-2b__middle .dates {
+      font-family: var(--f-ui);
+      font-size: 18px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--oro-chiaro);
+      margin-top: 0.5rem;
+    }
+    .ad-2b__middle .meta {
+      font-family: var(--f-ui);
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--avorio-scuro);
+      line-height: 1.9;
+    }
+    .ad-2b__bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .ad-2b__bottom .price { font-size: 130px; line-height: 1; }
+    .ad-2b__bottom .mim-badge { font-size: 14px; }
+    .ad-2b__bottom .cta { font-size: 18px; padding: 1.4rem 3rem; }
+    .ad-2b__bottom .handle {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      color: var(--oro-scuro);
+      text-transform: uppercase;
+    }
+
+    /* ==========================================================
+       3 — FACEBOOK LANDSCAPE 1200x628
+       Header-style: foto sinistra + testo destra
+       ========================================================== */
+    .ad-3 {
+      display: grid;
+      grid-template-columns: 480px 1fr;
+      background: var(--nero);
+    }
+    .ad-3__photo {
+      position: relative;
+      overflow: hidden;
+      background: var(--nero);
+    }
+    .ad-3__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: contrast(1.04) saturate(0.94);
+    }
+    .ad-3__photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(14,13,11,0) 60%, rgba(14,13,11,0.85) 100%);
+    }
+    .ad-3__photo .docente-tag {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      z-index: 2;
+      color: var(--avorio);
+    }
+    .ad-3__photo .docente-tag .ui-label {
+      font-size: 11px;
+      color: var(--oro-chiaro);
+      margin-bottom: 0.3rem;
+    }
+    .ad-3__photo .docente-tag .nome {
+      font-family: var(--f-display);
+      font-weight: 600;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .ad-3__content {
+      background:
+        radial-gradient(ellipse at right, rgba(184,150,90,0.10), transparent 70%),
+        var(--nero);
+      color: var(--avorio);
+      padding: 55px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .ad-3__content .top { }
+    .ad-3__content .brand-logo {
+      font-size: 16px;
+      color: var(--oro);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.26em;
+    }
+    .ad-3__content .ui-label {
+      font-size: 10px;
+      color: var(--oro-chiaro);
+      margin-bottom: 1.4rem;
+    }
+    .ad-3__content .display-title {
+      font-size: 48px;
+      color: var(--avorio);
+      margin-bottom: 0.8rem;
+    }
+    .ad-3__content .display-title .gold-word { color: var(--oro); }
+    .ad-3__content .quote {
+      font-size: 20px;
+      color: var(--avorio-scuro);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .ad-3__content .meta {
+      font-family: var(--f-ui);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--oro-chiaro);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .ad-3__content .bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+    .ad-3__content .price-block {
+      display: flex;
+      flex-direction: column;
+    }
+    .ad-3__content .price { font-size: 54px; line-height: 1; }
+    .ad-3__content .price-meta {
+      font-family: var(--f-ui);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--oro-chiaro);
+      margin-top: 0.3rem;
+    }
+    .ad-3__content .actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.7rem;
+    }
+    .ad-3__content .mim-badge { font-size: 9px; padding: 0.4rem 0.9rem; }
+    .ad-3__content .cta { font-size: 12px; padding: 0.85rem 1.6rem; }
+
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================
+       HEADER PAGINA — istruzioni e indice formati
+       ========================================================== -->
+  <header class="page-header">
+    <div class="page-header__inner">
+      <h1>Mockup Ads <span class="rombo">&#9670;</span> Corso Maschera Classica</h1>
+      <p>Sei mockup pronti per essere esportati come immagini singole e usati su Instagram, Facebook e TikTok. Ogni mockup viene renderizzato a dimensioni reali (1080&times;1080, 1080&times;1920, 1200&times;628); per fitting a video viene applicato uno <em>scale 0.35</em> di sola anteprima.</p>
+
+      <div class="page-header__instructions">
+        <strong>Come esportare in immagine</strong>
+        Chrome &rarr; tasto destro sopra il mockup &rarr; <em>Ispeziona</em> &rarr; tre pallini in alto del pannello DevTools &rarr; <em>Capture node screenshot</em>. In alternativa: <em>Cmd+Shift+P</em> &rarr; digita "Capture node screenshot". Firefox: tasto destro &rarr; <em>Take a Screenshot of Node</em>. Il file PNG esportato avrà la risoluzione esatta (1080&times;1080, 1080&times;1920, 1200&times;628). Attendi 2 secondi al primo render affinché Google Fonts (Cinzel, Cormorant) si carichino.
+      </div>
+
+      <ul class="formats-list">
+        <li><span class="rombo">&#9670;</span> Instagram Feed / Facebook Square &mdash; 1080&times;1080 (1:1) &mdash; Variante A &amp; B</li>
+        <li><span class="rombo">&#9670;</span> Instagram Story / Reels / TikTok &mdash; 1080&times;1920 (9:16) &mdash; Variante A &amp; B</li>
+        <li><span class="rombo">&#9670;</span> Facebook Landscape &mdash; 1200&times;628 (1.91:1) &mdash; Variante unica</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ==========================================================
+       GRIGLIA MOCKUP
+       ========================================================== -->
+  <main class="grid">
+
+    <!-- ============== 1A — IG FEED SQUARE — Variante A ============== -->
+    <div class="mockup-wrap">
+      <div class="label">Instagram Feed &mdash; Variante A <span class="dim">&middot; 1080&times;1080</span></div>
+      <div class="mockup-frame sq">
+        <div class="scaled">
+          <div class="ad ad-1a" data-format="1080x1080">
+
+            <div class="ad-1a__photo">
+              <img src="assets/docenti/andrea-puglisi.jpg" alt="Andrea Puglisi" />
+              <div class="docente-tag">
+                <div class="ui-label">Docente &middot; Direttore</div>
+                <div class="nome">Andrea Puglisi</div>
+              </div>
+            </div>
+
+            <div class="ad-1a__content">
+              <div class="top">
+                <div class="brand-logo">PROS&Omacr;PON</div>
+                <div class="micro">Corso Online &middot; 10 ore &middot; Attestato MIM</div>
+
+                <h2 class="display-title">Maschera<br/><em>Classica</em></h2>
+
+                <p class="quote">&ldquo;Un percorso unico nel teatro classico: storia, teoria e pratica attoriale della maschera.&rdquo;</p>
+
+                <div class="meta">
+                  5 incontri live <span class="gold">&#9670;</span> dal 15 giugno<br/>
+                  Andrea Puglisi <span class="gold">&middot;</span> Caterina Pentericci <span class="gold">&middot;</span> Robin Summa
+                </div>
+              </div>
+
+              <div>
+                <div class="price-row">
+                  <div class="price">&euro; 170</div>
+                  <div class="rate">Klarna a rate</div>
+                </div>
+                <div class="mim-badge"><span class="rombo">&#9670;</span> Attestato MIM</div>
+
+                <div class="bottom">
+                  <span>@accademiaprosopon</span>
+                  <span>accademiaprosopon.it</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== 1B — IG FEED SQUARE — Variante B ============== -->
+    <div class="mockup-wrap">
+      <div class="label">Instagram Feed &mdash; Variante B <span class="dim">&middot; 1080&times;1080</span></div>
+      <div class="mockup-frame sq">
+        <div class="scaled">
+          <div class="ad ad-1b" data-format="1080x1080">
+
+            <div class="ad-1b__top">
+              <div class="brand-logo">PROS&Omacr;PON</div>
+              <div class="ui-label">Corso Online &middot; 10 ore &middot; Attestato MIM</div>
+            </div>
+
+            <div class="ad-1b__center">
+              <div class="pretitle">Storia, teoria e pratica attoriale della</div>
+              <h2 class="display-title">Maschera<br/><span class="gold-word">Classica</span></h2>
+              <span class="gold-rule"></span>
+              <p class="quote">Cinque incontri live online con Andrea Puglisi,<br/>Caterina Pentericci e Robin Summa.</p>
+              <div class="price">&euro; 170</div>
+              <div class="price-meta">Klarna a rate &middot; Inizio 15 giugno</div>
+            </div>
+
+            <div class="ad-1b__bottom">
+              <div class="mim-badge"><span class="rombo">&#9670;</span> Attestato MIM</div>
+              <a class="cta">Iscriviti ora <span class="arrow">&rarr;</span></a>
+              <div class="url">accademiaprosopon.it</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== 2A — IG STORY — Variante A ============== -->
+    <div class="mockup-wrap">
+      <div class="label">Instagram Story / Reels / TikTok &mdash; Variante A <span class="dim">&middot; 1080&times;1920</span></div>
+      <div class="mockup-frame story">
+        <div class="scaled">
+          <div class="ad ad-2a" data-format="1080x1920">
+
+            <div class="ad-2a__bg">
+              <img src="assets/docenti/andrea-puglisi.jpg" alt="Andrea Puglisi" />
+            </div>
+            <div class="ad-2a__overlay"></div>
+
+            <div class="ad-2a__content">
+
+              <div class="ad-2a__top">
+                <div class="brand-logo">PROS&Omacr;PON</div>
+                <div class="ui-label">Corso Online &middot; 10 ore &middot; Attestato MIM</div>
+              </div>
+
+              <div class="ad-2a__middle">
+                <div class="pretitle">Storia, teoria e pratica attoriale della</div>
+                <h2 class="display-title">Maschera<br/><span class="gold-word">Classica</span></h2>
+                <span class="gold-rule"></span>
+                <div class="docenti">
+                  <strong>Andrea Puglisi</strong><br/>
+                  Direttore Accademia<br/><br/>
+                  con <strong>Caterina Pentericci</strong><br/>
+                  Universit&agrave; di Urbino<br/><br/>
+                  &amp; <strong>Robin Summa</strong>
+                </div>
+              </div>
+
+              <div class="ad-2a__bottom">
+                <div class="price-row">
+                  <div class="price">&euro; 170</div>
+                  <div class="rate">Klarna<br/>a rate</div>
+                </div>
+                <div class="mim-badge"><span class="rombo">&#9670;</span> Attestato MIM</div>
+                <a class="cta">Iscriviti ora <span class="arrow">&rarr;</span></a>
+                <div class="handle">@accademiaprosopon</div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== 2B — IG STORY — Variante B ============== -->
+    <div class="mockup-wrap">
+      <div class="label">Instagram Story / Reels / TikTok &mdash; Variante B <span class="dim">&middot; 1080&times;1920</span></div>
+      <div class="mockup-frame story">
+        <div class="scaled">
+          <div class="ad ad-2b" data-format="1080x1920">
+
+            <div class="ad-2b__top">
+              <div class="brand-logo">PROS&Omacr;PON</div>
+              <div class="ui-label">Corso Online &middot; 10 ore &middot; Attestato MIM</div>
+            </div>
+
+            <div class="ad-2b__symbol">
+              &Pi;
+              <span class="rombo-deco">&#9670; &#9670; &#9670;</span>
+            </div>
+
+            <div class="ad-2b__middle">
+              <div class="pretitle">Storia, teoria e pratica attoriale della</div>
+              <h2 class="display-title">Maschera<br/><span class="gold-word">Classica</span></h2>
+              <span class="gold-rule"></span>
+              <div class="dates">15 &middot; 18 &middot; 22 &middot; 25 &middot; 27 Giugno</div>
+              <div class="meta">5 incontri live online &middot; 10 ore</div>
+            </div>
+
+            <div class="ad-2b__bottom">
+              <div class="price">&euro; 170</div>
+              <div class="mim-badge"><span class="rombo">&#9670;</span> Attestato MIM</div>
+              <a class="cta">Iscriviti ora <span class="arrow">&rarr;</span></a>
+              <div class="handle">@accademiaprosopon</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== 3 — FACEBOOK LANDSCAPE 1200x628 ============== -->
+    <div class="mockup-wrap">
+      <div class="label">Facebook Landscape &mdash; Variante Unica <span class="dim">&middot; 1200&times;628</span></div>
+      <div class="mockup-frame landscape">
+        <div class="scaled">
+          <div class="ad ad-3" data-format="1200x628">
+
+            <div class="ad-3__photo">
+              <img src="assets/docenti/andrea-puglisi.jpg" alt="Andrea Puglisi" />
+              <div class="docente-tag">
+                <div class="ui-label">Direttore Accademia</div>
+                <div class="nome">Andrea Puglisi</div>
+              </div>
+            </div>
+
+            <div class="ad-3__content">
+
+              <div class="top">
+                <div class="brand-logo">PROS&Omacr;PON</div>
+                <div class="ui-label">Corso Online &middot; 10 ore &middot; 5 incontri live &middot; Inizio 15 giugno</div>
+
+                <h2 class="display-title">Maschera <span class="gold-word">Classica</span></h2>
+                <p class="quote">&ldquo;Un percorso unico nel teatro classico: storia, teoria e pratica attoriale.&rdquo;</p>
+                <div class="meta">Andrea Puglisi <span class="gold">&middot;</span> Caterina Pentericci <span class="gold">&middot;</span> Robin Summa</div>
+              </div>
+
+              <div class="bottom-row">
+                <div class="price-block">
+                  <div class="price">&euro; 170</div>
+                  <div class="price-meta">Klarna a rate</div>
+                </div>
+                <div class="actions">
+                  <div class="mim-badge"><span class="rombo">&#9670;</span> Attestato MIM</div>
+                  <a class="cta">Iscriviti ora <span class="arrow">&rarr;</span></a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>

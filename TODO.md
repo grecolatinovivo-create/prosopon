@@ -26,6 +26,14 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 38 — MOCKUP ADS SOCIAL CORSO MASCHERA (2026-05-04)
+
+> **2026-05-04 — R38: creato ads-render.html con mockup Instagram/Facebook/TikTok in stile brand**
+
+Creato `ads-render.html` autosufficiente (CSS inline, font Google caricati via `<link>`, palette identica al brand: oro #b8965a, oro-scuro #8a6e3a, oro-chiaro #d4b07a, avorio #f5f0e8, avorio-scuro #e8e0d0, grafite #1c1b18, nero #0e0d0b — Cinzel display, Manrope UI, Cormorant Garamond italic). Sei mockup pronti per screenshot via Chrome DevTools "Capture node screenshot": (1A) Instagram Feed 1080×1080 split foto Puglisi + testo, (1B) Instagram Feed 1080×1080 full-bleed dark con titolo Cinzel centrato e prezzo 130px oro, (2A) Instagram Story 1080×1920 foto Puglisi background + overlay + CTA in basso, (2B) Instagram Story 1080×1920 rituale con simbolo Π gigante oro e date 15·18·22·25·27 Giugno, (3) Facebook Landscape 1200×628 header-style foto + testo. Hierarchy neuromarketing rispettata: titolo → docente → prezzo € 170 → CTA "Iscriviti ora" singola; trust signal MIM sempre visibile; foto Andrea Puglisi come "umano riconoscibile" per algoritmo IG/FB face-detection; massimo 3-4 elementi di testo per ad (legge di Hick). Header pagina con istruzioni esportazione (Cmd+Shift+P → Capture node screenshot). Ogni mockup ha `data-format="1080x1080"|"1080x1920"|"1200x628"` e dimensioni esatte sul DOM; preview a video tramite `transform: scale(0.35)` ma screenshot a risoluzione reale.
+
+---
+
 ## 🟢 ROUND 37 — AUDIT COORDINATO A11Y + NEURO CORSO MASCHERA (2026-05-04)
 
 > **2026-05-04 — R37: audit coordinato a11y+neuro su corso-maschera-classica.html, sticky CTA rimossa**
