@@ -26,6 +26,14 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 35 — ACCESSIBILITY FIX-IT-PASS CORSO MASCHERA (2026-05-04)
+
+> **2026-05-04 — R35 Accessibility: audit WCAG AA corso-maschera-classica.html**
+
+Fix-it-pass WCAG 2.1 AA su `corso-maschera-classica.html` (solo HTML, niente style.css). Trovati e corretti: contrasto oro #b8965a su avorio #f5f0e8 sotto soglia 4.5:1 in 5 etichette di sezione (hero, team, dettagli, sessioni, FAQ) e nella tagline ministeriale (oro→grafite, 14.7:1); link "Torna ai corsi online" oro chiaro→`--color-link` #7a5f30 (5.12:1) con sottolineatura; `aria-label` aggiunto al badge "MIM" perché lo screen reader pronunci "Ministero dell'Istruzione e del Merito"; `aria-label` completo sul logo navigation per evitare la lettura frammentata dei 3 span; `aria-hidden` sulla freccia decorativa del link di ritorno. Verificati e OK: SVG icone tutte `aria-hidden`, alt foto docenti significativi, gerarchia heading (h1 unico → h2 → h3), focus-visible globale, touch target 44px nei `.btn`, FAQ accordion con pattern aria-expanded/controls/region, skip-link presente, `lang="it"`.
+
+---
+
 ## 🟢 ROUND 34 — AUDIT CONVERSION LANDING CORSO MASCHERA (2026-05-04)
 
 > **2026-05-04 — R34 Neuromarketer: audit conversion landing corso Maschera (CTA visibility, bypass risk)**
