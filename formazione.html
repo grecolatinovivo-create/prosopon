@@ -587,14 +587,17 @@
         'corso-maschera-classica': 'online'
       };
       if (tabIds.includes(hash)) {
+        // Solo apri la tab — niente scroll: la pagina parte dall'alto per evitare frizione visiva
         apriTab(null, hash);
+        // Annulla l'auto-scroll del browser verso #online (o altro tab id)
+        window.scrollTo(0, 0);
       } else if (['anno1','anno2','anno3'].includes(hash)) {
-        // Anchor interno al pannello triennale
+        // Anchor interno al pannello triennale (scroll voluto)
         apriTab(null, 'triennale');
         const target = document.getElementById(hash);
         if (target) setTimeout(() => target.scrollIntoView({behavior:'smooth', block:'start'}), 50);
       } else if (cardToTab[hash]) {
-        // Anchor a card specifica dentro un tab: apri prima il tab, poi scrolla alla card
+        // Anchor a card specifica dentro un tab: apri prima il tab, poi scrolla alla card (scroll voluto)
         apriTab(null, cardToTab[hash]);
         const target = document.getElementById(hash);
         if (target) setTimeout(() => target.scrollIntoView({behavior:'smooth', block:'start'}), 50);
