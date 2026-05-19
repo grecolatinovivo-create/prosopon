@@ -107,6 +107,52 @@
       outline: 2px solid var(--color-oro);
       outline-offset: 3px;
     }
+
+    /* R36 — Mobile: nascondi striscia ballerina, mostra dropdown elegante */
+    @media (max-width: 768px) {
+      .tab-nav { display: none; }
+      .ancore-corsi { display: none; }
+      .tab-select-wrap { display: block !important; margin-bottom: 1.5rem; }
+      /* Nascondi anche la sticky CTA mobile (crea confusione su formazione) */
+      .sticky-cta-mobile { display: none !important; }
+    }
+    .tab-select-shell {
+      position: relative;
+      background: var(--color-avorio);
+      border: 1.5px solid var(--color-oro);
+      border-radius: 4px;
+      transition: border-color 0.2s;
+    }
+    .tab-select-shell:hover, .tab-select-shell:focus-within {
+      border-color: var(--color-oro-scuro);
+    }
+    .tab-select {
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      border: none;
+      font-family: 'Manrope', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-grafite);
+      padding: 0.95rem 2.6rem 0.95rem 1.1rem;
+      cursor: pointer;
+      min-height: 48px;
+    }
+    .tab-select:focus-visible {
+      outline: 2px solid var(--color-oro);
+      outline-offset: 2px;
+    }
+    .tab-select-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-oro);
+      font-size: 1rem;
+      pointer-events: none;
+    }
   </style>
 
   <!-- R16 — Tracking placeholder (commentati, attivare quando IDs disponibili) -->
@@ -162,13 +208,20 @@
   <section class="sezione sezione--avorio" style="padding-top:3rem;">
     <div class="contenitore">
 
-      <nav class="ancore-corsi" aria-label="Sezioni della pagina (mobile)">
-        <a href="#triennale">Triennale</a>
-        <a href="#serali">Serali</a>
-        <a href="#laboratori">Laboratori e Residenze</a>
-        <a href="#masterclass">Masterclass</a>
-        <a href="#online">Online</a>
-      </nav>
+      <!-- Dropdown mobile per scelta sezione formazione (sostituisce la ballerina) -->
+      <div class="tab-select-wrap" style="display:none;">
+        <label for="tab-select" class="etichetta" style="display:block; margin-bottom:0.6rem;">Scegli un percorso</label>
+        <div class="tab-select-shell">
+          <select id="tab-select" class="tab-select" aria-label="Naviga tra le categorie di formazione" onchange="apriTab(null, this.value); history.replaceState(null,'','#'+this.value);">
+            <option value="triennale">Corso Triennale</option>
+            <option value="serali">Corsi Serali</option>
+            <option value="laboratori">Laboratori, Workshop e Residenze</option>
+            <option value="masterclass">Masterclass</option>
+            <option value="online" selected>Corso Online — Maschera Classica</option>
+          </select>
+          <span class="tab-select-icon" aria-hidden="true">▾</span>
+        </div>
+      </div>
 
       <div class="tab-nav" role="tablist" aria-label="Categorie di formazione">
         <button class="tab-btn attivo" id="tab-triennale" role="tab"
@@ -515,8 +568,10 @@
       btn.classList.add('attivo');
       btn.setAttribute('aria-selected', 'true');
       btn.setAttribute('tabindex', '0');
+      // Sincronizza il dropdown mobile
+      const sel = document.getElementById('tab-select');
+      if (sel && sel.value !== id) sel.value = id;
       // Aggiorna l'URL hash al click (non al deep-link iniziale), così il link è condivisibile.
-      // Usa replaceState per non inquinare la cronologia.
       if (evt && history && history.replaceState) {
         history.replaceState(null, '', '#' + id);
       }

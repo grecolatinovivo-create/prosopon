@@ -26,6 +26,14 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 37 — AUDIT COORDINATO A11Y + NEURO CORSO MASCHERA (2026-05-04)
+
+> **2026-05-04 — R37: audit coordinato a11y+neuro su corso-maschera-classica.html, sticky CTA rimossa**
+
+Audit top-down section-by-section sulla landing dedicata al corso Maschera, dopo rimozione della sticky CTA mobile (utente l'aveva trovata invasiva). Fix applicati solo su HTML, nessuna modifica a `style.css`. Contrasti: tutte le etichette uppercase Manrope su sfondo avorio/avorio-scuro portate da `--color-oro` (#b8965a, ~3:1) a `--color-oro-scuro` (#8a6e3a, ~4.7:1 AA) — etichette interessate: Team docenti, Dettagli del corso, Calendario, Durata totale, Modalità, Destinatari, Attestato, Obiettivi del corso, Struttura del percorso, Iscrizioni aperte · Posti limitati, Domande frequenti. Mantenuta in oro `--color-oro` l'etichetta hero su grafite (6.4:1) e l'inline "Ente accreditato dal Ministero dell'Istruzione" su grafite. Link "Torna ai corsi online" nell'hero portato da `--color-link` (#7a5f30, invisibile su grafite ~2.3:1) a `--color-oro-chiaro` (#d4b07a, ~7.5:1 AA). Prezzo "€ 170" della CTA finale (Cinzel 2.4rem) portato da `--color-oro` (2.7:1 sotto soglia large text) a `--color-oro-scuro` peso 800 (3.85:1 AA). Numeri romani I-V dei moduli-card rinforzati a Cinzel 800 e size aumentato a 1.55rem desktop / 1.2rem mobile, colore portato a oro-scuro per superare 3:1 large text. Touch target FAQ button: aggiunta `min-height:44px` + padding verticale 0.6rem per WCAG 2.5.5. Neuro: aggiunto trust-signal sotto la mini-CTA hero ("Pagamento sicuro Stripe · Klarna a rate · Posti limitati") per ridurre la frizione percepita ora che la sticky CTA è scomparsa; aggiunto "Rimborso entro 7 giorni" nella riga trust della CTA finale (allinea la promessa con la FAQ#7). Aria-label esplicito sui due bottoni Stripe per screen reader ("Iscriviti ora al corso, 170 euro, pagamento sicuro tramite Stripe"). Verificato: ordine sezioni Hero → 5 sessioni → CTA finale → FAQ regge senza sticky, due opportunità di click su € 170 mantenute, FAQ Klarna #6 ben leggibile.
+
+---
+
 ## 🟢 ROUND 35 — ACCESSIBILITY FIX-IT-PASS CORSO MASCHERA (2026-05-04)
 
 > **2026-05-04 — R35 Accessibility: audit WCAG AA corso-maschera-classica.html**
