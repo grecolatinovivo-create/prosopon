@@ -97,6 +97,16 @@
     /* Le ancore mobile usano ora la classe globale .ancore-corsi
        definita in style.css (sticky, scroll orizzontale, AA-friendly).
        Manteniamo qui solo eventuali override locali. */
+
+    /* R33 — Card corso online minimal stile Laboratori, cliccabile */
+    .card-corso-online:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .card-corso-online:focus-visible {
+      outline: 2px solid var(--color-oro);
+      outline-offset: 3px;
+    }
   </style>
 
   <!-- R16 — Tracking placeholder (commentati, attivare quando IDs disponibili) -->
@@ -379,102 +389,17 @@
           <p class="testo-grande">Percorsi accessibili da remoto, con docenza live e materiali di studio dedicati. Ogni edizione affronta un tema circoscritto, in formato concentrato.</p>
         </div>
 
-        <article class="anno-card" id="corso-maschera-classica">
-          <span class="etichetta">Prima edizione</span>
-          <h3 style="margin:0.6rem 0 1rem;">Storia, teoria e pratica attoriale della maschera classica</h3>
-          <p style="font-size:1rem; margin-bottom:1.6rem;">Un percorso unico sulla maschera nel teatro classico: storia delle origini e delle trasformazioni, fondamenti teorici e pratica attoriale del lavoro con la maschera.</p>
-
-          <!-- TEAM DOCENTI — riga orizzontale di ritratti (R27) -->
-          <div class="team-docenti-corso" style="display:flex; gap:2.2rem; justify-content:center; flex-wrap:wrap; margin:2rem 0 2.5rem; padding:1.8rem 1rem; border-top:1px solid var(--color-avorio-scuro); border-bottom:1px solid var(--color-avorio-scuro);">
-            <div style="text-align:center; width:200px;">
-              <picture>
-                <source srcset="assets/docenti/andrea-puglisi-mini.webp" type="image/webp">
-                <img src="assets/docenti/andrea-puglisi.jpg" alt="Ritratto di Andrea Puglisi" width="96" height="96" loading="lazy" decoding="async"
-                     style="display:block; margin:0 auto 0.9rem; width:96px; height:96px; border-radius:50%; object-fit:cover; box-shadow:0 4px 14px rgba(0,0,0,0.15);">
-              </picture>
-              <p style="font-size:1rem; line-height:1.45; margin:0;">
-                <strong>Andrea Puglisi</strong><br>
-                <span style="font-size:0.92rem; font-weight:500; line-height:1.5; color:var(--color-grafite);">Direttore dell'Accademia</span>
-              </p>
-            </div>
-            <div style="text-align:center; width:200px;">
-              <picture>
-                <source srcset="assets/docenti/caterina-pentericci-corso-maschera-mini.webp" type="image/webp">
-                <img src="assets/docenti/caterina-pentericci-corso-maschera.jpg" alt="Ritratto di Caterina Pentericci" width="96" height="96" loading="lazy" decoding="async"
-                     style="display:block; margin:0 auto 0.9rem; width:96px; height:96px; border-radius:50%; object-fit:cover; box-shadow:0 4px 14px rgba(0,0,0,0.15);">
-              </picture>
-              <p style="font-size:1rem; line-height:1.45; margin:0;">
-                <strong>Prof.ssa Caterina Pentericci</strong><br>
-                <span style="font-size:0.92rem; font-weight:500; line-height:1.5; color:var(--color-grafite);">Universit&agrave; di Urbino</span>
-              </p>
-            </div>
-            <div style="text-align:center; width:200px;">
-              <picture>
-                <source srcset="assets/docenti/robin-summa-mini.webp" type="image/webp">
-                <img src="assets/docenti/robin-summa.jpg" alt="Ritratto di Robin Summa" width="96" height="96" loading="lazy" decoding="async"
-                     style="display:block; margin:0 auto 0.9rem; width:96px; height:96px; border-radius:50%; object-fit:cover; object-position:50% 42%; box-shadow:0 4px 14px rgba(0,0,0,0.15);">
-              </picture>
-              <p style="font-size:1rem; line-height:1.45; margin:0;">
-                <strong>Maestro Robin Summa</strong><br>
-                <span style="font-size:0.92rem; font-weight:500; line-height:1.5; color:var(--color-grafite);">artigiano e artista specializzato nella maschera</span>
-              </p>
-            </div>
-          </div>
-
-          <div class="griglia-2" style="gap:2.5rem; margin-top:1.5rem;">
-            <div>
-              <p class="etichetta" style="color:var(--color-grafite); font-size:0.78rem;">Calendario</p>
-              <p style="font-size:1.02rem; margin-top:0.4rem; line-height:1.7;">
-                Luned&igrave; 15 giugno &middot; 20:30&ndash;22:00<br>
-                Gioved&igrave; 18 giugno &middot; 20:30&ndash;22:00<br>
-                Luned&igrave; 22 giugno &middot; 20:30&ndash;22:00<br>
-                Gioved&igrave; 25 giugno &middot; 20:30&ndash;22:00<br>
-                Sabato 27 giugno &middot; 9:00&ndash;13:00
-              </p>
-              <p style="font-size:0.95rem; margin-top:0.8rem; color:var(--color-grafite);">5 incontri &middot; 10 ore totali &middot; frequenza bisettimanale</p>
-            </div>
-
-            <div>
-              <p class="etichetta" style="color:var(--color-grafite); font-size:0.78rem;">Modalit&agrave;</p>
-              <p style="font-size:0.98rem; margin-top:0.4rem;">Live online.<br>Disponibile in asincrono per gli iscritti.</p>
-
-              <p class="etichetta" style="color:var(--color-grafite); margin-top:1.4rem; font-size:0.78rem;">Destinatari</p>
-              <p style="font-size:0.98rem; margin-top:0.4rem;">Attori, studenti, docenti.</p>
-
-              <p class="etichetta" style="color:var(--color-grafite); margin-top:1.4rem; font-size:0.78rem;">Attestato</p>
-              <p style="font-size:0.98rem; margin-top:0.4rem;">Rilasciato a fine corso, <strong>riconosciuto dal Ministero dell'Istruzione e del Merito (MIM)</strong>.</p>
-            </div>
-          </div>
-
-          <div class="card-outcome" style="background:var(--color-avorio-scuro); border-left:3px solid var(--color-oro); padding:1.5rem 1.8rem; margin-top:2rem;">
-            <p class="etichetta" style="color:var(--color-grafite); margin-bottom:0.8rem; font-size:0.82rem;">Cosa imparerai</p>
-            <ul style="list-style:none; padding:0; margin:0; font-size:1rem; line-height:1.7;">
-              <li style="padding:0.35rem 0; padding-left:1.6rem; position:relative;"><span style="position:absolute; left:0; top:0.45rem; color:var(--color-oro); font-size:0.7rem; line-height:1;">&#9670;</span>Conoscerai la storia e le funzioni dell'oggetto maschera in scena</li>
-              <li style="padding:0.35rem 0; padding-left:1.6rem; position:relative;"><span style="position:absolute; left:0; top:0.45rem; color:var(--color-oro); font-size:0.7rem; line-height:1;">&#9670;</span>Riconoscerai le tipologie di maschera nel teatro classico e i loro caratteri</li>
-              <li style="padding:0.35rem 0; padding-left:1.6rem; position:relative;"><span style="position:absolute; left:0; top:0.45rem; color:var(--color-oro); font-size:0.7rem; line-height:1;">&#9670;</span>Approfondirai il ruolo sociale della commedia antica</li>
-              <li style="padding:0.35rem 0; padding-left:1.6rem; position:relative;"><span style="position:absolute; left:0; top:0.45rem; color:var(--color-oro); font-size:0.7rem; line-height:1;">&#9670;</span>Imparerai a leggere una breve scena di Plauto in originale e in traduzione</li>
-              <li style="padding:0.35rem 0; padding-left:1.6rem; position:relative;"><span style="position:absolute; left:0; top:0.45rem; color:var(--color-oro); font-size:0.7rem; line-height:1;">&#9670;</span>Apprenderai come viene costruita una maschera integrale</li>
-            </ul>
-          </div>
-
-          <div style="margin-top:2rem; padding-top:1.8rem; border-top:1px solid var(--color-avorio-scuro); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.2rem;">
-            <div>
-              <p class="etichetta" style="color:var(--color-grafite); margin-bottom:0.3rem; font-size:0.78rem;">Quota di partecipazione</p>
-              <p style="font-family:'Manrope',sans-serif; font-size:1.8rem; color:var(--color-oro); margin:0; letter-spacing:0.03em;">&euro;&nbsp;170</p>
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center;">
-              <!-- CTA PRIMARIO: Stripe Payment Link (R29 — integrato 2026-05-04) -->
-              <a href="https://buy.stripe.com/9B628r9v2glA4FGdv5fQI01" class="btn btn--oro" target="_blank" rel="noopener noreferrer"
-                 data-corso="Storia, teoria e pratica attoriale della maschera classica"
-                 data-prezzo="170">Iscriviti e paga &middot; &euro;170</a>
-              <!-- CTA SECONDARIO: form contatti per domande pre-iscrizione -->
-              <a href="contatti.html?richiesta=corso-online-maschera#form-contatto"
-                 style="font-size:0.92rem; color:var(--color-link); text-decoration:underline; text-underline-offset:3px;">
-                 Hai domande? Scrivici prima di iscriverti
-              </a>
-            </div>
-          </div>
-        </article>
+        <!-- R33 — Card minimal stile Laboratori, cliccabile → corso-maschera-classica.html -->
+        <div class="griglia-3" style="gap:2rem;">
+          <a href="corso-maschera-classica.html" class="card card-corso-online" style="padding:2.5rem 2rem; text-align:center; text-decoration:none; color:inherit; display:block; transition:transform var(--transizione), box-shadow var(--transizione);">
+            <div style="font-family:var(--font-titolo); font-size:1.8rem; color:var(--color-oro); margin-bottom:1rem;" aria-hidden="true">&Pi;</div>
+            <span class="etichetta" style="color:var(--color-oro); margin-bottom:0.6rem; display:inline-block;">Prima edizione</span>
+            <h3 style="margin-bottom:1rem;">Storia, teoria e pratica attoriale della maschera classica</h3>
+            <p style="font-size:1rem; margin-bottom:1.2rem;">Un percorso unico sulla maschera nel teatro classico. 5 incontri &middot; 10 ore live online &middot; Attestato MIM.</p>
+            <p style="font-family:var(--font-titolo); font-size:1.4rem; color:var(--color-oro); margin:0; letter-spacing:0.03em;">&euro; 170</p>
+            <p style="font-size:0.9rem; margin-top:1rem; color:var(--color-link); font-weight:600;">Scopri il corso &rarr;</p>
+          </a>
+        </div>
       </div>
 
     </div>

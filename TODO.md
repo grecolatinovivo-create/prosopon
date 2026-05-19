@@ -26,6 +26,50 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 33 — CARD ONLINE MINIMAL + PAGINA DEDICATA CORSO MASCHERA (2026-05-04)
+
+> **2026-05-04 — R33: card Online minimal (stile Laboratori) + nuova pagina dedicata corso-maschera-classica.html**
+
+### Contesto
+La tab "Online" di `formazione.html` ospitava un unico `<article class="anno-card" id="corso-maschera-classica">` che conteneva TUTTO il dettaglio del corso (team docenti con ritratti, calendario, modalità, destinatari, attestato, outcome, CTA Stripe). Una sola card visivamente densissima dentro un tab, fuori scala rispetto alle altre tab (Laboratori, Masterclass, Serali) che presentano elenchi sintetici. Decisione (utente): trattare il corso Maschera come prodotto a sé, con una pagina dedicata, lasciando nella tab Online solo una card minimal "biglietto da visita" che porti alla pagina.
+
+### Fix applicati
+
+- [x] **R33.1 — `formazione.html`, tab Online**: rimosso integralmente l'`<article>` del corso (descrizione lunga + team-docenti-corso con 3 ritratti + griglia-2 calendario/modalità/destinatari/attestato + card-outcome + footer con prezzo + Stripe). Sostituito con UNA SOLA card minimal in pattern "Laboratori": `<a class="card card-corso-online">` cliccabile a tutto blocco, glifo oro Π (richiama PROSŌPON) + etichetta "Prima edizione" + titolo + paragrafo breve (5 incontri · 10 ore live online · Attestato MIM) + prezzo € 170 + microaction "Scopri il corso →". Aggiunto CSS hover (`translateY(-3px)` + box-shadow) e focus-visible (outline oro 2px) nel blocco `<style>` esistente. La card vive dentro un `griglia-3` come le 4 card di Laboratori (su desktop una sola colonna occupata, le altre 2 vuote — accettabile, mantiene proporzioni). Intro "Percorsi accessibili da remoto..." MANTENUTA. NON aggiunta sezione "Prossime edizioni" (rimossa dall'utente in R28, da non ripristinare). *(Coder R33)*
+
+- [x] **R33.2 — Nuova pagina `corso-maschera-classica.html`** (creata da zero, stessa scaffolding del sito):
+  - Head: title/description/canonical/OG/Twitter/favicon/manifest/theme-color/Google Fonts/style.css/tracking placeholder come le altre pagine.
+  - Header standard con voce "Formazione" marcata attiva (`nav__link--attivo` con `href="formazione.html#online"`).
+  - `hero-pagina` con breadcrumb-link "← Torna ai corsi online", etichetta "Prima edizione · Corso Online", h1, sottotitolo descrittivo, badge MIM + accreditamento Ministero.
+  - Sezione **Team Docenti** (sfondo avorio normale): blocco `team-docenti-corso` con i 3 ritratti circolari 96px (Puglisi, Pentericci con foto dedicata `caterina-pentericci-corso-maschera`, Summa) + nome + qualifica.
+  - Sezione **Dettagli del corso** (sfondo avorio): griglia-3 con Calendario (5 date), Durata totale + Modalità, Destinatari + Attestato.
+  - Sezione **Cosa imparerai** (sfondo avorio-scuro): box bordo-oro sinistro con i 5 outcome originali (rombi oro come bullet).
+  - Sezione **Le cinque sessioni** (NUOVA, sfondo avorio normale): 5 `modulo-card` numerate (I-V, con cerchio numerato in stile percorso-step di iscrizioni.html), ciascuna con data, titolo tematico e descrizione breve. Disclaimer in alto: "il programma è indicativo, i docenti potranno modulare contenuti e tempi". I titoli delle sessioni derivano direttamente dai 5 outcome dichiarati (zero invenzione di contenuti specifici non forniti dall'utente).
+  - Sezione **FAQ** (sfondo avorio-scuro): 7 domande in accordion (pattern faq-domanda/faq-risposta + JS identici a iscrizioni.html): esperienza preliminare, live vs registrato, validità attestato MIM, lezione persa, link piattaforma, rateizzazione (rimando a centroprosopon@gmail.com), disdetta entro 7 giorni con rimborso al netto commissioni.
+  - **CTA finale** (sezione sfondo avorio-scuro, centrata, max-width 560px): etichetta "Iscrizioni aperte · Posti limitati", h2 "Pronto a iscriverti?", prezzo grande € 170 in oro Cinzel, microcopy reassurance "Pagamento sicuro Stripe · Conferma immediata", bottone Stripe `btn btn--oro` (stesso payment link `https://buy.stripe.com/9B628r9v2glA4FGdv5fQI01`) + link secondario testuale al form contatti.
+  - Footer identico (4 colonne navigazione/formazione/contatti + bottom con accreditamento, copyright, privacy/cookie).
+  - Sticky CTA mobile riadattata al payment link Stripe (anziché iscrizioni.html). WhatsApp FAB con messaggio pre-filled dedicato al corso Maschera. *(Coder + UI/UX R33)*
+
+- [x] **R33.3 — `sitemap.xml`**: aggiunta entry `corso-maschera-classica.html` con `lastmod 2026-05-04`, `changefreq monthly`, `priority 0.7`. Posizionata subito dopo `formazione.html` per logica gerarchica. *(Coder R33)*
+
+- [x] **R33.4 — Nav header**: NON aggiunta voce "Corso Maschera" nella nav globale (la pagina è raggiungibile solo dalla card della tab Online, come da indicazione utente — evita pollution della navigazione principale e mantiene il triennio come asset di primo livello). *(UI/UX R33)*
+
+### Decisioni di design
+- **Glifo della card Online**: scelto `Π` (lettera greca pi maiuscola, U+03A0) tra le opzioni proposte. Motivazione: richiama PROSŌPON (Π di prosōpon), è leggibile in qualsiasi font/OS, è simbolicamente "porta" — coerente con la metafora teatrale. Le opzioni maschera Unicode (⚯, ⏃) sono o poco supportate o di rendering imprevedibile sui device meno recenti.
+- **Sezione "Le cinque sessioni"**: non avendo l'utente fornito i contenuti dettagliati di ogni singolo incontro, ho costruito i titoli tematici derivandoli 1:1 dai 5 outcome dichiarati ("Cosa imparerai"). Le descrizioni sono brevi e generiche, dichiarate come indicative. Zero invenzioni di programma.
+- **CTA finale ridondante con sticky mobile**: voluto. La sticky bar è solo mobile; sul desktop la CTA finale è il punto di conversione naturale dopo la scroll lunga (team → dettagli → outcome → programma → FAQ → CTA).
+
+### File modificati
+- `formazione.html` (tab Online: rimosso article enorme, inserita card minimal cliccabile + override CSS hover/focus)
+- `corso-maschera-classica.html` (NUOVO)
+- `sitemap.xml` (aggiunta entry pagina)
+- `TODO.md` (questo log)
+
+### Stato
+Card Online ora minimal e coerente con il pattern Laboratori. Pagina dedicata creata, autonoma, con tutta la profondità del corso (team, dettagli, outcome, programma sessioni, FAQ, CTA Stripe). Nessuna modifica al resto del sito (altre tab, altre pagine, nav globale).
+
+---
+
 ## 🟢 ROUND 32 — AUDIT VISIVO TOP-DOWN: FIX CONTRASTI ORO/ORO-SCURO ILLEGGIBILI (2026-05-04)
 
 > **2026-05-04 — R32 Auditor: pass visivo top-down, fix contrasti oro/oro-scuro illeggibili**
