@@ -26,6 +26,14 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 34 — AUDIT CONVERSION LANDING CORSO MASCHERA (2026-05-04)
+
+> **2026-05-04 — R34 Neuromarketer: audit conversion landing corso Maschera (CTA visibility, bypass risk)**
+
+Diagnosi non-tecnica sulla landing `corso-maschera-classica.html`: verifica visibilità CTA Stripe primario, presenza CTA fantasma (sticky mobile / hero), frizione cognitiva tra hero e pagamento, posizionamento dell'attestato MIM, anchoring prezzo, stima tasso di bypass desktop vs mobile. Output sintetico consegnato all'imprenditore (no modifiche codice in questa fase, solo proposta operativa).
+
+---
+
 ## 🟢 ROUND 33 — CARD ONLINE MINIMAL + PAGINA DEDICATA CORSO MASCHERA (2026-05-04)
 
 > **2026-05-04 — R33: card Online minimal (stile Laboratori) + nuova pagina dedicata corso-maschera-classica.html**

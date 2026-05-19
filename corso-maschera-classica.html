@@ -81,6 +81,53 @@
       .modulo-card { grid-template-columns: 48px 1fr; gap: 1rem; padding: 1.2rem; }
       .modulo-card__numero { width: 48px; height: 48px; font-size: 1.1rem; }
     }
+
+    /* R34 — Mini-CTA hero: prezzo + bottone Iscriviti subito visibili sopra la fold */
+    .hero-cta-mini {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.2rem 1.6rem;
+      margin-top: 1.8rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(184,150,90,0.25);
+    }
+    .hero-cta-mini__prezzo {
+      font-family: var(--font-titolo);
+      font-size: 1.85rem;
+      color: var(--color-oro);
+      letter-spacing: 0.04em;
+      font-weight: 600;
+      margin: 0;
+      line-height: 1;
+    }
+    .hero-cta-mini__info {
+      font-size: 0.92rem;
+      color: var(--color-grafite);
+      margin: 0;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    @media (max-width: 480px) {
+      .hero-cta-mini { gap: 0.8rem; }
+      .hero-cta-mini__prezzo { font-size: 1.6rem; }
+      .hero-cta-mini__info { flex-basis: 100%; }
+    }
+
+    /* R34 — Sticky bar conversione visibile ANCHE desktop su questa pagina */
+    @media (min-width: 769px) {
+      .sticky-cta-mobile {
+        display: flex !important;
+        max-width: 540px;
+        margin: 0 auto;
+        right: 1rem;
+        left: 1rem;
+        border-radius: 14px 14px 0 0;
+        bottom: 1rem;
+        border-radius: 999px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      }
+    }
   </style>
 
   <!-- R16 — Tracking placeholder (commentati, attivare quando IDs disponibili) -->
@@ -129,7 +176,14 @@
       <span class="etichetta">Prima edizione &middot; Corso Online</span>
       <h1 style="margin:0.8rem 0 1rem;">Storia, teoria e pratica attoriale della maschera classica</h1>
       <p>Un percorso unico sulla maschera nel teatro classico: storia delle origini e delle trasformazioni, fondamenti teorici e pratica attoriale del lavoro con la maschera.</p>
-      <p style="margin-top:1.2rem;"><span class="badge-accreditamento">MIM</span> <span style="font-family:'Manrope',sans-serif; font-size:0.82rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--color-grafite); font-weight:600; margin-left:0.4rem;">Ente accreditato dal Ministero dell'Istruzione</span></p>
+      <p style="margin-top:1.2rem;"><span class="badge-accreditamento">MIM</span> <span style="font-family:'Manrope',sans-serif; font-size:0.82rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--color-oro); font-weight:700; margin-left:0.4rem;">Ente accreditato dal Ministero dell'Istruzione</span></p>
+
+      <!-- R34 — Mini-CTA hero: prezzo visibile + bottone Iscriviti sopra la fold -->
+      <div class="hero-cta-mini">
+        <p class="hero-cta-mini__prezzo">&euro; 170</p>
+        <p class="hero-cta-mini__info">5 incontri &middot; 10 ore live online &middot; Attestato MIM</p>
+        <a href="https://buy.stripe.com/9B628r9v2glA4FGdv5fQI01" class="btn btn--oro" target="_blank" rel="noopener noreferrer" data-corso="Storia, teoria e pratica attoriale della maschera classica" data-prezzo="170">Iscriviti ora</a>
+      </div>
     </div>
   </section>
 
