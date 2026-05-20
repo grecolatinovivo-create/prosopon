@@ -56,22 +56,23 @@ export const config = {
 const CATALOGO_CORSI = {
   'maschera-classica': {
     titolo: 'Storia, teoria e pratica attoriale della maschera classica',
+    titoloBreve: 'Maschera Classica',  // usato nell'oggetto email
     sottotitolo: 'Corso online — Prima edizione',
-    direttore: 'Andrea Saverio Puglisi',
+    docenti: [
+      { nome: 'Andrea Saverio Puglisi',     ruolo: 'Direttore Artistico Accademia PROSŌPON' },
+      { nome: 'Prof.ssa Caterina Pentericci', ruolo: 'Università degli Studi di Urbino "Carlo Bo"' },
+      { nome: 'Maestro Robin Summa',        ruolo: 'Artigiano esperto nella realizzazione di Maschere Integrali' }
+    ],
     durata: '10 ore · 5 incontri live online',
     inizio: 'Lunedì 15 giugno',
-    // TODO — sostituire con il link Zoom/Meet definitivo prima del go-live
-    linkLezioni: 'https://us02web.zoom.us/j/PLACEHOLDER',
-    // TODO — calendario completo, riga per riga
+    // Calendario reale: identico a quello pubblicato su corso-maschera-classica.html
     calendario: [
-      'Lunedì 15 giugno — ore 19:00 (2h) · Origini della maschera nel teatro greco',
-      'Mercoledì 17 giugno — ore 19:00 (2h) · La maschera romana e la commedia',
-      'Lunedì 22 giugno — ore 19:00 (2h) · La Commedia dell\'Arte e le maschere fisse',
-      'Mercoledì 24 giugno — ore 19:00 (2h) · Pratica attoriale: respirazione e voce dietro la maschera',
-      'Lunedì 29 giugno — ore 19:00 (2h) · Lavoro di sintesi e prova individuale'
+      { num: 'I',   data: 'Lunedì 15 giugno · 20:30–22:00',                titolo: 'Apertura: l\'oggetto maschera, storia e funzioni in scena' },
+      { num: 'II',  data: 'Giovedì 18 giugno · 20:30–22:00',               titolo: 'Tipologie e caratteri della maschera nel teatro classico' },
+      { num: 'III', data: 'Lunedì 22 giugno · 20:30–22:00',                titolo: 'Il ruolo sociale della commedia antica' },
+      { num: 'IV',  data: 'Giovedì 25 giugno · 20:30–22:00',               titolo: 'Plauto: lettura di una scena in originale e in traduzione' },
+      { num: 'V',   data: 'Sabato 27 giugno · 9:00–13:00 · atelier 4h',    titolo: 'Atelier finale: costruzione di una maschera integrale' }
     ],
-    // TODO — eventuali materiali preparatori (PDF, video) da linkare
-    materialiPreparatori: null,
     contatto: 'Per ogni domanda scrivimi a centroprosopon@gmail.com o chiamami al +39 392 370 6618.'
   }
   // Aggiungi qui altri corsi con la chiave appropriata (es. 'voce-classica')
@@ -112,16 +113,17 @@ async function getRawBody(req) {
 //  TEMPLATE EMAIL — BENVENUTO al cliente (oro/avorio, brand PROSŌPON)
 // ----------------------------------------------------------------------------
 function emailBenvenutoHtml({ nomeCliente, corso, importo }) {
-  const nomeSafe = escapeHtml(nomeCliente || 'benvenuto/a');
-  const calendarioRows = corso.calendario.map(r => `
-    <tr><td style="padding:7px 0;border-bottom:1px solid #e8e3d8;font-family:Georgia,serif;font-size:14px;color:#1c1b18;">${escapeHtml(r)}</td></tr>
+  const nomeSafe = escapeHtml(nomeCliente || 'iscritto/a');
+
+  // Lista docenti (3 nomi, ognuno con ruolo in italico grafite)
+  const docentiRows = corso.docenti.map(d => `
+    <p style="margin:0 0 4px;font-family:Georgia,serif;font-size:15px;color:#1c1b18;line-height:1.5;">${escapeHtml(d.nome)} <span style="color:#7a7368;font-style:italic;">— ${escapeHtml(d.ruolo)}</span></p>
   `).join('');
 
-  const materialiBlock = corso.materialiPreparatori ? `
-    <p style="font-family:Georgia,serif;font-size:15px;line-height:1.6;color:#1c1b18;margin:18px 0 0;">
-      <strong style="color:#b8965a;">Materiali preparatori:</strong><br>
-      ${escapeHtml(corso.materialiPreparatori)}
-    </p>` : '';
+  // Calendario: ogni sessione è una riga con numero romano + data in oro + titolo sotto
+  const calendarioRows = corso.calendario.map(r => `
+    <tr><td style="padding:9px 0;border-bottom:1px solid #e8e3d8;font-family:Georgia,serif;font-size:14px;color:#1c1b18;line-height:1.5;"><strong style="color:#b8965a;">${escapeHtml(r.num)} &middot; ${escapeHtml(r.data)}</strong><br>${escapeHtml(r.titolo)}</td></tr>
+  `).join('');
 
   return `<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"></head>
   <body style="margin:0;padding:0;background:#f5f0e8;font-family:Georgia,serif;">
@@ -138,7 +140,7 @@ function emailBenvenutoHtml({ nomeCliente, corso, importo }) {
 
           <!-- Saluto -->
           <tr><td style="padding:24px 40px 0;">
-            <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:500;color:#1c1b18;margin:0 0 8px;letter-spacing:0.01em;">Benvenuto/a, ${nomeSafe}.</h1>
+            <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:500;color:#1c1b18;margin:0 0 8px;letter-spacing:0.01em;">Ciao ${nomeSafe}!</h1>
             <p style="font-family:Georgia,serif;font-size:16px;line-height:1.65;color:#1c1b18;margin:0 0 12px;">
               La tua iscrizione è stata registrata. Da questo momento sei tra i partecipanti di:
             </p>
@@ -150,13 +152,14 @@ function emailBenvenutoHtml({ nomeCliente, corso, importo }) {
             </p>
           </td></tr>
 
-          <!-- Info essenziali -->
+          <!-- Info essenziali: Docenti (3 nomi) + Durata + Inizio -->
           <tr><td style="padding:0 40px 8px;">
             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:#f5f0e8;">
               <tr>
                 <td style="padding:18px 22px;border-left:3px solid #b8965a;">
-                  <p style="margin:0 0 4px;font-family:'Manrope',Helvetica,sans-serif;font-size:10px;letter-spacing:0.16em;color:#7a7368;text-transform:uppercase;">Direzione artistica</p>
-                  <p style="margin:0 0 14px;font-family:Georgia,serif;font-size:15px;color:#1c1b18;">${escapeHtml(corso.direttore)}</p>
+                  <p style="margin:0 0 6px;font-family:'Manrope',Helvetica,sans-serif;font-size:10px;letter-spacing:0.16em;color:#7a7368;text-transform:uppercase;">Docenti</p>
+                  ${docentiRows}
+                  <div style="height:12px;line-height:12px;">&nbsp;</div>
 
                   <p style="margin:0 0 4px;font-family:'Manrope',Helvetica,sans-serif;font-size:10px;letter-spacing:0.16em;color:#7a7368;text-transform:uppercase;">Durata</p>
                   <p style="margin:0 0 14px;font-family:Georgia,serif;font-size:15px;color:#1c1b18;">${escapeHtml(corso.durata)}</p>
@@ -174,16 +177,16 @@ function emailBenvenutoHtml({ nomeCliente, corso, importo }) {
             <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${calendarioRows}</table>
           </td></tr>
 
-          <!-- Link lezione -->
-          <tr><td style="padding:24px 40px 0;text-align:center;">
-            <a href="${escapeHtml(corso.linkLezioni)}"
-               style="display:inline-block;padding:14px 36px;background:#b8965a;color:#ffffff;text-decoration:none;font-family:'Manrope',Helvetica,sans-serif;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;">
-              Apri la stanza online
-            </a>
-            <p style="margin:10px 0 0;font-family:Georgia,serif;font-size:13px;color:#7a7368;font-style:italic;">Stesso link per tutti i 5 incontri.</p>
+          <!-- Avviso: i link arrivano il giorno prima (niente pulsante) -->
+          <tr><td style="padding:28px 40px 0;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f5f0e8;border-left:3px solid #b8965a;">
+              <tr><td style="padding:16px 22px;">
+                <p style="margin:0;font-family:Georgia,serif;font-size:15px;line-height:1.6;color:#1c1b18;">
+                  Il <strong>giorno prima della prima lezione</strong> riceverai un'email con tutte le informazioni operative e i link per seguire il corso.
+                </p>
+              </td></tr>
+            </table>
           </td></tr>
-
-          ${materialiBlock ? `<tr><td style="padding:0 40px;">${materialiBlock}</td></tr>` : ''}
 
           <!-- Contatto -->
           <tr><td style="padding:30px 40px 0;">
@@ -196,7 +199,7 @@ function emailBenvenutoHtml({ nomeCliente, corso, importo }) {
           <tr><td style="padding:24px 40px 8px;">
             <p style="font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#1c1b18;margin:0;line-height:1.4;">
               A presto in scena,<br>
-              <span style="color:#b8965a;">la Direzione di PROSŌPON</span>
+              <span style="color:#b8965a;">Andrea Puglisi</span>
             </p>
           </td></tr>
 
@@ -300,11 +303,12 @@ export default async function handler(req, res) {
     const corso = risolviCorso(session, lineItems);
 
     // 1) Email BENVENUTO al cliente
+    //    NB: niente replyTo — le risposte cadono su noreply@ (i contatti
+    //    di riferimento sono già esplicitati nel corpo dell'email).
     const { error: errCliente } = await resend.emails.send({
       from: FROM_EMAIL,
       to: [emailCliente],
-      replyTo: ADMIN_EMAIL,
-      subject: `Benvenuto/a in PROSŌPON — ${corso.titolo}`,
+      subject: `PROSŌPON — Iscrizione confermata · ${corso.titoloBreve || corso.titolo}`,
       html: emailBenvenutoHtml({ nomeCliente, corso, importo })
     });
     if (errCliente) console.error('Errore email cliente:', errCliente);
