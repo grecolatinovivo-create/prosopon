@@ -26,6 +26,14 @@ Motivazione: l'attuale tab "Online" è una soluzione TRANSITORIA — quando il t
 
 ---
 
+## 🟢 ROUND 43 — MOBILE UX DOCENTI (2026-05-04)
+
+> **2026-05-04 — R43 Mobile UX docenti: fix taglio foto + animazione apertura su <768px**
+
+Su `docenti.html`/`style.css` (sezione `.modale-ritratto__*` <768px): la foto modale era forzata a banda 16:9 di 320px con `object-position: center top`, tagliando il volto dei docenti sotto naso/bocca (le foto sorgente sono ritratti 3:4 verticali). Passata a `aspect-ratio: 4/5` (Instagram portrait, mostra volto+spalle), `max-height: 56vh`, `object-position: center 22%` per privilegiare la fascia occhi-volto. L'animazione di apertura passa da `scale(0.96)→1` (pop centrale, percepito brusco su mobile) a `translateY(28px)→0` con curva `cubic-bezier(0.22, 1, 0.36, 1)` 320ms — la modale "sale dal basso" come una sheet iOS. Backdrop con fade-in dedicato 220ms (evita flash del fondo nero). Aggiunto feedback tap fisico sulla `.card-docente` (`:active scale(0.97)` 180ms) che sostituisce l'hover lift inutilizzabile su touch. Pulsante chiudi spostato in `env(safe-area-inset-top)` per il notch. `prefers-reduced-motion: reduce` ora azzera tutte le nuove animazioni e disabilita anche il tap-scale.
+
+---
+
 ## 🟢 ROUND 38 — MOCKUP ADS SOCIAL CORSO MASCHERA (2026-05-04)
 
 > **2026-05-04 — R38: creato ads-render.html con mockup Instagram/Facebook/TikTok in stile brand**
