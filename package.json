@@ -1,0 +1,13 @@
+{
+  "name": "accademia-prosopon",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sito istituzionale Accademia di Teatro Classico e Arti Performative PROSŌPON",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "resend": "^4.0.0"
+  }
+}
