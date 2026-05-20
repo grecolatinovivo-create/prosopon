@@ -164,14 +164,17 @@
           <p style="margin-bottom:1.5rem; font-size:0.9rem; color:var(--color-grafite); font-style:italic;">Risposta entro 48 ore lavorative · I tuoi dati restano tuoi.</p>
 
           <form id="form-c"
-                action="https://formsubmit.co/centroprosopon@gmail.com"
+                action="/api/send-form"
                 method="POST"
+                data-engine="resend"
                 novalidate
                 aria-describedby="stato-contatto">
-            <input type="hidden" name="_subject" value="Nuovo messaggio dal sito PROSŌPON" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="true" />
-            <input type="hidden" name="_next" value="https://www.accademiaprosopon.it/grazie.html" />
+            <!-- Tipo di form: serve all'endpoint per scegliere oggetto email -->
+            <input type="hidden" name="form" value="contatti" />
+            <!-- Honeypot anti-bot: invisibile agli umani, lo compilano solo gli script. -->
+            <input type="text" name="website" tabindex="-1" autocomplete="off"
+                   style="position:absolute;left:-9999px;opacity:0;height:0;width:0;pointer-events:none;"
+                   aria-hidden="true" />
 
             <div class="griglia-2" style="gap:2rem;">
               <div class="form-gruppo">
@@ -340,7 +343,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <p class="footer-accreditamento"><strong>Ente accreditato dal Ministero dell'Istruzione</strong><span class="sep">·</span>Progetto formativo gestito da GLV srl</p>
+        <p class="footer-accreditamento"><strong>Ente accreditato dal Ministero dell'Istruzione</strong></p>
         <p>© 2025 Accademia di Teatro Classico e Arti Performative PROSŌPON. Tutti i diritti riservati.</p>
         <p class="footer__legale"><a href="privacy.html">Privacy</a> · <a href="cookie.html">Cookie</a> · <span style="font-style:italic;">Roma, Italia</span></p>
       </div>
@@ -411,22 +414,57 @@
         stato.textContent = 'Stiamo facendo partire il messaggio…';
         btn.disabled = true;
 
+        // Due engine supportati:
+        //  - data-engine="resend"  → invio JSON al nostro endpoint /api/send-form, poi redirect a grazie.html
+        //  - (default)             → invio FormData multipart a Formsubmit (comportamento storico)
+        const engine = form.getAttribute('data-engine');
+
         try {
-          const data = new FormData(form);
-          const resp = await fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-          });
-          if (resp.ok) {
-            stato.textContent = etichettaSuccesso;
-            form.reset();
+          if (engine === 'resend') {
+            // 1) Serializza il form in oggetto JS (FormData → {chiave: valore})
+            const data = Object.fromEntries(new FormData(form).entries());
+            // 2) Honeypot: se il bot ha compilato "website", fingiamo successo lato UI
+            //    (l'endpoint comunque scarta il messaggio).
+            const resp = await fetch(form.action, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify(data)
+            });
+            const json = await resp.json().catch(() => ({}));
+            if (resp.ok && json.ok) {
+              stato.textContent = etichettaSuccesso;
+              form.reset();
+              // Redirect a grazie.html, conservando ?tipo=<oggetto> se presente
+              const oggetto = (data.oggetto || data.form || '').toString();
+              const url = oggetto
+                ? 'grazie.html?tipo=' + encodeURIComponent(oggetto)
+                : 'grazie.html';
+              // Piccolo delay per far leggere il messaggio di successo
+              setTimeout(() => { window.location.href = url; }, 700);
+            } else {
+              stato.textContent = (json && json.error)
+                ? 'Qualcosa non ha funzionato: ' + json.error
+                : 'Il messaggio non è partito. Riprova più tardi, oppure scrivici direttamente via email.';
+              btn.disabled = false;
+            }
           } else {
-            const errData = await resp.json().catch(() => ({}));
-            stato.textContent = (errData && errData.error)
-              ? 'Qualcosa non ha funzionato: ' + errData.error
-              : 'Il messaggio non è partito. Riprova più tardi, oppure scrivici direttamente via email.';
-            btn.disabled = false;
+            // Engine legacy (Formsubmit) — invariato per non rompere form non ancora migrati.
+            const data = new FormData(form);
+            const resp = await fetch(form.action, {
+              method: 'POST',
+              body: data,
+              headers: { 'Accept': 'application/json' }
+            });
+            if (resp.ok) {
+              stato.textContent = etichettaSuccesso;
+              form.reset();
+            } else {
+              const errData = await resp.json().catch(() => ({}));
+              stato.textContent = (errData && errData.error)
+                ? 'Qualcosa non ha funzionato: ' + errData.error
+                : 'Il messaggio non è partito. Riprova più tardi, oppure scrivici direttamente via email.';
+              btn.disabled = false;
+            }
           }
         } catch (err) {
           stato.textContent = 'La rete fa le bizze. Controlla la connessione e riprova fra un istante.';
@@ -440,56 +478,19 @@
     gestisciForm('form-nl', 'stato-newsletter', 'btn-nl',
       'Fatto. Il tuo nome è ora tra le voci di PROSŌPON — benvenuto/a.');
 
-    // Pre-compilazione oggetto contatto + subject email + _next contestuali
-    // se la pagina viene aperta con ?richiesta=...
+    // Pre-compilazione oggetto del form Contatti se la pagina è aperta con ?richiesta=...
+    // (es. da link "Richiedi il piano di studi" della pagina Formazione)
+    // L'oggetto email viene generato server-side dal valore del campo "form"
+    // (e arricchito dal contenuto del campo "oggetto"), quindi qui basta
+    // pre-selezionare l'opzione giusta nel select.
     (function() {
       const params = new URLSearchParams(window.location.search);
       const r = params.get('richiesta');
       if (!r) return;
-
-      // 1) Pre-seleziona l'opzione del select "oggetto"
       const sel = document.getElementById('oggetto-c');
       if (sel) {
         const opt = Array.from(sel.options).find(o => o.value === r);
         if (opt) sel.value = r;
-      }
-
-      // 2) Mappa richiesta -> subject email Formsubmit
-      //    Default (fallback): valore originale dell'hidden _subject ("Nuovo messaggio dal sito PROSŌPON")
-      const richiestaToSubject = {
-        'corso-online-maschera': 'ISCRIZIONE Maschera Classica — €170 da confermare',
-        'piano-triennale': 'Richiesta piano di studi triennale',
-        'prenotazione-aula': 'Prenotazione aula prove',
-        'accesso-biblioteca': 'Richiesta accesso biblioteca',
-        'info-corsi-online': 'Richiesta informazioni corsi online',
-        'info-triennale': 'Richiesta informazioni corso triennale',
-        'info-serali': 'Richiesta informazioni corsi serali',
-        'info-laboratori': 'Richiesta informazioni laboratori',
-        'info-masterclass': 'Richiesta informazioni masterclass',
-        'collaborazione': 'Proposta di collaborazione',
-        'stampa': 'Richiesta stampa e media'
-      };
-      const form = document.getElementById('form-c');
-      if (form) {
-        const subjEl = form.querySelector('input[type="hidden"][name="_subject"]');
-        if (subjEl && richiestaToSubject[r]) {
-          subjEl.value = richiestaToSubject[r];
-        }
-
-        // 3) Aggiorna _next per portare ?tipo=<richiesta> a grazie.html
-        //    Pattern scalabile: funziona per tutte le richieste future.
-        const nextEl = form.querySelector('input[type="hidden"][name="_next"]');
-        if (nextEl) {
-          try {
-            const u = new URL(nextEl.value, window.location.origin);
-            u.searchParams.set('tipo', r);
-            nextEl.value = u.toString();
-          } catch (e) {
-            // Fallback: append manuale se _next non è una URL parseable
-            const sep = nextEl.value.includes('?') ? '&' : '?';
-            nextEl.value = nextEl.value + sep + 'tipo=' + encodeURIComponent(r);
-          }
-        }
       }
     })();
   </script>
