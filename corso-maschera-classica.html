@@ -125,6 +125,19 @@
       .hero-cta-mini { gap: 0.8rem; }
       .hero-cta-mini__prezzo { font-size: 1.6rem; }
       .hero-cta-mini__info { flex-basis: 100%; }
+      /* Fix R44 — Su mobile, il pulsante "Iscriviti ora" dell'hero deve essere:
+         (1) centrato sotto prezzo e info (occupa tutta la riga + margin auto)
+         (2) ad alto contrasto: sfondo oro pieno e testo nero (rinforzo esplicito
+             per evitare che il sfondo scuro dell'hero rovini la leggibilità). */
+      .hero-cta-mini .btn--oro {
+        flex-basis: 100%;
+        width: -moz-fit-content;
+        width: fit-content;
+        margin: 0.4rem auto 0;
+        background: var(--color-oro) !important;
+        color: var(--color-nero) !important;
+        font-weight: 700;
+      }
     }
   </style>
 
