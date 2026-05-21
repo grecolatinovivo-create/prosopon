@@ -348,6 +348,7 @@ p {
 
 .nav__cta:hover {
   background: var(--color-oro-chiaro);
+  color: var(--color-nero);
 }
 
 /* Hamburger mobile — R16: touch target 44x44 minimo (WCAG AA 2.5.5) */
@@ -471,12 +472,18 @@ p {
 }
 
 .btn--oro {
-  background: var(--color-oro);
-  color: var(--color-nero);
+  /* R45 — Contrasto rinforzato: sfondo oro pieno + testo nero + font 700.
+     !important difende il pulsante dagli override di stili inline o
+     contestuali (es. su hero scure, dove iOS Safari talvolta indebolisce
+     il colore del testo). Garantisce leggibilità AA su qualsiasi sezione. */
+  background: var(--color-oro) !important;
+  color: var(--color-nero) !important;
+  font-weight: 700;
 }
 
 .btn--oro:hover {
-  background: var(--color-oro-chiaro);
+  background: var(--color-oro-chiaro) !important;
+  color: var(--color-nero) !important;
 }
 
 .btn--contorno {
@@ -1925,6 +1932,7 @@ textarea:focus-visible,
     color: var(--color-nero);
     font-family: var(--font-titolo);
     font-size: 0.72rem;
+    font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     padding: 0.85rem 1rem;
