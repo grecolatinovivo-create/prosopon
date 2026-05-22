@@ -2178,7 +2178,11 @@ textarea:focus-visible,
   font-size: 0.78em;
   letter-spacing: 0.08em;
   color: var(--color-oro);
-  font-weight: 500;
+  /* R47 — peso aumentato da 500 a 700: in oro chiaro su sfondo avorio,
+     il font sottile risultava poco leggibile. Cinzel mappa 700 → 800 (il
+     peso più grasso caricato), garantendo che le voci dell'offerta
+     formativa "stacchino" come previsto. */
+  font-weight: 700;
   white-space: nowrap;
 }
 @media (max-width: 480px) {
