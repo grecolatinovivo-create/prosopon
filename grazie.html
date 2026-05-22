@@ -88,8 +88,8 @@
     </div>
   </section>
 
-  <!-- ============ CORPO ============ -->
-  <section class="sezione sezione--avorio">
+  <!-- ============ CORPO STANDARD (form contatti / iscrizioni / newsletter) ============ -->
+  <section class="sezione sezione--avorio" id="grazie-corpo-standard">
     <div class="contenitore" style="max-width:680px; text-align:center;">
 
       <p id="grazie-messaggio" style="font-size:1.1rem; line-height:1.7; margin-bottom:1.2rem;">
@@ -139,6 +139,50 @@
       <!-- R16 — Evento conversione: attivare quando GA4/Meta Pixel installati -->
       <!-- gtag('event', 'conversion', { event_category: 'form_submit' }) — attivare quando GA4/Pixel installati -->
       <!-- fbq('track', 'Lead') — attivare quando Meta Pixel installato -->
+
+    </div>
+  </section>
+
+  <!-- ============ CORPO ISCRIZIONE CORSO MASCHERA CONFERMATA (Stripe success) ============
+       Visibile solo quando l'URL è grazie.html?tipo=iscrizione-corso-maschera
+       (impostato come Success URL del Payment Link Stripe del corso). -->
+  <section class="sezione sezione--avorio" id="grazie-corpo-corso" hidden>
+    <div class="contenitore" style="max-width:700px;">
+
+      <div style="text-align:center; margin-bottom:2.5rem;">
+        <span class="etichetta" style="color:var(--color-oro-scuro);">Cosa succede ora</span>
+        <p style="font-size:1.1rem; line-height:1.75; margin-top:1.2rem;">
+          Entro pochi minuti riceverai un'<strong>email di conferma</strong> con tutti i dettagli del corso.
+          Nei <strong>giorni precedenti la prima lezione</strong> ti invieremo un'ulteriore email
+          con il link e le istruzioni per accedere alle sessioni online.
+        </p>
+      </div>
+
+      <!-- Calendario reale delle 5 sessioni (identico a corso-maschera-classica.html) -->
+      <div style="background:var(--color-avorio-scuro); padding:1.8rem 2rem; border-left:3px solid var(--color-oro); margin-bottom:2rem;">
+        <p class="etichetta" style="color:var(--color-oro-scuro); margin-bottom:1rem;">Calendario delle cinque sessioni</p>
+        <ul style="list-style:none; padding:0; margin:0; font-size:1rem; line-height:1.85;">
+          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(184,150,90,0.18);"><strong style="color:var(--color-oro-scuro);">I &middot; Luned&igrave; 15 giugno</strong> &middot; 20:30&ndash;22:00</li>
+          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(184,150,90,0.18);"><strong style="color:var(--color-oro-scuro);">II &middot; Gioved&igrave; 18 giugno</strong> &middot; 20:30&ndash;22:00</li>
+          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(184,150,90,0.18);"><strong style="color:var(--color-oro-scuro);">III &middot; Luned&igrave; 22 giugno</strong> &middot; 20:30&ndash;22:00</li>
+          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(184,150,90,0.18);"><strong style="color:var(--color-oro-scuro);">IV &middot; Gioved&igrave; 25 giugno</strong> &middot; 20:30&ndash;22:00</li>
+          <li style="padding:0.5rem 0;"><strong style="color:var(--color-oro-scuro);">V &middot; Sabato 27 giugno</strong> &middot; 9:00&ndash;13:00 &middot; atelier 4h</li>
+        </ul>
+      </div>
+
+      <p style="font-size:0.95rem; color:var(--color-grafite); margin-bottom:2.5rem; text-align:center; font-style:italic;">
+        Se non vedi l'email di conferma entro pochi minuti, controlla la cartella <strong>Spam</strong> o <strong>Promozioni</strong>.
+      </p>
+
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="index.html" class="btn btn--contorno-scuro">Torna alla home</a>
+        <a href="corso-maschera-classica.html" class="btn btn--contorno-scuro">Dettagli del corso</a>
+      </div>
+
+      <p style="margin-top:3rem; font-size:0.9rem; color:var(--color-grafite); font-style:italic; text-align:center;">
+        Per qualsiasi domanda scrivi a
+        <a href="mailto:centroprosopon@gmail.com" style="color:var(--color-link); text-decoration:underline; text-underline-offset:3px;">centroprosopon@gmail.com</a>.
+      </p>
 
     </div>
   </section>
@@ -234,6 +278,15 @@
           titolo: 'Sei dentro.',
           sottotitolo: 'Riceverai gli annunci dell\'Accademia.',
           messaggio: 'Da ora riceverai gli annunci di PROSŌPON: bando audizioni, nuove edizioni dei corsi, eventi e spettacoli.'
+        },
+        'iscrizione-corso-maschera': {
+          // Tipologia attivata dal Success URL del Payment Link Stripe del corso maschera.
+          // Il messaggio standard non viene usato: invece nasconde il corpo standard e
+          // mostra il blocco dedicato #grazie-corpo-corso con il calendario completo.
+          etichetta: 'Iscrizione confermata',
+          titolo: 'Sei dei nostri.',
+          sottotitolo: 'Hai un posto al corso di maschera classica.',
+          messaggio: null
         }
       };
 
@@ -244,6 +297,20 @@
       if (titolo && c.titolo) titolo.textContent = c.titolo;
       if (sottotitolo && c.sottotitolo) sottotitolo.textContent = c.sottotitolo;
       if (messaggio && c.messaggio) messaggio.innerHTML = c.messaggio;
+
+      // Toggle delle sezioni corpo: per "iscrizione-corso-maschera" nasconde
+      // la sezione corpo standard e mostra quella dedicata al post-pagamento.
+      if (tipo === 'iscrizione-corso-maschera') {
+        const corpoStandard = document.getElementById('grazie-corpo-standard');
+        const corpoCorso = document.getElementById('grazie-corpo-corso');
+        if (corpoStandard) corpoStandard.hidden = true;
+        if (corpoCorso) corpoCorso.hidden = false;
+
+        // Tracking Meta Pixel: evento "Purchase" (conversione di pagamento andata a buon fine)
+        if (typeof fbq === 'function') {
+          fbq('track', 'Purchase', { value: 170, currency: 'EUR' });
+        }
+      }
     })();
   </script>
 
