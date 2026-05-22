@@ -139,6 +139,46 @@
         font-weight: 700;
       }
     }
+
+    /* R46 — Banda istituzionale "In collaborazione con" (partner accademico).
+       Posizionata tra hero e team docenti: stacca il partner dall'accreditamento
+       MIM e gli dà dignità di pari grado. Stile sobrio, avorio scuro, accento oro. */
+    .banda-partner {
+      background: var(--color-avorio-scuro);
+      padding: 2.6rem 0;
+      border-top: 1px solid rgba(184,150,90,0.22);
+      border-bottom: 1px solid rgba(184,150,90,0.22);
+      text-align: center;
+    }
+    .banda-partner__filetto {
+      display: block;
+      width: 50px;
+      height: 1px;
+      background: var(--color-oro);
+      margin: 0 auto 1.4rem;
+    }
+    .banda-partner__etichetta {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-oro-scuro);
+      font-weight: 700;
+      margin: 0 0 0.7rem;
+    }
+    .banda-partner__nome {
+      font-family: var(--font-titolo);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-nero);
+      letter-spacing: 0.04em;
+      line-height: 1.45;
+      margin: 0;
+    }
+    @media (max-width: 480px) {
+      .banda-partner { padding: 2.2rem 0; }
+      .banda-partner__nome { font-size: 1.02rem; }
+    }
   </style>
 
   <!-- Meta Pixel Code -->
@@ -210,6 +250,15 @@
         <p class="hero-cta-mini__info">5 incontri &middot; 10 ore live online &middot; Attestato MIM<br><span style="font-size:0.82rem; color:var(--color-avorio-scuro);">Pagamento sicuro Stripe &middot; Klarna a rate &middot; Posti limitati</span></p>
         <a href="https://buy.stripe.com/9B628r9v2glA4FGdv5fQI01" class="btn btn--oro" target="_blank" rel="noopener noreferrer" data-corso="Storia, teoria e pratica attoriale della maschera classica" data-prezzo="170" aria-label="Iscriviti ora al corso, 170 euro, pagamento sicuro tramite Stripe">Iscriviti ora</a>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ BANDA COLLABORAZIONE ISTITUZIONALE ============ -->
+  <section class="banda-partner" aria-label="In collaborazione con">
+    <div class="contenitore" style="max-width:680px;">
+      <span class="banda-partner__filetto" aria-hidden="true"></span>
+      <p class="banda-partner__etichetta">In collaborazione con</p>
+      <p class="banda-partner__nome">Centro Nazionale di Studi Classici<br>GrecoLatinoVivo</p>
     </div>
   </section>
 
