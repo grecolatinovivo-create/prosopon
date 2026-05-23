@@ -49,10 +49,14 @@ Una volta scelto "redirect to your site" si apre il campo URL.
 Incolla **esattamente** questa URL:
 
 ```
-https://accademiaprosopon.it/grazie.html?tipo=iscrizione-corso-maschera
+https://accademiaprosopon.it/grazie.html?tipo=iscrizione&corso=maschera-classica
 ```
 
-> **Attenzione al `?tipo=iscrizione-corso-maschera` finale**: è la parte che dice alla pagina di ringraziamento "mostra il messaggio del corso pagato" invece del messaggio generico per i form di contatto. Senza questo parametro, l'iscritto vedrebbe un messaggio sbagliato.
+> **Attenzione ai due parametri finali**:
+> - `tipo=iscrizione` dice alla pagina "questo è un pagamento, non un form"
+> - `corso=maschera-classica` dice "il corso comprato è la Maschera Classica" — la pagina pesca i dettagli dal catalogo dei corsi (titolo, calendario, link dettagli) e si auto-popola.
+>
+> Quando in futuro venderete un secondo corso (es. "Voce e dizione classica"), il Payment Link Stripe di quel corso avrà come Success URL `?tipo=iscrizione&corso=voce-classica` — basta cambiare lo slug. La pagina di ringraziamento si adatta da sola.
 
 ### 7. Imposta la Cancel URL
 
@@ -83,8 +87,8 @@ Prima di considerarle "in produzione", fai un test reale **piccolo**:
 1. Crea per un attimo un **secondo Payment Link da €1** (Stripe → Payment Links → "+ New") collegato al tuo stesso webhook ma con un prezzo simbolico. Imposta le stesse Success/Cancel URL.
 2. Apri il link da una finestra in incognito e completa il pagamento con la tua carta vera (€1).
 3. Verifica:
-   - dopo il pagamento sei rimandato a `accademiaprosopon.it/grazie.html?tipo=iscrizione-corso-maschera`
-   - la pagina mostra il titolo "**Sei dei nostri.**" + il calendario delle 5 sessioni
+   - dopo il pagamento sei rimandato a `accademiaprosopon.it/grazie.html?tipo=iscrizione&corso=maschera-classica`
+   - la pagina mostra il titolo "**Sei dei nostri.**" + il box con titolo corso + calendario delle 5 sessioni
    - su `centroprosopon@gmail.com` arriva la notifica "[NUOVA ISCRIZIONE]..."
    - alla tua email arriva il messaggio "PROSŌPON — Iscrizione confermata · Maschera Classica"
 4. Rimborsati l'€1 (perdi solo ~€0,27 di commissione Stripe).

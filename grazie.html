@@ -143,9 +143,13 @@
     </div>
   </section>
 
-  <!-- ============ CORPO ISCRIZIONE CORSO MASCHERA CONFERMATA (Stripe success) ============
-       Visibile solo quando l'URL è grazie.html?tipo=iscrizione-corso-maschera
-       (impostato come Success URL del Payment Link Stripe del corso). -->
+  <!-- ============ CORPO ISCRIZIONE CORSO CONFERMATA (Stripe success — multi-corso) ============
+       Visibile solo quando l'URL è grazie.html?tipo=iscrizione&corso=<slug>
+       (impostato come Success URL del Payment Link Stripe).
+       Tutti i campi marcati id="corso-..." vengono popolati dinamicamente dal JS
+       in base al catalogo CATALOGO_CORSI. Per aggiungere un nuovo corso basta
+       inserirlo nel catalogo (nello script in fondo alla pagina), nessuna
+       modifica all'HTML necessaria. -->
   <section class="sezione sezione--avorio" id="grazie-corpo-corso" hidden>
     <div class="contenitore" style="max-width:700px;">
 
@@ -158,15 +162,15 @@
         </p>
       </div>
 
-      <!-- Calendario reale delle 5 sessioni (identico a corso-maschera-classica.html) -->
+      <!-- Box dinamico: titolo corso + calendario -->
       <div style="background:var(--color-avorio-scuro); padding:1.8rem 2rem; border-left:3px solid var(--color-oro); margin-bottom:2rem;">
-        <p class="etichetta" style="color:var(--color-oro-scuro); margin-bottom:1rem;">Calendario delle cinque sessioni</p>
-        <ul style="list-style:none; padding:0; margin:0; font-size:1rem; line-height:1.85;">
-          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(184,150,90,0.18);"><strong style="color:var(--color-oro-scuro);">I &middot; Luned&igrave; 15 giugno</strong> &middot; 20:30&ndash;22:00</li>
-          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(184,150,90,0.18);"><strong style="color:var(--color-oro-scuro);">II &middot; Gioved&igrave; 18 giugno</strong> &middot; 20:30&ndash;22:00</li>
-          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(184,150,90,0.18);"><strong style="color:var(--color-oro-scuro);">III &middot; Luned&igrave; 22 giugno</strong> &middot; 20:30&ndash;22:00</li>
-          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(184,150,90,0.18);"><strong style="color:var(--color-oro-scuro);">IV &middot; Gioved&igrave; 25 giugno</strong> &middot; 20:30&ndash;22:00</li>
-          <li style="padding:0.5rem 0;"><strong style="color:var(--color-oro-scuro);">V &middot; Sabato 27 giugno</strong> &middot; 9:00&ndash;13:00 &middot; atelier 4h</li>
+        <p class="etichetta" style="color:var(--color-oro-scuro); margin-bottom:0.6rem;">Hai un posto al corso</p>
+        <h2 id="corso-titolo" style="font-family:var(--font-titolo); font-size:1.3rem; color:var(--color-nero); margin:0 0 1.4rem; font-weight:600; line-height:1.4;">
+          <!-- popolato dal JS in base al param corso -->
+        </h2>
+        <p class="etichetta" id="corso-calendario-label" style="color:var(--color-oro-scuro); margin-bottom:1rem;">Calendario delle sessioni</p>
+        <ul id="corso-calendario" style="list-style:none; padding:0; margin:0; font-size:1rem; line-height:1.85;">
+          <!-- popolato dal JS: una <li> per ogni sessione del corso -->
         </ul>
       </div>
 
@@ -176,7 +180,7 @@
 
       <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
         <a href="index.html" class="btn btn--contorno-scuro">Torna alla home</a>
-        <a href="corso-maschera-classica.html" class="btn btn--contorno-scuro">Dettagli del corso</a>
+        <a id="corso-link-dettagli" href="formazione.html" class="btn btn--contorno-scuro">Dettagli del corso</a>
       </div>
 
       <p style="margin-top:3rem; font-size:0.9rem; color:var(--color-grafite); font-style:italic; text-align:center;">
@@ -248,7 +252,42 @@
       hamburger.setAttribute('aria-label', aperto ? 'Chiudi menu' : 'Apri menu');
     });
 
-    // R25 — Messaggio contestuale in base al ?tipo= passato dal form di contatti
+    // ====================================================================
+    //  CATALOGO CORSI A PAGAMENTO (multi-corso, estendibile)
+    // --------------------------------------------------------------------
+    //  Per aggiungere un nuovo corso a pagamento:
+    //   1) inserisci una nuova entry qui sotto con lo "slug" del corso
+    //   2) crea il Payment Link Stripe con Success URL:
+    //      https://accademiaprosopon.it/grazie.html?tipo=iscrizione&corso=<slug>
+    //   3) (nel webhook /api/stripe-webhook.js aggiungi anche lì il corso)
+    //  Nessun'altra modifica all'HTML è necessaria: la pagina si auto-popola.
+    // ====================================================================
+    const CATALOGO_CORSI = {
+      'maschera-classica': {
+        titolo: 'Storia, teoria e pratica attoriale della maschera classica',
+        paginaCorso: 'corso-maschera-classica.html',
+        prezzo: 170, // EUR — usato per il tracking Meta Pixel Purchase
+        calendario: [
+          { num: 'I',   data: 'Lunedì 15 giugno', orario: '20:30–22:00' },
+          { num: 'II',  data: 'Giovedì 18 giugno', orario: '20:30–22:00' },
+          { num: 'III', data: 'Lunedì 22 giugno', orario: '20:30–22:00' },
+          { num: 'IV',  data: 'Giovedì 25 giugno', orario: '20:30–22:00' },
+          { num: 'V',   data: 'Sabato 27 giugno', orario: '9:00–13:00 · atelier 4h' }
+        ]
+      }
+      // Esempio per un futuro corso:
+      // 'voce-classica': { titolo: '...', paginaCorso: '...', prezzo: 180, calendario: [...] }
+    };
+
+    // ====================================================================
+    //  ROUTER della pagina di ringraziamento
+    //  Decide cosa mostrare in base ai parametri URL:
+    //   - ?tipo=iscrizione&corso=<slug>  → pagamento corso confermato (multi-corso)
+    //   - ?tipo=corso-online-maschera    → richiesta info ricevuta dal form
+    //   - ?tipo=piano-triennale          → richiesta piano di studi triennale
+    //   - ?tipo=newsletter               → conferma iscrizione newsletter
+    //   - nessun param                   → messaggio generico "Sei dentro"
+    // ====================================================================
     (function() {
       const params = new URLSearchParams(window.location.search);
       const tipo = params.get('tipo');
@@ -259,7 +298,51 @@
       const sottotitolo = document.getElementById('grazie-sottotitolo');
       const messaggio = document.getElementById('grazie-messaggio');
 
-      // Mappa tipo -> contenuti contestuali. Estendibile per future richieste.
+      // ============ CASO A: iscrizione a un corso a pagamento ============
+      if (tipo === 'iscrizione') {
+        const corsoSlug = params.get('corso');
+        const corso = CATALOGO_CORSI[corsoSlug];
+        if (!corso) return; // slug sconosciuto → lascia il messaggio default
+
+        // 1) Hero: etichetta + titolo + sottotitolo
+        if (etichetta) etichetta.textContent = 'Iscrizione confermata';
+        if (titolo) titolo.textContent = 'Sei dei nostri.';
+        if (sottotitolo) sottotitolo.textContent = 'Ecco i dettagli del tuo corso.';
+
+        // 2) Box corso: titolo del corso
+        const corsoTitoloEl = document.getElementById('corso-titolo');
+        if (corsoTitoloEl) corsoTitoloEl.textContent = corso.titolo;
+
+        // 3) Box corso: lista calendario
+        const corsoCalEl = document.getElementById('corso-calendario');
+        if (corsoCalEl && Array.isArray(corso.calendario)) {
+          corsoCalEl.innerHTML = corso.calendario.map((s, idx) => {
+            const isLast = idx === corso.calendario.length - 1;
+            const border = isLast ? '' : 'border-bottom:1px solid rgba(184,150,90,0.18);';
+            return '<li style="padding:0.5rem 0;' + border + '">' +
+                   '<strong style="color:var(--color-oro-scuro);">' + s.num + ' &middot; ' + s.data + '</strong> &middot; ' + s.orario +
+                   '</li>';
+          }).join('');
+        }
+
+        // 4) Link "Dettagli del corso" → punta alla pagina del corso comprato
+        const corsoLinkEl = document.getElementById('corso-link-dettagli');
+        if (corsoLinkEl && corso.paginaCorso) corsoLinkEl.href = corso.paginaCorso;
+
+        // 5) Toggle sezioni corpo
+        const corpoStandard = document.getElementById('grazie-corpo-standard');
+        const corpoCorso = document.getElementById('grazie-corpo-corso');
+        if (corpoStandard) corpoStandard.hidden = true;
+        if (corpoCorso) corpoCorso.hidden = false;
+
+        // 6) Tracking Meta Pixel: conversione Purchase
+        if (typeof fbq === 'function' && corso.prezzo) {
+          fbq('track', 'Purchase', { value: corso.prezzo, currency: 'EUR' });
+        }
+        return;
+      }
+
+      // ============ CASO B: messaggi contestuali per i form (legacy) ============
       const tipoToContenuti = {
         'corso-online-maschera': {
           etichetta: 'Richiesta ricevuta',
@@ -278,39 +361,15 @@
           titolo: 'Sei dentro.',
           sottotitolo: 'Riceverai gli annunci dell\'Accademia.',
           messaggio: 'Da ora riceverai gli annunci di PROSŌPON: bando audizioni, nuove edizioni dei corsi, eventi e spettacoli.'
-        },
-        'iscrizione-corso-maschera': {
-          // Tipologia attivata dal Success URL del Payment Link Stripe del corso maschera.
-          // Il messaggio standard non viene usato: invece nasconde il corpo standard e
-          // mostra il blocco dedicato #grazie-corpo-corso con il calendario completo.
-          etichetta: 'Iscrizione confermata',
-          titolo: 'Sei dei nostri.',
-          sottotitolo: 'Hai un posto al corso di maschera classica.',
-          messaggio: null
         }
       };
 
       const c = tipoToContenuti[tipo];
       if (!c) return;
-
       if (etichetta && c.etichetta) etichetta.textContent = c.etichetta;
       if (titolo && c.titolo) titolo.textContent = c.titolo;
       if (sottotitolo && c.sottotitolo) sottotitolo.textContent = c.sottotitolo;
       if (messaggio && c.messaggio) messaggio.innerHTML = c.messaggio;
-
-      // Toggle delle sezioni corpo: per "iscrizione-corso-maschera" nasconde
-      // la sezione corpo standard e mostra quella dedicata al post-pagamento.
-      if (tipo === 'iscrizione-corso-maschera') {
-        const corpoStandard = document.getElementById('grazie-corpo-standard');
-        const corpoCorso = document.getElementById('grazie-corpo-corso');
-        if (corpoStandard) corpoStandard.hidden = true;
-        if (corpoCorso) corpoCorso.hidden = false;
-
-        // Tracking Meta Pixel: evento "Purchase" (conversione di pagamento andata a buon fine)
-        if (typeof fbq === 'function') {
-          fbq('track', 'Purchase', { value: 170, currency: 'EUR' });
-        }
-      }
     })();
   </script>
 
