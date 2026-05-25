@@ -290,8 +290,21 @@
     // ====================================================================
     (function() {
       const params = new URLSearchParams(window.location.search);
-      const tipo = params.get('tipo');
+      let tipo = params.get('tipo');
       if (!tipo) return;
+
+      // Backwards compatibility: traduce vecchi URL del Payment Link Stripe
+      // nel nuovo formato ?tipo=iscrizione&corso=<slug>. Se in qualunque punto
+      // (Stripe Success URL, email vecchie, link archiviati) sopravvive un URL
+      // del vecchio formato, viene rimappato senza rompere l'esperienza utente.
+      const LEGACY_TIPO_TO_CORSO = {
+        'iscrizione-corso-maschera': 'maschera-classica'
+        // Aggiungere qui eventuali altri alias legacy in futuro.
+      };
+      if (LEGACY_TIPO_TO_CORSO[tipo]) {
+        params.set('corso', LEGACY_TIPO_TO_CORSO[tipo]);
+        tipo = 'iscrizione';
+      }
 
       const etichetta = document.getElementById('grazie-etichetta');
       const titolo = document.getElementById('grazie-titolo');
